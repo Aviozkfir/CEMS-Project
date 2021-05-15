@@ -20,6 +20,7 @@ public abstract class Person implements Serializable {
 		this.email = email;
 		this.role = role;
 	}
+	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -56,9 +57,6 @@ public abstract class Person implements Serializable {
 				+ ", role=" + role + "]";
 	}
 	
-	
-
-
 
 
 }
