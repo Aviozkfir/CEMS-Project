@@ -18,6 +18,7 @@ import message.ClientMessageType;
  * main class for running the application,sets up a client,connects to default port and opens the login scene
  */
 public class ClientMain extends Application {
+	String hello = "hi";
 	private final int DEFAULT_PORT=5555;
 	ClientCEMS client;
 	String hi="sadsadsad";
