@@ -84,7 +84,7 @@ public class ServerCEMS extends AbstractServer {
 					returnVal = null;
 					type = ServerMessageType.LOGOUT_SUCCESS;
 					break;
-				case LOGIN_VISITOR:
+				case LOGIN_PERSON:
 					returnVal = MySQLConnection.validateVisitor((String) (clientMsg.getMessage()));
 					type = ServerMessageType.LOGIN;
 					if (userList.contains(returnVal)) // user already logged in
