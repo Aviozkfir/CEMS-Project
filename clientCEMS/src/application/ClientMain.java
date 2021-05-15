@@ -20,7 +20,7 @@ import message.ClientMessageType;
 public class ClientMain extends Application {
 	private final int DEFAULT_PORT=5555;
 	ClientCEMS client;
-	String hi="hi";
+	String hi="sadsadsad";
 	GUIControl guiControl=GUIControl.getInstance();
 	@Override
 	public void start(Stage primaryStage) {
