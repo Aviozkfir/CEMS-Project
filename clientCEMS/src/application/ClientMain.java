@@ -18,14 +18,8 @@ import message.ClientMessageType;
  * main class for running the application,sets up a client,connects to default port and opens the login scene
  */
 public class ClientMain extends Application {
-	String hello = "hi";
 	private final int DEFAULT_PORT=5555;
 	ClientCEMS client;
-<<<<<<< HEAD
-	String hi="WTFFFFFConfilict";
-=======
-	String hi="byeConfilict";
->>>>>>> branch 'master' of https://github.com/VercetT1/ProjectCEMS.git
 	GUIControl guiControl=GUIControl.getInstance();
 	@Override
 	public void start(Stage primaryStage) {
