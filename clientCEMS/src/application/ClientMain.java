@@ -21,6 +21,7 @@ public class ClientMain extends Application {
 	String hello = "hi";
 	private final int DEFAULT_PORT=5555;
 	ClientCEMS client;
+	String hi="hi";
 	GUIControl guiControl=GUIControl.getInstance();
 	@Override
 	public void start(Stage primaryStage) {
