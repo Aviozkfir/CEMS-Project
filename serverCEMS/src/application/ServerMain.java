@@ -19,6 +19,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import message.ServerMessage;
+import message.ServerMessageType;
 import message.ServerMessageTypes;
 import mySQL.MySQLConnection;
 import server.ServerCEMS;
