@@ -34,7 +34,7 @@ public class LoginPageController {
 			primaryStage.hide();
 			PersonCEMS person = (PersonCEMS) guiControl.getUser();
 			String role = person.getRole();
-			String chosenPath;
+			String chosenPath = null;
 			ClientMainPageController controller;
 			switch (role) {
 			case "Teacher":

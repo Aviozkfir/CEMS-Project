@@ -5,16 +5,16 @@ import java.io.Serializable;
  * ServerMessage is with a type and an Object message that the server sends to the client
  */
 public class ServerMessage implements Serializable{
-	private ServerMessageType type;
+	private ServerMessageTypes type;
 	private Object message;
-	public ServerMessage(ServerMessageType type, Object message) {
+	public ServerMessage(ServerMessageTypes type, Object message) {
 		this.type = type;
 		this.message = message;
 	}
-	public ServerMessageType getType() {
+	public ServerMessageTypes getType() {
 		return type;
 	}
-	public void setType(ServerMessageType type) {
+	public void setType(ServerMessageTypes type) {
 		this.type = type;
 	}
 	public Object getMessage() {

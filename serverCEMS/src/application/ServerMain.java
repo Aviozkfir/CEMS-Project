@@ -19,7 +19,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import message.ServerMessage;
-import message.ServerMessageType;
+import message.ServerMessageTypes;
 import mySQL.MySQLConnection;
 import server.ServerCEMS;
 
@@ -82,7 +82,7 @@ public class ServerMain extends Application {
 	 */
 	public static void stopServer() {
 		if(server!=null)
-			server.sendToAllClients(new ServerMessage(ServerMessageType.SERVER_ERROR,"Server crashed!\nSorry for the inconvenience\nClick 'OK' to exit..."));
+			server.sendToAllClients(new ServerMessage(ServerMessageTypes.SERVER_ERROR,"Server crashed!\nSorry for the inconvenience\nClick 'OK' to exit..."));
 		System.exit(0);
 		
 	}
@@ -109,7 +109,7 @@ public class ServerMain extends Application {
 		scheduledThreadPool.scheduleAtFixedRate(() -> {
 			try {
 				List<Order> orderList=MySQLConnection.sendSmsToActiveOrders();
-				server.sendToAllClients(new ServerMessage(ServerMessageType.FINAL_APPROVAL_EMAIL_AND_SMS,orderList));
+				server.sendToAllClients(new ServerMessage(ServerMessageTypes.FINAL_APPROVAL_EMAIL_AND_SMS,orderList));
 			} catch (SQLException e) {
 				showError("FAILED TO SEND CLIENTS SMS AND EMAILS");
 			}
@@ -117,9 +117,9 @@ public class ServerMain extends Application {
 		scheduledThreadPool.scheduleAtFixedRate(() -> {
 			try {
 				List<List<Order>> twoOrderList=MySQLConnection.sendSmsToCancelOrders();
-				server.sendToAllClients(new ServerMessage(ServerMessageType.CANCEL_EMAIL_AND_SMS,twoOrderList.get(0)));
+				server.sendToAllClients(new ServerMessage(ServerMessageTypes.CANCEL_EMAIL_AND_SMS,twoOrderList.get(0)));
 				if(twoOrderList.get(1)!=null)
-					server.sendToAllClients(new ServerMessage(ServerMessageType.WAITING_LIST_APPROVAL_EMAIL_AND_SMS,twoOrderList.get(1)));
+					server.sendToAllClients(new ServerMessage(ServerMessageTypes.WAITING_LIST_APPROVAL_EMAIL_AND_SMS,twoOrderList.get(1)));
 			} catch (NumberFormatException | SQLException | ParseException e) {
 				showError("FAILED TO SEND CLIENTS SMS AND EMAILS");
 			}

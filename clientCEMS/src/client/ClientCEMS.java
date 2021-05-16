@@ -46,6 +46,8 @@ public class ClientCEMS extends AbstractClient {
 	public void handleMessageFromServer(Object msg) {
 		System.out.print("--> handleMessageFromServer : ");
 		
+		
+		
 	}
 
 	/**
