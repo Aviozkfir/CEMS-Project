@@ -1,10 +1,6 @@
 package gui;
 
-import java.util.regex.Pattern;
-
 import client.ClientCEMS;
-import client.GoNatureClient;
-import entity.Employee;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -25,19 +21,19 @@ public class GUIControl {
 	private  Object currentUser;
 	private  Stage primaryStage;
 	private  ServerMessage serverMsg;
-	//private ClientMainPageController cmpc;
+	private ClientMainPageController cmpc;
 	private GUIControl() {}
 	public static GUIControl getInstance() {
 		return instance;
 	}
-	//public void setClientMainPageController(ClientMainPageController cmpc)
-	//{
-		//this.cmpc=cmpc;
-	//}
-	//public ClientMainPageController getClientMainPageController()
-	//{
-	//	return cmpc;
-	//}
+	public void setClientMainPageController(ClientMainPageController cmpc)
+	{
+		this.cmpc=cmpc;
+	}
+	public ClientMainPageController getClientMainPageController()
+	{
+		return cmpc;
+	}
 	public  void setClient(ClientCEMS client) {
 		this.client=client;
 	}

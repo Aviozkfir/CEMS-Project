@@ -4,7 +4,7 @@ import java.io.Serializable;
 /*
  * Person is made for employee and subscriber to extend it
  */
-public abstract class Person implements Serializable {
+public abstract class PersonCEMS implements Serializable {
 	protected String firstName;
 	protected String lastName;
 	protected String id;
@@ -12,7 +12,7 @@ public abstract class Person implements Serializable {
 	protected String role;
 	
 	
-	public Person(String firstName, String lastName, String id, String email, String role) {
+	public PersonCEMS(String firstName, String lastName, String id, String email, String role) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;

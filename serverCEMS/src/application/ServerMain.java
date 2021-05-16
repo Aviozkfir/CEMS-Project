@@ -20,7 +20,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import message.ServerMessage;
 import message.ServerMessageType;
-import mysql.MySQLConnection;
+import mySQL.MySQLConnection;
 import server.ServerCEMS;
 
 /**

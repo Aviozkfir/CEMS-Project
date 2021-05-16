@@ -41,7 +41,7 @@ import ocsf.server.ConnectionToClient;
  */
 public class ServerCEMS extends AbstractServer {
 	// Class variables *****************
-	private MySQLConnection goNatureDB;
+	private MySQLConnection cemsDataBase;
 	private ArrayList<Object> userList;
 
 	// Constructors ******************

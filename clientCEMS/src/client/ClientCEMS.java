@@ -1,22 +1,10 @@
 package client;
 
 import java.io.IOException;
-import java.net.ConnectException;
-import java.sql.SQLException;
-import java.util.List;
 
-import entity.Employee;
-import entity.Order;
-import entity.ParameterUpdate;
-import entity.ParkDiscount;
-import entity.Subscriber;
-import entity.Visitor;
 import gui.GUIControl;
-import gui.GuiButton;
-import gui.ClientConstants.AlertType;
 import message.ClientMessage;
 import message.ClientMessageType;
-import message.ServerMessage;
 import ocsf.client.AbstractClient;
 
 /**

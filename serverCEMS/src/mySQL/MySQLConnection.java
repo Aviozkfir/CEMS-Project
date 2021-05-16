@@ -1,8 +1,5 @@
 package mySQL;
 
-import java.io.NotActiveException;
-import java.io.ObjectInputStream.GetField;
-import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -10,12 +7,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
-import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Duration;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -27,11 +22,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.PrimitiveIterator.OfDouble;
-import java.util.Random;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 //import com.sun.javafx.webkit.ThemeClientImpl;
 
@@ -41,25 +31,21 @@ import java.util.concurrent.TimeUnit;
 
 import entity.Employee;
 import entity.EntityConstants;
-import entity.Order;
-import entity.ParameterUpdate;
-import entity.Park;
-import entity.ParkDiscount;
-import entity.ReportDate;
-import entity.ParkCapacityReport;
-import entity.Subscriber;
-import entity.Visitor;
-import entity.VisitorReport;
-import message.ClientMessageType;
-import message.ServerMessage;
-import message.ServerMessageType;
-import server.GoNatureServer;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import entity.EntityConstants.OrderStatus;
 import entity.EntityConstants.OrderType;
 import entity.EntityConstants.ParkParameter;
 import entity.EntityConstants.RequestStatus;
+import entity.Order;
+import entity.ParameterUpdate;
+import entity.Park;
+import entity.ParkDiscount;
+import entity.PersonCEMS;
+import entity.ReportDate;
+import entity.Subscriber;
+import entity.Visitor;
+import entity.VisitorReport;
+import message.ServerMessage;
+import message.ServerMessageType;
 
 /**
  * class that holds static methods related to database actions such as
@@ -84,7 +70,7 @@ public class MySQLConnection {
 	 * @return Subscriber or null
 	 * @throws SQLException
 	 */
-	public static Visitor validateVisitor(String id) throws SQLException {
+	public static PersonCEMS validatePerson(String id) throws SQLException {
 		PreparedStatement logInPreparedStatement;
 		logInPreparedStatement = con.prepareStatement("SELECT * FROM visitor where id=? LIMIT 1;");
 		logInPreparedStatement.setString(1, id);

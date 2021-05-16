@@ -1,5 +1,8 @@
 package gui;
 
+import java.io.IOException;
+
+import entity.PersonCEMS;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +17,6 @@ import message.ClientMessageType;
 
 public class LoginPageController {
 	GUIControl guiControl = GUIControl.getInstance();
-	
 
 	@FXML
 	private PasswordField PasswordFieldText;
@@ -26,24 +28,39 @@ public class LoginPageController {
 	private TextField UserIDTextField;
 
 	@FXML
-	void LoginButtonPressed(ActionEvent event) {
-    	if(validateLogin()) {
-    		Stage primaryStage=guiControl.getStage();
-    		primaryStage.hide();
-    		
-    		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/CEMSlogin.fxml"));
-    		AnchorPane root = fxmlLoader.load();
-    		ClientMainPageController cmpc = (ClientMainPageController)fxmlLoader.getController();
-    		guiControl.setClientMainPageController(cmpc);
-    		cmpc.setUser(guiControl.getUser());
-			Scene scene = new Scene (root);
+	void LoginButtonPressed(ActionEvent event) throws IOException {
+		if (validateLogin()) {
+			Stage primaryStage = guiControl.getStage();
+			primaryStage.hide();
+			PersonCEMS person = (PersonCEMS) guiControl.getUser();
+			String role = person.getRole();
+			String chosenPath;
+			ClientMainPageController controller;
+			switch (role) {
+			case "Teacher":
+				chosenPath = ClientsConstants.Screens.TEACHER_MAIN_PAGE.path;
+				break;
+			case "Principal":
+				chosenPath = ClientsConstants.Screens.PRINCIPAL_MAIN_PAGE.path;
+				break;
+			case "Student":
+				chosenPath = ClientsConstants.Screens.STUDENT_MAIN_PAGE.path;
+				break;
+			default:
+			}
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(chosenPath));
+			controller = (ClientMainPageController) fxmlLoader.getController();
+			AnchorPane root = fxmlLoader.load();
+			guiControl.setClientMainPageController(controller);
+			controller.setUser(guiControl.getUser());
+			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("/gui/application.css").toExternalForm());
 			primaryStage.setScene(scene);
-			primaryStage.setOnCloseRequest(e->{
+			primaryStage.setOnCloseRequest(e -> {
 				guiControl.disconnect();
 			});
 			primaryStage.show();
-    	}  
+		}
 
 	}
 
