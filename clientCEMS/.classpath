@@ -4,5 +4,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="/Common"/>
 	<classpathentry kind="src" path="/commonCEMS"/>
+	<classpathentry kind="src" path="/Client"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
