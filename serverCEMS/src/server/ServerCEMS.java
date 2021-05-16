@@ -150,7 +150,7 @@ public class ServerCEMS extends AbstractServer {
 			dateAndTime.put(dateOfOrder, times);
 			checkWating.put(parkName, dateAndTime);
 			List<Order> orderList = MySQLConnection.checkWatingList(checkWating);
-			sendToAllClients(new ServerMessage(ServerMessageType.WAITING_LIST_APPROVAL_EMAIL_AND_SMS, orderList));
+			sendToAllClients(new ServerMessage(ServerMessageTypes.WAITING_LIST_APPROVAL_EMAIL_AND_SMS, orderList));
 		}
 	}
 
