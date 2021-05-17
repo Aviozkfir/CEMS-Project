@@ -49,10 +49,10 @@ public class LoginPageController {
 			default:
 			}
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(chosenPath));
-			controller = (ClientMainPageController) fxmlLoader.getController();
+			//controller = (ClientMainPageController) fxmlLoader.getController();
 			AnchorPane root = fxmlLoader.load();
-			guiControl.setClientMainPageController(controller);
-			controller.setUser(guiControl.getUser());
+			//guiControl.setClientMainPageController(controller);
+			//controller.setUser(guiControl.getUser());
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("/gui/application.css").toExternalForm());
 			primaryStage.setScene(scene);
@@ -77,7 +77,10 @@ public class LoginPageController {
 		String[] IdAndPassword = { UserIDTextField.getText(), PasswordFieldText.getText() };
 		msg = new ClientMessage(ClientMessageType.LOGIN_PERSON, IdAndPassword);
 		guiControl.sendToServer(msg);
-		if (guiControl.getServerMsg().getMessage() == null) {
+		
+		
+		System.out.println("MESSAGE RECIEVED");
+		if (guiControl.getServerMsg().getMessage()==null) {
 			GUIControl.popUpError("Login information doesn't exist\n Please try again");
 			return false;
 		} else if (guiControl.getServerMsg().getMessage().equals("logged in")) {

@@ -1,9 +1,10 @@
 package entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 @SuppressWarnings("serial")
-public class Teacher extends PersonCEMS {
+public class Teacher extends PersonCEMS implements Serializable {
 
 
 	ArrayList<Subject> subjectList = new ArrayList<Subject>();

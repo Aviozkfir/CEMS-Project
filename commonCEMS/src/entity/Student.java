@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Student extends PersonCEMS {
+public class Student extends PersonCEMS implements Serializable {
 
 	//private ArrayList<SolvedExam> examList = new ArrayList<SolvedExam>(); // need to create solved exam class and set/get
 	private ArrayList<Subject> subjectList = new ArrayList<Subject>();

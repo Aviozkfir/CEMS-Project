@@ -1,8 +1,9 @@
 package entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Principal extends PersonCEMS{
+public class Principal extends PersonCEMS implements Serializable{
 
 	
 	//private ArrayList<Request> requestLists = new ArrayList<Request>(); //need to create Request class and set/get. 

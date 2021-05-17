@@ -70,6 +70,7 @@ public class ServerCEMS extends AbstractServer {
 	public void handleMessageFromClient(Object msg, ConnectionToClient client) {
 		Object returnVal = null;
 		ServerMessageTypes type = null;
+		
 		try {
 			if (msg instanceof ClientMessage) {
 				ClientMessage clientMsg = (ClientMessage) msg;
@@ -87,7 +88,7 @@ public class ServerCEMS extends AbstractServer {
 					break;
 				case LOGIN_PERSON:
 					returnVal = MySQLConnection.validatePerson((String[]) (clientMsg.getMessage()));
-					if (!returnVal.equals(null)) {
+					if (returnVal!=null) {
 						PersonCEMS returnPerson = (PersonCEMS) returnVal;
 						switch (returnPerson.getRole()) {
 						case "Teacher":
@@ -130,29 +131,6 @@ public class ServerCEMS extends AbstractServer {
 		}
 	}
 
-	/**
-	 * This function gets a canceled order and check the Waiting List for orders
-	 * that the date and period of time like order. We get the orders in the Waiting
-	 * List with checkWatingList function. In the end we send the notification of
-	 * the orders in the queue.
-	 * 
-	 * @param order the order that is cancelled
-	 */
-	private void notifyFromWaitingList(Order order) throws NumberFormatException, SQLException, ParseException {
-		if (order != null && !order.getStatus().equals(OrderStatus.WAITING)) {
-			String parkName = order.getParkName();
-			String dateOfOrder = order.getDateOfOrder();
-			String timeOfOrder = order.getTimeOfOrder();
-			Map<String, Map<String, List<String>>> checkWating = new LinkedHashMap<String, Map<String, List<String>>>();
-			Map<String, List<String>> dateAndTime = new LinkedHashMap<String, List<String>>();
-			List<String> times = new ArrayList<String>();
-			times.add(timeOfOrder);
-			dateAndTime.put(dateOfOrder, times);
-			checkWating.put(parkName, dateAndTime);
-			List<Order> orderList = MySQLConnection.checkWatingList(checkWating);
-			sendToAllClients(new ServerMessage(ServerMessageTypes.WAITING_LIST_APPROVAL_EMAIL_AND_SMS, orderList));
-		}
-	}
 
 	/**
 	 * This method overrides the one in the superclass. Called when the server
