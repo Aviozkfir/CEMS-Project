@@ -34,11 +34,11 @@ public class ServerMain extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		FXMLLoader loader =  new FXMLLoader(getClass().getResource("/gui/ServerScreen.fxml"));
-		
 		Parent root = loader.load();
 		guiController = loader.getController();
 		Scene serverScene = new Scene(root);
-		serverScene.getStylesheets().add(getClass().getResource("/gui/application.css").toExternalForm());
+		primaryStage.setTitle("CEMS Server Window");
+		//serverScene.getStylesheets().add(getClass().getResource("/gui/application.css").toExternalForm());
 		primaryStage.setScene(serverScene);
 		primaryStage.setOnCloseRequest(e -> stopServer());//make sure safe shutdown
 		primaryStage.show();
@@ -73,7 +73,6 @@ public class ServerMain extends Application {
 	        	server.stopListening();
 	        	return false;
 	        }
-	        runThreads();
 	        return true;
 	       
 	       
@@ -87,55 +86,8 @@ public class ServerMain extends Application {
 		System.exit(0);
 		
 	}
-	/**
-	 * This is The method that handles all order management.
-	 * In addition we check every park if it is full or not
-	 */
-	private static void runThreads() {
-		ScheduledExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(1);
-		scheduledThreadPool.scheduleAtFixedRate(() -> {
-			try {
-				MySQLConnection.delAllOldWaitingOrders();
-			} catch ( SQLException e) {
-				showError("FAILED TO Delete Old Waiting Orders");
-			}
-		}, 0, 5, TimeUnit.HOURS);
-		scheduledThreadPool.scheduleAtFixedRate(() -> {
-			try {
-				MySQLConnection.expiredApprovedOrders();
-			} catch ( SQLException e) {
-				showError("FAILED TO Expire Old Approved Orders");
-			}
-		}, 0, 5, TimeUnit.HOURS);
-		scheduledThreadPool.scheduleAtFixedRate(() -> {
-			try {
-				List<Order> orderList=MySQLConnection.sendSmsToActiveOrders();
-				server.sendToAllClients(new ServerMessage(ServerMessageTypes.FINAL_APPROVAL_EMAIL_AND_SMS,orderList));
-			} catch (SQLException e) {
-				showError("FAILED TO SEND CLIENTS SMS AND EMAILS");
-			}
-		}, 0, 1, TimeUnit.HOURS);
-		scheduledThreadPool.scheduleAtFixedRate(() -> {
-			try {
-				List<List<Order>> twoOrderList=MySQLConnection.sendSmsToCancelOrders();
-				server.sendToAllClients(new ServerMessage(ServerMessageTypes.CANCEL_EMAIL_AND_SMS,twoOrderList.get(0)));
-				if(twoOrderList.get(1)!=null)
-					server.sendToAllClients(new ServerMessage(ServerMessageTypes.WAITING_LIST_APPROVAL_EMAIL_AND_SMS,twoOrderList.get(1)));
-			} catch (NumberFormatException | SQLException | ParseException e) {
-				showError("FAILED TO SEND CLIENTS SMS AND EMAILS");
-			}
-		}, 0, 30, TimeUnit.MINUTES);
-		scheduledThreadPool.scheduleAtFixedRate(() -> {
-			try {
-				MySQLConnection.checkIfParksFull();
-			} catch ( SQLException e) {
-				showError("FAILED TO CHECK IF PARKS FULL");
-			}
-		}, 0, 1, TimeUnit.HOURS);
 
-		
-	}
-	private static void showError(String msg) {
+ static void showError(String msg) {
 			Platform.runLater(() -> {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Error");

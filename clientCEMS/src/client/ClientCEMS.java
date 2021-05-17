@@ -5,10 +5,12 @@ import java.io.IOException;
 import gui.GUIControl;
 import message.ClientMessage;
 import message.ClientMessageType;
+import message.ServerMessage;
 import ocsf.client.AbstractClient;
 
 /**
- * This class controls the communication between the client and the server using handleMessageFromClientUI and handleMessageFromClient
+ * This class controls the communication between the client and the server using
+ * handleMessageFromClientUI and handleMessageFromClient
  */
 public class ClientCEMS extends AbstractClient {
 	// Instance variables **********************************************
@@ -45,9 +47,30 @@ public class ClientCEMS extends AbstractClient {
 	 */
 	public void handleMessageFromServer(Object msg) {
 		System.out.print("--> handleMessageFromServer : ");
-		
-		
-		
+	
+		if (msg instanceof ServerMessage) {
+			ServerMessage serverMsg = (ServerMessage) msg;
+			switch (serverMsg.getType()) {
+			case LOGIN_TEACHER:
+				guiControl.setServerMsg(serverMsg);
+				break;	
+			case LOGIN_PERSON_NOT_FOUND:
+				if (serverMsg.getMessage() == null) {
+					guiControl.setServerMsg(serverMsg);
+				} else {
+					GUIControl.popUpErrorExitOnClick((String) serverMsg.getMessage());
+				}
+				break;
+			case LOGOUT_SUCCESS:
+				GUIControl.popUpMessage("Logged out");
+				break;
+			default:
+				guiControl.setServerMsg(serverMsg);
+				break;
+
+			}
+		}
+		awaitResponse = false;
 	}
 
 	/**
@@ -80,7 +103,6 @@ public class ClientCEMS extends AbstractClient {
 			quit();
 		}
 	}
-	
 
 	/**
 	 * This method terminates the client.

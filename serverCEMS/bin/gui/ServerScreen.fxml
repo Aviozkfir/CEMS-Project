@@ -58,6 +58,6 @@
             <Image url="@../resources/CEMSlogo.png" />
          </image>
       </ImageView>
-      <ProgressIndicator fx:id="progressIndicator" layoutX="557.0" layoutY="301.0" prefHeight="39.0" prefWidth="34.0" style="-fx-progress-color: white;" />
+      <ProgressIndicator fx:id="progressIndicator" layoutX="423.0" layoutY="229.0" prefHeight="39.0" prefWidth="34.0" style="-fx-progress-color: white;" />
    </children>
 </AnchorPane>
