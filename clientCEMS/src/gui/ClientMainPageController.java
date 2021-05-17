@@ -133,7 +133,7 @@ public class ClientMainPageController implements Initializable {
 	@FXML
 	void logOutBtnClick(ActionEvent event) {
 		guiControl.logOut();
-		guiControl.openLogInPage();
+		guiControl.openLoginPage();
 	}
 
 	@FXML

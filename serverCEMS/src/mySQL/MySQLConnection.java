@@ -29,23 +29,12 @@ import java.util.Map;
 
 //import com.sun.media.jfxmedia.events.NewFrameEvent;
 
-import entity.Employee;
-import entity.EntityConstants;
-import entity.EntityConstants.OrderStatus;
-import entity.EntityConstants.OrderType;
-import entity.EntityConstants.ParkParameter;
-import entity.EntityConstants.RequestStatus;
-import entity.Order;
-import entity.ParameterUpdate;
-import entity.Park;
-import entity.ParkDiscount;
 import entity.PersonCEMS;
-import entity.ReportDate;
-import entity.Subscriber;
-import entity.Visitor;
-import entity.VisitorReport;
+import entity.Principal;
+import entity.Student;
+import entity.Teacher;
 import message.ServerMessage;
-import message.ServerMessageType;
+import message.ServerMessageTypes;
 
 /**
  * class that holds static methods related to database actions such as
@@ -70,103 +59,40 @@ public class MySQLConnection {
 	 * @return Subscriber or null
 	 * @throws SQLException
 	 */
-	public static PersonCEMS validatePerson(String id) throws SQLException {
+	public static PersonCEMS validatePerson(String[] idAndPassword) throws SQLException {
+		String role;
 		PreparedStatement logInPreparedStatement;
-		logInPreparedStatement = con.prepareStatement("SELECT * FROM visitor where id=? LIMIT 1;");
-		logInPreparedStatement.setString(1, id);
+		logInPreparedStatement = con.prepareStatement("SELECT * FROM Person where id=? and password=?");
+		logInPreparedStatement.setString(1, idAndPassword[0]);
+		logInPreparedStatement.setString(2, idAndPassword[1]);
 		ResultSet rs = logInPreparedStatement.executeQuery();
-		if (rs.next()) {
-			return new Visitor(rs.getString(1));
-		} else {
-			PreparedStatement insertVisitorPreparedStatement;
-			insertVisitorPreparedStatement = con.prepareStatement("INSERT INTO visitor (id) VALUES (?);");
-			insertVisitorPreparedStatement.setString(1, id);
-			insertVisitorPreparedStatement.executeUpdate();
-			return new Visitor(id);
+		if(rs.equals(null)) {
+			return null;
 		}
-	}
-
-	/**
-	 * A method that returns a Subscriber with subNum. Returns null if there is not.
-	 * 
-	 * @param subNum
-	 * @return Subscriber or null
-	 * @throws SQLException
-	 */
-	public static Subscriber validateSubscriber(String subNum) throws SQLException {
-		PreparedStatement logInPreparedStatement;
-		logInPreparedStatement = con.prepareStatement("SELECT * FROM subscriber where subNum=? LIMIT 1;");
-		logInPreparedStatement.setString(1, subNum);
-		ResultSet rs = logInPreparedStatement.executeQuery();
-		if (rs.next()) {
-			return new Subscriber(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-					rs.getString(6), Integer.parseInt(rs.getString(7)), rs.getString(8),
-					rs.getString(9).contentEquals("0") ? false : true);
+		role = rs.getString(6);//Change according to table.
+		if (role.equals("Teacher")) {
+			if (rs.next()) {
+				return new Teacher(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+			}
+		}
+		if (role.equals("Principal")) {
+			if (rs.next()) {
+				return new Principal(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
+						rs.getString(5));
+			}
+		}
+		if (role.equals("Student")) {
+			if (rs.next()) {
+				return new Student(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+			}
 		}
 		return null;
 	}
 
-	/**
-	 * A method that returns an Employee with employeeNum and password. Returns null
-	 * if there is not.
-	 * 
-	 * @param employeeNumber and password
-	 * @return Employee or null
-	 * @throws SQLException
-	 */
-	public static Employee validateEmployee(String[] employeeNumberAndPassword) throws SQLException {
-		PreparedStatement logInPreparedStatement;
-		logInPreparedStatement = con
-				.prepareStatement("SELECT * FROM employee where employeeNum=? AND password=? LIMIT 1;");
-		logInPreparedStatement.setString(1, employeeNumberAndPassword[0]);
-		logInPreparedStatement.setString(2, employeeNumberAndPassword[1]);
-		ResultSet rs = logInPreparedStatement.executeQuery();
-		if (rs.next()) {
-			return new Employee(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-					EntityConstants.EmployeeRole.valueOf(rs.getString(6)), rs.getString(8));
-		}
-		return null;
-	}
 
-	/**
-	 * A method that returns a List of all parks in the DataBase
-	 * 
-	 * @param
-	 * @return List of Park
-	 * @throws NumberFormatException, SQLException
-	 */
-	public static List<Park> getParks() throws SQLException {
-		ArrayList<Park> parkList = new ArrayList<>();
-		Statement getParkStatement;
-		getParkStatement = con.createStatement();
-		ResultSet rs = getParkStatement.executeQuery("SELECT * FROM park;");
-		while (rs.next()) {
-			parkList.add(new Park(rs.getString(1), Integer.parseInt(rs.getString(2)), Integer.parseInt(rs.getString(3)),
-					Integer.parseInt(rs.getString(4)), Integer.parseInt(rs.getString(5))));
-		}
-		return parkList;
-	}
 
-	/**
-	 * A method that returns a Park with it's name is parkName in DB. If there is
-	 * not it returns null.
-	 * 
-	 * @param parkName
-	 * @return Park or null
-	 * @throws NumberFormatException, SQLException
-	 */
-	private static Park getCertainPark(String parkName) throws NumberFormatException, SQLException {
 
-		PreparedStatement getParkStatement;
-		getParkStatement = con.prepareStatement("SELECT * FROM park where parkName=?;");
-		getParkStatement.setString(1, parkName);
-		ResultSet rs = getParkStatement.executeQuery();
-		if (rs.next()) {
-			return new Park(rs.getString(1), Integer.parseInt(rs.getString(2)), Integer.parseInt(rs.getString(3)),
-					Integer.parseInt(rs.getString(4)), Integer.parseInt(rs.getString(5)));
-		}
-		return null;
-	}
+
 
 	/**
 	 * A method that returns the data to the park manager's visitor report from
@@ -604,16 +530,16 @@ public class MySQLConnection {
 		parameterPreparedStatement.setInt(2, parameterUpdate.getNewValue());
 		parameterPreparedStatement.setString(3, parameterUpdate.getParkName());
 		ResultSet rs = parameterPreparedStatement.executeQuery();
-		if(rs.next())
+		if (rs.next())
 			return null;
 		else {
-		PreparedStatement parameterPreparedStatement1 = con
-				.prepareStatement("INSERT INTO parameterUpdate (parameter,newValue,parkName_fk) VALUES (?,?,?);");
-		parameterPreparedStatement1.setString(1, parameterUpdate.getParameter());
-		parameterPreparedStatement1.setInt(2, parameterUpdate.getNewValue());
-		parameterPreparedStatement1.setString(3, parameterUpdate.getParkName());
-		parameterPreparedStatement1.executeUpdate();
-		return parameterUpdate;
+			PreparedStatement parameterPreparedStatement1 = con
+					.prepareStatement("INSERT INTO parameterUpdate (parameter,newValue,parkName_fk) VALUES (?,?,?);");
+			parameterPreparedStatement1.setString(1, parameterUpdate.getParameter());
+			parameterPreparedStatement1.setInt(2, parameterUpdate.getNewValue());
+			parameterPreparedStatement1.setString(3, parameterUpdate.getParkName());
+			parameterPreparedStatement1.executeUpdate();
+			return parameterUpdate;
 		}
 	}
 
@@ -669,7 +595,7 @@ public class MySQLConnection {
 		if (rs.next()) {
 			ParkDiscount existDiscount = new ParkDiscount(rs.getString(1), rs.getString(2), rs.getString(3),
 					rs.getInt(4), EntityConstants.RequestStatus.valueOf(rs.getString(5)), rs.getString(6));
-			return new ServerMessage(ServerMessageType.DISCOUNT_IS_ALREADY_EXIST, existDiscount);
+			return new ServerMessage(ServerMessageTypes.DISCOUNT_IS_ALREADY_EXIST, existDiscount);
 
 		}
 		String query2 = "SELECT * FROM discounts WHERE parkName_fk=? AND startDate<=? AND finishDate>=? AND status=?;";
@@ -678,12 +604,11 @@ public class MySQLConnection {
 		checkDiscountRequestStatement2.setString(2, newDiscountRequest.getStartDate());
 		checkDiscountRequestStatement2.setString(3, newDiscountRequest.getFinishDate());
 		checkDiscountRequestStatement2.setString(4, EntityConstants.RequestStatus.APPROVED.name());
-		rs=checkDiscountRequestStatement2.executeQuery();
-		if (rs.next()) 
-		{
+		rs = checkDiscountRequestStatement2.executeQuery();
+		if (rs.next()) {
 			ParkDiscount discountBetweenDates = new ParkDiscount(rs.getString(1), rs.getString(2), rs.getString(3),
 					rs.getInt(4), EntityConstants.RequestStatus.valueOf(rs.getString(5)), rs.getString(6));
-			return new ServerMessage(ServerMessageType.DISCOUNT_EXIST_BETWEEN_DATES, discountBetweenDates);
+			return new ServerMessage(ServerMessageTypes.DISCOUNT_EXIST_BETWEEN_DATES, discountBetweenDates);
 		}
 		String query3 = "SELECT * FROM discounts WHERE parkName_fk=? AND startDate<=? AND finishDate>=? AND status=?;";
 		PreparedStatement checkDiscountRequestStatement3 = con.prepareStatement(query2);
@@ -691,14 +616,13 @@ public class MySQLConnection {
 		checkDiscountRequestStatement3.setString(2, newDiscountRequest.getStartDate());
 		checkDiscountRequestStatement3.setString(3, newDiscountRequest.getFinishDate());
 		checkDiscountRequestStatement3.setString(4, EntityConstants.RequestStatus.WAITING.name());
-		rs=checkDiscountRequestStatement3.executeQuery();
-		if (rs.next()) 
-		{
+		rs = checkDiscountRequestStatement3.executeQuery();
+		if (rs.next()) {
 			ParkDiscount waitingDiscount = new ParkDiscount(rs.getString(1), rs.getString(2), rs.getString(3),
 					rs.getInt(4), EntityConstants.RequestStatus.valueOf(rs.getString(5)), rs.getString(6));
-			return new ServerMessage(ServerMessageType.WAITING_DISCOUNT, waitingDiscount);
+			return new ServerMessage(ServerMessageTypes.WAITING_DISCOUNT, waitingDiscount);
 		}
-		return new ServerMessage(ServerMessageType.CAN_INSERT_NEW_DISCOUNT, null);
+		return new ServerMessage(ServerMessageTypes.CAN_INSERT_NEW_DISCOUNT, null);
 	}
 
 	/**
@@ -1257,12 +1181,14 @@ public class MySQLConnection {
 	public static boolean approveDiscountUpdate(ParkDiscount discountToApprove) throws SQLException {
 		String query1 = "UPDATE discounts SET status=? WHERE parkName_fk=? AND startDate=? AND finishDate=? AND discountAmount=? ;";
 		PreparedStatement approveDiscount = con.prepareStatement(query1);
-		String[] changeStartDateForDB=discountToApprove.getStartDate().split("-");
-		String[] changeFinishDateForDB=discountToApprove.getFinishDate().split("-");
+		String[] changeStartDateForDB = discountToApprove.getStartDate().split("-");
+		String[] changeFinishDateForDB = discountToApprove.getFinishDate().split("-");
 		approveDiscount.setString(1, entity.EntityConstants.RequestStatus.APPROVED.name());
 		approveDiscount.setString(2, discountToApprove.getParkName());
-		approveDiscount.setString(3, changeStartDateForDB[2]+'-'+changeStartDateForDB[1]+'-'+changeStartDateForDB[0]);
-		approveDiscount.setString(4, changeFinishDateForDB[2]+'-'+changeFinishDateForDB[1]+'-'+changeFinishDateForDB[0]);
+		approveDiscount.setString(3,
+				changeStartDateForDB[2] + '-' + changeStartDateForDB[1] + '-' + changeStartDateForDB[0]);
+		approveDiscount.setString(4,
+				changeFinishDateForDB[2] + '-' + changeFinishDateForDB[1] + '-' + changeFinishDateForDB[0]);
 		approveDiscount.setInt(5, discountToApprove.getDiscountAmount());
 		approveDiscount.executeUpdate();
 
@@ -1283,7 +1209,7 @@ public class MySQLConnection {
 			Subscriber registered = new Subscriber(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
 					rs.getString(5), rs.getString(6), Integer.parseInt(rs.getString(7)), rs.getString(8),
 					rs.getString(9).contentEquals("0") ? false : true);
-			return new ServerMessage(ServerMessageType.REGISTRATION_FAILED, registered);
+			return new ServerMessage(ServerMessageTypes.REGISTRATION_FAILED, registered);
 		}
 		validateVisitor(subscriber.getID());
 		registerPreparedStatement = con.prepareStatement("INSERT INTO subscriber "
@@ -1306,7 +1232,7 @@ public class MySQLConnection {
 			subscriber.setSuibscriberNum(rs1.getString(1));
 		}
 
-		return new ServerMessage(ServerMessageType.REGISTRATION_SUCCESSED, subscriber);
+		return new ServerMessage(ServerMessageTypes.REGISTRATION_SUCCESSED, subscriber);
 
 	}
 
@@ -1320,12 +1246,14 @@ public class MySQLConnection {
 	public static boolean declineDiscountUpdate(ParkDiscount discountToDecline) throws SQLException {
 		String query1 = "UPDATE discounts SET status=? WHERE parkName_fk=? AND startDate=? AND finishDate=? AND discountAmount=?;";
 		PreparedStatement declineDiscount = con.prepareStatement(query1);
-		String[] changeStartDateForDB=discountToDecline.getStartDate().split("-");
-		String[] changeFinishDateForDB=discountToDecline.getFinishDate().split("-");
+		String[] changeStartDateForDB = discountToDecline.getStartDate().split("-");
+		String[] changeFinishDateForDB = discountToDecline.getFinishDate().split("-");
 		declineDiscount.setString(1, entity.EntityConstants.RequestStatus.DECLINED.name());
 		declineDiscount.setString(2, discountToDecline.getParkName());
-		declineDiscount.setString(3, changeStartDateForDB[2]+'-'+changeStartDateForDB[1]+'-'+changeStartDateForDB[0]);
-		declineDiscount.setString(4, changeFinishDateForDB[2]+'-'+changeFinishDateForDB[1]+'-'+changeFinishDateForDB[0]);
+		declineDiscount.setString(3,
+				changeStartDateForDB[2] + '-' + changeStartDateForDB[1] + '-' + changeStartDateForDB[0]);
+		declineDiscount.setString(4,
+				changeFinishDateForDB[2] + '-' + changeFinishDateForDB[1] + '-' + changeFinishDateForDB[0]);
 		declineDiscount.setInt(5, discountToDecline.getDiscountAmount());
 		declineDiscount.executeUpdate();
 
@@ -1386,7 +1314,6 @@ public class MySQLConnection {
 	 *         waiting List
 	 * @throws SQLException
 	 * @throws NumberFormatException
-	 * @throws ParseException
 	 */
 	public static List<List<Order>> sendSmsToCancelOrders() throws SQLException, NumberFormatException, ParseException {
 		List<Order> orders = new ArrayList<>();
@@ -1612,10 +1539,12 @@ public class MySQLConnection {
 			parktoreturn = new Park(rs.getString(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getInt(5));
 		return parktoreturn;
 	}
-/**
- * This method delete all orders with status waiting in the DB
- * @throws SQLException
- */
+
+	/**
+	 * This method delete all orders with status waiting in the DB
+	 * 
+	 * @throws SQLException
+	 */
 	public static void delAllOldWaitingOrders() throws SQLException {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		LocalDateTime now = LocalDateTime.now();

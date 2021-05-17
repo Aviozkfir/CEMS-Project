@@ -2,14 +2,15 @@ package message;
 /**
  * ServerMessageType is the type of the message of ServerMessage
  */
-public enum ServerMessageType {
+public enum ServerMessageTypes {
 	LOGIN,
 	LOGOUT_SUCCESS,
 	AVAILABLE_DATES,
 	PARK_LIST,
+	LOGIN_PERSON_NOT_FOUND,
 	LOGIN_TEACHER,
 	LOGIN_STUDENT,
-	LOGIN_PRINCIPLE,
+	LOGIN_PRINCIPAL,
 	PARK_VISITATION_REPORT,
 	PARK_CAPACITY_REPORT,
 	PARK_INCOME_REPORT,
