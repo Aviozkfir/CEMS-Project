@@ -2,9 +2,7 @@ package gui;
 
 import java.util.ArrayList;
 
-import entity.Subscriber;
 import entity.Teacher;
-import entity.Visitor;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
