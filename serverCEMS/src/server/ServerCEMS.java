@@ -56,6 +56,7 @@ public class ServerCEMS extends AbstractServer {
 	public ServerCEMS(int port) {
 		super(port);
 		userList = new ArrayList<>();
+		String s;
 	}
 
 	// Instance methods ****************
