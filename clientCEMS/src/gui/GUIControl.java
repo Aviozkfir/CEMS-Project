@@ -27,8 +27,8 @@ public class GUIControl {
 	private Object currentUser;
 	private Stage primaryStage;
 	private ServerMessage serverMsg;
-	private ClientMainPageController cmpc;
-	private static LoginPageController lpc;
+	private CurrentController cmpc;
+
 
 	private GUIControl() {
 	}
@@ -37,11 +37,11 @@ public class GUIControl {
 		return instance;
 	}
 
-	public void setClientMainPageController(ClientMainPageController cmpc) {
+	public void setClientCurrentController(CurrentController cmpc) {
 		this.cmpc = cmpc;
 	}
 
-	public ClientMainPageController getClientMainPageController() {
+	public CurrentController getCurrentController() {
 		return cmpc;
 	}
 

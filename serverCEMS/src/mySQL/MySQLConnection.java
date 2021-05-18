@@ -59,33 +59,32 @@ public class MySQLConnection {
 	 * @return Subscriber or null
 	 * @throws SQLException
 	 */
-	public static PersonCEMS validatePerson(String[] idAndPassword) throws SQLException {
-		System.out.println(idAndPassword[0]+" "+idAndPassword[1]);
+	public static Object validatePerson(String[] idAndPassword) throws SQLException {
+		System.out.println(idAndPassword[0] + " " + idAndPassword[1]);
 		String role;
+		ResultSet rs;
 		PreparedStatement logInPreparedStatement;
 		logInPreparedStatement = con.prepareStatement("SELECT * FROM Person where Id=? and Password=?");
 		logInPreparedStatement.setString(1, idAndPassword[0]);
 		logInPreparedStatement.setString(2, idAndPassword[1]);
-		ResultSet rs = logInPreparedStatement.executeQuery();
-		if(rs.getFetchSize()==0) {
+		rs = logInPreparedStatement.executeQuery();
+		if (!(rs.next())) {
 			return null;
 		}
-		role = rs.getString(5);//Change according to table.
+
+		role = rs.getString(5);// Change according to table.
 		if (role.equals("Teacher")) {
-			if (rs.next()) {
-				return new Teacher(rs.getString(2), rs.getString(3), rs.getString(1), rs.getString(4), rs.getString(5));
-			}
+			System.out.println("next enter");
+			return new Teacher(rs.getString(2), rs.getString(3), rs.getString(1), rs.getString(4), rs.getString(5));
+
 		}
 		if (role.equals("Principal")) {
-			if (rs.next()) {
-				return new Principal(rs.getString(2), rs.getString(3), rs.getString(1), rs.getString(4),
-						rs.getString(5));
-			}
+
+			return new Principal(rs.getString(2), rs.getString(3), rs.getString(1), rs.getString(4), rs.getString(5));
 		}
 		if (role.equals("Student")) {
-			if (rs.next()) {
-				return new Student(rs.getString(2), rs.getString(3), rs.getString(1), rs.getString(4), rs.getString(5));
-			}
+			return new Student(rs.getString(2), rs.getString(3), rs.getString(1), rs.getString(4), rs.getString(5));
+
 		}
 		return null;
 	}
