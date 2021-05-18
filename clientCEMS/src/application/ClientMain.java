@@ -11,6 +11,7 @@ import javafx.stage.Stage;
  * main class for running the application,sets up a client,connects to default port and opens the login scene
  */
 public class ClientMain extends Application {
+	String str;                                    //to delete
 	private final int DEFAULT_PORT=5555;
 	ClientCEMS client;
 	GUIControl guiControl=GUIControl.getInstance();
