@@ -3,6 +3,7 @@ package gui;
 import java.io.IOException;
 
 import entity.PersonCEMS;
+import entity.Teacher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,7 +36,7 @@ public class LoginPageController {
 			PersonCEMS person = (PersonCEMS) guiControl.getUser();
 			String role = person.getRole();
 			String chosenPath = null;
-			ClientMainPageController controller;
+			CurrentController controller;
 			switch (role) {
 			case "Teacher":
 				chosenPath = ClientsConstants.Screens.TEACHER_MAIN_PAGE.path;
@@ -46,15 +47,16 @@ public class LoginPageController {
 			case "Student":
 				chosenPath = ClientsConstants.Screens.STUDENT_MAIN_PAGE.path;
 				break;
-			default:
 			}
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(chosenPath));
-			//controller = (ClientMainPageController) fxmlLoader.getController();
+			
+			controller = (CurrentController) fxmlLoader.getController();
 			AnchorPane root = fxmlLoader.load();
-			//guiControl.setClientMainPageController(controller);
+			
+			//guiControl.setClientCurrentController(controller);
 			//controller.setUser(guiControl.getUser());
 			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("/gui/application.css").toExternalForm());
+			//scene.getStylesheets().add(getClass().getResource("/gui/application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.setOnCloseRequest(e -> {
 				guiControl.disconnect();
@@ -77,9 +79,7 @@ public class LoginPageController {
 		String[] IdAndPassword = { UserIDTextField.getText(), PasswordFieldText.getText() };
 		msg = new ClientMessage(ClientMessageType.LOGIN_PERSON, IdAndPassword);
 		guiControl.sendToServer(msg);
-		
-		
-		System.out.println("MESSAGE RECIEVED");
+
 		if (guiControl.getServerMsg().getMessage()==null) {
 			GUIControl.popUpError("Login information doesn't exist\n Please try again");
 			return false;

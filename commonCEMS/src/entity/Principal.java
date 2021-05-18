@@ -8,7 +8,7 @@ public class Principal extends PersonCEMS implements Serializable{
 	
 	//private ArrayList<Request> requestLists = new ArrayList<Request>(); //need to create Request class and set/get. 
 	
-	public Principal(String firstName, String lastName, String email, String role,String id) {
+	public Principal(String firstName, String lastName, String id, String email,String role) {
 		super(firstName, lastName,id, email, role);
 	}
 
