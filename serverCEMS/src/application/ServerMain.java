@@ -7,7 +7,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import entity.Order;
 import gui.ServerScreenController;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -19,7 +18,6 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import message.ServerMessage;
-import message.ServerMessageType;
 import message.ServerMessageTypes;
 import mySQL.MySQLConnection;
 import server.ServerCEMS;
