@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 public class dashBoardPrincipalControllerHome {
 	private Principal user;
 	private GUIControl guiControl = GUIControl.getInstance();
+    private dashBoardPrincipalControllerHome controller = this;
 
     @FXML
     private Button HomePageButton;
@@ -67,7 +68,7 @@ public class dashBoardPrincipalControllerHome {
 		chosenPath=ClientsConstants.Screens.REPORT_MAIN_PAGE.path;
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(chosenPath));
 		AnchorPane root = fxmlLoader.load();
-		//guiControl.setController(controller);
+		guiControl.setController(controller);
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setOnCloseRequest(e -> {
@@ -84,7 +85,7 @@ public class dashBoardPrincipalControllerHome {
 		chosenPath=ClientsConstants.Screens.PRINCIPAL_MAIN_PAGE.path;
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(chosenPath));
 		AnchorPane root = fxmlLoader.load();
-		//guiControl.setController(controller);
+		guiControl.setController(controller);
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setOnCloseRequest(e -> {
@@ -109,7 +110,7 @@ public class dashBoardPrincipalControllerHome {
 		chosenPath=ClientsConstants.Screens.QUESTION_BANK_PAGE.path;
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(chosenPath));
 		AnchorPane root = fxmlLoader.load();
-		//guiControl.setController(controller);
+		guiControl.setController(controller);
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setOnCloseRequest(e -> {
@@ -126,7 +127,7 @@ public class dashBoardPrincipalControllerHome {
 		chosenPath=ClientsConstants.Screens.MANAGER_REQUESTS_PAGE.path;
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(chosenPath));
 		AnchorPane root = fxmlLoader.load();
-		//guiControl.setController(controller);
+		guiControl.setController(controller);
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setOnCloseRequest(e -> {

@@ -32,7 +32,6 @@ public class Student extends PersonCEMS implements Serializable {
 	public void setCourseList(ArrayList<Course> courseList) {
 		this.courseList = courseList;
 	}
-  
 
 
 

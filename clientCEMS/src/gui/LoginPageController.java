@@ -51,19 +51,10 @@ public class LoginPageController {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(chosenPath));
 			AnchorPane root = fxmlLoader.load();
 
-			if (role.equals("Teacher")) {
-				controller = (dashBoardTeacherControllerHome) fxmlLoader.getController();
-				guiControl.setController(controller);
-				((dashBoardTeacherControllerHome) controller).setUser(guiControl.getUser());
-			} else if (role.equals("Student")) {
-				controller = (dashBoardStudentControllerHome) fxmlLoader.getController();
-				guiControl.setController(controller);
-				((dashBoardStudentControllerHome) controller).setUser(guiControl.getUser());
-			} else if (role.equals("Principal")) {
-				controller = (dashBoardPrincipalControllerHome) fxmlLoader.getController();
-				guiControl.setController(controller);
-				((dashBoardPrincipalControllerHome) controller).setUser(guiControl.getUser());
-			}
+			controller = (MainPageController) fxmlLoader.getController();
+			guiControl.setController(controller);
+			((MainPageController) controller).setUser(guiControl.getUser());
+			
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.setOnCloseRequest(e -> {
