@@ -1,10 +1,16 @@
 package gui;
 
+import java.io.IOException;
+
 import entity.Principal;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class dashBoardPrincipalControllerHome {
 	private Principal user;
@@ -35,19 +41,56 @@ public class dashBoardPrincipalControllerHome {
     private Button RequestsButton;
 
     @FXML
-    void ExamBankButtonPressed(ActionEvent event) {
-    	
+    void ExamBankButtonPressed(ActionEvent event) throws IOException {
+		String chosenPath;
+		Stage primaryStage = guiControl.getStage();
+		//primaryStage.hide();
+		chosenPath=ClientsConstants.Screens.EXAM_BANK_MAIN_PAGE.path;
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(chosenPath));
+		AnchorPane root = fxmlLoader.load();
+		//guiControl.setController(controller);
+		Scene scene = new Scene(root);
+		primaryStage.setScene(scene);
+		primaryStage.setOnCloseRequest(e -> {
+			guiControl.disconnect();
+		});
+		primaryStage.show();
+
 
     }
 
     @FXML
-    void GetReportButtonPressed(ActionEvent event) {
-
+    void GetReportButtonPressed(ActionEvent event) throws IOException {
+		String chosenPath;
+		Stage primaryStage = guiControl.getStage();
+		//primaryStage.hide();
+		chosenPath=ClientsConstants.Screens.REPORT_MAIN_PAGE.path;
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(chosenPath));
+		AnchorPane root = fxmlLoader.load();
+		//guiControl.setController(controller);
+		Scene scene = new Scene(root);
+		primaryStage.setScene(scene);
+		primaryStage.setOnCloseRequest(e -> {
+			guiControl.disconnect();
+		});
+		primaryStage.show();
     }
 
     @FXML
-    void HomePageButtonPressed(ActionEvent event) {
-
+    void HomePageButtonPressed(ActionEvent event) throws IOException {
+		String chosenPath;
+		Stage primaryStage = guiControl.getStage();
+		//primaryStage.hide();
+		chosenPath=ClientsConstants.Screens.PRINCIPAL_MAIN_PAGE.path;
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(chosenPath));
+		AnchorPane root = fxmlLoader.load();
+		//guiControl.setController(controller);
+		Scene scene = new Scene(root);
+		primaryStage.setScene(scene);
+		primaryStage.setOnCloseRequest(e -> {
+			guiControl.disconnect();
+		});
+		primaryStage.show();
     }
 
     @FXML
@@ -58,14 +101,38 @@ public class dashBoardPrincipalControllerHome {
     }
 
     @FXML
-    void QuestionBankButtonPressed(ActionEvent event) {
+    void QuestionBankButtonPressed(ActionEvent event) throws IOException {
     	
-
+		String chosenPath;
+		Stage primaryStage = guiControl.getStage();
+		//primaryStage.hide();
+		chosenPath=ClientsConstants.Screens.QUESTION_BANK_PAGE.path;
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(chosenPath));
+		AnchorPane root = fxmlLoader.load();
+		//guiControl.setController(controller);
+		Scene scene = new Scene(root);
+		primaryStage.setScene(scene);
+		primaryStage.setOnCloseRequest(e -> {
+			guiControl.disconnect();
+		});
+		primaryStage.show();
     }
     
     @FXML
-    void RequestsButtonPressed(ActionEvent event) {
-    	
+    void RequestsButtonPressed(ActionEvent event) throws IOException {
+		String chosenPath;
+		Stage primaryStage = guiControl.getStage();
+		//primaryStage.hide();
+		chosenPath=ClientsConstants.Screens.MANAGER_REQUESTS_PAGE.path;
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(chosenPath));
+		AnchorPane root = fxmlLoader.load();
+		//guiControl.setController(controller);
+		Scene scene = new Scene(root);
+		primaryStage.setScene(scene);
+		primaryStage.setOnCloseRequest(e -> {
+			guiControl.disconnect();
+		});
+		primaryStage.show();
 
     }
     
