@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainPageController">
    <children>
       <VBox prefHeight="600.0" prefWidth="206.0" style="-fx-background-color: #F7F7F7;">
          <children>
@@ -23,7 +23,7 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </ImageView>
-            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="46.0" prefWidth="172.0" style="-fx-background-color: #F7F7F7;" text="Home Page" textFill="#9b9c9f">
+            <Button fx:id="HomePageButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#HomePageButtonPressed" prefHeight="46.0" prefWidth="172.0" style="-fx-background-color: #F7F7F7;" text="Home Page" textFill="#9b9c9f">
                <font>
                   <Font name="Ebrima" size="16.0" />
                </font>
@@ -35,7 +35,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="46.0" prefWidth="173.0" style="-fx-background-color: #4CB5F5;" text="My Exams">
+            <Button fx:id="MyExamsButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#MyExamsButtonPressed" prefHeight="46.0" prefWidth="173.0" style="-fx-background-color: #4CB5F5;" text="My Exams">
                <font>
                   <Font name="Ebrima Bold" size="17.0" />
                </font>
@@ -47,7 +47,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="46.0" prefWidth="173.0" style="-fx-background-color: #F7F7F7;" text="Start Exam" textFill="#9b9c9f">
+            <Button fx:id="StartExamButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#StartExamButtonPressed" prefHeight="46.0" prefWidth="173.0" style="-fx-background-color: #F7F7F7;" text="Start Exam" textFill="#9b9c9f">
                <font>
                   <Font name="Ebrima" size="16.0" />
                </font>
@@ -71,7 +71,7 @@
                         <Font size="15.0" />
                      </font>
                   </Text>
-                  <Button layoutX="764.0" layoutY="4.0" mnemonicParsing="false" opacity="0.85" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: transperent;" text="Logout" textFill="#1c251d">
+                  <Button fx:id="LogOutButton" layoutX="764.0" layoutY="4.0" mnemonicParsing="false" onAction="#LogOutButtonPressed" opacity="0.85" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: transperent;" text="Logout" textFill="#1c251d">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
