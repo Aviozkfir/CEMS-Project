@@ -44,13 +44,6 @@ public class Teacher extends PersonCEMS implements Serializable {
 	public void setCourseList(ArrayList<Course> courseList) {
 		this.courseList = courseList;
 	}
-
-
-
-
-
-
-	
 	
 	
 }
