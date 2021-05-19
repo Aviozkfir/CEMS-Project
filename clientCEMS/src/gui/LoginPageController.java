@@ -36,7 +36,7 @@ public class LoginPageController {
 			PersonCEMS person = (PersonCEMS) guiControl.getUser();
 			String role = person.getRole();
 			String chosenPath = null;
-			CurrentController controller;
+			Object controller = null;
 			switch (role) {
 			case "Teacher":
 				chosenPath = ClientsConstants.Screens.TEACHER_MAIN_PAGE.path;
@@ -49,14 +49,22 @@ public class LoginPageController {
 				break;
 			}
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(chosenPath));
-			
-			controller = (CurrentController) fxmlLoader.getController();
 			AnchorPane root = fxmlLoader.load();
-			
-			//guiControl.setClientCurrentController(controller);
-			//controller.setUser(guiControl.getUser());
+
+			if (role.equals("Teacher")) {
+				controller = (dashBoardTeacherControllerHome) fxmlLoader.getController();
+				guiControl.setController(controller);
+				((dashBoardTeacherControllerHome) controller).setUser(guiControl.getUser());
+			} else if (role.equals("Student")) {
+				controller = (dashBoardStudentControllerHome) fxmlLoader.getController();
+				guiControl.setController(controller);
+				((dashBoardStudentControllerHome) controller).setUser(guiControl.getUser());
+			} else if (role.equals("Principal")) {
+				controller = (dashBoardPrincipalControllerHome) fxmlLoader.getController();
+				guiControl.setController(controller);
+				((dashBoardPrincipalControllerHome) controller).setUser(guiControl.getUser());
+			}
 			Scene scene = new Scene(root);
-			//scene.getStylesheets().add(getClass().getResource("/gui/application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.setOnCloseRequest(e -> {
 				guiControl.disconnect();
@@ -80,7 +88,7 @@ public class LoginPageController {
 		msg = new ClientMessage(ClientMessageType.LOGIN_PERSON, IdAndPassword);
 		guiControl.sendToServer(msg);
 
-		if (guiControl.getServerMsg().getMessage()==null) {
+		if (guiControl.getServerMsg().getMessage() == null) {
 			GUIControl.popUpError("Login information doesn't exist\n Please try again");
 			return false;
 		} else if (guiControl.getServerMsg().getMessage().equals("logged in")) {

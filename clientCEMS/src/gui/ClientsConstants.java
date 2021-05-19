@@ -14,7 +14,7 @@ public class ClientsConstants {
 		TEACHER_MAIN_PAGE("/gui/dashBoardTeacherView.fxml"),
 		STUDENT_MAIN_PAGE("/gui/dashBoardStudentView.fxml"), 
 		PRINCIPAL_MAIN_PAGE("/gui/dashBoardPrincipalView.fxml"),
-		EMPLOYEE_MAIN_PAGE("/gui/EmployeeHomePage.fxml"),
+		QUESTION_BANK_PAGE("/gui/questionBankSubjects.fxml"),
 		PARK_MANAGER_REPOTRS("/gui/ParkManagerReports.fxml"),
 		DEPARTMENT_MANAGER_REPOTRS("/gui/DepartmentManagerProduceReportsPage.fxml"),
 		PARK_MNG_VISIT_REPORT("/gui/ParkManagerVisitaoinReport.fxml"),

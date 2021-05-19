@@ -27,7 +27,7 @@ public class GUIControl {
 	private Object currentUser;
 	private Stage primaryStage;
 	private ServerMessage serverMsg;
-	private CurrentController cmpc;
+	private Object cmpc;
 
 
 	private GUIControl() {
@@ -37,11 +37,11 @@ public class GUIControl {
 		return instance;
 	}
 
-	public void setClientCurrentController(CurrentController cmpc) {
+	public void setController(Object cmpc) {
 		this.cmpc = cmpc;
 	}
 
-	public CurrentController getCurrentController() {
+	public Object getController() {
 		return cmpc;
 	}
 
