@@ -18,47 +18,46 @@ import javafx.stage.Stage;
 public class MainPageController {
 	private PersonCEMS user;
 	private GUIControl guiControl = GUIControl.getInstance();
-    
 
-    @FXML
-    private Button HomePageButton;
+	@FXML
+	private Button HomePageButton;
 
-    @FXML
-    private Button QuestionBankButton;
+	@FXML
+	private Button QuestionBankButton;
 
-    @FXML
-    private Button ExamBankButton;
+	@FXML
+	private Button ExamBankButton;
 
-    @FXML
-    private Button GetReportButton;
+	@FXML
+	private Button GetReportButton;
 
-    @FXML
-    private Text Name;
+	@FXML
+	private Text Name;
 
-    @FXML
-    private Button LogOutButton;
+	@FXML
+	private Button LogOutButton;
 
-    @FXML
-    private Text HelloNameMessage;
-    
-    @FXML
-    private Button RequestsButton;
-    
-    @FXML
-    private Button MyExamsButton;
+	@FXML
+	private Text HelloNameMessage;
 
-    @FXML
-    private Button StartExamButton;
+	@FXML
+	private Button RequestsButton;
 
-    @FXML
-    void ExamBankButtonPressed(ActionEvent event) throws IOException {
+	@FXML
+	private Button MyExamsButton;
+
+	@FXML
+	private Button StartExamButton;
+
+	@FXML
+	void ExamBankButtonPressed(ActionEvent event) throws IOException {
 		String chosenPath;
 		Stage primaryStage = guiControl.getStage();
-		//primaryStage.hide();
-		chosenPath=ClientsConstants.Screens.EXAM_BANK_MAIN_PAGE.path;
+		// primaryStage.hide();
+		chosenPath = ClientsConstants.Screens.EXAM_BANK_MAIN_PAGE.path;
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(chosenPath));
 		AnchorPane root = fxmlLoader.load();
-		//guiControl.setController(controller);
+		// guiControl.setController(controller);
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setOnCloseRequest(e -> {
@@ -66,119 +65,124 @@ public class MainPageController {
 		});
 		primaryStage.show();
 
+	}
 
-    }
-
-    @FXML
-    void GetReportButtonPressed(ActionEvent event) throws IOException {
+	@FXML
+	void GetReportButtonPressed(ActionEvent event) throws IOException {
 		String chosenPath;
 		Stage primaryStage = guiControl.getStage();
-		//primaryStage.hide();
-		chosenPath=ClientsConstants.Screens.REPORT_MAIN_PAGE.path;
+		// primaryStage.hide();
+		chosenPath = ClientsConstants.Screens.REPORT_MAIN_PAGE.path;
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(chosenPath));
 		AnchorPane root = fxmlLoader.load();
-		//guiControl.setController(controller);
+		// guiControl.setController(controller);
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setOnCloseRequest(e -> {
 			guiControl.disconnect();
 		});
 		primaryStage.show();
-    }
+	}
 
-    @FXML
-    void HomePageButtonPressed(ActionEvent event) throws IOException {
+	@FXML
+	void HomePageButtonPressed(ActionEvent event) throws IOException {
 		String chosenPath;
 		Stage primaryStage = guiControl.getStage();
-		//primaryStage.hide();
-		chosenPath=ClientsConstants.Screens.PRINCIPAL_MAIN_PAGE.path;
+		// primaryStage.hide();
+		if (user instanceof Principal) {
+			chosenPath = ClientsConstants.Screens.PRINCIPAL_MAIN_PAGE.path;
+		} else if (user instanceof Teacher) {
+			chosenPath = ClientsConstants.Screens.TEACHER_MAIN_PAGE.path;
+		} else {
+			chosenPath = ClientsConstants.Screens.STUDENT_MAIN_PAGE.path;
+		}
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(chosenPath));
 		AnchorPane root = fxmlLoader.load();
-		//guiControl.setController(controller);
+		// guiControl.setController(controller);
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setOnCloseRequest(e -> {
 			guiControl.disconnect();
 		});
 		primaryStage.show();
-    }
+	}
 
-    @FXML
-    void LogOutButtonPressed(ActionEvent event) {
-    	guiControl.logOut();
+	@FXML
+	void LogOutButtonPressed(ActionEvent event) {
+		guiControl.logOut();
 		guiControl.openLoginPage();
 
-    }
+	}
 
-    @FXML
-    void QuestionBankButtonPressed(ActionEvent event) throws IOException {
-    	
+	@FXML
+	void QuestionBankButtonPressed(ActionEvent event) throws IOException {
+
 		String chosenPath;
 		Stage primaryStage = guiControl.getStage();
-		//primaryStage.hide();
-		chosenPath=ClientsConstants.Screens.QUESTION_BANK_PAGE.path;
+		// primaryStage.hide();
+		chosenPath = ClientsConstants.Screens.QUESTION_BANK_PAGE.path;
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(chosenPath));
 		AnchorPane root = fxmlLoader.load();
-		//guiControl.setController(controller);
+		// guiControl.setController(controller);
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setOnCloseRequest(e -> {
 			guiControl.disconnect();
 		});
 		primaryStage.show();
-    }
-    
-    @FXML
-    void RequestsButtonPressed(ActionEvent event) throws IOException {
+	}
+
+	@FXML
+	void RequestsButtonPressed(ActionEvent event) throws IOException {
 		String chosenPath;
 		Stage primaryStage = guiControl.getStage();
-		//primaryStage.hide();
-		chosenPath=ClientsConstants.Screens.MANAGER_REQUESTS_PAGE.path;
+		// primaryStage.hide();
+		chosenPath = ClientsConstants.Screens.MANAGER_REQUESTS_PAGE.path;
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(chosenPath));
 		AnchorPane root = fxmlLoader.load();
-		//guiControl.setController(controller);
+		// guiControl.setController(controller);
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setOnCloseRequest(e -> {
 			guiControl.disconnect();
 		});
 		primaryStage.show();
-    }
-    
-    @FXML
-    void MyExamsButtonPressed(ActionEvent event) throws IOException {
+	}
+
+	@FXML
+	void MyExamsButtonPressed(ActionEvent event) throws IOException {
 		String chosenPath;
 		Stage primaryStage = guiControl.getStage();
-		//primaryStage.hide();
-		chosenPath=ClientsConstants.Screens.STUDENT_MY_EXAMS_PAGE.path;
+		// primaryStage.hide();
+		chosenPath = ClientsConstants.Screens.STUDENT_MY_EXAMS_PAGE.path;
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(chosenPath));
 		AnchorPane root = fxmlLoader.load();
-		//guiControl.setController(controller);
+		// guiControl.setController(controller);
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setOnCloseRequest(e -> {
 			guiControl.disconnect();
 		});
 		primaryStage.show();
-    }
-    
-    @FXML
-    void StartExamButtonPressed(ActionEvent event) throws IOException {
+	}
+
+	@FXML
+	void StartExamButtonPressed(ActionEvent event) throws IOException {
 		String chosenPath;
 		Stage primaryStage = guiControl.getStage();
-		//primaryStage.hide();
-		chosenPath=ClientsConstants.Screens.STUDENT_START_EXAM_PAGE.path;
+		// primaryStage.hide();
+		chosenPath = ClientsConstants.Screens.STUDENT_START_EXAM_PAGE.path;
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(chosenPath));
 		AnchorPane root = fxmlLoader.load();
-		//guiControl.setController(controller);
+		// guiControl.setController(controller);
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setOnCloseRequest(e -> {
 			guiControl.disconnect();
 		});
 		primaryStage.show();
-    }
-    
+	}
+
 	public void setUser(Object person) {
 		if (user instanceof Principal) {
 			this.user = (Principal) person;
@@ -189,19 +193,22 @@ public class MainPageController {
 		}
 		setNames();
 	}
+
 	public void setNames() {
 		if (user instanceof Principal) {
-		HelloNameMessage.setText(((Principal) user).getFirstName() + " " + ((Principal) user).getLastName());
-		Name.setText(((Principal) user).getFirstName() + " " + ((Principal) user).getLastName());}
-		
+			HelloNameMessage.setText(((Principal) user).getFirstName() + " " + ((Principal) user).getLastName());
+			Name.setText(((Principal) user).getFirstName() + " " + ((Principal) user).getLastName());
+		}
+
 		else if (user instanceof Teacher) {
 			HelloNameMessage.setText(((Teacher) user).getFirstName() + " " + ((Teacher) user).getLastName());
-			Name.setText(((Teacher) user).getFirstName() + " " + ((Teacher) user).getLastName());}
-		
+			Name.setText(((Teacher) user).getFirstName() + " " + ((Teacher) user).getLastName());
+		}
+
 		else if (user instanceof Student) {
-		HelloNameMessage.setText(((Student) user).getFirstName() + " " + ((Student) user).getLastName());
-		Name.setText(((Student) user).getFirstName() + " " + ((Student) user).getLastName());}
-	}
-	
+			HelloNameMessage.setText(((Student) user).getFirstName() + " " + ((Student) user).getLastName());
+			Name.setText(((Student) user).getFirstName() + " " + ((Student) user).getLastName());
+		}
 	}
 
+}
