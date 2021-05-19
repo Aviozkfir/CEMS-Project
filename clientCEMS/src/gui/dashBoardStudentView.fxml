@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.dashBoardStudentControllerHome">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainPageController">
    <children>
       <VBox prefHeight="600.0" prefWidth="206.0" style="-fx-background-color: #F7F7F7;">
          <children>
@@ -23,7 +23,7 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </ImageView>
-            <Button fx:id="HomeButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#HomeButtonPressed" prefHeight="46.0" prefWidth="172.0" style="-fx-background-color: #4CB5F5;" text="Home Page">
+            <Button fx:id="HomePageButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#HomePageButtonPressed" prefHeight="46.0" prefWidth="172.0" style="-fx-background-color: #4CB5F5;" text="Home Page">
                <font>
                   <Font name="Ebrima Bold" size="17.0" />
                </font>
