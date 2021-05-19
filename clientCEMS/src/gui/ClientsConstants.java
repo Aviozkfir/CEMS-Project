@@ -19,7 +19,6 @@ public class ClientsConstants {
 		REPORT_MAIN_PAGE("/gui/getReportMain.fxml"),
 		MANAGER_REQUESTS_PAGE("/gui/managerRequests.fxml"),
 		DIFFERENCE_PARAMETER_UPDATE("/gui/DifferenceParameterUpdate.fxml"),
-		REQUESTS("/gui/RequestsDepManager.fxml"),
 		ENTRY_CONTROL_PAGE("/gui/EntryControlPane.fxml"),
 		STUDENT_MY_EXAMS_PAGE("/gui/myExams.fxml"),
 		STUDENT_START_EXAM_PAGE("/gui/startExamStudent.fxml"),
