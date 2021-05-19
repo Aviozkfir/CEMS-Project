@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.dashBoardPrincipalController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.dashBoardPrincipalControllerHome">
    <children>
       <VBox prefHeight="600.0" prefWidth="206.0" style="-fx-background-color: #F7F7F7;">
          <children>
@@ -23,7 +23,7 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </ImageView>
-            <Button fx:id="HomeButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#HomeButtonPressed" prefHeight="46.0" prefWidth="172.0" style="-fx-background-color: #4CB5F5;" text="Home Page">
+            <Button fx:id="HomePageButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#HomePageButtonPressed" prefHeight="46.0" prefWidth="172.0" style="-fx-background-color: #4CB5F5;" text="Home Page">
                <font>
                   <Font name="Ebrima Bold" size="17.0" />
                </font>
@@ -94,7 +94,7 @@
                         <Font size="15.0" />
                      </font>
                   </Text>
-                  <Button fx:id="LogOutButton" layoutX="764.0" layoutY="4.0" mnemonicParsing="false" opacity="0.85" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: transperent;" text="Logout" textFill="#1c251d">
+                  <Button fx:id="LogOutButton" layoutX="764.0" layoutY="4.0" mnemonicParsing="false" onAction="#LogOutButtonPressed" opacity="0.85" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: transperent;" text="Logout" textFill="#1c251d">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -126,7 +126,7 @@
                         <Insets left="22.0" />
                      </HBox.margin>
                   </Text>
-                  <Text fx:id="HelloNameText" strokeType="OUTSIDE" strokeWidth="0.0" text="Israel Israeli">
+                  <Text fx:id="HelloNameMessage" strokeType="OUTSIDE" strokeWidth="0.0" text="Israel Israeli">
                      <font>
                         <Font size="28.0" />
                      </font>

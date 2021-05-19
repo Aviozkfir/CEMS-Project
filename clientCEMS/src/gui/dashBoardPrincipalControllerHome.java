@@ -1,9 +1,6 @@
 package gui;
 
-
-
 import entity.Principal;
-import entity.Student;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -33,6 +30,9 @@ public class dashBoardPrincipalControllerHome {
 
     @FXML
     private Text HelloNameMessage;
+    
+    @FXML
+    private Button RequestsButton;
 
     @FXML
     void ExamBankButtonPressed(ActionEvent event) {
@@ -59,6 +59,12 @@ public class dashBoardPrincipalControllerHome {
 
     @FXML
     void QuestionBankButtonPressed(ActionEvent event) {
+    	
+
+    }
+    
+    @FXML
+    void RequestsButtonPressed(ActionEvent event) {
     	
 
     }
