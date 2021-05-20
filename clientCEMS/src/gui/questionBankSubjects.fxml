@@ -93,7 +93,7 @@
          <children>
             <Pane opacity="0.82" prefHeight="36.0" prefWidth="851.0" style="-fx-background-color: #4CB5F5; -fx-background-radius: 30 0 0 0;">
                <children>
-                  <Text fill="WHITE" layoutX="605.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Israel Israeli" textAlignment="CENTER" wrappingWidth="156.0">
+                  <Text fx:id="Name" fill="WHITE" layoutX="605.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Israel Israeli" textAlignment="CENTER" wrappingWidth="156.0">
                      <font>
                         <Font size="15.0" />
                      </font>

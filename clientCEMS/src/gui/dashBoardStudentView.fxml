@@ -102,7 +102,7 @@
                         <Insets left="22.0" />
                      </HBox.margin>
                   </Text>
-                  <Text fx:id="HelloMessageName" strokeType="OUTSIDE" strokeWidth="0.0" text="Israel Israeli">
+                  <Text fx:id="HelloNameMessage" strokeType="OUTSIDE" strokeWidth="0.0" text="Israel Israeli">
                      <font>
                         <Font size="28.0" />
                      </font>
