@@ -16,8 +16,11 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class MainPageController {
-	private PersonCEMS user;
 	private GUIControl guiControl = GUIControl.getInstance();
+	private Object user;
+	private  String chosenPath;
+	private boolean IsDashBord;
+
 
 	@FXML
 	private Button HomePageButton;
@@ -51,44 +54,20 @@ public class MainPageController {
 
 	@FXML
 	void ExamBankButtonPressed(ActionEvent event) throws IOException {
-		String chosenPath;
-		Stage primaryStage = guiControl.getStage();
-		// primaryStage.hide();
 		chosenPath = ClientsConstants.Screens.EXAM_BANK_MAIN_PAGE.path;
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(chosenPath));
-		AnchorPane root = fxmlLoader.load();
-		// guiControl.setController(controller);
-		Scene scene = new Scene(root);
-		primaryStage.setScene(scene);
-		primaryStage.setOnCloseRequest(e -> {
-			guiControl.disconnect();
-		});
-		primaryStage.show();
+		IsDashBord=false;
+		loadStage( chosenPath);
 
 	}
 
 	@FXML
 	void GetReportButtonPressed(ActionEvent event) throws IOException {
-		String chosenPath;
-		Stage primaryStage = guiControl.getStage();
-		// primaryStage.hide();
 		chosenPath = ClientsConstants.Screens.REPORT_MAIN_PAGE.path;
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(chosenPath));
-		AnchorPane root = fxmlLoader.load();
-		// guiControl.setController(controller);
-		Scene scene = new Scene(root);
-		primaryStage.setScene(scene);
-		primaryStage.setOnCloseRequest(e -> {
-			guiControl.disconnect();
-		});
-		primaryStage.show();
+		IsDashBord=false;
+		loadStage( chosenPath);
 	}
-
 	@FXML
 	void HomePageButtonPressed(ActionEvent event) throws IOException {
-		String chosenPath;
-		Stage primaryStage = guiControl.getStage();
-		// primaryStage.hide();
 		if (user instanceof Principal) {
 			chosenPath = ClientsConstants.Screens.PRINCIPAL_MAIN_PAGE.path;
 		} else if (user instanceof Teacher) {
@@ -96,15 +75,8 @@ public class MainPageController {
 		} else {
 			chosenPath = ClientsConstants.Screens.STUDENT_MAIN_PAGE.path;
 		}
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(chosenPath));
-		AnchorPane root = fxmlLoader.load();
-		// guiControl.setController(controller);
-		Scene scene = new Scene(root);
-		primaryStage.setScene(scene);
-		primaryStage.setOnCloseRequest(e -> {
-			guiControl.disconnect();
-		});
-		primaryStage.show();
+		IsDashBord=true;
+		loadStage( chosenPath);
 	}
 
 	@FXML
@@ -117,98 +89,69 @@ public class MainPageController {
 	@FXML
 	void QuestionBankButtonPressed(ActionEvent event) throws IOException {
 
-		String chosenPath;
-		Stage primaryStage = guiControl.getStage();
-		// primaryStage.hide();
 		chosenPath = ClientsConstants.Screens.QUESTION_BANK_PAGE.path;
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(chosenPath));
-		AnchorPane root = fxmlLoader.load();
-		// guiControl.setController(controller);
-		Scene scene = new Scene(root);
-		primaryStage.setScene(scene);
-		primaryStage.setOnCloseRequest(e -> {
-			guiControl.disconnect();
-		});
-		primaryStage.show();
+		IsDashBord=false;
+		loadStage( chosenPath);
 	}
 
 	@FXML
 	void RequestsButtonPressed(ActionEvent event) throws IOException {
-		String chosenPath;
-		Stage primaryStage = guiControl.getStage();
-		// primaryStage.hide();
 		chosenPath = ClientsConstants.Screens.MANAGER_REQUESTS_PAGE.path;
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(chosenPath));
-		AnchorPane root = fxmlLoader.load();
-		// guiControl.setController(controller);
-		Scene scene = new Scene(root);
-		primaryStage.setScene(scene);
-		primaryStage.setOnCloseRequest(e -> {
-			guiControl.disconnect();
-		});
-		primaryStage.show();
+		IsDashBord=false;
+		loadStage( chosenPath);
 	}
 
 	@FXML
 	void MyExamsButtonPressed(ActionEvent event) throws IOException {
-		String chosenPath;
-		Stage primaryStage = guiControl.getStage();
-		// primaryStage.hide();
 		chosenPath = ClientsConstants.Screens.STUDENT_MY_EXAMS_PAGE.path;
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(chosenPath));
-		AnchorPane root = fxmlLoader.load();
-		// guiControl.setController(controller);
-		Scene scene = new Scene(root);
-		primaryStage.setScene(scene);
-		primaryStage.setOnCloseRequest(e -> {
-			guiControl.disconnect();
-		});
-		primaryStage.show();
+		IsDashBord=false;
+		loadStage( chosenPath);
 	}
 
 	@FXML
 	void StartExamButtonPressed(ActionEvent event) throws IOException {
-		String chosenPath;
-		Stage primaryStage = guiControl.getStage();
-		// primaryStage.hide();
 		chosenPath = ClientsConstants.Screens.STUDENT_START_EXAM_PAGE.path;
+		IsDashBord=false;
+		loadStage( chosenPath);
+	}
+
+	public void setIsDashBord(boolean isDashBord) {
+		IsDashBord = isDashBord;
+	}
+
+	public void setUser(Object person,boolean isDashBorad) {
+		if(person instanceof Teacher)
+		    user = (Teacher)person;
+		if(person instanceof Principal)
+			user=(Principal)person;
+		if(person instanceof Student)
+			user=(Student) person;
+		setNames(isDashBorad);
+
+	}
+
+	public void setNames(boolean IsDashBoard) {
+		if(IsDashBoard) {
+			HelloNameMessage.setText(((PersonCEMS) user).getFirstName() + " " + (((PersonCEMS) user).getLastName()));
+		}
+			Name.setText(((PersonCEMS) user).getFirstName() + " " + (((PersonCEMS) user).getLastName()));
+		
+	}
+	
+	public void loadStage(String chosenPath) throws IOException {
+		MainPageController controller;
+		Stage primaryStage = guiControl.getStage();
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(chosenPath));
 		AnchorPane root = fxmlLoader.load();
-		// guiControl.setController(controller);
+		controller = (MainPageController) fxmlLoader.getController();
+		guiControl.setController(controller);
+		(controller).setUser(guiControl.getUser(),this.IsDashBord);
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setOnCloseRequest(e -> {
 			guiControl.disconnect();
 		});
 		primaryStage.show();
-	}
-
-	public void setUser(Object person) {
-		if (user instanceof Principal) {
-			this.user = (Principal) person;
-		} else if (user instanceof Teacher) {
-			this.user = (Teacher) person;
-		} else if (user instanceof Student) {
-			this.user = (Student) person;
-		}
-		setNames();
-	}
-
-	public void setNames() {
-		if (user instanceof Principal) {
-			HelloNameMessage.setText(((Principal) user).getFirstName() + " " + ((Principal) user).getLastName());
-			Name.setText(((Principal) user).getFirstName() + " " + ((Principal) user).getLastName());
-		}
-
-		else if (user instanceof Teacher) {
-			HelloNameMessage.setText(((Teacher) user).getFirstName() + " " + ((Teacher) user).getLastName());
-			Name.setText(((Teacher) user).getFirstName() + " " + ((Teacher) user).getLastName());
-		}
-
-		else if (user instanceof Student) {
-			HelloNameMessage.setText(((Student) user).getFirstName() + " " + ((Student) user).getLastName());
-			Name.setText(((Student) user).getFirstName() + " " + ((Student) user).getLastName());
-		}
 	}
 
 }

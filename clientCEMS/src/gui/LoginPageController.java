@@ -53,7 +53,7 @@ public class LoginPageController {
 
 			controller = (MainPageController) fxmlLoader.getController();
 			guiControl.setController(controller);
-			((MainPageController) controller).setUser(guiControl.getUser());
+			((MainPageController) controller).setUser(guiControl.getUser(),true);
 			
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
