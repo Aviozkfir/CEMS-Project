@@ -5,13 +5,12 @@ import java.util.ArrayList;
 
 import entity.Principal;
 import entity.Subject;
-import entity.Teacher;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 
-public class PrincipalQuestionBankSubjectsController extends MainPageController {
+public class PrincipalExamBankSubjectsController extends MainPageController {
 	@FXML
 	private GridPane grid;
 
@@ -30,12 +29,12 @@ public class PrincipalQuestionBankSubjectsController extends MainPageController 
 				StackPane root = fxmlLoader.load();
 				controller = (btnFolderController) fxmlLoader.getController();
 
-				controller.setChosenPath(ClientsConstants.Screens.PRINCIPAl_QUESTION_BANK_PAGE.path);
+				controller.setChosenPath(ClientsConstants.Screens.PRINCIPAL_EXAM_BANK_PAGE.path);
 				controller.setText(subjectList.get(i).getName());
 				controller.setObject(subjectList.get(i));
 				controller.setConsumer((fxmlLocation, subject) -> {
 					try {
-						PrincipalQuestionBankCoursesController contr = (PrincipalQuestionBankCoursesController) GUIControl.instance
+						PrincipalExamBankCoursesController contr = (PrincipalExamBankCoursesController) GUIControl.instance
 								.loadStage(fxmlLocation);
 
 						contr.setPrincipalCourse((Subject) subject);
@@ -55,5 +54,4 @@ public class PrincipalQuestionBankSubjectsController extends MainPageController 
 			}
 
 	}
-
 }

@@ -35,14 +35,14 @@ public class PrincipalMainPageController extends MainPageController {
 		dashBoardPrincipalControllerHome a = (dashBoardPrincipalControllerHome) guiControl
 				.loadStage(ClientsConstants.Screens.PRINCIPAL_MAIN_PAGE.path);
 		a.setWelcomeName();
-
 	}
 
 	@FXML
 	void ExamBankButtonPressed(ActionEvent event) throws IOException {
 
-		dashBoardPrincipalControllerHome a = (dashBoardPrincipalControllerHome) guiControl
+		PrincipalExamBankSubjectsController a = (PrincipalExamBankSubjectsController) guiControl
 				.loadStage(ClientsConstants.Screens.PRINCIPAL_EXAM_BANK_PAGE.path);
+		a.setPrincipalSubject();
 	}
 
 	@FXML

@@ -116,5 +116,29 @@ public class MySQLConnection {
 		}
 		return courseList;
 	}
+	
+	public static Object getPrincipalSubjects(String teacherID) throws SQLException {
+		ArrayList<Subject> subjectList=new ArrayList<Subject>();
+		ResultSet rs;
+		PreparedStatement logInPreparedStatement;
+		logInPreparedStatement = con.prepareStatement("SELECT * FROM Subject ");
+		rs = logInPreparedStatement.executeQuery();
+		while(rs.next()) {
+			subjectList.add(new Subject(rs.getString(2),rs.getString(1)));
+		}
+		return subjectList;
+	}
+	
+	public static Object getPrincipalCourses(String teacherID) throws SQLException {
+		ArrayList<Course> courseList=new ArrayList<Course>();
+		ResultSet rs;
+		PreparedStatement logInPreparedStatement;
+		logInPreparedStatement = con.prepareStatement("SELECT * FROM Course");
+		rs = logInPreparedStatement.executeQuery();
+		while(rs.next()) {
+			courseList.add(new Course(rs.getString(2),rs.getString(1), new Subject(rs.getString(4), rs.getString(3))));
+		}
+		return courseList;
+	}
 
 }

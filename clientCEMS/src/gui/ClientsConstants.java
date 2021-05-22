@@ -22,10 +22,11 @@ public class ClientsConstants {
 		
 		
 		PRINCIPAL_MAIN_PAGE("/gui/dashBoardPrincipalView.fxml"),
-		PRINCIPAl_QUESTION_BANK_PAGE("/gui/PrincipalQuestionBankSubjects.fxml"),
 		PRINCIPAL_EXAM_BANK_PAGE("/gui/principalExamBankMain.fxml"),
-		PRINCIPAL_REQUESTS_PAGE("/gui/principalRequests.fxml"),
+		PRINCIPAl_QUESTION_BANK_PAGE("/gui/PrincipalQuestionBankSubjects.fxml"),
+		PRINCIPAl_QUESTION_BANK_COURSES("/gui/principalQuestionBankCourses.fxml"),
 		PRINCIPAL_REPORT_PAGE("/gui/principalGetReportMain.fxml"),
+		PRINCIPAL_REQUESTS_PAGE("/gui/principalRequests.fxml"),
 		
 		//DIFFERENCE_PARAMETER_UPDATE("/gui/DifferenceParameterUpdate.fxml"),
 		//ENTRY_CONTROL_PAGE("/gui/EntryControlPane.fxml"),

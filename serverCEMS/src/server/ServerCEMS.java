@@ -117,6 +117,22 @@ public class ServerCEMS extends AbstractServer {
 						type = ServerMessageTypes.TEACHER_COURSES_NOT_ADDED;
 					}
 					break;
+				case PRINCIPAL_SUBJECTS_INFORMATION:
+					returnVal = MySQLConnection.getPrincipalSubjects((String) clientMsg.getMessage());
+					if (returnVal != null) {
+						type = ServerMessageTypes.PRINCIPAL_SUBJECTS_ADDED;
+					} else {
+						type = ServerMessageTypes.PRINCIPAL_SUBJECTS_NOT_ADDED;
+					}
+					break;
+				case PRINCIPAL_COURSES_INFORMATION:
+					returnVal = MySQLConnection.getPrincipalCourses((String) clientMsg.getMessage());
+					if (returnVal != null) {
+						type = ServerMessageTypes.PRINCIPAL_COURSES_ADDED;
+					} else {
+						type = ServerMessageTypes.PRINCIPAL_COURSES_NOT_ADDED;
+					}
+					break;
 
 				}
 			}
