@@ -8,7 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
-public class PrincipalExamBankCoursesController extends MainPageController{
+public class PrincipalExamBankCoursesController extends PrincipalMainPageController{
 	@FXML
     private Text name;
 

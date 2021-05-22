@@ -10,7 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 
-public class PrincipalExamBankSubjectsController extends MainPageController {
+public class PrincipalExamBankSubjectsController extends PrincipalMainPageController {
 	@FXML
 	private GridPane grid;
 

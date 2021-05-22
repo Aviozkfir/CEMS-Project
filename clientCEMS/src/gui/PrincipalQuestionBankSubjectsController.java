@@ -11,7 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 
-public class PrincipalQuestionBankSubjectsController extends MainPageController {
+public class PrincipalQuestionBankSubjectsController extends PrincipalMainPageController {
 	@FXML
 	private GridPane grid;
 

@@ -121,7 +121,7 @@ public class MySQLConnection {
 		ArrayList<Subject> subjectList=new ArrayList<Subject>();
 		ResultSet rs;
 		PreparedStatement logInPreparedStatement;
-		logInPreparedStatement = con.prepareStatement("SELECT * FROM Subject ");
+		logInPreparedStatement = con.prepareStatement("SELECT * FROM Subject");
 		rs = logInPreparedStatement.executeQuery();
 		while(rs.next()) {
 			subjectList.add(new Subject(rs.getString(2),rs.getString(1)));
@@ -133,7 +133,7 @@ public class MySQLConnection {
 		ArrayList<Course> courseList=new ArrayList<Course>();
 		ResultSet rs;
 		PreparedStatement logInPreparedStatement;
-		logInPreparedStatement = con.prepareStatement("SELECT * FROM Course");
+		logInPreparedStatement = con.prepareStatement("SELECT c.Cid,c.name,s.Sid,s.name FROM Course c,Subject s WHERE c.Sid=s.Sid");
 		rs = logInPreparedStatement.executeQuery();
 		while(rs.next()) {
 			courseList.add(new Course(rs.getString(2),rs.getString(1), new Subject(rs.getString(4), rs.getString(3))));
