@@ -28,7 +28,7 @@ public class questionBankSubjectsController extends MainPageController {
     
     public void setTeacherSubject() {
     	int i;
-		Teacher teacher = (Teacher) GUIControl.instance.getUser();
+		Teacher teacher = (Teacher) guiControl.getUser();
 		
 		ArrayList<Subject> subjectList = teacher.getSubjectList();
 		
@@ -44,18 +44,18 @@ public class questionBankSubjectsController extends MainPageController {
 				controller.setChosenPath(ClientsConstants.Screens.QUESTION_BANK_COURSES.path);
 				controller.setText(subjectList.get(i).getName());
 				controller.setObject(subjectList.get(i));
-//				controller.setConsumer((fxmlLocation, subject)->{   
-//					try {
-//						questionBankCoursesController contr =(questionBankCoursesController) GUIControl.instance.loadStage(fxmlLocation);
-//					
-//						contr.setTeacherCourse((Subject)subject);
-//					
-//					} catch (IOException e) {
-//						// TODO Auto-generated catch block
-//						e.printStackTrace();
-//					}
-//					
-//				});
+				controller.setConsumer((fxmlLocation, subject)->{   
+					try {
+						questionBankCoursesController contr =(questionBankCoursesController) GUIControl.instance.loadStage(fxmlLocation);
+					
+						contr.setTeacherCourse((Subject)subject);
+					
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				});
 				
 				
 				grid.add(root,i%4 , i/4);

@@ -16,9 +16,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class MainPageController {
-	private GUIControl guiControl = GUIControl.getInstance();
-	private Object user;
-	private  String chosenPath;
+	public final GUIControl guiControl = GUIControl.getInstance();
+	
 
 
 
@@ -40,8 +39,7 @@ public class MainPageController {
 	@FXML
 	private Button LogOutButton;
 
-	@FXML
-	private Text HelloNameMessage;
+	
 //
 //	@FXML
 //	private Button RequestsButton;
@@ -66,22 +64,7 @@ public class MainPageController {
 //		IsDashBord=false;
 //		loadStage( chosenPath);
 //	}
-	@FXML
-	void HomePageButtonPressed(ActionEvent event) throws IOException {
-//		if (user instanceof Principal) {
-//			chosenPath = ClientsConstants.Screens.PRINCIPAL_MAIN_PAGE.path;
-//		} else if (user instanceof Teacher) {
-//			chosenPath = ClientsConstants.Screens.TEACHER_MAIN_PAGE.path;
-//		} else {
-//			chosenPath = ClientsConstants.Screens.STUDENT_MAIN_PAGE.path;
-//		}
-//		IsDashBord=true;
-//		loadStage( chosenPath);
-		
-		questionBankSubjectsController a = (questionBankSubjectsController) guiControl.loadStage(ClientsConstants.Screens.QUESTION_BANK_PAGE.path);
-		a.setTeacherSubject();
 	
-	}
 
 	@FXML
 	void LogOutButtonPressed(ActionEvent event) {
@@ -90,13 +73,7 @@ public class MainPageController {
 
 	}
 //
-//	@FXML
-//	void QuestionBankButtonPressed(ActionEvent event) throws IOException {
-//
-//		chosenPath = ClientsConstants.Screens.QUESTION_BANK_PAGE.path;
-//		IsDashBord=false;
-//		loadStage( chosenPath);
-//	}
+
 
 //	@FXML
 //	void RequestsButtonPressed(ActionEvent event) throws IOException {

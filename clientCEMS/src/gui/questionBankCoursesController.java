@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import entity.Course;
 import entity.Subject;
 import entity.Teacher;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,12 +14,32 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 
 public class questionBankCoursesController extends MainPageController  {
 
+	@FXML
+    private Text name;
+
     @FXML
-    private GridPane grid;
+    private Button Back;
+
+    @FXML
+    void BackPressed(ActionEvent event) throws IOException {
+    	questionBankSubjectsController a = (questionBankSubjectsController) guiControl.loadStage(ClientsConstants.Screens.QUESTION_BANK_PAGE.path);
+		a.setTeacherSubject();
+    }
+
+    
 	
+    
+	public void setName(String name) {
+		this.name.setText(name);
+	}
+
+
+
+
 	public void setTeacherCourse(Subject sub) {
 //    	int i;
 //		Teacher teacher = (Teacher) GUIControl.instance.getUser();
