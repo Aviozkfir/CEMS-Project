@@ -8,25 +8,25 @@ public class Subject implements Serializable {
 
 	private String name;
 	private String id;
-	private ArrayList<String> TeachersID = new ArrayList<String>(); // array list that contains the teachers that teach
+	//private ArrayList<String> TeachersID = new ArrayList<String>(); // array list that contains the teachers that teach
 																	// this field of subject.
-	private ArrayList<String> StudentsID = new ArrayList<String>(); // array list that contains the students that study
+	//private ArrayList<String> StudentsID = new ArrayList<String>(); // array list that contains the students that study
 																	// this field of subject.
 
-	public void setId(String id) {
-		this.id = id;
-	}
 
-	public void setTeachersID(ArrayList<String> teachersID) {
+
+	/*public void setTeachersID(ArrayList<String> teachersID) {
 		TeachersID = teachersID;
 	}
+	*/
 
-	public void setStudentsID(ArrayList<String> studentsID) {
+	/*public void setStudentsID(ArrayList<String> studentsID) {
 		StudentsID = studentsID;
 	}
+	*/
 
-	public Subject(String name) {
-
+	public Subject(String name,String id) {
+		this.id=id;
 		this.name = name;
 	}
 
@@ -34,9 +34,6 @@ public class Subject implements Serializable {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
 
 	public String getId() { // make method in sqlconnection that gets id from db.
 		return id;
@@ -49,6 +46,13 @@ public class Subject implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
+	}
+	
+	
+
+	@Override
+	public String toString() {
+		return "Subject [name=" + name + ", id=" + id + "]";
 	}
 
 	@Override
@@ -73,12 +77,12 @@ public class Subject implements Serializable {
 		return true;
 	}
 
-	public ArrayList<String> getTeachersID() {
-		return TeachersID;
-	}
+	//public ArrayList<String> getTeachersID() {
+		//return TeachersID;
+	//}
 
-	public ArrayList<String> getStudentsID() {
-		return StudentsID;
-	}
+	//public ArrayList<String> getStudentsID() {
+	//	return StudentsID;
+//	}
 
 }

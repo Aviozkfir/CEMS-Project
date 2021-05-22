@@ -10,21 +10,29 @@ import javafx.scene.media.AudioClip;
 public class ClientsConstants {
 
 	public enum Screens {
-		LOGIN_PAGE("/gui/CEMSlogin.fxml"), 
+		LOGIN_PAGE("/gui/CEMSlogin.fxml"),
+		
 		TEACHER_MAIN_PAGE("/gui/dashBoardTeacherView.fxml"),
+		QUESTION_BANK_PAGE("/gui/questionBankSubjects.fxml"),
+		QUESTION_BANK_COURSES("/gui/questionBankCourses.fxml"),
+		TEACHER_REPORT_PAGE("/gui/teacherGetReport.fxml"),
+		
+		
 		STUDENT_MAIN_PAGE("/gui/dashBoardStudentView.fxml"), 
 		PRINCIPAL_MAIN_PAGE("/gui/dashBoardPrincipalView.fxml"),
-		QUESTION_BANK_PAGE("/gui/questionBankSubjects.fxml"),
+		
+		
 		EXAM_BANK_MAIN_PAGE("/gui/examBankMain.fxml"),
 		REPORT_MAIN_PAGE("/gui/getReportMain.fxml"),
 		MANAGER_REQUESTS_PAGE("/gui/managerRequests.fxml"),
-		DIFFERENCE_PARAMETER_UPDATE("/gui/DifferenceParameterUpdate.fxml"),
-		ENTRY_CONTROL_PAGE("/gui/EntryControlPane.fxml"),
+		//DIFFERENCE_PARAMETER_UPDATE("/gui/DifferenceParameterUpdate.fxml"),
+		//ENTRY_CONTROL_PAGE("/gui/EntryControlPane.fxml"),
 		STUDENT_MY_EXAMS_PAGE("/gui/myExams.fxml"),
 		STUDENT_START_EXAM_PAGE("/gui/startExamStudent.fxml"),
-		EXIT_CONTROL_PAGE("/gui/ExitControlPane.fxml");
-
-
+		EXIT_CONTROL_PAGE("/gui/ExitControlPane.fxml"),
+		
+		btnFolder("btnFolder.fxml");
+		
 		public final String path;
 
 		private Screens(String path) {

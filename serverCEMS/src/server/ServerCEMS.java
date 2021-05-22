@@ -64,7 +64,7 @@ public class ServerCEMS extends AbstractServer {
 	public void handleMessageFromClient(Object msg, ConnectionToClient client) {
 		Object returnVal = null;
 		ServerMessageTypes type = null;
-		
+
 		try {
 			if (msg instanceof ClientMessage) {
 				ClientMessage clientMsg = (ClientMessage) msg;
@@ -82,7 +82,7 @@ public class ServerCEMS extends AbstractServer {
 					break;
 				case LOGIN_PERSON:
 					returnVal = MySQLConnection.validatePerson((String[]) (clientMsg.getMessage()));
-					if (returnVal!=null) {
+					if (returnVal != null) {
 						PersonCEMS returnPerson = (PersonCEMS) returnVal;
 						switch (returnPerson.getRole()) {
 						case "Teacher":
@@ -97,11 +97,26 @@ public class ServerCEMS extends AbstractServer {
 						else if (returnVal != null) // user isn't already logged in and was found in the database
 							userList.add(returnVal);
 						break;
-						
+
 					} else {
 						type = ServerMessageTypes.LOGIN_PERSON_NOT_FOUND;
 					}
-					
+				case TEACHER_SUBJECTS_INFORMATION:
+					returnVal = MySQLConnection.getTeacherSubjects((String) clientMsg.getMessage());
+					if (returnVal != null) {
+						type = ServerMessageTypes.TEACHER_SUBJECTS_ADDED;
+					} else {
+						type = ServerMessageTypes.TEACHER_SUBJECTS_NOT_ADDED;
+					}
+					break;
+				case TEACHER_COURSES_INFORMATION:
+					returnVal = MySQLConnection.getTeacherCourses((String) clientMsg.getMessage());
+					if (returnVal != null) {
+						type = ServerMessageTypes.TEACHER_COURSES_ADDED;
+					} else {
+						type = ServerMessageTypes.TEACHER_COURSES_NOT_ADDED;
+					}
+					break;
 
 				}
 			}
@@ -114,8 +129,8 @@ public class ServerCEMS extends AbstractServer {
 			}
 		}
 
-		System.out.println("Message received: " + msg + " from " + client);
-		System.out.println(userList.toString());
+		// System.out.println("Message received: " + msg + " from " + client);
+		// System.out.println(userList.toString());
 		try {
 			if (client != null)
 				client.sendToClient(new ServerMessage(type, returnVal));
@@ -124,7 +139,6 @@ public class ServerCEMS extends AbstractServer {
 			e.printStackTrace();
 		}
 	}
-
 
 	/**
 	 * This method overrides the one in the superclass. Called when the server

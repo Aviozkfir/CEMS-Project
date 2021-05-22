@@ -2,45 +2,47 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.questionBankSubjectsController">
    <children>
-      <HBox prefHeight="100.0" prefWidth="200.0" />
       <VBox prefHeight="600.0" prefWidth="175.0" style="-fx-background-color: #F7F7F7;">
          <children>
             <ImageView fitHeight="92.0" fitWidth="156.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../resources/CEMSlogo.png" />
+                  <Image url="@../../../../../eclipse-workspace/Client/photos/CEMSlogo.png" />
                </image>
                <VBox.margin>
                   <Insets bottom="10.0" />
                </VBox.margin>
             </ImageView>
-            <Button fx:id="HomePageButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#HomePageButtonPressed" prefHeight="46.0" prefWidth="172.0" style="-fx-background-color: #F7F7F7;" text="Home Page" textFill="#9b9c9f">
+            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="46.0" prefWidth="172.0" style="-fx-background-color: #F7F7F7;" text="Home Page" textFill="#9b9c9f">
                <font>
                   <Font name="Ebrima" size="16.0" />
                </font>
                <graphic>
                   <ImageView fitHeight="27.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/btnHomepage.png" />
+                        <Image url="@../../../../../eclipse-workspace/Client/photos/btnHomepage.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="QuestionBankButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#QuestionBankButtonPressed" prefHeight="46.0" prefWidth="175.0" style="-fx-background-color: #4CB5F5;" text="Question Bank">
+            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="46.0" prefWidth="175.0" style="-fx-background-color: #4CB5F5;" text="Question Bank">
                <graphic>
                   <ImageView fitHeight="27.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/btnQuestinBankOrange.png" />
+                        <Image url="@../../../../../eclipse-workspace/Client/photos/btnQuestinBankOrange.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -48,48 +50,34 @@
                   <Font name="Ebrima Bold" size="17.0" />
                </font>
             </Button>
-            <Button fx:id="ExamBankButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#ExamBankButtonPressed" prefHeight="46.0" prefWidth="173.0" style="-fx-background-color: #F7F7F7;" text="Exam Bank" textFill="#9b9c9f">
+            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="46.0" prefWidth="173.0" style="-fx-background-color: #F7F7F7;" text="Exam Bank" textFill="#9b9c9f">
                <font>
                   <Font name="Ebrima" size="16.0" />
                </font>
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/btnExamBank.png" />
+                        <Image url="@../../../../../eclipse-workspace/Client/photos/btnExamBank.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="GetReportButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#GetReportButtonPressed" prefHeight="46.0" prefWidth="173.0" style="-fx-background-color: #F7F7F7;" text="Get Report" textFill="#9b9c9f">
+            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="46.0" prefWidth="173.0" style="-fx-background-color: #F7F7F7;" text="Get Report" textFill="#9b9c9f">
                <font>
                   <Font name="Ebrima" size="16.0" />
                </font>
                <graphic>
                   <ImageView fitHeight="27.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/btnStatistics.png" />
+                        <Image url="@../../../../../eclipse-workspace/Client/photos/btnStatistics.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Pane prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <Button fx:id="RequestsButton" alignment="BASELINE_LEFT" layoutX="1.0" mnemonicParsing="false" onAction="#RequestsButtonPressed" prefHeight="46.0" prefWidth="173.0" style="-fx-background-color: #F7F7F7;" text="Requests" textFill="#9b9c9f">
-                     <font>
-                        <Font name="Ebrima" size="16.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="27.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../resources/RequestsNotClicked.jpeg" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-               </children></Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0" />
          </children>
       </VBox>
-      <VBox layoutX="173.0" prefHeight="600.0" prefWidth="851.0" style="-fx-background-color: #F7F7F7; -fx-background-radius: 30 0 0 0;">
+      <VBox layoutX="173.0" prefHeight="600.0" prefWidth="851.0" style="-fx-background-color: transperent; -fx-background-radius: 30 0 0 0;">
          <children>
             <Pane opacity="0.82" prefHeight="36.0" prefWidth="851.0" style="-fx-background-color: #4CB5F5; -fx-background-radius: 30 0 0 0;">
                <children>
@@ -98,7 +86,7 @@
                         <Font size="15.0" />
                      </font>
                   </Text>
-                  <Button fx:id="LogOutButton" layoutX="764.0" layoutY="4.0" mnemonicParsing="false" onAction="#LogOutButtonPressed" opacity="0.85" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #4CB5F5;" text="Logout" textFill="#1c251d">
+                  <Button layoutX="764.0" layoutY="4.0" mnemonicParsing="false" opacity="0.85" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: transperent;" text="Logout" textFill="#1c251d">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -120,13 +108,19 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </HBox>
-            <HBox prefHeight="236.0" prefWidth="851.0">
-               <children>
-                  <Pane prefHeight="236.0" prefWidth="851.0">
-                     <children>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="97.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true" />
-                     </children></Pane>
-               </children></HBox>
+            <HBox prefHeight="30.0" prefWidth="851.0" />
+            <ScrollPane prefHeight="321.0" prefWidth="851.0" style="-fx-background-color: transperent;" VBox.vgrow="ALWAYS">
+               <content>
+                  <GridPane fx:id="grid" prefHeight="0.0" prefWidth="849.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                  </GridPane>
+               </content>
+            </ScrollPane>
          </children></VBox>
    </children>
 </AnchorPane>

@@ -23,6 +23,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import entity.Course;
+
 //import com.sun.javafx.webkit.ThemeClientImpl;
 
 //import org.omg.PortableServer.ID_ASSIGNMENT_POLICY_ID;
@@ -32,6 +34,7 @@ import java.util.Map;
 import entity.PersonCEMS;
 import entity.Principal;
 import entity.Student;
+import entity.Subject;
 import entity.Teacher;
 import message.ServerMessage;
 import message.ServerMessageTypes;
@@ -60,7 +63,7 @@ public class MySQLConnection {
 	 * @throws SQLException
 	 */
 	public static Object validatePerson(String[] idAndPassword) throws SQLException {
-		System.out.println(idAndPassword[0] + " " + idAndPassword[1]);
+		//System.out.println(idAndPassword[0] + " " + idAndPassword[1]);
 		String role;
 		ResultSet rs;
 		PreparedStatement logInPreparedStatement;
@@ -74,7 +77,6 @@ public class MySQLConnection {
 
 		role = rs.getString(5);// Change according to table.
 		if (role.equals("Teacher")) {
-			System.out.println("next enter");
 			return new Teacher(rs.getString(2), rs.getString(3), rs.getString(1), rs.getString(4), rs.getString(5));
 
 		}
@@ -87,6 +89,32 @@ public class MySQLConnection {
 
 		}
 		return null;
+	}
+	
+	public static Object getTeacherSubjects(String teacherID) throws SQLException {
+		ArrayList<Subject> subjectList=new ArrayList<Subject>();
+		ResultSet rs;
+		PreparedStatement logInPreparedStatement;
+		logInPreparedStatement = con.prepareStatement("SELECT DISTINCT s.Sid,s.name FROM Person_Enrolled_Course p, Course c, Subject s WHERE p.ID=? and c.Cid=p.Cid and c.Sid=s.Sid");
+		logInPreparedStatement.setString(1, teacherID);
+		rs = logInPreparedStatement.executeQuery();
+		while(rs.next()) {
+			subjectList.add(new Subject(rs.getString(2),rs.getString(1)));
+		}
+		return subjectList;
+	}
+	
+	public static Object getTeacherCourses(String teacherID) throws SQLException {
+		ArrayList<Course> courseList=new ArrayList<Course>();
+		ResultSet rs;
+		PreparedStatement logInPreparedStatement;
+		logInPreparedStatement = con.prepareStatement("SELECT p.Cid,c.name,s.Sid,s.name FROM Person_Enrolled_Course p, Course c,Subject s WHERE p.ID=? and c.Cid=p.Cid and c.Sid=s.Sid");
+		logInPreparedStatement.setString(1, teacherID);
+		rs = logInPreparedStatement.executeQuery();
+		while(rs.next()) {
+			courseList.add(new Course(rs.getString(2),rs.getString(1), new Subject(rs.getString(4), rs.getString(3))));
+		}
+		return courseList;
 	}
 
 }

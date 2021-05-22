@@ -1,6 +1,9 @@
 package gui;
 
+import java.io.IOException;
+
 import client.ClientCEMS;
+import entity.PersonCEMS;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,7 +25,7 @@ import message.ServerMessage;
  * values.
  */
 public class GUIControl {
-	private static GUIControl instance = new GUIControl();
+	public static GUIControl instance = new GUIControl();
 	private ClientCEMS client;
 	private Object currentUser;
 	private Stage primaryStage;
@@ -177,6 +180,24 @@ public class GUIControl {
 			alert.setContentText(msg);
 			alert.showAndWait();
 		});
+	}
+	
+	
+	public MainPageController loadStage(String chosenPath) throws IOException {
+		MainPageController controller;
+		Stage primaryStage = getStage();
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(chosenPath));
+		AnchorPane root = fxmlLoader.load();
+		controller = (MainPageController) fxmlLoader.getController();
+		setController(controller);
+		(controller).setUser((PersonCEMS) getUser());
+		Scene scene = new Scene(root);
+		primaryStage.setScene(scene);
+		primaryStage.setOnCloseRequest(e -> {
+			disconnect();
+		});
+		primaryStage.show();
+		return controller;
 	}
 
 }

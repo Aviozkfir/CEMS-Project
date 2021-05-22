@@ -1,8 +1,11 @@
 package gui;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import entity.Course;
 import entity.PersonCEMS;
+import entity.Subject;
 import entity.Teacher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,6 +18,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import message.ClientMessage;
 import message.ClientMessageType;
+import message.ServerMessageTypes;
 
 public class LoginPageController {
 	GUIControl guiControl = GUIControl.getInstance();
@@ -30,6 +34,7 @@ public class LoginPageController {
 
 	@FXML
 	void LoginButtonPressed(ActionEvent event) throws IOException {
+
 		if (validateLogin()) {
 			Stage primaryStage = guiControl.getStage();
 			primaryStage.hide();
@@ -40,6 +45,43 @@ public class LoginPageController {
 			switch (role) {
 			case "Teacher":
 				chosenPath = ClientsConstants.Screens.TEACHER_MAIN_PAGE.path;
+
+				ClientMessage msg1 = new ClientMessage(ClientMessageType.TEACHER_SUBJECTS_INFORMATION,
+
+						((Teacher) guiControl.getUser()).getId());
+
+				guiControl.sendToServer(msg1);
+
+				if (guiControl.getServerMsg().getType() == ServerMessageTypes.TEACHER_SUBJECTS_ADDED) {
+
+					ArrayList<Subject> subjects = (ArrayList<Subject>) guiControl.getServerMsg().getMessage();
+
+					((Teacher) person).setSubjectList(subjects);
+
+				} else {
+
+					GUIControl.popUpError("Error in loading courses list to Teacher");
+
+				}
+
+				ClientMessage msg2 = new ClientMessage(ClientMessageType.TEACHER_COURSES_INFORMATION,
+
+						((Teacher) guiControl.getUser()).getId());
+
+				guiControl.sendToServer(msg2);
+
+				if (guiControl.getServerMsg().getType() == ServerMessageTypes.TEACHER_COURSES_ADDED) {
+
+					ArrayList<Course> courses = (ArrayList<Course>) guiControl.getServerMsg().getMessage();
+
+					((Teacher) person).setCourseList(courses);
+
+				} else {
+
+					GUIControl.popUpError("Error in loading courses list to Teacher");
+
+				}
+
 				break;
 			case "Principal":
 				chosenPath = ClientsConstants.Screens.PRINCIPAL_MAIN_PAGE.path;
@@ -53,8 +95,8 @@ public class LoginPageController {
 
 			controller = (MainPageController) fxmlLoader.getController();
 			guiControl.setController(controller);
-			((MainPageController) controller).setUser(guiControl.getUser(),true);
-			
+			((MainPageController) controller).setUser((PersonCEMS) guiControl.getUser());
+
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.setOnCloseRequest(e -> {

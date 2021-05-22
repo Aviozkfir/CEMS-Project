@@ -7,8 +7,8 @@ import java.util.ArrayList;
 public class Teacher extends PersonCEMS implements Serializable {
 
 
-	ArrayList<Subject> subjectList = new ArrayList<Subject>();
-	ArrayList<Course> courseList = new ArrayList<Course>(); // Create an ArrayList object
+	private ArrayList<Subject> subjectList;
+	private ArrayList<Course> courseList; // Create an ArrayList object
 	
 	
 	public Teacher(String firstName, String lastName,String id, String email, String role) {
