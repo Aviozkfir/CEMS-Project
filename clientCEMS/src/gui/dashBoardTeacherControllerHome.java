@@ -2,7 +2,6 @@ package gui;
 
 import java.io.IOException;
 
-import entity.Teacher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

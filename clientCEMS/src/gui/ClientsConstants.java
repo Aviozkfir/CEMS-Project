@@ -19,12 +19,14 @@ public class ClientsConstants {
 		
 		
 		STUDENT_MAIN_PAGE("/gui/dashBoardStudentView.fxml"), 
+		
+		
 		PRINCIPAL_MAIN_PAGE("/gui/dashBoardPrincipalView.fxml"),
+		PRINCIPAl_QUESTION_BANK_PAGE("/gui/PrincipalQuestionBankSubjects.fxml"),
+		PRINCIPAL_EXAM_BANK_PAGE("/gui/principalExamBankMain.fxml"),
+		PRINCIPAL_REQUESTS_PAGE("/gui/principalRequests.fxml"),
+		PRINCIPAL_REPORT_PAGE("/gui/principalGetReportMain.fxml"),
 		
-		
-		EXAM_BANK_MAIN_PAGE("/gui/examBankMain.fxml"),
-		REPORT_MAIN_PAGE("/gui/getReportMain.fxml"),
-		MANAGER_REQUESTS_PAGE("/gui/managerRequests.fxml"),
 		//DIFFERENCE_PARAMETER_UPDATE("/gui/DifferenceParameterUpdate.fxml"),
 		//ENTRY_CONTROL_PAGE("/gui/EntryControlPane.fxml"),
 		STUDENT_MY_EXAMS_PAGE("/gui/myExams.fxml"),
