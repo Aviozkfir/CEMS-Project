@@ -24,38 +24,38 @@ public class PrincipalMainPageController extends MainPageController {
 
 	@FXML
 	void QuestionBankButtonPressed(ActionEvent event) throws IOException {
-		PrincipalQuestionBankSubjectsController a = (PrincipalQuestionBankSubjectsController) guiControl
+		PrincipalQuestionBankSubjectsController controller = (PrincipalQuestionBankSubjectsController) guiControl
 				.loadStage(ClientsConstants.Screens.PRINCIPAl_QUESTION_BANK_PAGE.path);
-		a.setPrincipalSubject();
+		controller.setPrincipalSubject();
 	}
 
 	@FXML
 	void HomePageButtonPressed(ActionEvent event) throws IOException {
 
-		dashBoardPrincipalControllerHome a = (dashBoardPrincipalControllerHome) guiControl
+		dashBoardPrincipalControllerHome controller = (dashBoardPrincipalControllerHome) guiControl
 				.loadStage(ClientsConstants.Screens.PRINCIPAL_MAIN_PAGE.path);
-		a.setWelcomeName();
+		controller.setWelcomeName();
 	}
 
 	@FXML
 	void ExamBankButtonPressed(ActionEvent event) throws IOException {
 
-		PrincipalExamBankSubjectsController a = (PrincipalExamBankSubjectsController) guiControl
+		PrincipalExamBankSubjectsController controller = (PrincipalExamBankSubjectsController) guiControl
 				.loadStage(ClientsConstants.Screens.PRINCIPAL_EXAM_BANK_PAGE.path);
-		a.setPrincipalSubject();
+		controller.setPrincipalSubject();
 	}
 
 	@FXML
 	void GetReportButtonPressed(ActionEvent event) throws IOException {
 
-		dashBoardPrincipalControllerHome a = (dashBoardPrincipalControllerHome) guiControl
+		PrincipalReportController controller = (PrincipalReportController) guiControl
 				.loadStage(ClientsConstants.Screens.PRINCIPAL_REPORT_PAGE.path);
 	}
 
 	@FXML
 	void RequestsButtonPressed(ActionEvent event) throws IOException {
 
-		dashBoardPrincipalControllerHome a = (dashBoardPrincipalControllerHome) guiControl
+		PrincipalRequestsController controller = (PrincipalRequestsController) guiControl
 				.loadStage(ClientsConstants.Screens.PRINCIPAL_REQUESTS_PAGE.path);
 	}
 
