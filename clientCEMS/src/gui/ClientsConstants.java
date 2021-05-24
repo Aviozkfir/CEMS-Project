@@ -27,12 +27,15 @@ public class ClientsConstants {
 		PRINCIPAl_QUESTION_BANK_COURSES("/gui/principalQuestionBankCourses.fxml"),
 		PRINCIPAL_REPORT_PAGE("/gui/principalGetReportMain.fxml"),
 		PRINCIPAL_REQUESTS_PAGE("/gui/principalRequests.fxml"),
+        STUDENT_CHOICE_EXAM_PAGE("/gui/studentExamChoice.fxml"),
 		
 		//DIFFERENCE_PARAMETER_UPDATE("/gui/DifferenceParameterUpdate.fxml"),
 		//ENTRY_CONTROL_PAGE("/gui/EntryControlPane.fxml"),
+	
 		STUDENT_MY_EXAMS_PAGE("/gui/myExams.fxml"),
 		STUDENT_START_EXAM_PAGE("/gui/startExamStudent.fxml"),
 		EXIT_CONTROL_PAGE("/gui/ExitControlPane.fxml"),
+		
 		
 		btnFolder("btnFolder.fxml");
 		
