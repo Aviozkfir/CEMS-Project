@@ -7,7 +7,6 @@ public class Principal extends PersonCEMS implements Serializable {
 
 	private ArrayList<Subject> subjectList;
 	private ArrayList<Course> courseList;
-	private String str = "temp";
 
 	public Principal(String firstName, String lastName, String id, String email, String role) {
 		super(firstName, lastName, id, email, role);
