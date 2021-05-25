@@ -34,7 +34,7 @@ public class PrincipalMainPageController extends MainPageController {
 
 		dashBoardPrincipalControllerHome controller = (dashBoardPrincipalControllerHome) guiControl
 				.loadStage(ClientsConstants.Screens.PRINCIPAL_MAIN_PAGE.path);
-		controller.setWelcomeName();
+		
 	}
 
 	@FXML
