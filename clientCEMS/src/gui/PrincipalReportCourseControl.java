@@ -6,7 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-public class PrincipalReportCourseControl extends PrincipalReportController {
+public class PrincipalReportCourseControl extends PrincipalMainPageController {
     @FXML
     private Button Back;
 
