@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -21,29 +22,29 @@
          <children>
             <ImageView fitHeight="92.0" fitWidth="156.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@CEMSlogo.png" />
+                  <Image url="@../resources/CEMSlogo.png" />
                </image>
                <VBox.margin>
                   <Insets bottom="10.0" />
                </VBox.margin>
             </ImageView>
-            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="46.0" prefWidth="172.0" style="-fx-background-color: #F7F7F7;" text="Home Page" textFill="#9b9c9f">
+            <Button fx:id="HomePageButton" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="46.0" prefWidth="172.0" style="-fx-background-color: #F7F7F7;" text="Home Page" textFill="#9b9c9f">
                <font>
                   <Font name="Ebrima" size="16.0" />
                </font>
                <graphic>
                   <ImageView fitHeight="27.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@btnHomepage.png" />
+                        <Image url="@../resources/btnHomepage.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="46.0" prefWidth="175.0" style="-fx-background-color: #4CB5F5;" text="Question Bank">
+            <Button fx:id="QuestionBankButton" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="46.0" prefWidth="175.0" style="-fx-background-color: #4CB5F5;" text="Question Bank">
                <graphic>
                   <ImageView fitHeight="27.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@btnQuestinBankOrange.png" />
+                        <Image url="@../resources/btnQuestinBankOrange.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -51,26 +52,26 @@
                   <Font name="Ebrima Bold" size="17.0" />
                </font>
             </Button>
-            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="46.0" prefWidth="173.0" style="-fx-background-color: #F7F7F7;" text="Exam Bank" textFill="#9b9c9f">
+            <Button fx:id="ExamBankButton" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="46.0" prefWidth="173.0" style="-fx-background-color: #F7F7F7;" text="Exam Bank" textFill="#9b9c9f">
                <font>
                   <Font name="Ebrima" size="16.0" />
                </font>
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@btnExamBank.png" />
+                        <Image url="@../resources/btnExamBank.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="46.0" prefWidth="173.0" style="-fx-background-color: #F7F7F7;" text="Get Report" textFill="#9b9c9f">
+            <Button fx:id="GetReportButton" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="46.0" prefWidth="173.0" style="-fx-background-color: #F7F7F7;" text="Get Report" textFill="#9b9c9f">
                <font>
                   <Font name="Ebrima" size="16.0" />
                </font>
                <graphic>
                   <ImageView fitHeight="27.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@btnStatistics.png" />
+                        <Image url="@../resources/btnStatistics.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -82,12 +83,12 @@
          <children>
             <Pane opacity="0.82" prefHeight="36.0" prefWidth="851.0" style="-fx-background-color: #4CB5F5; -fx-background-radius: 30 0 0 0;">
                <children>
-                  <Text fill="WHITE" layoutX="605.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Israel Israeli" textAlignment="CENTER" wrappingWidth="156.0">
+                  <Text fx:id="Name" fill="WHITE" layoutX="605.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Israel Israeli" textAlignment="CENTER" wrappingWidth="156.0">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Text>
-                  <Button layoutX="764.0" layoutY="4.0" mnemonicParsing="false" opacity="0.85" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: transperent;" text="Logout" textFill="#1c251d">
+                  <Button fx:id="LogOutButton" layoutX="764.0" layoutY="4.0" mnemonicParsing="false" opacity="0.85" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: transperent;" text="Logout" textFill="#1c251d">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -187,7 +188,7 @@
                         </Text>
                      </children>
                   </HBox>
-                  <TextArea prefHeight="59.0" prefWidth="787.0">
+                  <TextArea fx:id="textQuestion" prefHeight="59.0" prefWidth="787.0">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -225,7 +226,7 @@
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ANSWER OPTION" />
                      </children>
                   </HBox>
-                  <HBox prefHeight="19.0" prefWidth="808.0">
+                  <HBox prefHeight="40.0" prefWidth="808.0">
                      <children>
                         <Pane prefHeight="39.0" prefWidth="50.0" style="-fx-border-color: #4CB5F5;">
                            <opaqueInsets>
@@ -240,16 +241,19 @@
                                     <Font size="15.0" />
                                  </font>
                               </Label>
-                              <RadioButton layoutX="16.0" layoutY="20.0" mnemonicParsing="false" />
+                              <RadioButton fx:id="rbA" layoutX="16.0" layoutY="20.0" mnemonicParsing="false">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="rbGroup" />
+                                 </toggleGroup></RadioButton>
                            </children>
                         </Pane>
-                        <TextArea prefHeight="39.0" prefWidth="725.0" />
+                        <TextArea fx:id="textA" prefHeight="39.0" prefWidth="725.0" />
                      </children>
                      <VBox.margin>
                         <Insets bottom="11.0" left="21.0" />
                      </VBox.margin>
                   </HBox>
-                  <HBox prefHeight="19.0" prefWidth="808.0">
+                  <HBox prefHeight="40.0" prefWidth="808.0">
                      <children>
                         <Pane prefHeight="39.0" prefWidth="50.0" style="-fx-border-color: #4CB5F5;">
                            <opaqueInsets>
@@ -264,16 +268,16 @@
                                     <Font size="15.0" />
                                  </font>
                               </Label>
-                              <RadioButton layoutX="16.0" layoutY="20.0" mnemonicParsing="false" />
+                              <RadioButton fx:id="rbB" layoutX="16.0" layoutY="20.0" mnemonicParsing="false" toggleGroup="$rbGroup" />
                            </children>
                         </Pane>
-                        <TextArea prefHeight="39.0" prefWidth="725.0" />
+                        <TextArea fx:id="textB" prefHeight="39.0" prefWidth="725.0" />
                      </children>
                      <VBox.margin>
                         <Insets bottom="11.0" left="21.0" />
                      </VBox.margin>
                   </HBox>
-                  <HBox prefHeight="19.0" prefWidth="808.0">
+                  <HBox prefHeight="40.0" prefWidth="808.0">
                      <children>
                         <Pane prefHeight="39.0" prefWidth="50.0" style="-fx-border-color: #4CB5F5;">
                            <opaqueInsets>
@@ -288,16 +292,16 @@
                                     <Font size="15.0" />
                                  </font>
                               </Label>
-                              <RadioButton layoutX="16.0" layoutY="20.0" mnemonicParsing="false" />
+                              <RadioButton fx:id="rbC" layoutX="16.0" layoutY="20.0" mnemonicParsing="false" toggleGroup="$rbGroup" />
                            </children>
                         </Pane>
-                        <TextArea prefHeight="39.0" prefWidth="725.0" />
+                        <TextArea fx:id="textC" prefHeight="39.0" prefWidth="725.0" />
                      </children>
                      <VBox.margin>
                         <Insets bottom="11.0" left="21.0" />
                      </VBox.margin>
                   </HBox>
-                  <HBox prefHeight="19.0" prefWidth="808.0">
+                  <HBox prefHeight="40.0" prefWidth="808.0">
                      <children>
                         <Pane prefHeight="39.0" prefWidth="50.0" style="-fx-border-color: #4CB5F5;">
                            <opaqueInsets>
@@ -312,10 +316,10 @@
                                     <Font size="15.0" />
                                  </font>
                               </Label>
-                              <RadioButton layoutX="16.0" layoutY="20.0" mnemonicParsing="false" />
+                              <RadioButton fx:id="rbD" layoutX="16.0" layoutY="20.0" mnemonicParsing="false" toggleGroup="$rbGroup" />
                            </children>
                         </Pane>
-                        <TextArea prefHeight="39.0" prefWidth="725.0" />
+                        <TextArea fx:id="textD" prefHeight="39.0" prefWidth="725.0" />
                      </children>
                      <VBox.margin>
                         <Insets bottom="11.0" left="21.0" />
@@ -354,7 +358,7 @@
                         </Text>
                      </children>
                   </HBox>
-                  <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="207.0" style="-fx-background-color: #6897E7; -fx-background-radius: 100;" text="Save">
+                  <Button fx:id="btnSave" mnemonicParsing="false" onAction="#handleSaveButtonAction" prefHeight="37.0" prefWidth="207.0" style="-fx-background-color: #6897E7; -fx-background-radius: 100;" text="Save">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -369,7 +373,7 @@
             </VBox>
             <HBox prefHeight="39.0" prefWidth="851.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="91.0" style="-fx-background-color: #6897E7; -fx-background-radius: 100;" text="Back">
+                  <Button fx:id="btnBack" mnemonicParsing="false" prefHeight="37.0" prefWidth="91.0" style="-fx-background-color: #6897E7; -fx-background-radius: 100;" text="Back">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -379,7 +383,7 @@
                      <graphic>
                         <ImageView fitHeight="18.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@btnBack.png" />
+                              <Image url="@../resources/btnBack.png" />
                            </image>
                         </ImageView>
                      </graphic>

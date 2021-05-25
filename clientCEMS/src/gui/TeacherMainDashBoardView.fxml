@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherMainDashBoardController">
+   <children>
+      <VBox prefHeight="600.0" prefWidth="206.0" style="-fx-background-color: #F7F7F7;">
+         <children>
+            <ImageView fitHeight="92.0" fitWidth="156.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/CEMSlogo.png" />
+               </image>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </ImageView>
+            <Button fx:id="HomePageButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#HomePageButtonPressed" prefHeight="46.0" prefWidth="172.0" style="-fx-background-color: #4CB5F5;" text="Home Page">
+               <font>
+                  <Font name="Ebrima Bold" size="17.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="27.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/btnHimepageOrange.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="QuestionBankButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#QuestionPageButtonPressed" prefHeight="46.0" prefWidth="175.0" style="-fx-background-color: #F7F7F7;" text="Question Bank" textFill="#9b9c9f">
+               <graphic>
+                  <ImageView fitHeight="27.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/btnQuestionBank.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="Ebrima" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="ExamBankButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#ExamPageButtonPressed" prefHeight="46.0" prefWidth="173.0" style="-fx-background-color: #F7F7F7;" text="Exam Bank" textFill="#9b9c9f">
+               <font>
+                  <Font name="Ebrima" size="16.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/btnExamBank.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="GetReportButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#ReportPageButtonPressed" prefHeight="46.0" prefWidth="173.0" style="-fx-background-color: #F7F7F7;" text="Get Report" textFill="#9b9c9f">
+               <font>
+                  <Font name="Ebrima" size="16.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="27.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/btnStatistics.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </VBox>
+      <VBox layoutX="173.0" prefHeight="600.0" prefWidth="851.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 30 0 0 0;">
+         <children>
+            <Pane opacity="0.82" prefHeight="36.0" prefWidth="851.0" style="-fx-background-color: #4CB5F5; -fx-background-radius: 30 0 0 0;">
+               <children>
+                  <Text fx:id="Name" fill="WHITE" layoutX="605.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Israel Israeli" textAlignment="CENTER" wrappingWidth="156.0">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Button fx:id="LogOutButton" layoutX="764.0" layoutY="4.0" mnemonicParsing="false" onAction="#LogOutButtonPressed" opacity="0.85" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #4CB5F5;" text="Logout" textFill="#1c251d" underline="true">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+            <HBox prefHeight="44.0" prefWidth="851.0">
+               <children>
+                  <Text fill="#868282" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Home Page" wrappingWidth="185.0">
+                     <font>
+                        <Font name="Ebrima" size="25.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" right="7.0" top="10.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="30.0" prefWidth="851.0" style="-fx-alignment: center;">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Hello " textAlignment="CENTER">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="22.0" />
+                     </HBox.margin>
+                  </Text>
+                  <Text fx:id="HelloNameMessage" strokeType="OUTSIDE" strokeWidth="0.0" text="Israel Israeli">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Text>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets top="41.0" />
+               </VBox.margin></HBox>
+            <HBox prefHeight="30.0" prefWidth="851.0" style="-fx-alignment: center;">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="and welcome to the Teacher portal of CEMS">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+            <Pane prefHeight="376.0" prefWidth="851.0">
+               <children>
+                  <ImageView fitHeight="324.0" fitWidth="412.0" layoutX="439.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/teacherPage.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="213.0" fitWidth="447.0" layoutY="228.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/teacherPage2.png" />
+                     </image>
+                  </ImageView>
+               </children></Pane>
+         </children></VBox>
+   </children>
+</AnchorPane>

@@ -22,19 +22,35 @@ public class TeacherMainPageController extends MainPageController {
 	@FXML
 	private Button GetReportButton;
 	
-	@FXML
-	void QuestionBankButtonPressed(ActionEvent event) throws IOException {
-		questionBankSubjectsController a = (questionBankSubjectsController) guiControl.loadStage(ClientsConstants.Screens.QUESTION_BANK_PAGE.path);
-		a.setTeacherSubject();
-	}
+	
 	
 	@FXML
 	void HomePageButtonPressed(ActionEvent event) throws IOException {
-
-		dashBoardTeacherControllerHome a = (dashBoardTeacherControllerHome) guiControl.loadStage(ClientsConstants.Screens.TEACHER_MAIN_PAGE.path);
+		TeacherMainDashBoardController a = (TeacherMainDashBoardController) guiControl.loadStage(ClientsConstants.Screens.TEACHER_WELCOME_PAGE.path);
 		
-	
 	}
+	
+	@FXML
+	void QuestionPageButtonPressed(ActionEvent event) throws IOException {
+		TeacherMainQuestionController a = (TeacherMainQuestionController) guiControl.loadStage(ClientsConstants.Screens.TEACHER_MAIN_QUESTION_PAGE.path);
+		a.setTeacherSubject();
+	}
+	
+	
+	@FXML
+	void ExamPageButtonPressed(ActionEvent event) throws IOException {
+		guiControl.loadStage(ClientsConstants.Screens.TEACHER_MAIN_EXAM_PAGE.path);
+	}
+	
+	@FXML
+	void ReportPageButtonPressed(ActionEvent event) throws IOException {
+		guiControl.loadStage(ClientsConstants.Screens.TEACHER_MAIN_REPORT_PAGE.path);
+	}
+	
+	
+	
+	
+	
 
 	
 }

@@ -7,7 +7,6 @@ import entity.Course;
 import entity.PersonCEMS;
 import entity.Subject;
 import entity.Teacher;
-import entity.Principal;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -45,7 +44,7 @@ public class LoginPageController {
 			Object controller = null;
 			switch (role) {
 			case "Teacher":
-				chosenPath = ClientsConstants.Screens.TEACHER_MAIN_PAGE.path;
+				chosenPath = ClientsConstants.Screens.TEACHER_WELCOME_PAGE.path;
 
 				ClientMessage msg1 = new ClientMessage(ClientMessageType.TEACHER_SUBJECTS_INFORMATION,
 
@@ -61,7 +60,7 @@ public class LoginPageController {
 
 				} else {
 
-					GUIControl.popUpError("Error in loading subject list to Teacher");
+					GUIControl.popUpError("Error in loading courses list to Teacher");
 
 				}
 
@@ -86,40 +85,6 @@ public class LoginPageController {
 				break;
 			case "Principal":
 				chosenPath = ClientsConstants.Screens.PRINCIPAL_MAIN_PAGE.path;
-				ClientMessage msg3 = new ClientMessage(ClientMessageType.PRINCIPAL_SUBJECTS_INFORMATION,				
-						((Principal) guiControl.getUser()).getId());
-
-				guiControl.sendToServer(msg3);
-
-				if (guiControl.getServerMsg().getType() == ServerMessageTypes.PRINCIPAL_SUBJECTS_ADDED) {
-
-					ArrayList<Subject> subjects = (ArrayList<Subject>) guiControl.getServerMsg().getMessage();
-
-					((Principal) person).setSubjectList(subjects);
-
-				} else {
-
-					GUIControl.popUpError("Error in loading subject list to Principal");
-
-				}
-
-				ClientMessage msg4 = new ClientMessage(ClientMessageType.PRINCIPAL_COURSES_INFORMATION,
-
-						((Principal) guiControl.getUser()).getId());
-
-				guiControl.sendToServer(msg4);
-
-				if (guiControl.getServerMsg().getType() == ServerMessageTypes.PRINCIPAL_COURSES_ADDED) {
-
-					ArrayList<Course> courses = (ArrayList<Course>) guiControl.getServerMsg().getMessage();
-
-					((Principal) person).setCourseList(courses);
-
-				} else {
-
-					GUIControl.popUpError("Error in loading courses list to Principal");
-
-				}
 				break;
 			case "Student":
 				chosenPath = ClientsConstants.Screens.STUDENT_MAIN_PAGE.path;

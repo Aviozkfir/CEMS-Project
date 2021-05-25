@@ -20,10 +20,6 @@ public class MainPageController {
 	
 
 
-
-	@FXML
-	private Button HomePageButton;
-
 //	@FXML
 //	private Button QuestionBankButton;
 
