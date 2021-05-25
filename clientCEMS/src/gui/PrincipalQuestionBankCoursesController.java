@@ -18,7 +18,7 @@ public class PrincipalQuestionBankCoursesController extends PrincipalMainPageCon
 
     @FXML
     void BackPressed(ActionEvent event) throws IOException {
-    	PrincipalQuestionBankSubjectsController a = (PrincipalQuestionBankSubjectsController) guiControl.loadStage(ClientsConstants.Screens.QUESTION_BANK_PAGE.path);
+    	PrincipalQuestionBankSubjectsController a = (PrincipalQuestionBankSubjectsController) guiControl.loadStage(ClientsConstants.Screens.PRINCIPAl_QUESTION_BANK_PAGE.path);
 		a.setPrincipalSubject();
     }
 
