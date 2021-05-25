@@ -1,8 +1,9 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
+@SuppressWarnings("serial")
 public class Principal extends PersonCEMS implements Serializable {
 
 	private ArrayList<Subject> subjectList;

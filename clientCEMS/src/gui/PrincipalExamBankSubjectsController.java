@@ -29,7 +29,7 @@ public class PrincipalExamBankSubjectsController extends PrincipalMainPageContro
 				StackPane root = fxmlLoader.load();
 				controller = (btnFolderController) fxmlLoader.getController();
 
-				controller.setChosenPath(ClientsConstants.Screens.PRINCIPAL_EXAM_BANK_PAGE.path);
+				controller.setChosenPath(ClientsConstants.Screens.PRINCIPAl_EXAM_BANK_COURSES.path);
 				controller.setText(subjectList.get(i).getName());
 				controller.setObject(subjectList.get(i));
 				controller.setConsumer((fxmlLocation, subject) -> {

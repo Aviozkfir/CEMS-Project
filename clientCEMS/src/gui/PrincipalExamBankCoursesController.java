@@ -1,19 +1,28 @@
 package gui;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import entity.Course;
+import entity.Principal;
 import entity.Subject;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 
 public class PrincipalExamBankCoursesController extends PrincipalMainPageController{
 	@FXML
-    private Text name;
+    private Text subjectName;
+
+	@FXML
+    private Button Back;
 
     @FXML
-    private Button Back;
+    private GridPane grid;
 
     @FXML
     void BackPressed(ActionEvent event) throws IOException {
@@ -21,52 +30,49 @@ public class PrincipalExamBankCoursesController extends PrincipalMainPageControl
 		a.setPrincipalSubject();
     }
 
-	public void setName(String name) {
-		this.name.setText(name);
-	}
-
 
 	public void setPrincipalCourse(Subject sub) {
-//    	int i;
-//		Teacher teacher = (Teacher) GUIControl.instance.getUser();
-//	
-//		ArrayList<Course> courseList = teacher.getCourseList(); 
-//		Course course;
-//		Button butt;
-//		for(i=0;i<5;i++)
-//			try {
-////				btnFolderController controller;
-//				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ClientsConstants.Screens.btnFolder.path));
-//				StackPane root = fxmlLoader.load();
-//				controller = (btnFolderController) fxmlLoader.getController();
-//
-//				controller.setChosenPath(ClientsConstants.Screens.QUESTION_BANK_COURSES.path);
-//				controller.setText(subjectList.get(i).getName());
-//				controller.setSubject(subjectList.get(i));
-//				controller.setConsumer((fxmlLocation, subject)->{   
-//					try {
-//						questionBankCoursesController contr =(questionBankCoursesController) GUIControl.instance.loadStage(fxmlLocation);
-//					
-//						contr.setTeacherCourse((Subject)subject);
-//					
-//					} catch (IOException e) {
-//						// TODO Auto-generated catch block
-//						e.printStackTrace();
-//					}
-//					
-//				});
-//				
-//				
-//				grid.add(root, i%4, i/4);
-//				
-//						
-//				
-//				
-//				
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//    	
-    }
+			this.subjectName.setText(sub.getName());
+	    	int i;
+			Principal principal = (Principal) GUIControl.instance.getUser();
+		
+			ArrayList<Course> courseList = principal.getCourseList(); 
+			System.out.print(courseList.toString());
+			int counter =0;
+			for(i=0;i<courseList.size();i++)
+				if(courseList.get(i).getSubject().getId().equals(sub.getId()))
+					try {
+					btnFolderController controller;
+					FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ClientsConstants.Screens.btnFolder.path));
+					StackPane root = fxmlLoader.load();
+					controller = (btnFolderController) fxmlLoader.getController();
+
+					controller.setChosenPath(ClientsConstants.Screens.PRINCIPAL_MAIN_PAGE.path);
+					controller.setText(courseList.get(i).getName());
+					controller.setObject(courseList.get(i));
+					controller.setConsumer((fxmlLocation, subject)->{   
+						try {
+							
+							GUIControl.instance.loadStage(fxmlLocation);
+						
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					
+					});
+					
+					
+					grid.add(root, counter%4, counter/4);
+					counter++;
+							
+					
+					
+					
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	    	
+	    }
 }
