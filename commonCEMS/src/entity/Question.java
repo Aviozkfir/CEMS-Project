@@ -13,6 +13,13 @@ public class Question {
 	private int id;//5 digit number in the format:-subject(2)-question number(3)-
 	private String author;//the name of the teacher that created the question
 	private Date modified;//the date the question was modified or updated
+	private int correctAnswar;
+	public int getCorrectAnswar() {
+		return correctAnswar;
+	}
+	public void setCorrectAnswar(int correctAnswar) {
+		this.correctAnswar = correctAnswar;
+	}
 	
 	public Question() { }
 	public Question(String text, String ansA, String ansB, String ansC, String ansD) {
