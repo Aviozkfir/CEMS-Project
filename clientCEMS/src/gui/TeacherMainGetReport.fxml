@@ -12,13 +12,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherMainReportController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherMainReportController">
    <children>
       <VBox prefHeight="600.0" prefWidth="206.0" style="-fx-background-color: #F7F7F7;">
          <children>
             <ImageView fitHeight="92.0" fitWidth="156.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../git/ProjectCEMS/clientCEMS/src/resources/CEMSlogo.png" />
+                  <Image url="@../resources/CEMSlogo.png" />
                </image>
                <VBox.margin>
                   <Insets bottom="10.0" />
@@ -31,7 +31,7 @@
                <graphic>
                   <ImageView fitHeight="27.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../git/ProjectCEMS/clientCEMS/src/resources/btnHomepage.png" />
+                        <Image url="@../resources/btnHomepage.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -40,7 +40,7 @@
                <graphic>
                   <ImageView fitHeight="27.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../git/ProjectCEMS/clientCEMS/src/resources/btnQuestionBank.png" />
+                        <Image url="@../resources/btnQuestionBank.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -55,7 +55,7 @@
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../git/ProjectCEMS/clientCEMS/src/resources/btnExamBank.png" />
+                        <Image url="@../resources/btnExamBank.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -67,7 +67,7 @@
                <graphic>
                   <ImageView fitHeight="27.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../git/ProjectCEMS/clientCEMS/src/resources/btnStatisticsOrange.png" />
+                        <Image url="@../resources/btnStatisticsOrange.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -186,7 +186,7 @@
                         <Insets left="21.0" top="51.0" />
                      </HBox.margin>
                      <image>
-                        <Image url="@../git/ProjectCEMS/clientCEMS/src/resources/tiny-character-male-create-graphic-report-man-vector-32050681-removebg-preview-removebg-preview.png" />
+                        <Image url="@../resources/tiny-character-male-create-graphic-report-man-vector-32050681-removebg-preview-removebg-preview.png" />
                      </image>
                   </ImageView>
                </children>
