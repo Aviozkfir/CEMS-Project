@@ -1,17 +1,27 @@
 package gui;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 import entity.Course;
+import entity.Question;
 import entity.Subject;
+import entity.Teacher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import message.ClientMessage;
+import message.ClientMessageType;
 
 public class TeacherQuestionBankQuestionsController extends TeacherMainPageController {
 
-    
+    private ArrayList<Question> allQuestions;
 
     @FXML
     private Text subjectName;
@@ -37,11 +47,13 @@ public class TeacherQuestionBankQuestionsController extends TeacherMainPageContr
     @FXML
     private Button btnBack;
 
-   
+    
+    private Course course;
 
     @FXML
-    void btnBackPressed(ActionEvent event) {
-
+    void btnBackPressed(ActionEvent event) throws IOException {
+    	TeacherQuestionBankCoursesController contr =(TeacherQuestionBankCoursesController) GUIControl.instance.loadStage("TeacherQuestionBankCourses.fxml");
+		contr.setTeacherCourse(course.getSubject());
     }
 
     @FXML
@@ -54,8 +66,25 @@ public class TeacherQuestionBankQuestionsController extends TeacherMainPageContr
 
     }
     
-    public void setTeacherCourse(Course sub) {
+    public void setTeacherCourse(Course course) throws IOException {
     	
+    	this.course=course;
+    	
+    	ClientMessage m1 = new ClientMessage(ClientMessageType.GET_QUESTION_BY_COURSE, course);
+    	guiControl.sendToServer(m1);
+    	
+    	allQuestions = (ArrayList<Question>) guiControl.getServerMsg().getMessage();
+    	
+    	for(Question q : allQuestions)
+    	{
+    		TeacherQuestionTableRowController controller;
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/TeacherQuestionTableRow.fxml"));
+			AnchorPane root = fxmlLoader.load();
+			controller = (TeacherQuestionTableRowController) fxmlLoader.getController();
+			controller.setQuestion(q);
+			vTable.getChildren().add(root);
+			
+    	}
     	
     }
 

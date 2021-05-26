@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import application.ServerMain;
+import entity.Course;
 import entity.PersonCEMS;
 import message.ClientMessage;
 import message.ServerMessage;
@@ -147,6 +148,14 @@ public class ServerCEMS extends AbstractServer {
 						type = ServerMessageTypes.EXAM_INFORMATION_NOT_RECIVED;
 					} else {
 						type = ServerMessageTypes.EXAM_INFORMATION_RECIVED;
+					}
+					break;
+				case GET_QUESTION_BY_COURSE:
+					returnVal = MySQLConnection.getQuestionByCourse((Course) clientMsg.getMessage());
+					if (returnVal == null) {
+						type = ServerMessageTypes.QUESTION_BY_COURSE_NOT_RECIVED;
+					} else {
+						type = ServerMessageTypes.QUESTION_BY_COURSE_RECIVED;
 					}
 					break;	
 

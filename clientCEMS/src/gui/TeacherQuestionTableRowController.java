@@ -31,8 +31,10 @@ public class TeacherQuestionTableRowController {
     
     public void setQuestion(Question q) {
     	this.q=q;
-    	
-    	
+    	questionText.setText(q.getText());
+    	date.setText(q.getModified().toString());
+    	questionID.setText(""+q.getId());
+  
     }
 
     @FXML

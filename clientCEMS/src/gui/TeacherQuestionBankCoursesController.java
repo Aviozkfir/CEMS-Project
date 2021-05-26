@@ -56,13 +56,15 @@ public class TeacherQuestionBankCoursesController extends TeacherMainPageControl
 				StackPane root = fxmlLoader.load();
 				controller = (btnFolderController) fxmlLoader.getController();
 
-				controller.setChosenPath(ClientsConstants.Screens.TEACHER_WELCOME_PAGE.path);
+				controller.setChosenPath("/gui/TeacherQuestionBankQuestions.fxml");
 				controller.setText(courseList.get(i).getName());
 				controller.setObject(courseList.get(i));
-				controller.setConsumer((fxmlLocation, subject)->{   
+				controller.setConsumer((fxmlLocation, course)->{   
 					try {
 						
-						GUIControl.instance.loadStage(fxmlLocation);
+						((TeacherQuestionBankQuestionsController)GUIControl.instance.loadStage(fxmlLocation)).setTeacherCourse((Course) course);
+						
+						
 					
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
