@@ -24,6 +24,9 @@ public class TeacherQuestionBankQuestionsController extends TeacherMainPageContr
     private ArrayList<Question> allQuestions;
 
     @FXML
+    private AnchorPane myRoot;
+    
+    @FXML
     private Text subjectName;
 
     @FXML
@@ -57,8 +60,8 @@ public class TeacherQuestionBankQuestionsController extends TeacherMainPageContr
     }
 
     @FXML
-    void btnCreateQuestionPressed(ActionEvent event) {
-
+    void btnCreateQuestionPressed(ActionEvent event) throws IOException {
+    	((TeacherCreateQuestionController)GUIControl.instance.loadStage("/gui/TeacherCreateQuestion.fxml")).setPage(course);
     }
 
     @FXML
@@ -70,10 +73,15 @@ public class TeacherQuestionBankQuestionsController extends TeacherMainPageContr
     	
     	this.course=course;
     	
+    	courseName.setText(course.getName());
+    	subjectName.setText(course.getSubject().getName());
+    	
     	ClientMessage m1 = new ClientMessage(ClientMessageType.GET_QUESTION_BY_COURSE, course);
     	guiControl.sendToServer(m1);
     	
     	allQuestions = (ArrayList<Question>) guiControl.getServerMsg().getMessage();
+    	
+    	numberOfQuestions.setText(""+allQuestions.size());
     	
     	for(Question q : allQuestions)
     	{

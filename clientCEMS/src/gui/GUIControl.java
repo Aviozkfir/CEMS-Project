@@ -199,5 +199,17 @@ public class GUIControl {
 		primaryStage.show();
 		return controller;
 	}
+	
+	public void loadStage(AnchorPane root) throws IOException {
+
+		Stage primaryStage = getStage();
+		
+		Scene scene = new Scene(root);
+		primaryStage.setScene(scene);
+		primaryStage.setOnCloseRequest(e -> {
+			disconnect();
+		});
+		primaryStage.show();
+	}
 
 }

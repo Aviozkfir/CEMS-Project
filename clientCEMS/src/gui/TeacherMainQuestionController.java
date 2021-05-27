@@ -32,7 +32,7 @@ public class TeacherMainQuestionController extends TeacherMainPageController {
 		
 		ArrayList<Subject> subjectList = teacher.getSubjectList();
 		
-		System.out.println(subjectList.toString()+" "+teacher.getCourseList().toString());
+		
 		for(i=0;i<subjectList.size();i++)
 			try {
 			

@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherCreateQuestionController">
    <children>
       <VBox prefHeight="600.0" prefWidth="206.0" style="-fx-background-color: #F7F7F7;">
          <children>
@@ -40,7 +40,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="QuestionBankButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#QuestionBankButtonPressed" prefHeight="46.0" prefWidth="175.0" style="-fx-background-color: #4CB5F5;" text="Question Bank">
+            <Button fx:id="QuestionBankButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#QuestionPageButtonPressed" prefHeight="46.0" prefWidth="172.0" style="-fx-background-color: #4CB5F5;" text="Question Bank">
                <graphic>
                   <ImageView fitHeight="27.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -49,10 +49,10 @@
                   </ImageView>
                </graphic>
                <font>
-                  <Font name="Ebrima Bold" size="17.0" />
+                  <Font name="Ebrima Bold" size="16.0" />
                </font>
             </Button>
-            <Button fx:id="ExamBankButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#ExamBankButtonPressed" prefHeight="46.0" prefWidth="173.0" style="-fx-background-color: #F7F7F7;" text="Exam Bank" textFill="#9b9c9f">
+            <Button fx:id="ExamBankButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#ExamPageButtonPressed" prefHeight="46.0" prefWidth="172.0" style="-fx-background-color: #F7F7F7;" text="Exam Bank" textFill="#9b9c9f">
                <font>
                   <Font name="Ebrima" size="16.0" />
                </font>
@@ -64,7 +64,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="GetReportButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#ReportPageButtenPressed" prefHeight="46.0" prefWidth="173.0" style="-fx-background-color: #F7F7F7;" text="Get Report" textFill="#9b9c9f">
+            <Button fx:id="GetReportButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#ReportPageButtonPressed" prefHeight="46.0" prefWidth="172.0" style="-fx-background-color: #F7F7F7;" text="Get Report" textFill="#9b9c9f">
                <font>
                   <Font name="Ebrima" size="16.0" />
                </font>
@@ -116,7 +116,7 @@
                         <Insets top="12.0" />
                      </HBox.margin>
                   </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SE ">
+                  <Text fx:id="subjectName" strokeType="OUTSIDE" strokeWidth="0.0" text="SE ">
                      <font>
                         <Font size="17.0" />
                      </font>
@@ -132,7 +132,7 @@
                         <Insets top="12.0" />
                      </HBox.margin>
                   </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Human-Computer Interaction" wrappingWidth="239.029296875">
+                  <Text fx:id="courseName" strokeType="OUTSIDE" strokeWidth="0.0" text="h" wrappingWidth="203.69589233398438" HBox.hgrow="ALWAYS">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
@@ -358,7 +358,7 @@
                         </Text>
                      </children>
                   </HBox>
-                  <Button fx:id="btnSave" mnemonicParsing="false" onAction="#savePressed" prefHeight="37.0" prefWidth="207.0" style="-fx-background-color: #6897E7; -fx-background-radius: 100;" text="Save">
+                  <Button fx:id="btnSave" mnemonicParsing="false" onAction="#SavePressed" prefHeight="37.0" prefWidth="207.0" style="-fx-background-color: #6897E7; -fx-background-radius: 100;" text="Save">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
