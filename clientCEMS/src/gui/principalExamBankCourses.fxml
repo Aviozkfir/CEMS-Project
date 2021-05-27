@@ -81,7 +81,7 @@
                <graphic>
                   <ImageView fitHeight="27.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/RequestsNotClicked.jpeg" />
+                        <Image url="@../resources/RequestsNotClicked.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -132,10 +132,13 @@
                      </HBox.margin>
                   </Text>
                </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
             </HBox>
             <ScrollPane prefHeight="448.0" prefWidth="851.0" style="-fx-background-color: transperent;">
                <content>
-                  <GridPane fx:id="grid" prefHeight="454.0" prefWidth="849.0" style="-fx-background-color: #EBEBEB;">
+                  <GridPane fx:id="grid" prefHeight="446.0" prefWidth="849.0" style="-fx-background-color: #EBEBEB;">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
