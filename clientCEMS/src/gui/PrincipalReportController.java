@@ -26,7 +26,7 @@ public class PrincipalReportController extends PrincipalMainPageController imple
 	@FXML
 	void CreateButtonPressed(ActionEvent event) throws IOException {
 		if (Istype("Course")) {
-			PrincipalReportCourseControl a = (PrincipalReportCourseControl) guiControl
+			PrincipalReportCourseControl controller = (PrincipalReportCourseControl) guiControl
 					.loadStage(ClientsConstants.Screens.PRINCIPAL_REPORT_COURSE_PAGE.path);
 		}
 

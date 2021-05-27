@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import entity.Course;
+import entity.CourseReport;
 import entity.PersonCEMS;
 import entity.Principal;
 import entity.Subject;
@@ -86,7 +87,7 @@ public class LoginPageController {
 				break;
 			case "Principal":
 				chosenPath = ClientsConstants.Screens.PRINCIPAL_MAIN_PAGE.path;
-				ClientMessage msg3 = new ClientMessage(ClientMessageType.PRINCIPAL_SUBJECTS_INFORMATION,				
+				ClientMessage msg3 = new ClientMessage(ClientMessageType.PRINCIPAL_SUBJECTS_INFORMATION,
 						((Principal) guiControl.getUser()).getId());
 				guiControl.sendToServer(msg3);
 
@@ -119,8 +120,8 @@ public class LoginPageController {
 					GUIControl.popUpError("Error in loading courses list to Principal");
 
 				}
+
 				break;
-				
 			case "Student":
 				chosenPath = ClientsConstants.Screens.STUDENT_MAIN_PAGE.path;
 				break;
