@@ -134,6 +134,14 @@ public class ServerCEMS extends AbstractServer {
 						type = ServerMessageTypes.PRINCIPAL_COURSES_NOT_ADDED;
 					}
 					break;
+				case PRINCIPAL_REPORT_COURSES_INFORMATION:
+					returnVal = MySQLConnection.getPrincipalReportCourses((String[]) clientMsg.getMessage());
+					if (returnVal != null) {
+						type = ServerMessageTypes.PRINCIPAL_REPORT_COURSES_ADDED;
+					} else {
+						type = ServerMessageTypes.PRINCIPAL_REPORT_COURSES_NOT_ADDED;
+					}
+					break;
 				case VALIDATE_EXAM_CODE:
 					returnVal = MySQLConnection.validateExamCode((String) clientMsg.getMessage());
 					if ((boolean) returnVal == false) {

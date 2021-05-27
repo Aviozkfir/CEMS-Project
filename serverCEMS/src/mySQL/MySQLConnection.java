@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 import entity.Course;
+import entity.CourseReport;
 import entity.Exam;
 
 //import com.sun.javafx.webkit.ThemeClientImpl;
@@ -146,6 +147,18 @@ public class MySQLConnection {
 		return courseList;
 	}
 	
+	public static Object getPrincipalReportCourses(String[] data) throws SQLException {
+		ArrayList<CourseReport> courseList = new ArrayList<CourseReport>();
+		ResultSet rs;
+		PreparedStatement logInPreparedStatement;
+		logInPreparedStatement = con
+				.prepareStatement("SELECT Cid,name FROM Course");
+		rs = logInPreparedStatement.executeQuery();
+		while (rs.next()) {
+			courseList.add(new CourseReport(rs.getString(1), rs.getString(2)));
+		}
+		return courseList;
+	}
 	
 	
 	
