@@ -84,8 +84,8 @@ public class PrincipalReportCourseControl extends PrincipalMainPageController im
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		ObsCourseList.addAll(principal.getCourseList());
-		IDColumn.setCellValueFactory(new PropertyValueFactory<Course, String>("Id"));
-		NameColumn.setCellValueFactory(new PropertyValueFactory<Course, String>("Name"));
+		IDColumn.setCellValueFactory(new PropertyValueFactory<Course, String>("id"));
+		NameColumn.setCellValueFactory(new PropertyValueFactory<Course, String>("name"));
 		TableView.getItems().setAll(ObsCourseList);
 	}
 
@@ -97,13 +97,7 @@ public class PrincipalReportCourseControl extends PrincipalMainPageController im
 
 	public void SetMedianAndAverage() {
 		ArrayList<String> gradesString = new ArrayList<String>(principal.getReport().getReportData().keySet()); // set
-																												// the
-																												// keys:
-																												// grades
-																												// into
-																												// this
-																												// string
-																												// arraylist.
+																							// arraylist.
 		ArrayList<Integer> grades = new ArrayList<Integer>();
 		for (String i : gradesString) {
 			Integer k = Integer.parseInt(i);
