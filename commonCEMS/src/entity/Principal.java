@@ -9,6 +9,7 @@ public class Principal extends PersonCEMS implements Serializable {
 	private ArrayList<Subject> subjectList;
 	private ArrayList<Course> courseList;
 	private ArrayList<CourseReport> courseReportList;
+	private Report report;
 
 	public Principal(String firstName, String lastName, String id, String email, String role) {
 		super(firstName, lastName, id, email, role);
@@ -20,6 +21,13 @@ public class Principal extends PersonCEMS implements Serializable {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+	public Report getReport() {
+		return report;
+	}
+
+	public void setReport(Report report) {
+		this.report = report;
 	}
 
 	public ArrayList<Subject> getSubjectList() {

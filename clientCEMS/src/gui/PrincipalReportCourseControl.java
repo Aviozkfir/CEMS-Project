@@ -3,17 +3,22 @@ package gui;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import entity.Course;
 import entity.CourseReport;
 import entity.Principal;
+import entity.Report;
+import entity.Subject;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -34,13 +39,14 @@ public class PrincipalReportCourseControl extends PrincipalMainPageController im
 	@FXML
 	private TextField IDtext;
 	@FXML
-	private TextField Yeartext;
+	private DatePicker YearDatePick;
 	@FXML
 	private Button GetButton;
+	private Report report;
 
 	ObservableList<Course> ObsCourseList = FXCollections.observableArrayList();
 	Principal principal = (Principal) guiControl.getUser();
-	String[] inputData= new String[2];
+	String[] inputData = new String[2];
 
 	@FXML
 	void BackPressed(ActionEvent event) throws IOException {
@@ -52,19 +58,18 @@ public class PrincipalReportCourseControl extends PrincipalMainPageController im
 	@FXML
 	void GetButtonPressed(ActionEvent event) throws IOException {
 
-
 		if (validateInput()) {
-			inputData[0]=IDtext.getText();
-			inputData[1]=Yeartext.getText();
-			ClientMessage msg = new ClientMessage(ClientMessageType.PRINCIPAL_REPORT_COURSES_INFORMATION,inputData);
+			inputData[0] = IDtext.getText();
+			inputData[1] = YearDatePick.getValue().toString();
+			System.out.println(YearDatePick.getValue().toString()); // pemanently
+			ClientMessage msg = new ClientMessage(ClientMessageType.PRINCIPAL_REPORT_COURSES_INFORMATION, inputData);
 			guiControl.sendToServer(msg);
 
 			if (guiControl.getServerMsg().getType() == ServerMessageTypes.PRINCIPAL_REPORT_COURSES_ADDED) {
 
-				ArrayList<CourseReport> courseReportList = (ArrayList<CourseReport>) guiControl.getServerMsg()
-						.getMessage();
-
-				principal.setCourseReportList(courseReportList);
+				HashMap<String, String> reportData = (HashMap<String, String>) guiControl.getServerMsg().getMessage();
+				report = new Report(reportData);
+				principal.setReport(report);
 
 			} else {
 				GUIControl.popUpError("Error in loading courses-report list  to Principal");
@@ -85,17 +90,52 @@ public class PrincipalReportCourseControl extends PrincipalMainPageController im
 	}
 
 	public boolean validateInput() {
-		if (IDtext.getText().isEmpty() || Yeartext.getText().isEmpty())
+		if (IDtext.getText().isEmpty() || YearDatePick.getValue().toString().isEmpty())
 			GUIControl.popUpError("Please fill all the required fields.");
 		return false;
 	}
 
-	public String getID() {
-		return IDtext.getText();
+	public void SetMedianAndAverage() {
+		ArrayList<String> gradesString = new ArrayList<String>(principal.getReport().getReportData().keySet()); // set
+																												// the
+																												// keys:
+																												// grades
+																												// into
+																												// this
+																												// string
+																												// arraylist.
+		ArrayList<Integer> grades = new ArrayList<Integer>();
+		for (String i : gradesString) {
+			Integer k = Integer.parseInt(i);
+			grades.add(k);
+		}
+		principal.getReport().setMedian(Median(grades));
+		principal.getReport().setAverage(Average(grades));
 	}
 
-	public String GetYear() {
-		return Yeartext.getText();
+	/*
+	 * public static double Median(ArrayList<Double> values) {
+	 * Collections.sort(values);
+	 * 
+	 * if (values.size() % 2 == 1) return values.get((values.size() + 1) / 2 - 1);
+	 * else { double lower = values.get(values.size() / 2 - 1); double upper =
+	 * values.get(values.size() / 2);
+	 * 
+	 * return (lower + upper) / 2.0; } }
+	 */
+	public static int Median(ArrayList<Integer> values) {
+		Collections.sort(values);
+			int lower = values.get(values.size() / 2 - 1);
+			int upper = values.get(values.size() / 2);
+
+			return (int) ((lower + upper) / 2.0);
+		}
+	public static int Average(ArrayList<Integer> values) {
+		int sum=0;
+		for(int i:values)
+			sum+=values.get(i);
+		return sum/values.size();
 	}
+	
 
 }
