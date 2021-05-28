@@ -48,9 +48,15 @@ public class TeacherMainPageController extends MainPageController {
 	}
 	
 	
-	
-	
-	
+//	
+//	 public void CheckForRefreshOfQuestions() {
+//	    	
+//	 }
+//	 
+//	 public void CheckForRefreshOfExams() {
+//	    	
+//	 }
+//	
 
 	
 }
