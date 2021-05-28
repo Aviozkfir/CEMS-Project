@@ -202,7 +202,7 @@
                                     <Insets bottom="19.0" />
                                  </padding>
                               </HBox>
-                              <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="117.0" style="-fx-background-color: #6897E7; -fx-background-radius: 100;" text="Get">
+                              <Button fx:id="GetButton" mnemonicParsing="false" onAction="#GetButtonPressed" prefHeight="37.0" prefWidth="117.0" style="-fx-background-color: #6897E7; -fx-background-radius: 100;" text="Get">
                                  <font>
                                     <Font name="System Bold" size="16.0" />
                                  </font>

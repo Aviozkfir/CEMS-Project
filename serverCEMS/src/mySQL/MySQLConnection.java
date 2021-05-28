@@ -152,14 +152,14 @@ public class MySQLConnection {
 		ResultSet rs;
 		PreparedStatement logInPreparedStatement;
 		 String str;
-		 String[] date;
+		 String[] stringarr;
 		logInPreparedStatement = con
-				.prepareStatement("SELECT s.Grade,s.Date,FROM Exam e,SolvedExams s,Where s.EId=e.Eid and "+data[0]+"=e.cid and s.Date>"+data[1]);
+				.prepareStatement("SELECT s.Grade,s.Date FROM Exams e,SolvedExams s WHERE s.EId=e.Eid and "+data[0]+"=e.cid AND s.Date >"+data[1]);
 		rs = logInPreparedStatement.executeQuery();
 		while (rs.next()) {
 			str=rs.getString(2);
-			date=str.split("/"); //split the date mm/dd/yyyy
-			report.put(rs.getString(1), date[2]);  // put grade and date
+			stringarr=str.split("-"); //split the date yyyy/mm/dd
+			report.put(rs.getString(1), stringarr[0]);  // put grade and date
 			
 		}
 		return report;

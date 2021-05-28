@@ -7,8 +7,8 @@ import java.util.HashMap;
 public class Report implements Serializable {
 
 	private HashMap<String, String> report = new HashMap<String, String>(); // (grade,Date).
-	private int Median;
-	private int Average;
+	private String Median;
+	private String Average;
 
 	public Report(HashMap<String, String> report) {
 		this.report = report;
@@ -22,19 +22,19 @@ public class Report implements Serializable {
 		this.report = report;
 	}
 
-	public void setMedian(int median) {
+	public void setMedian(String median) {
 		Median = median;
 	}
 
-	public void setAverage(int average) {
+	public void setAverage(String average) {
 		Average = average;
 	}
 
-	public int getMedian() {
+	public String getMedian() {
 		return Median;
 	}
 
-	public int getAverage() {
+	public String getAverage() {
 		return Average;
 	}
 }

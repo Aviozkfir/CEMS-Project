@@ -50,15 +50,15 @@ public class PrincipalReportCourseControl extends PrincipalMainPageController im
 
 	@FXML
 	void BackPressed(ActionEvent event) throws IOException {
-		PrincipalExamBankSubjectsController a = (PrincipalExamBankSubjectsController) guiControl
+		PrincipalReportController a = (PrincipalReportController) guiControl
 				.loadStage(ClientsConstants.Screens.PRINCIPAL_REPORT_PAGE.path);
-		a.setPrincipalSubject();
 	}
 
 	@FXML
 	void GetButtonPressed(ActionEvent event) throws IOException {
 
 		if (validateInput()) {
+			
 			inputData[0] = IDtext.getText();
 			inputData[1] = YearDatePick.getValue().toString();
 			System.out.println(YearDatePick.getValue().toString()); // pemanently
@@ -70,6 +70,7 @@ public class PrincipalReportCourseControl extends PrincipalMainPageController im
 				HashMap<String, String> reportData = (HashMap<String, String>) guiControl.getServerMsg().getMessage();
 				report = new Report(reportData);
 				principal.setReport(report);
+				SetMedianAndAverage();
 
 			} else {
 				GUIControl.popUpError("Error in loading courses-report list  to Principal");
@@ -78,6 +79,7 @@ public class PrincipalReportCourseControl extends PrincipalMainPageController im
 			PrincipalFinalReportControl controller = (PrincipalFinalReportControl) guiControl
 					.loadStage(ClientsConstants.Screens.PRINCIPAL_FINAL_REPORT_PAGE.path);
 		}
+		else {GUIControl.popUpError("Problematic, ID:"+IDtext.getText()+ "Year:"+YearDatePick.getValue().toString());}
 
 	}
 
@@ -90,9 +92,11 @@ public class PrincipalReportCourseControl extends PrincipalMainPageController im
 	}
 
 	public boolean validateInput() {
-		if (IDtext.getText().isEmpty() || YearDatePick.getValue().toString().isEmpty())
+		if (IDtext.getText().isEmpty() || YearDatePick.getValue().toString().isEmpty()) {
 			GUIControl.popUpError("Please fill all the required fields.");
 		return false;
+		}
+		return true;
 	}
 
 	public void SetMedianAndAverage() {
@@ -117,18 +121,20 @@ public class PrincipalReportCourseControl extends PrincipalMainPageController im
 	 * 
 	 * return (lower + upper) / 2.0; } }
 	 */
-	public static int Median(ArrayList<Integer> values) {
+	public static String Median(ArrayList<Integer> values) {
+		String convertStr=null;
 		Collections.sort(values);
 			int lower = values.get(values.size() / 2 - 1);
 			int upper = values.get(values.size() / 2);
 
-			return (int) ((lower + upper) / 2.0);
+			return convertStr.valueOf((int) ((lower + upper) / 2.0));
 		}
-	public static int Average(ArrayList<Integer> values) {
+	public static String Average(ArrayList<Integer> values) {
+		String convertStr=null;
 		int sum=0;
-		for(int i:values)
+		for(int i=0;i<values.size();i++)
 			sum+=values.get(i);
-		return sum/values.size();
+		return convertStr.valueOf(sum/values.size());
 	}
 	
 
