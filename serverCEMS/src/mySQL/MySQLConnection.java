@@ -148,16 +148,21 @@ public class MySQLConnection {
 	}
 	
 	public static Object getPrincipalReportCourses(String[] data) throws SQLException {
-		ArrayList<CourseReport> courseList = new ArrayList<CourseReport>();
+		HashMap<String, String> report = new HashMap<String, String>();
 		ResultSet rs;
 		PreparedStatement logInPreparedStatement;
+		 String str;
+		 String[] date;
 		logInPreparedStatement = con
-				.prepareStatement("SELECT Cid,name FROM Course");
+				.prepareStatement("SELECT s.Grade,s.Date,FROM Exam e,SolvedExams s,Where s.EId=e.Eid and "+data[0]+"=e.cid and s.Date>"+data[1]);
 		rs = logInPreparedStatement.executeQuery();
 		while (rs.next()) {
-			courseList.add(new CourseReport(rs.getString(1), rs.getString(2)));
+			str=rs.getString(2);
+			date=str.split("/"); //split the date mm/dd/yyyy
+			report.put(rs.getString(1), date[2]);  // put grade and date
+			
 		}
-		return courseList;
+		return report;
 	}
 	
 	
