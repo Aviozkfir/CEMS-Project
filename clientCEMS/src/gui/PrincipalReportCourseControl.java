@@ -61,7 +61,6 @@ public class PrincipalReportCourseControl extends PrincipalMainPageController im
 			
 			inputData[0] = IDtext.getText();
 			inputData[1] = YearDatePick.getValue().toString();
-			System.out.println(YearDatePick.getValue().toString()); // pemanently
 			ClientMessage msg = new ClientMessage(ClientMessageType.PRINCIPAL_REPORT_COURSES_INFORMATION, inputData);
 			guiControl.sendToServer(msg);
 

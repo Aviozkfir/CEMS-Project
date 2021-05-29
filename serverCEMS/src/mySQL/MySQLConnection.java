@@ -147,15 +147,23 @@ public class MySQLConnection {
 		return courseList;
 	}
 	
-	public static Object getPrincipalReportCourses(String[] data) throws SQLException {
+	public static Object getPrincipalReportCourses(String[] data) throws SQLException, ParseException {
 		HashMap<String, String> report = new HashMap<String, String>();
 		ResultSet rs;
 		PreparedStatement logInPreparedStatement;
 		 String str;
 		 String[] stringarr;
+			Date dateInput=new SimpleDateFormat("yyyy-MM-dd").parse(data[1]);
+			java.sql.Date dateInputData = new java.sql.Date(dateInput.getTime());
+		
+		
 		logInPreparedStatement = con
-				.prepareStatement("SELECT s.Grade,s.Date FROM Exams e,SolvedExams s WHERE s.EId=e.Eid and "+data[0]+"=e.cid AND s.Date >"+data[1]);
+				.prepareStatement("SELECT s.Grade,s.Date FROM Exams e,SolvedExams s WHERE s.EId=e.Eid and ?=e.cid AND s.Date >=?");
+		logInPreparedStatement.setString(1, data[0]);
+		logInPreparedStatement.setDate(2, dateInputData);
 		rs = logInPreparedStatement.executeQuery();
+		 
+
 		while (rs.next()) {
 			str=rs.getString(2);
 			stringarr=str.split("-"); //split the date yyyy/mm/dd
@@ -163,6 +171,7 @@ public class MySQLConnection {
 			
 		}
 		return report;
+
 	}
 	
 	
