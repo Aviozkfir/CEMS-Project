@@ -10,6 +10,8 @@ import java.util.ResourceBundle;
 import entity.Course;
 import entity.Principal;
 import entity.Report;
+import entity.Student;
+import entity.Teacher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -29,11 +31,13 @@ public class PrincipalReportTeacherControl extends PrincipalMainPageController i
 	@FXML
 	private Button Back;
 	@FXML
-	private TableView<Course> TableView;
+	private TableView<Teacher> TableView;
 	@FXML
-	private TableColumn<Course, String> IDColumn;
+	private TableColumn<Teacher, String> IDColumn;
 	@FXML
-	private TableColumn<Course, String> NameColumn;
+	private TableColumn<Teacher, String> FirstNameColumn;
+	@FXML
+	private TableColumn<Teacher, String> LastNameColumn;
 	@FXML
 	private TextField IDtext;
 	@FXML
@@ -42,7 +46,7 @@ public class PrincipalReportTeacherControl extends PrincipalMainPageController i
 	private Button GetButton;
 	private Report report;
 
-	ObservableList<Course> ObsCourseList = FXCollections.observableArrayList();
+	ObservableList<Teacher> ObsCourseList = FXCollections.observableArrayList();
 	Principal principal = (Principal) guiControl.getUser();
 	String[] inputData = new String[2];
 
@@ -56,14 +60,14 @@ public class PrincipalReportTeacherControl extends PrincipalMainPageController i
 	void GetButtonPressed(ActionEvent event) throws IOException {
 
 		if (validateInput()) {
-			
+
 			inputData[0] = IDtext.getText();
 			inputData[1] = YearDatePick.getValue().toString();
-			System.out.println(YearDatePick.getValue().toString()); // pemanently
-			ClientMessage msg = new ClientMessage(ClientMessageType.PRINCIPAL_REPORT_COURSES_INFORMATION, inputData);
+			System.out.println(YearDatePick.getValue().toString());
+			ClientMessage msg = new ClientMessage(ClientMessageType.PRINCIPAL_REPORT_TEACHER_INFORMATION, inputData);
 			guiControl.sendToServer(msg);
 
-			if (guiControl.getServerMsg().getType() == ServerMessageTypes.PRINCIPAL_REPORT_COURSES_ADDED) {
+			if (guiControl.getServerMsg().getType() == ServerMessageTypes.PRINCIPAL_REPORT_TEACHER_ADDED) {
 
 				HashMap<String, String> reportData = (HashMap<String, String>) guiControl.getServerMsg().getMessage();
 				report = new Report(reportData);
@@ -71,35 +75,37 @@ public class PrincipalReportTeacherControl extends PrincipalMainPageController i
 				SetMedianAndAverage();
 
 			} else {
-				GUIControl.popUpError("Error in loading courses-report list  to Principal");
+				GUIControl.popUpError("Error in loading teachers-report list  to Principal");
 			}
 
 			PrincipalFinalReportControl controller = (PrincipalFinalReportControl) guiControl
 					.loadStage(ClientsConstants.Screens.PRINCIPAL_FINAL_REPORT_PAGE.path);
+		} else {
+			GUIControl.popUpError("Problematic, ID:" + IDtext.getText() + "Year:" + YearDatePick.getValue().toString());
 		}
-		else {GUIControl.popUpError("Problematic, ID:"+IDtext.getText()+ "Year:"+YearDatePick.getValue().toString());}
 
 	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		ObsCourseList.addAll(principal.getCourseList());
-		IDColumn.setCellValueFactory(new PropertyValueFactory<Course, String>("id"));
-		NameColumn.setCellValueFactory(new PropertyValueFactory<Course, String>("name"));
+		ObsCourseList.addAll(principal.getTeacherList());
+		IDColumn.setCellValueFactory(new PropertyValueFactory<Teacher, String>("id"));
+		FirstNameColumn.setCellValueFactory(new PropertyValueFactory<Teacher, String>("firstName"));
+		LastNameColumn.setCellValueFactory(new PropertyValueFactory<Teacher, String>("lastName"));
 		TableView.getItems().setAll(ObsCourseList);
 	}
 
 	public boolean validateInput() {
 		if (IDtext.getText().isEmpty() || YearDatePick.getValue().toString().isEmpty()) {
 			GUIControl.popUpError("Please fill all the required fields.");
-		return false;
+			return false;
 		}
 		return true;
 	}
 
 	public void SetMedianAndAverage() {
 		ArrayList<String> gradesString = new ArrayList<String>(principal.getReport().getReportData().keySet()); // set
-																							// arraylist.
+
 		ArrayList<Integer> grades = new ArrayList<Integer>();
 		for (String i : gradesString) {
 			Integer k = Integer.parseInt(i);
@@ -109,31 +115,21 @@ public class PrincipalReportTeacherControl extends PrincipalMainPageController i
 		principal.getReport().setAverage(Average(grades));
 	}
 
-	/*
-	 * public static double Median(ArrayList<Double> values) {
-	 * Collections.sort(values);
-	 * 
-	 * if (values.size() % 2 == 1) return values.get((values.size() + 1) / 2 - 1);
-	 * else { double lower = values.get(values.size() / 2 - 1); double upper =
-	 * values.get(values.size() / 2);
-	 * 
-	 * return (lower + upper) / 2.0; } }
-	 */
 	public static String Median(ArrayList<Integer> values) {
-		String convertStr=null;
+		String convertStr = null;
 		Collections.sort(values);
-			int lower = values.get(values.size() / 2 - 1);
-			int upper = values.get(values.size() / 2);
+		int lower = values.get(values.size() / 2 - 1);
+		int upper = values.get(values.size() / 2);
 
-			return convertStr.valueOf((int) ((lower + upper) / 2.0));
-		}
+		return convertStr.valueOf((int) ((lower + upper) / 2.0));
+	}
+
 	public static String Average(ArrayList<Integer> values) {
-		String convertStr=null;
-		int sum=0;
-		for(int i=0;i<values.size();i++)
-			sum+=values.get(i);
-		return convertStr.valueOf(sum/values.size());
+		String convertStr = null;
+		int sum = 0;
+		for (int i = 0; i < values.size(); i++)
+			sum += values.get(i);
+		return convertStr.valueOf(sum / values.size());
 	}
 	
-
 }

@@ -122,7 +122,7 @@ public class MySQLConnection {
 		return courseList;
 	}
 
-	public static Object getPrincipalSubjects(String teacherID) throws SQLException {
+	public static Object getPrincipalSubjects(String principalID) throws SQLException {
 		ArrayList<Subject> subjectList = new ArrayList<Subject>();
 		ResultSet rs;
 		PreparedStatement logInPreparedStatement;
@@ -134,7 +134,7 @@ public class MySQLConnection {
 		return subjectList;
 	}
 
-	public static Object getPrincipalCourses(String teacherID) throws SQLException {
+	public static Object getPrincipalCourses(String principalID) throws SQLException {
 		ArrayList<Course> courseList = new ArrayList<Course>();
 		ResultSet rs;
 		PreparedStatement logInPreparedStatement;
@@ -222,5 +222,83 @@ public class MySQLConnection {
 		}
 		return questionList;
 	}
+	
+	public static Object getPrincipalStudentList() throws SQLException {
+		ArrayList<Student> studentList = new ArrayList<Student>();
+		ResultSet rs;
+		PreparedStatement logInPreparedStatement;
+		logInPreparedStatement = con
+				.prepareStatement("SELECT s.Id, s.FirstName, s.LastName, s.Email  FROM Person s WHERE s.Role = 'Student'");
+		rs = logInPreparedStatement.executeQuery();
+		while (rs.next()) {
+			studentList.add(new Student(rs.getString(2), rs.getString(3), rs.getString(1), rs.getString(4), null));
+		} 
+		return studentList;
+	}
+	
+	public static Object getPrincipalTeacherList() throws SQLException {
+		ArrayList<Teacher> studentList = new ArrayList<Teacher>();
+		ResultSet rs;
+		PreparedStatement logInPreparedStatement;
+		logInPreparedStatement = con
+				.prepareStatement("SELECT s.Id, s.FirstName, s.LastName, s.Email  FROM Person s WHERE s.Role = 'Teacher'");
+		rs = logInPreparedStatement.executeQuery();
+		while (rs.next()) {
+			studentList.add(new Teacher(rs.getString(2), rs.getString(3), rs.getString(1), rs.getString(4), null));
+		} 
+		return studentList;
+	}
+	
+	public static Object getPrincipalReportStudents(String[] data) throws SQLException, ParseException {
+		HashMap<String, String> report = new HashMap<String, String>();
+		ResultSet rs;
+		PreparedStatement logInPreparedStatement;
+		 String str;
+		 String[] stringarr;
+			Date dateInput=new SimpleDateFormat("yyyy-MM-dd").parse(data[1]);
+			java.sql.Date dateInputData = new java.sql.Date(dateInput.getTime());
+		
+		
+		logInPreparedStatement = con
+				.prepareStatement("SELECT s.Grade,s.Date FROM Exams e,SolvedExams s WHERE s.EId=e.Eid and ?=e.cid AND s.Date >=?");
+		logInPreparedStatement.setString(1, data[0]);
+		logInPreparedStatement.setDate(2, dateInputData);
+		rs = logInPreparedStatement.executeQuery();
+		 
 
+		while (rs.next()) {
+			str=rs.getString(2);
+			stringarr=str.split("-"); //split the date yyyy/mm/dd
+			report.put(rs.getString(1), stringarr[0]);  // put grade and date
+			
+		}
+		return report;
+
+	}
+	
+	public static Object getPrincipalReportTeachers(String[] data) throws SQLException, ParseException {
+		HashMap<String, String> report = new HashMap<String, String>();
+		ResultSet rs;
+		PreparedStatement logInPreparedStatement;
+		 String str;
+		 String[] stringarr;
+			Date dateInput=new SimpleDateFormat("yyyy-MM-dd").parse(data[1]);
+			java.sql.Date dateInputData = new java.sql.Date(dateInput.getTime());
+		
+		
+		logInPreparedStatement = con
+				.prepareStatement("SELECT s.Grade,s.Date FROM Exams e,SolvedExams s WHERE s.EId=e.Eid and ?=e.cid AND s.Date >=?");
+		logInPreparedStatement.setString(1, data[0]);
+		logInPreparedStatement.setDate(2, dateInputData);
+		rs = logInPreparedStatement.executeQuery();
+		 
+		while (rs.next()) {
+			str=rs.getString(2);
+			stringarr=str.split("-"); //split the date yyyy/mm/dd
+			report.put(rs.getString(1), stringarr[0]);  // put grade and date
+			
+		}
+		return report;
+
+	}
 }

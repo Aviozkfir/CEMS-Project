@@ -14,9 +14,6 @@ public class Student extends PersonCEMS implements Serializable {
 		super(firstName, lastName,id, email, role);
 	}
 
-
-
-
 	public ArrayList<Subject> getSubjectList() {
 		return subjectList;
 	}

@@ -8,6 +8,8 @@ public class Principal extends PersonCEMS implements Serializable {
 
 	private ArrayList<Subject> subjectList;
 	private ArrayList<Course> courseList;
+	private ArrayList<Teacher> teacherList;
+	private ArrayList<Student> studentList;
 	private Report report;
 
 	public Principal(String firstName, String lastName, String id, String email, String role) {
@@ -43,6 +45,22 @@ public class Principal extends PersonCEMS implements Serializable {
 
 	public void setCourseList(ArrayList<Course> courseList) {
 		this.courseList = courseList;
+	}
+	
+	public ArrayList<Student> getStudentList() {
+		return studentList;
+	}
+
+	public void setStudentList(ArrayList<Student> studentList) {
+		this.studentList = studentList;
+	}
+	
+	public ArrayList<Teacher> getTeacherList() {
+		return teacherList;
+	}
+
+	public void setTeacherList(ArrayList<Teacher> teacherList) {
+		this.teacherList = teacherList;
 	}
 	
 

@@ -58,7 +58,7 @@ public class PrincipalReportCourseControl extends PrincipalMainPageController im
 	void GetButtonPressed(ActionEvent event) throws IOException {
 
 		if (validateInput()) {
-			
+
 			inputData[0] = IDtext.getText();
 			inputData[1] = YearDatePick.getValue().toString();
 			ClientMessage msg = new ClientMessage(ClientMessageType.PRINCIPAL_REPORT_COURSES_INFORMATION, inputData);
@@ -77,8 +77,9 @@ public class PrincipalReportCourseControl extends PrincipalMainPageController im
 
 			PrincipalFinalReportControl controller = (PrincipalFinalReportControl) guiControl
 					.loadStage(ClientsConstants.Screens.PRINCIPAL_FINAL_REPORT_PAGE.path);
+		} else {
+			GUIControl.popUpError("Problematic, ID:" + IDtext.getText() + "Year:" + YearDatePick.getValue().toString());
 		}
-		else {GUIControl.popUpError("Problematic, ID:"+IDtext.getText()+ "Year:"+YearDatePick.getValue().toString());}
 
 	}
 
@@ -93,14 +94,14 @@ public class PrincipalReportCourseControl extends PrincipalMainPageController im
 	public boolean validateInput() {
 		if (IDtext.getText().isEmpty() || YearDatePick.getValue().toString().isEmpty()) {
 			GUIControl.popUpError("Please fill all the required fields.");
-		return false;
+			return false;
 		}
 		return true;
 	}
 
 	public void SetMedianAndAverage() {
 		ArrayList<String> gradesString = new ArrayList<String>(principal.getReport().getReportData().keySet()); // set
-																							// arraylist.
+		// arraylist.
 		ArrayList<Integer> grades = new ArrayList<Integer>();
 		for (String i : gradesString) {
 			Integer k = Integer.parseInt(i);
@@ -121,20 +122,20 @@ public class PrincipalReportCourseControl extends PrincipalMainPageController im
 	 * return (lower + upper) / 2.0; } }
 	 */
 	public static String Median(ArrayList<Integer> values) {
-		String convertStr=null;
+		String convertStr = null;
 		Collections.sort(values);
-			int lower = values.get(values.size() / 2 - 1);
-			int upper = values.get(values.size() / 2);
+		int lower = values.get(values.size() / 2 - 1);
+		int upper = values.get(values.size() / 2);
 
-			return convertStr.valueOf((int) ((lower + upper) / 2.0));
-		}
-	public static String Average(ArrayList<Integer> values) {
-		String convertStr=null;
-		int sum=0;
-		for(int i=0;i<values.size();i++)
-			sum+=values.get(i);
-		return convertStr.valueOf(sum/values.size());
+		return convertStr.valueOf((int) ((lower + upper) / 2.0));
 	}
-	
+
+	public static String Average(ArrayList<Integer> values) {
+		String convertStr = null;
+		int sum = 0;
+		for (int i = 0; i < values.size(); i++)
+			sum += values.get(i);
+		return convertStr.valueOf(sum / values.size());
+	}
 
 }
