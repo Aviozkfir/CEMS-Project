@@ -53,6 +53,8 @@ public class ClientsConstants {
 		PRINCIPAl_QUESTION_BANK_COURSES("/gui/principalQuestionBankCourses.fxml"),
 		PRINCIPAL_REPORT_PAGE("/gui/principalGetReportMain.fxml"),
 		PRINCIPAL_REPORT_COURSE_PAGE("/gui/principalCourseReport.fxml"),
+		PRINCIPAL_REPORT_TEACHER_PAGE("/gui/principalTeacherReport.fxml"),
+		PRINCIPAL_REPORT_STUDENT_PAGE("/gui/principalStudentReport.fxml"),
 		PRINCIPAL_FINAL_REPORT_PAGE("/gui/principalFinalReport.fxml"),
 		PRINCIPAL_REQUESTS_PAGE("/gui/principalRequests.fxml"),
         STUDENT_CHOICE_EXAM_PAGE("/gui/studentExamChoice.fxml");
