@@ -144,18 +144,26 @@
                               <Insets bottom="11.0" left="21.0" top="11.0" />
                            </VBox.margin>
                            <font>
-                              <Font name="System Bold" size="17.0" />
+                              <Font name="System Bold" size="20.0" />
                            </font>
                         </Text>
                         <HBox prefHeight="25.0" prefWidth="829.0">
                            <children>
-                              <Text fx:id="Average" strokeType="OUTSIDE" strokeWidth="0.0" text="Average:" wrappingWidth="130.234375">
+                              <Text fill="#3b66c3" strokeType="OUTSIDE" strokeWidth="0.0" text="Average:" wrappingWidth="80.234375">
                                  <font>
-                                    <Font size="15.0" />
+                                    <Font name="System Bold" size="18.0" />
                                  </font>
                                  <HBox.margin>
                                     <Insets />
                                  </HBox.margin>
+                              </Text>
+                              <Text fx:id="Average" strokeType="OUTSIDE" strokeWidth="0.0" text="80">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
                               </Text>
                            </children>
                            <padding>
@@ -167,18 +175,26 @@
                         </HBox>
                         <HBox prefHeight="25.0" prefWidth="829.0">
                            <children>
-                              <Text fx:id="Median" strokeType="OUTSIDE" strokeWidth="0.0" text="Median: " wrappingWidth="130.234375">
+                              <Text fill="#3b66c3" strokeType="OUTSIDE" strokeWidth="0.0" text="Median:" wrappingWidth="79.234375">
                                  <font>
-                                    <Font size="15.0" />
+                                    <Font name="System Bold" size="18.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets left="19.0" right="5.0" />
+                                    <Insets left="20.0" />
                                  </HBox.margin>
+                              </Text>
+                              <Text fx:id="Median" strokeType="OUTSIDE" strokeWidth="0.0" text="80">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
                               </Text>
                            </children>
                            <padding>
                               <Insets bottom="19.0" />
                            </padding>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
                         </HBox>
                      </children>
                      <HBox.margin>

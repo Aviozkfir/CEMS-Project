@@ -160,7 +160,7 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Text>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Teacher ID:" wrappingWidth="130.234375">
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Teacher ID:" wrappingWidth="77.234375">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
@@ -168,7 +168,7 @@
                                           <Insets right="5.0" />
                                        </HBox.margin>
                                     </Text>
-                                    <TextField fx:id="IDtext" prefHeight="31.0" prefWidth="179.0" />
+                                    <TextField fx:id="IDtext" prefHeight="31.0" prefWidth="168.0" />
                                  </children>
                                  <padding>
                                     <Insets bottom="19.0" />
@@ -184,7 +184,7 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Text>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="From 2021 to:" wrappingWidth="130.234375">
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" wrappingWidth="77.234375">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
@@ -192,7 +192,7 @@
                                           <Insets right="5.0" />
                                        </HBox.margin>
                                     </Text>
-                                    <DatePicker fx:id="YearDatePick">
+                                    <DatePicker fx:id="YearDatePick" prefHeight="31.0" prefWidth="169.0">
                                        <HBox.margin>
                                           <Insets right="20.0" />
                                        </HBox.margin>
@@ -202,6 +202,14 @@
                                     <Insets bottom="19.0" />
                                  </padding>
                               </HBox>
+                              <Text fill="#3b66c3" strokeType="OUTSIDE" strokeWidth="0.0" text="Note: Chosen date - Today date." wrappingWidth="249.33154296875">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets left="26.0" />
+                                 </VBox.margin>
+                              </Text>
                               <Button fx:id="GetButton" mnemonicParsing="false" onAction="#GetButtonPressed" prefHeight="37.0" prefWidth="117.0" style="-fx-background-color: #6897E7; -fx-background-radius: 100;" text="Get">
                                  <font>
                                     <Font name="System Bold" size="16.0" />
