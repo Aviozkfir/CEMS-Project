@@ -18,7 +18,8 @@ import message.ClientMessageType;
 import message.ServerMessageTypes;
 
 public class PrincipalRequestsController extends PrincipalMainPageController {
-	PersonCEMS person = (PersonCEMS) guiControl.getUser();
+	Principal principal = (Principal) guiControl.getUser();
+	ArrayList<PrincipalRequestTableRowControl> requestControllerList = new ArrayList<PrincipalRequestTableRowControl> ();
 
 	@FXML
 	private GridPane grid;
@@ -31,14 +32,28 @@ public class PrincipalRequestsController extends PrincipalMainPageController {
 
 	@FXML
 	void ApproveButtonPressed(ActionEvent event) throws IOException {
-		PrincipalRequestTableRowControl controller;
-		
-		
+		ArrayList<String> CheckedExams = new ArrayList<String>();
+		ArrayList<Request> requestList = principal.getRequestList();
+		for(int i = 0 ; i< requestList.size();i++) {
+			if(requestList.get(i).getcBox()) {
+				CheckedExams.add(requestList.get(i).getNum());
+				principal.getRequestList().remove(requestList.get(i));
+			}
+		}
+		SendAprrovedRequests(CheckedExams);
 	}
 	
 	@FXML
 	void DeclineButtonPressed(ActionEvent event) throws IOException {
-
+		ArrayList<String> CheckedExams = new ArrayList<String>();
+		ArrayList<Request> requestList = principal.getRequestList();
+		for(int i = 0 ; i< requestList.size();i++) {
+			if(requestList.get(i).getcBox()) {
+				CheckedExams.add(requestList.get(i).getNum());
+				principal.getRequestList().remove(requestList.get(i));
+			}
+		}
+		SendDeclinedRequests(CheckedExams);
 		
 	}
 	
@@ -48,6 +63,7 @@ public class PrincipalRequestsController extends PrincipalMainPageController {
 		int i;
 		Principal principal = (Principal) guiControl.getUser();
 		ArrayList<Request> requestList = principal.getRequestList();
+		
 		for (i = 0; i < requestList.size(); i++)
 			try {
 
@@ -74,7 +90,7 @@ public class PrincipalRequestsController extends PrincipalMainPageController {
 				});
 
 				grid.add(root, 0, i);
-
+				requestControllerList.add(controller);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -93,7 +109,7 @@ public class PrincipalRequestsController extends PrincipalMainPageController {
 
 			ArrayList<Request> requestList = (ArrayList<Request>) guiControl.getServerMsg().getMessage();
 
-			((Principal) person).setRequestList(requestList);
+			principal.setRequestList(requestList);
 
 		} else {
 
@@ -102,4 +118,28 @@ public class PrincipalRequestsController extends PrincipalMainPageController {
 		}
 	}
 
+	public void SendAprrovedRequests(ArrayList<String> ApprovedRequests) {
+		ClientMessage msg = new ClientMessage(ClientMessageType.PRINCIPAL_APPROVED_REQUESTS_UPDATE,ApprovedRequests);
+		guiControl.sendToServer(msg);
+
+		if (guiControl.getServerMsg().getType() == ServerMessageTypes.PRINCIPAL_APPROVED_REQUESTS_ADDED) {
+			GUIControl.popUpError("Approved Requests has sent successfully");
+		} else {
+
+			GUIControl.popUpError("Error-sending update for requests");
+
+		}
+	}
+	public void SendDeclinedRequests(ArrayList<String> DeclinedRequests) {
+		ClientMessage msg = new ClientMessage(ClientMessageType.PRINCIPAL_DECLINED_REQUESTS_UPDATE,DeclinedRequests);
+		guiControl.sendToServer(msg);
+
+		if (guiControl.getServerMsg().getType() == ServerMessageTypes.PRINCIPAL_DECLINED_REQUESTS_ADDED) {
+			GUIControl.popUpError("Declined Requests has sent successfully");
+		} else {
+
+			GUIControl.popUpError("Error-sending update for requests");
+
+		}
+	}
 }

@@ -14,7 +14,7 @@
             <Insets />
          </opaqueInsets>
          <children>
-            <CheckBox fx:id="cBox" mnemonicParsing="false" prefHeight="42.0" prefWidth="19.0">
+            <CheckBox fx:id="cBox" mnemonicParsing="false" onAction="#CBoxPressed" prefHeight="42.0" prefWidth="19.0">
                <HBox.margin>
                   <Insets left="20.0" />
                </HBox.margin>

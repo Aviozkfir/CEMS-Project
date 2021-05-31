@@ -1,15 +1,19 @@
 package gui;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.function.BiConsumer;
 
-import entity.PersonCEMS;
+import entity.Principal;
+import entity.Request;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 
 public class PrincipalRequestTableRowControl {
+	public final GUIControl guiControl = GUIControl.getInstance();
+	Principal principal = (Principal) guiControl.getUser();
 	
 	@FXML
 	private CheckBox cBox;
@@ -73,9 +77,14 @@ public class PrincipalRequestTableRowControl {
 	
 	@FXML
 	void CBoxPressed(ActionEvent event) throws IOException {
-		boolean check = cBox.isSelected();
-		
-		
+		ArrayList<Request> requestList = principal.getRequestList();
+		if(cBox.isSelected()) {
+			for(Request request : requestList) {
+				if(request.getNum().equals(num.getText())) {
+					request.setcBox(true);
+				}
+			}
+		}
 	}
 
 }

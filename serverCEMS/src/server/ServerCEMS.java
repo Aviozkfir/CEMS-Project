@@ -210,6 +210,20 @@ public class ServerCEMS extends AbstractServer {
 						type = ServerMessageTypes.PRINCIPAL_REQUESTS_NOT_ADDED;
 					}
 					break;
+					
+				case PRINCIPAL_APPROVED_REQUESTS_UPDATE:
+					returnVal = MySQLConnection.updatePrincipalApprovedRequests((ArrayList<String>) clientMsg.getMessage());
+					if (returnVal != null) {
+						type = ServerMessageTypes.PRINCIPAL_APPROVED_REQUESTS_ADDED;
+					}
+					break;
+					
+				case PRINCIPAL_DECLINED_REQUESTS_UPDATE:
+					returnVal = MySQLConnection.updatePrincipalDeclinedRequests((ArrayList<String>) clientMsg.getMessage());
+					if (returnVal != null) {
+						type = ServerMessageTypes.PRINCIPAL_DECLINED_REQUESTS_ADDED;
+					}
+					break;
 
 				}
 			}
