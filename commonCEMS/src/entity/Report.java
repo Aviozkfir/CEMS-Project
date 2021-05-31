@@ -10,6 +10,7 @@ public class Report implements Serializable {
 	private String Median;
 	private String Average;
 
+
 	public Report(HashMap<String, String> report) {
 		this.report = report;
 	}

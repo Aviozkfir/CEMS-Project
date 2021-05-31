@@ -11,6 +11,7 @@ public class Principal extends PersonCEMS implements Serializable {
 	private ArrayList<Teacher> teacherList;
 	private ArrayList<Student> studentList;
 	private Report report;
+	private String ReportType;
 
 	public Principal(String firstName, String lastName, String id, String email, String role) {
 		super(firstName, lastName, id, email, role);
@@ -61,6 +62,14 @@ public class Principal extends PersonCEMS implements Serializable {
 
 	public void setTeacherList(ArrayList<Teacher> teacherList) {
 		this.teacherList = teacherList;
+	}
+
+	public String getReportType() {
+		return ReportType;
+	}
+
+	public void setReportType(String reportType) {
+		ReportType = reportType;
 	}
 	
 

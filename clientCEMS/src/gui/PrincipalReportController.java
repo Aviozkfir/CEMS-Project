@@ -23,7 +23,7 @@ public class PrincipalReportController extends PrincipalMainPageController imple
 	
 	private String SelectedReport=null;
 	
-	PersonCEMS person = (PersonCEMS) guiControl.getUser();
+	Principal principal = (Principal) guiControl.getUser();
 	@FXML
 	private ComboBox<String> ReportTypeCombo;
 	@FXML
@@ -38,11 +38,13 @@ public class PrincipalReportController extends PrincipalMainPageController imple
 	@FXML
 	void CreateButtonPressed(ActionEvent event) throws IOException {
 		if (Istype("Course")) {
+			principal.setReportType("Course");
 			PrincipalReportCourseControl controller = (PrincipalReportCourseControl) guiControl
 					.loadStage(ClientsConstants.Screens.PRINCIPAL_REPORT_COURSE_PAGE.path);
 		}
 		
 		else if (Istype("Teacher")) {
+			principal.setReportType("Teacher");
 			GetTeacherListFromDB();
 			PrincipalReportTeacherControl controller = (PrincipalReportTeacherControl) guiControl
 					.loadStage(ClientsConstants.Screens.PRINCIPAL_REPORT_TEACHER_PAGE.path);
@@ -50,6 +52,7 @@ public class PrincipalReportController extends PrincipalMainPageController imple
 		}
 		
 		else if (Istype("Student")) {
+			principal.setReportType("Student");
 			GetStudentListFromDB();
 			PrincipalReportStudentControl controller = (PrincipalReportStudentControl) guiControl
 					.loadStage(ClientsConstants.Screens.PRINCIPAL_REPORT_STUDENT_PAGE.path);
@@ -80,7 +83,7 @@ public class PrincipalReportController extends PrincipalMainPageController imple
 
 			ArrayList<Teacher> teacherList = (ArrayList<Teacher>) guiControl.getServerMsg().getMessage();
 
-			((Principal) person).setTeacherList(teacherList);
+			principal.setTeacherList(teacherList);
 
 		} else {
 
@@ -100,7 +103,7 @@ public class PrincipalReportController extends PrincipalMainPageController imple
 
 			ArrayList<Student> studentList = (ArrayList<Student>) guiControl.getServerMsg().getMessage();
 
-			((Principal) person).setStudentList(studentList);
+			principal.setStudentList(studentList);
 
 		} else {
 
