@@ -36,6 +36,7 @@ import entity.Exam;
 import entity.PersonCEMS;
 import entity.Principal;
 import entity.Question;
+import entity.Request;
 import entity.Student;
 import entity.Subject;
 import entity.Teacher;
@@ -297,6 +298,19 @@ public class MySQLConnection {
 										rs.getString(5),rs.getString(6), rs.getInt(7),rs.getString(8), rs.getString(9)));
 		}
 		return questionList;
+	}
+	
+	public static Object getPrincipalRequests() throws SQLException {
+		ArrayList<Request> requestList = new ArrayList<Request>();
+		ResultSet rs;
+		PreparedStatement logInPreparedStatement;
+		logInPreparedStatement = con
+				.prepareStatement("SELECT r.Enum, r.title, r.currentDuration, r.newDuration, r.Tid  FROM Requests r");
+		rs = logInPreparedStatement.executeQuery();
+		while (rs.next()) {
+			requestList.add(new Request(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),rs.getString(5)));
+		} 
+		return requestList;
 	}
 	
 }

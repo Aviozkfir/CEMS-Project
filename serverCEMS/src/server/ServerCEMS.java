@@ -201,6 +201,15 @@ public class ServerCEMS extends AbstractServer {
 						type = ServerMessageTypes.PRINCIPAL_REPORT_STUDENT_NOT_ADDED;
 					}
 					break;
+					
+				case PRINCIPAL_REQUESTS_INFORMATION:
+					returnVal = MySQLConnection.getPrincipalRequests();
+					if (returnVal != null) {
+						type = ServerMessageTypes.PRINCIPAL_REQUESTS_ADDED;
+					} else {
+						type = ServerMessageTypes.PRINCIPAL_REQUESTS_NOT_ADDED;
+					}
+					break;
 
 				}
 			}

@@ -10,6 +10,7 @@ public class Principal extends PersonCEMS implements Serializable {
 	private ArrayList<Course> courseList;
 	private ArrayList<Teacher> teacherList;
 	private ArrayList<Student> studentList;
+	private ArrayList<Request> requestList;
 	private Report report;
 	private String ReportType;
 
@@ -70,6 +71,14 @@ public class Principal extends PersonCEMS implements Serializable {
 
 	public void setReportType(String reportType) {
 		ReportType = reportType;
+	}
+	
+	public ArrayList<Request> getRequestList() {
+		return requestList;
+	}
+
+	public void setRequestList(ArrayList<Request> requestList) {
+		this.requestList = requestList;
 	}
 	
 

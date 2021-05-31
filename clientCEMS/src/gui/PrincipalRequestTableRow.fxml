@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="816.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.PrincipalRequestTableRowControl">
+   <children>
+      <HBox prefHeight="45.0" prefWidth="820.0" style="-fx-background-color: white;">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <children>
+            <CheckBox fx:id="cBox" mnemonicParsing="false" prefHeight="42.0" prefWidth="19.0">
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+            </CheckBox>
+            <Label fx:id="num" alignment="CENTER" prefHeight="42.0" prefWidth="78.0" text="060301" textAlignment="CENTER">
+               <opaqueInsets>
+                  <Insets top="5.0" />
+               </opaqueInsets>
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Label>
+            <Label fx:id="title" alignment="CENTER" prefHeight="42.0" prefWidth="348.0" text="Midterm Moed A" wrapText="true">
+               <opaqueInsets>
+                  <Insets top="5.0" />
+               </opaqueInsets>
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="currentDuration" alignment="CENTER" prefHeight="42.0" prefWidth="181.0" text="1:30:00">
+               <opaqueInsets>
+                  <Insets top="5.0" />
+               </opaqueInsets>
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="newDuration" alignment="CENTER" prefHeight="42.0" prefWidth="153.0" text=" 20">
+               <opaqueInsets>
+                  <Insets top="5.0" />
+               </opaqueInsets>
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
