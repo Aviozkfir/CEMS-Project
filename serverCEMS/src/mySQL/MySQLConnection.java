@@ -277,6 +277,37 @@ public class MySQLConnection {
 		return exam;
 	}
 
+	
+	
+
+//
+//	public static Object checkForDuplicateQuestion(Question q, ArrayList<Course> course) throws SQLException {
+//		ArrayList<Question> questionList = new ArrayList<Question>();
+//		ResultSet rs;
+//		PreparedStatement logInPreparedStatement;
+//		StringBuilder s= new StringBuilder("(qc.Cid=?");
+//		for(int i=0; i<course.size()-1;i++)
+//			s.append(" OR qc.Cid=?");
+//		
+//		logInPreparedStatement = con
+//				.prepareStatement("SELECT c.name"
+//						+ "FROM Questions q, Question_In_Course qc Course c" + "where q.Qid=qc.Qid AND qc.Cid=c.Cid AND  q.Text=? AND q.Ans1=? AND q.Ans2=? AND q.Ans3=? AND q.Ans4=? AND q.CorrectAns=?" +"AND "+s.toString()+")");
+//		logInPreparedStatement.setString(1, q.getText());
+//		logInPreparedStatement.setString(2, q.getAnsA());
+//		logInPreparedStatement.setString(3, q.getAnsB());
+//		logInPreparedStatement.setString(4, q.getAnsC());
+//		logInPreparedStatement.setString(5, q.getAnsD());
+//		logInPreparedStatement.setString(6, ""+q.getCorrectAnswar());
+//		
+//		for(int i=7; i<course.size()+7;i++)
+//			logInPreparedStatement.setString(i, course.get(i).getId());
+//		rs = logInPreparedStatement.executeQuery();
+//		while (rs.next()) {
+//		
+//		}
+//		return questionList;
+//	}
+	
 	public static Object getQuestionByCourse(Course course) throws SQLException {
 		ArrayList<Question> questionList = new ArrayList<Question>();
 		ResultSet rs;
@@ -287,10 +318,72 @@ public class MySQLConnection {
 		logInPreparedStatement.setString(1, course.getId());
 		rs = logInPreparedStatement.executeQuery();
 		while (rs.next()) {
-			questionList.add(new Question(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
+			questionList.add(new Question(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
 					rs.getString(5), rs.getString(6), rs.getInt(7), rs.getString(8), rs.getString(9)));
 		}
 		return questionList;
+	}
+	
+	
+	public static void deletedQuestion(Question q) throws SQLException {
+		
+		
+		PreparedStatement delQ =con.prepareStatement("DELETE FROM Questions WHERE Qid=?");
+		delQ.setString(1, q.getId());
+		delQ.executeUpdate();
+		
+		
+		
+		PreparedStatement delQC;
+		delQC = con.prepareStatement("DELETE FROM Question_In_Course WHERE Qid=?");
+		delQC.setString(1, q.getId());
+		delQC.executeUpdate();
+		
+	}
+	
+	public static void addQuestionByCourses(Question q, ArrayList<Course> course) throws SQLException {
+		
+		ResultSet maxID;
+		PreparedStatement getMaxID =con.prepareStatement("SELECT MAX(q.Qid) FROM Questions q where q.Sid=?");
+		getMaxID.setString(1, course.get(0).getSubject().getId());
+		maxID=getMaxID.executeQuery();
+		String id;
+		
+		if(maxID.next()) {
+			id=(""+(1+Integer.parseInt(maxID.getNString(1))));
+			if(id.length()==4) {
+				id="0"+id;
+			}
+			q.setId(id);
+		}
+		else 
+			q.setId(course.get(0).getSubject().getId()+"001");
+		
+		PreparedStatement addQuestion;
+		addQuestion = con
+				.prepareStatement("INSERT INTO Questions (Qid, Text, Ans1, Ans2, Ans3, Ans4, CorrectAns, ID,DATE,Sid) "
+						+ "VALUES (?, ? ,? ,? ,? ,? ,? ,? ,? ,? )");
+		addQuestion.setString(1, q.getId());
+		addQuestion.setString(2, q.getText());
+		addQuestion.setString(3, q.getAnsA());
+		addQuestion.setString(4, q.getAnsB());
+		addQuestion.setString(5, q.getAnsC());
+		addQuestion.setString(6, q.getAnsD());
+		addQuestion.setInt(7, q.getCorrectAnswar());
+		addQuestion.setString(8, q.getAuthor());
+		addQuestion.setString(9, q.getModified());
+		addQuestion.setString(10, q.getSubject());
+		addQuestion.executeUpdate();
+		System.out.print("slnfa;lsj;gnalj");
+		for(Course c : course) {
+			PreparedStatement addToCourse =con
+					.prepareStatement("INSERT INTO Question_In_Course (Qid,Cid) "
+							+ "VALUES (?, ?)");
+			
+			addToCourse.setString(1, q.getId());
+			addToCourse.setString(2, c.getId());
+			addToCourse.executeUpdate();
+		}
 	}
 
 	public static Object getPrincipalRequests() throws SQLException {

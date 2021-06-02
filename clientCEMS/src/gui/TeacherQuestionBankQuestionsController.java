@@ -90,6 +90,7 @@ public class TeacherQuestionBankQuestionsController extends TeacherMainPageContr
 			AnchorPane root = fxmlLoader.load();
 			controller = (TeacherQuestionTableRowController) fxmlLoader.getController();
 			controller.setQuestion(q);
+			controller.setCourse(course);
 			vTable.getChildren().add(root);
 			
     	}

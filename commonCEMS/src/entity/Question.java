@@ -11,14 +11,18 @@ public class Question implements Serializable {
 	private String ansC;
 	private String ansD;
 	
-	private int id;//5 digit number in the format:-subject(2)-question number(3)
+	private String id;//5 digit number in the format:-subject(2)-question number(3)
 	private String author;//the name of the teacher that created the question
 	private String modified;//the date the question was modified or updated
 	
-	public int getId() {
+	
+	public String getSubject() {
+		return id.substring(0, 2);
+	}
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getAuthor() {
@@ -33,6 +37,24 @@ public class Question implements Serializable {
 	public void setModified(String modified) {
 		this.modified = modified;
 	}
+	
+	public void setModified() {
+		int day = java.time.LocalDate.now().getDayOfMonth();
+    	int mounth =java.time.LocalDate.now().getMonthValue();
+    	int year=java.time.LocalDate.now().getYear();
+    	String s="";
+    	if(day<10)
+    		s=s.concat("0");
+    	s=s.concat(day+"/");
+    	
+    	if(mounth<10)
+    		s=s.concat("0");
+    	s=s.concat(mounth+"/");
+    	s=s.concat(""+year);
+    	
+    	modified=s;
+	}
+	
 	private int correctAnswar;
 	public int getCorrectAnswar() {
 		return correctAnswar;
@@ -43,7 +65,7 @@ public class Question implements Serializable {
 	
 	public Question() { }
 	
-	public Question(int id, String text, String ansA, String ansB, String ansC, String ansD, int correct, String author, String date) {
+	public Question(String id, String text, String ansA, String ansB, String ansC, String ansD, int correct, String author, String date) {
 		this.text = text;
 		this.ansA = ansA;
 		this.ansB = ansB;

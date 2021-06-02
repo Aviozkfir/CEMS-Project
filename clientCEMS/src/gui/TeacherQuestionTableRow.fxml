@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherQuestionTableRowController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="801.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherQuestionTableRowController">
    <children>
-      <HBox prefHeight="45.0" prefWidth="820.0" style="-fx-background-color: white;">
+      <HBox prefHeight="45.0" prefWidth="806.0" style="-fx-background-color: white;">
          <children>
             <Button fx:id="btnView" mnemonicParsing="false" onAction="#btnViewQuestionPressed" prefHeight="47.0" prefWidth="27.0" style="-fx-background-color: transperent;">
                <graphic>

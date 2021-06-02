@@ -14,6 +14,7 @@ import java.util.Map;
 import application.ServerMain;
 import entity.Course;
 import entity.PersonCEMS;
+import entity.Question;
 import message.ClientMessage;
 import message.ServerMessage;
 import message.ServerMessageTypes;
@@ -165,7 +166,29 @@ public class ServerCEMS extends AbstractServer {
 					} else {
 						type = ServerMessageTypes.QUESTION_BY_COURSE_RECIVED;
 					}
-					break;	
+					break;
+				case TEACHER_ADD_QUESTION:
+					type=ServerMessageTypes.QUESTION_ADDED;
+					Object[] arr =(Object[]) clientMsg.getMessage();
+					try {
+					MySQLConnection.addQuestionByCourses((Question)arr[0], (ArrayList<Course>) arr[1]);
+					}
+					catch (Exception e1) {
+						type=ServerMessageTypes.QUESTION_NOT_ADDED;
+						e1.printStackTrace();
+					}
+					break;
+				case TEACHER_DELETE_QUESTION:
+					type=ServerMessageTypes.QUESTION_DELETED;
+					Question q =(Question) clientMsg.getMessage();
+					try {
+					MySQLConnection.deletedQuestion(q);
+					}
+					catch (Exception e1) {
+						type=ServerMessageTypes.QUESTION_NOT_DELETED;
+						e1.printStackTrace();
+					}
+					break;
 				case PRINCIPAL_STUDENTS_INFORMATION:
 					returnVal = MySQLConnection.getPrincipalStudentList();
 					if (returnVal == null) {

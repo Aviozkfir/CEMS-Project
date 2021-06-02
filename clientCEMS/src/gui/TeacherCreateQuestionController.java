@@ -16,6 +16,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
 import message.ClientMessage;
 import message.ClientMessageType;
+import message.ServerMessageTypes;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 
@@ -125,11 +126,29 @@ public class TeacherCreateQuestionController extends TeacherMainPageController {
 	    	question.setAnsD(textD.getText());
 	    	
 	    	question.setAuthor(((Teacher)guiControl.getUser()).getId());
-	    	question.setModified(java.time.LocalDate.now().toString());
+	    	question.setModified();
+	    	Object[] arr = new Object[2];
+	    	arr[0]=question;
+	    	arr[1]=list;
 	    	
-//	    	ClientMessage m1 = new ClientMessage(ClientMessageType.GET_QUESTION_BY_COURSE, course);
-//	    	guiControl.sendToServer(m1);
 	    	
+	    	ClientMessage m1 = new ClientMessage(ClientMessageType.TEACHER_ADD_QUESTION, arr);
+	    	guiControl.sendToServer(m1);
+	    	
+	    	if(guiControl.getServerMsg().getType()==ServerMessageTypes.QUESTION_IS_ALREADY_IN_DATABASE) {
+	    		GUIControl.popUpMessage("Error", "The question already exists in" + ((String)guiControl.getServerMsg().getMessage())+" question bank." );
+	    		return; 
+	    	}
+	    	else if(guiControl.getServerMsg().getType()==ServerMessageTypes.QUESTION_ADDED) {
+	    		GUIControl.popUpMessage("Success", "The question was Created.");
+	    		return; 
+	    	}if(guiControl.getServerMsg().getType()==ServerMessageTypes.QUESTION_NOT_ADDED) {
+	    		GUIControl.popUpMessage("Error", "Could not create question.");
+	    		return; 
+	    	}  
+	    	
+	    	//SELECT MAX(q.Qid) FROM Questions q where q.Sid=01
+
 	    }
     
     public void setPage(Course course) {
