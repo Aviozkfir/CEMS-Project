@@ -74,7 +74,18 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Pane prefHeight="200.0" prefWidth="200.0" />
+            <Button fx:id="OnGoingButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#OnGoingPageButtonPressed" prefHeight="46.0" prefWidth="172.0" style="-fx-background-color: #F7F7F7;" text="On-going exams" textFill="#9b9c9f">
+               <font>
+                  <Font name="Ebrima" size="16.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/btnOngoingExam.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
       </VBox>
       <VBox layoutX="173.0" prefHeight="600.0" prefWidth="851.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 30 0 0 0;">
@@ -86,7 +97,7 @@
                         <Font size="15.0" />
                      </font>
                   </Text>
-                  <Button fx:id="LogOutButton" layoutX="764.0" layoutY="4.0" mnemonicParsing="false" onAction="#LogOutButtonPressed" opacity="0.85" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: transperent;" text="Logout" textFill="#1c251d">
+                  <Button fx:id="LogOutButton" layoutX="764.0" layoutY="4.0" mnemonicParsing="false" onAction="#LogOutButtonPressed" opacity="0.85" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #4CB5F5;" text="Logout" textFill="#1c251d">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -108,7 +119,7 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </HBox>
-            <ScrollPane prefHeight="321.0" prefWidth="851.0" style="-fx-background-color: transperent;" VBox.vgrow="ALWAYS">
+            <ScrollPane prefHeight="321.0" prefWidth="851.0" style="-fx-background-color:  #EBEBEB;" VBox.vgrow="ALWAYS">
                <content>
                   <GridPane fx:id="grid" prefHeight="508.0" prefWidth="849.0" style="-fx-background-color: #EBEBEB;">
                     <columnConstraints>

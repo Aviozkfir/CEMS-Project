@@ -22,7 +22,10 @@ public class TeacherMainPageController extends MainPageController {
 	@FXML
 	private Button GetReportButton;
 	
-	
+	@FXML
+    private Button OnGoingButton;
+
+
 	
 	@FXML
 	void HomePageButtonPressed(ActionEvent event) throws IOException {
@@ -47,13 +50,16 @@ public class TeacherMainPageController extends MainPageController {
 		guiControl.loadStage(ClientsConstants.Screens.TEACHER_MAIN_REPORT_PAGE.path);
 	}
 	
-	
+	 @FXML
+	 void OnGoingPageButtonPressed(ActionEvent event) throws IOException {
+		 TeacherOngoingExamsController a = (TeacherOngoingExamsController) guiControl.loadStage(ClientsConstants.Screens.TEACHER_ONGOING_EXAMS_PAGE.path);
+	 }
 //	
 //	 public void CheckForRefreshOfQuestions() {
 //	    	
 //	 }
 //	 
-//	 public void CheckForRefreshOfExams() {
+//	 public void CheckForRezzfreshOfExams() {
 //	    	
 //	 }
 //	
