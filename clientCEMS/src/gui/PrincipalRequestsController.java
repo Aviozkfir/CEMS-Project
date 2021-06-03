@@ -3,10 +3,8 @@ package gui;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import entity.PersonCEMS;
 import entity.Principal;
 import entity.Request;
-import entity.Teacher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -37,7 +35,6 @@ public class PrincipalRequestsController extends PrincipalMainPageController {
 		for(int i = 0 ; i< requestList.size();i++) {
 			if(requestList.get(i).getcBox()) {
 				CheckedExams.add(requestList.get(i).getNum());
-				principal.getRequestList().remove(requestList.get(i));
 			}
 		}
 		SendAprrovedRequests(CheckedExams);
@@ -50,7 +47,6 @@ public class PrincipalRequestsController extends PrincipalMainPageController {
 		for(int i = 0 ; i< requestList.size();i++) {
 			if(requestList.get(i).getcBox()) {
 				CheckedExams.add(requestList.get(i).getNum());
-				principal.getRequestList().remove(requestList.get(i));
 			}
 		}
 		SendDeclinedRequests(CheckedExams);
