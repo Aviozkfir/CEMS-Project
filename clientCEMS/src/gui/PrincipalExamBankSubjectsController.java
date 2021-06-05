@@ -38,7 +38,7 @@ public class PrincipalExamBankSubjectsController extends PrincipalMainPageContro
 								.loadStage(fxmlLocation);
 
 						contr.setPrincipalCourse((Subject) subject);
-
+						contr.setRequestCounter();
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

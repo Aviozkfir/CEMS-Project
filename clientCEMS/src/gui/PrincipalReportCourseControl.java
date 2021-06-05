@@ -77,6 +77,7 @@ public class PrincipalReportCourseControl extends PrincipalMainPageController im
 
 			PrincipalFinalReportControl controller = (PrincipalFinalReportControl) guiControl
 					.loadStage(ClientsConstants.Screens.PRINCIPAL_FINAL_REPORT_PAGE.path);
+			controller.setRequestCounter();
 		} else {
 			GUIControl.popUpError("Problematic, ID:" + IDtext.getText() + "Year:" + YearDatePick.getValue().toString());
 		}

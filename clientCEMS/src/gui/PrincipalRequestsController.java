@@ -40,6 +40,8 @@ public class PrincipalRequestsController extends PrincipalMainPageController {
 		SendAprrovedRequests(CheckedExams);
 	}
 	
+	
+
 	@FXML
 	void DeclineButtonPressed(ActionEvent event) throws IOException {
 		ArrayList<String> CheckedExams = new ArrayList<String>();
@@ -52,7 +54,6 @@ public class PrincipalRequestsController extends PrincipalMainPageController {
 		SendDeclinedRequests(CheckedExams);
 		
 	}
-	
 	
 	
 	public void setPrincipalRequests() {
@@ -106,6 +107,12 @@ public class PrincipalRequestsController extends PrincipalMainPageController {
 			ArrayList<Request> requestList = (ArrayList<Request>) guiControl.getServerMsg().getMessage();
 
 			principal.setRequestList(requestList);
+			
+			ArrayList<String> requestNumList = new ArrayList<String>();
+			for(int i = 0 ; i< requestList.size();i++) {
+				requestNumList.add(requestList.get(i).getNum());
+			}
+			UpdateRequestStatus(requestNumList);
 
 		} else {
 
@@ -137,5 +144,16 @@ public class PrincipalRequestsController extends PrincipalMainPageController {
 			GUIControl.popUpError("Error-sending update for requests");
 
 		}
+	}
+	
+	public void UpdateRequestStatus(ArrayList<String> allRequests) {
+		ClientMessage msg = new ClientMessage(ClientMessageType.PRINCIPAL_UPDATE_REQUESTS_STATUS,allRequests);
+		guiControl.sendToServer(msg);
+
+		if (guiControl.getServerMsg().getType() == ServerMessageTypes.PRINCIPAL_UPDATE_REQUESTS_STATUS_SUCCESS) {
+		} else {
+			GUIControl.popUpError("Error-sending update for requests status");
+		}
+		
 	}
 }

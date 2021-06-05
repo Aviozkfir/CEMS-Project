@@ -100,9 +100,4 @@ public class MainPageController {
 		Name.setText(person.getFirstName()+" "+person.getLastName() );
 	}
 
-	
-
-	
-	
-
 }

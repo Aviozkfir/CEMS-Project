@@ -21,10 +21,10 @@ public class dashBoardPrincipalControllerHome extends PrincipalMainPageControlle
 	@FXML
 	private Text HelloNameMessage;
 
-
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-	
+			
 			PersonCEMS principal = (Principal) guiControl.getUser();
 			HelloNameMessage.setText(principal.getFirstName() + " " + principal.getLastName());
 		

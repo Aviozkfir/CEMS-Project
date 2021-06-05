@@ -38,6 +38,7 @@ public class PrincipalReportController extends PrincipalMainPageController imple
 			principal.setReportType("Course");
 			PrincipalReportCourseControl controller = (PrincipalReportCourseControl) guiControl
 					.loadStage(ClientsConstants.Screens.PRINCIPAL_REPORT_COURSE_PAGE.path);
+			controller.setRequestCounter();
 		}
 		
 		else if (Istype("Teacher")) {
@@ -45,7 +46,7 @@ public class PrincipalReportController extends PrincipalMainPageController imple
 			GetTeacherListFromDB();
 			PrincipalReportTeacherControl controller = (PrincipalReportTeacherControl) guiControl
 					.loadStage(ClientsConstants.Screens.PRINCIPAL_REPORT_TEACHER_PAGE.path);
-			
+			controller.setRequestCounter();
 		}
 		
 		else if (Istype("Student")) {
@@ -53,7 +54,7 @@ public class PrincipalReportController extends PrincipalMainPageController imple
 			GetStudentListFromDB();
 			PrincipalReportStudentControl controller = (PrincipalReportStudentControl) guiControl
 					.loadStage(ClientsConstants.Screens.PRINCIPAL_REPORT_STUDENT_PAGE.path);
-			
+			controller.setRequestCounter();
 		}
 
 	}

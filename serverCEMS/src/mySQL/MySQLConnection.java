@@ -389,37 +389,59 @@ public class MySQLConnection {
 	public static Object getPrincipalRequests() throws SQLException {
 		ArrayList<Request> requestList = new ArrayList<Request>();
 		ResultSet rs;
-		PreparedStatement logInPreparedStatement;
-		logInPreparedStatement = con
-				.prepareStatement("SELECT r.Enum, r.title, r.currentDuration, r.newDuration, r.Tid  FROM Requests r");
-		rs = logInPreparedStatement.executeQuery();
+		PreparedStatement statment;
+		statment = con
+				.prepareStatement("SELECT r.Enum, r.title, r.currentDuration, r.newDuration, r.Tid  FROM Requests r WHERE r.Status = 'StandBy' AND (r.Status2 ='Waiting' OR Status2 ='Working')");
+		rs = statment.executeQuery();
 		while (rs.next()) {
 			requestList.add(
 					new Request(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
 		}
+		
 		return requestList;
 	}
 
 	public static Object updatePrincipalApprovedRequests(ArrayList<String> RequestList) throws SQLException {
-		PreparedStatement logInPreparedStatement;
+		PreparedStatement statment;
 		for (String request : RequestList) {
-			logInPreparedStatement = con
+			statment = con
 					.prepareStatement("UPDATE `Requests` SET `Status` = 'Approved' WHERE `Requests`.`Enum` = ?");
-			logInPreparedStatement.setString(1, request);
-			logInPreparedStatement.executeUpdate();
+			statment.setString(1, request);
+			statment.executeUpdate();
 		}
 		return "Succeded";
 	}
 	
 	public static Object updatePrincipalDeclinedRequests(ArrayList<String> RequestList) throws SQLException {
-		PreparedStatement logInPreparedStatement;
+		PreparedStatement statment;
 		for (String request : RequestList) {
-			logInPreparedStatement = con
+			statment = con
 					.prepareStatement("UPDATE `Requests` SET `Status` = 'Declined' WHERE `Requests`.`Enum` = ?");
-			logInPreparedStatement.setString(1, request);
-			logInPreparedStatement.executeUpdate();
+			statment.setString(1, request);
+			statment.executeUpdate();
 		}
 		return "Succeded";
 	}
-
+	
+	public static Object getRequestCount() throws SQLException {
+		int Counter = 0;
+		ResultSet rs;
+		PreparedStatement statment;
+		statment = con.prepareStatement("SELECT COUNT(*) FROM Requests r WHERE r.Status = 'StandBy' AND r.Status2 = 'Waiting'");
+		rs = statment.executeQuery();
+		rs.next();
+			 Counter = rs.getInt(1);
+		return Counter;
+	}
+	
+	public static Object updatePrincipalRequestStatus(ArrayList<String> RequestList) throws SQLException {
+		PreparedStatement statment;
+		for (String request : RequestList) {
+			statment = con
+					.prepareStatement("UPDATE `Requests` SET `Status2` = 'Working' WHERE `Requests`.`Enum` = ?");
+			statment.setString(1, request);
+			statment.executeUpdate();
+		}
+		return "Succeded";
+	}
 }

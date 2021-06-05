@@ -16,6 +16,7 @@ public class PrincipalQuestionBankSubjectsController extends PrincipalMainPageCo
 	private GridPane grid;
 
 	public void setPrincipalSubject() {
+
 		int i;
 		Principal principal = (Principal) guiControl.getUser();
 		
@@ -39,6 +40,7 @@ public class PrincipalQuestionBankSubjectsController extends PrincipalMainPageCo
 						PrincipalQuestionBankCoursesController contr =(PrincipalQuestionBankCoursesController) GUIControl.instance.loadStage(fxmlLocation);
 					
 						contr.setPrincipalCourse((Subject)subject);
+						contr.setRequestCounter();
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

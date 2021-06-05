@@ -1,12 +1,21 @@
 package gui;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
+import entity.PersonCEMS;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.text.Text;
+import message.ClientMessage;
+import message.ClientMessageType;
+import message.ServerMessageTypes;
 
-public class PrincipalMainPageController extends MainPageController {
+public class PrincipalMainPageController extends MainPageController  {
+	
 	@FXML
 	private Button HomePageButton;
 
@@ -21,12 +30,17 @@ public class PrincipalMainPageController extends MainPageController {
 
 	@FXML
 	private Button RequestsButton;
+	
+	@FXML
+	private Text requests;
 
 	@FXML
 	void QuestionBankButtonPressed(ActionEvent event) throws IOException {
 		PrincipalQuestionBankSubjectsController controller = (PrincipalQuestionBankSubjectsController) guiControl
 				.loadStage(ClientsConstants.Screens.PRINCIPAl_QUESTION_BANK_PAGE.path);
 		controller.setPrincipalSubject();
+		guiControl.CountRequest();
+		controller.setRequestCounter();
 	}
 
 	@FXML
@@ -34,6 +48,7 @@ public class PrincipalMainPageController extends MainPageController {
 
 		dashBoardPrincipalControllerHome controller = (dashBoardPrincipalControllerHome) guiControl
 				.loadStage(ClientsConstants.Screens.PRINCIPAL_MAIN_PAGE.path);
+		controller.setRequestCounter();
 		
 	}
 
@@ -42,7 +57,9 @@ public class PrincipalMainPageController extends MainPageController {
 
 		PrincipalExamBankSubjectsController controller = (PrincipalExamBankSubjectsController) guiControl
 				.loadStage(ClientsConstants.Screens.PRINCIPAL_EXAM_BANK_PAGE.path);
+		guiControl.CountRequest();
 		controller.setPrincipalSubject();
+		controller.setRequestCounter();
 	}
 
 	@FXML
@@ -50,6 +67,7 @@ public class PrincipalMainPageController extends MainPageController {
 
 		PrincipalReportController controller = (PrincipalReportController) guiControl
 				.loadStage(ClientsConstants.Screens.PRINCIPAL_REPORT_PAGE.path);
+		controller.setRequestCounter();
 	}
 
 	@FXML
@@ -58,8 +76,22 @@ public class PrincipalMainPageController extends MainPageController {
 		PrincipalRequestsController controller = (PrincipalRequestsController) guiControl
 				.loadStage(ClientsConstants.Screens.PRINCIPAL_REQUESTS_PAGE.path);
 		controller.GetRequestListFromDB();
-		controller.setPrincipalRequests();
 		
 	}
+	
+	public void setRequestCounter() {
+		int requestCounter = guiControl.getRequestCount();
+		if(requestCounter !=0) {
+			requests.setVisible(true);
+			requests.setText("You Have "+ requestCounter+" new requests.");
+		}
+		else {
+			requests.setVisible(false);
+		}
+	}
+	
+	
+
+	
 
 }

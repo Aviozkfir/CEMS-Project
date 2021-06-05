@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import client.ClientCEMS;
 import entity.PersonCEMS;
+import entity.Principal;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,6 +19,7 @@ import javafx.stage.Stage;
 import message.ClientMessage;
 import message.ClientMessageType;
 import message.ServerMessage;
+import message.ServerMessageTypes;
 
 /**
  * service class for the client with various service methods this class is
@@ -31,7 +33,9 @@ public class GUIControl {
 	private Stage primaryStage;
 	private ServerMessage serverMsg;
 	private Object cmpc;
+	private int requestCounter = 0;
 
+	
 
 	private GUIControl() {
 	}
@@ -163,7 +167,7 @@ public class GUIControl {
 
 	public static void popUpMessage(String msg) {
 		popUpMessage("Message", msg);
-	}
+		}
 
 	/*
 	 * method that displays a message in an alert
@@ -211,5 +215,23 @@ public class GUIControl {
 		});
 		primaryStage.show();
 	}
+
+	public int getRequestCount() {
+		return requestCounter;
+	}
+	
+	public void SetRequestCount(int requestCounter) {
+		this.requestCounter = requestCounter;
+	}
+	
+	public void CountRequest() {
+
+		ClientMessage msg = new ClientMessage(ClientMessageType.PRINCIPAL_CHECK_REQUESTS_COUNTING, ((PersonCEMS) getUser()).getId());
+		instance.sendToServer(msg);
+		if (instance.getServerMsg().getType() == ServerMessageTypes.PRINCIPAL_DIDNT_GOT_REQUESTS_COUNTING) {
+			GUIControl.popUpError("There was a problem to check if there is new requests for principal");
+		}
+	}
+	
 
 }

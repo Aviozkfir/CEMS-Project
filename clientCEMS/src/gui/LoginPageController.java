@@ -3,6 +3,7 @@ package gui;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import application.UpdateThread;
 import entity.Course;
 import entity.CourseReport;
 import entity.PersonCEMS;
@@ -24,7 +25,7 @@ import message.ServerMessageTypes;
 
 public class LoginPageController {
 	GUIControl guiControl = GUIControl.getInstance();
-
+//	ThreadUpdate thread = new ThreadUpdate();
 	@FXML
 	private PasswordField PasswordFieldText;
 
@@ -44,6 +45,7 @@ public class LoginPageController {
 			String role = person.getRole();
 			String chosenPath = null;
 			Object controller = null;
+			UpdateThread requestThread = new UpdateThread();
 			switch (role) {
 			case "Teacher":
 				chosenPath = ClientsConstants.Screens.TEACHER_WELCOME_PAGE.path;
@@ -118,9 +120,9 @@ public class LoginPageController {
 				} else {
 
 					GUIControl.popUpError("Error in loading courses list to Principal");
-
+				
 				}
-
+				requestThread.start();
 				break;
 			case "Student":
 				chosenPath = ClientsConstants.Screens.STUDENT_MAIN_PAGE.path;
@@ -132,7 +134,10 @@ public class LoginPageController {
 			controller = (MainPageController) fxmlLoader.getController();
 			guiControl.setController(controller);
 			((MainPageController) controller).setUser((PersonCEMS) guiControl.getUser());
-
+			if(role.equals("Principal")) {
+			PrincipalMainPageController con = (PrincipalMainPageController) guiControl.getController();
+			con.setRequestCounter();
+			}
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.setOnCloseRequest(e -> {

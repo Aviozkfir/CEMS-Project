@@ -1,8 +1,8 @@
 package client;
 
 import java.io.IOException;
-
 import gui.GUIControl;
+import gui.PrincipalMainPageController;
 import message.ClientMessage;
 import message.ClientMessageType;
 import message.ServerMessage;
@@ -21,7 +21,7 @@ public class ClientCEMS extends AbstractClient {
 	 */
 	public static boolean awaitResponse = false;
 	private GUIControl guiControl;
-
+	
 	// Constructors ****************************************************
 
 	/**
@@ -47,13 +47,12 @@ public class ClientCEMS extends AbstractClient {
 	 */
 	public void handleMessageFromServer(Object msg) {
 		System.out.print("--> handleMessageFromServer : ");
-	
 		if (msg instanceof ServerMessage) {
 			ServerMessage serverMsg = (ServerMessage) msg;
 			switch (serverMsg.getType()) {
 			case LOGIN_TEACHER:
 				guiControl.setServerMsg(serverMsg);
-				break;	
+				break;
 			case LOGIN_PERSON_NOT_FOUND:
 				if (serverMsg.getMessage() == null) {
 					guiControl.setServerMsg(serverMsg);
@@ -63,6 +62,12 @@ public class ClientCEMS extends AbstractClient {
 				break;
 			case LOGOUT_SUCCESS:
 				GUIControl.popUpMessage("Logged out");
+				break;
+			case PRINCIPAL_GOT_REQUESTS_COUNTING:
+				guiControl.setServerMsg(serverMsg);
+				guiControl.SetRequestCount((int) serverMsg.getMessage());
+//				PrincipalMainPageController controller = (PrincipalMainPageController) guiControl.getController();
+//				controller.setRequestCounter((int) serverMsg.getMessage());
 				break;
 			default:
 				guiControl.setServerMsg(serverMsg);
@@ -103,7 +108,6 @@ public class ClientCEMS extends AbstractClient {
 			quit();
 		}
 	}
-
 	/**
 	 * This method terminates the client.
 	 */
@@ -114,4 +118,6 @@ public class ClientCEMS extends AbstractClient {
 		}
 		System.exit(0);
 	}
+
+
 }
