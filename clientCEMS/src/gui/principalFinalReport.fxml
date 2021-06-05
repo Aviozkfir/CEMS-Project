@@ -127,7 +127,7 @@
                         <Font size="17.0" />
                      </font>
                   </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Distribution of grades in different exams of the same course">
+                  <Text fx:id="PageExplainText" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Distribution of grades -  exams from the same chosen   " wrappingWidth="496.23974609375">
                      <font>
                         <Font size="17.0" />
                      </font>
@@ -142,11 +142,11 @@
             </HBox>
             <HBox prefHeight="160.0" prefWidth="780.0">
                <children>
-                  <VBox prefHeight="247.0" prefWidth="256.0" style="-fx-background-radius: 30 30 30 30; -fx-background-color: white;">
+                  <VBox prefHeight="149.0" prefWidth="798.0" style="-fx-background-radius: 30 30 30 30; -fx-background-color: white;">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Report Details">
                            <VBox.margin>
-                              <Insets bottom="11.0" left="21.0" top="11.0" />
+                              <Insets bottom="11.0" left="300.0" top="11.0" />
                            </VBox.margin>
                            <font>
                               <Font name="System Bold" size="20.0" />
@@ -159,13 +159,39 @@
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets />
+                                    <Insets left="20.0" />
                                  </HBox.margin>
                               </Text>
-                              <Text fx:id="Average" strokeType="OUTSIDE" strokeWidth="0.0">
+                              <Text fx:id="Average" strokeType="OUTSIDE" strokeWidth="0.0" text="80">
                                  <HBox.margin>
                                     <Insets />
                                  </HBox.margin>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="#3b66c3" strokeType="OUTSIDE" strokeWidth="0.0" text="Total students:" wrappingWidth="131.7099609375">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="150.0" />
+                                 </HBox.margin>
+                              </Text>
+                              <Text fx:id="totalStudentsText" strokeType="OUTSIDE" strokeWidth="0.0" text="300" wrappingWidth="38.109375">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="#3b66c3" strokeType="OUTSIDE" strokeWidth="0.0" text="Years:" wrappingWidth="60.30859375">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="130.0" />
+                                 </HBox.margin>
+                              </Text>
+                              <Text fx:id="yearsText" strokeType="OUTSIDE" strokeWidth="0.0" text="2005-2021">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -185,10 +211,23 @@
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets left="20.0" />
+                                    <Insets left="40.0" />
                                  </HBox.margin>
                               </Text>
-                              <Text fx:id="Median" strokeType="OUTSIDE" strokeWidth="0.0">
+                              <Text fx:id="Median" strokeType="OUTSIDE" strokeWidth="0.0" text="80">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="#3b66c3" strokeType="OUTSIDE" strokeWidth="0.0" text="Total failed:" wrappingWidth="107.8984375">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="174.0" />
+                                 </HBox.margin>
+                              </Text>
+                              <Text fx:id="totalFailedText" strokeType="OUTSIDE" strokeWidth="0.0" text="30" wrappingWidth="25.40625">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -203,7 +242,7 @@
                         </HBox>
                      </children>
                      <HBox.margin>
-                        <Insets left="21.0" top="11.0" />
+                        <Insets left="40.0" top="11.0" />
                      </HBox.margin>
                   </VBox>
                </children>

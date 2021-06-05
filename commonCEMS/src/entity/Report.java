@@ -9,6 +9,7 @@ public class Report implements Serializable {
 	private HashMap<String, String> report = new HashMap<String, String>(); // (grade,Date).
 	private String Median;
 	private String Average;
+	private String yearRange;
 
 
 	public Report(HashMap<String, String> report) {
@@ -38,4 +39,14 @@ public class Report implements Serializable {
 	public String getAverage() {
 		return Average;
 	}
+
+	public String getYearRange() {
+		return yearRange;
+	}
+
+	public void setYearRange(String yearRange) {
+		this.yearRange = yearRange;
+	}
+
+
 }
