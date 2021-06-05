@@ -3,6 +3,7 @@ package gui;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.ResourceBundle;
@@ -39,7 +40,7 @@ public class PrincipalReportCourseControl extends PrincipalMainPageController im
 	@FXML
 	private TextField IDtext;
 	@FXML
-	private DatePicker YearDatePick;
+	private DatePicker datePicker;
 	@FXML
 	private Button GetButton;
 	private Report report;
@@ -60,7 +61,7 @@ public class PrincipalReportCourseControl extends PrincipalMainPageController im
 		if (validateInput()) {
 
 			inputData[0] = IDtext.getText();
-			inputData[1] = YearDatePick.getValue().toString();
+			inputData[1] = datePicker.getValue().toString();
 			ClientMessage msg = new ClientMessage(ClientMessageType.PRINCIPAL_REPORT_COURSES_INFORMATION, inputData);
 			guiControl.sendToServer(msg);
 
@@ -70,6 +71,7 @@ public class PrincipalReportCourseControl extends PrincipalMainPageController im
 				report = new Report(reportData);
 				principal.setReport(report);
 				SetMedianAndAverage();
+				SetYearRange();
 
 			} else {
 				GUIControl.popUpError("Error in loading courses-report list  to Principal");
@@ -79,7 +81,7 @@ public class PrincipalReportCourseControl extends PrincipalMainPageController im
 					.loadStage(ClientsConstants.Screens.PRINCIPAL_FINAL_REPORT_PAGE.path);
 			controller.setRequestCounter();
 		} else {
-			GUIControl.popUpError("Problematic, ID:" + IDtext.getText() + "Year:" + YearDatePick.getValue().toString());
+			GUIControl.popUpError("Problematic, ID:" + IDtext.getText() + "Year:" + datePicker.getValue().toString());
 		}
 
 	}
@@ -93,7 +95,7 @@ public class PrincipalReportCourseControl extends PrincipalMainPageController im
 	}
 
 	public boolean validateInput() {
-		if (IDtext.getText().isEmpty() || YearDatePick.getValue().toString().isEmpty()) {
+		if (IDtext.getText().isEmpty() || datePicker.getValue().toString().isEmpty()) {
 			GUIControl.popUpError("Please fill all the required fields.");
 			return false;
 		}
@@ -139,4 +141,9 @@ public class PrincipalReportCourseControl extends PrincipalMainPageController im
 		return convertStr.valueOf(sum / values.size());
 	}
 
+	public void SetYearRange() {
+		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+		int pickedYear = datePicker.getValue().getYear();
+		principal.getReport().setYearRange(pickedYear + "-" + currentYear);
+	}
 }

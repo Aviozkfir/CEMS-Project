@@ -197,7 +197,7 @@
                                           <Insets right="5.0" />
                                        </HBox.margin>
                                     </Text>
-                                    <DatePicker fx:id="YearDatePick" prefHeight="31.0" prefWidth="169.0">
+                                    <DatePicker fx:id="datePicker" prefHeight="31.0" prefWidth="169.0">
                                        <HBox.margin>
                                           <Insets right="20.0" />
                                        </HBox.margin>
