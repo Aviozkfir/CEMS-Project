@@ -51,6 +51,8 @@ public class ClientsConstants {
 		PRINCIPAL_FINAL_REPORT_PAGE("/gui/principalFinalReport.fxml"),
 		PRINCIPAL_REQUESTS_PAGE("/gui/principalRequests.fxml"),
 		PRINCIPAL_REQUEST_TABLE_ROW("/gui/PrincipalRequestTableRow.fxml"),
+		PRINCIPAL_QUESTION_BANK_QUESTION("/gui/PrincipalQuestionBankQuestions.fxml"),
+		PRINCIPAL_QUESTION_TABLE_ROW("/gui/PrincipalQuestionTableRow.fxml"),
 		STUDENT_CHOICE_EXAM_PAGE("/gui/studentExamChoice.fxml");
 
 		// DIFFERENCE_PARAMETER_UPDATE("/gui/DifferenceParameterUpdate.fxml"),

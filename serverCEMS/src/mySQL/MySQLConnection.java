@@ -620,4 +620,5 @@ public class MySQLConnection {
 		return courseList;
 	}
 	
+	
 }

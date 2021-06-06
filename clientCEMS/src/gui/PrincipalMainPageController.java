@@ -39,7 +39,6 @@ public class PrincipalMainPageController extends MainPageController  {
 		PrincipalQuestionBankSubjectsController controller = (PrincipalQuestionBankSubjectsController) guiControl
 				.loadStage(ClientsConstants.Screens.PRINCIPAl_QUESTION_BANK_PAGE.path);
 		controller.setPrincipalSubject();
-		guiControl.CountRequest();
 		controller.setRequestCounter();
 	}
 
@@ -57,7 +56,6 @@ public class PrincipalMainPageController extends MainPageController  {
 
 		PrincipalExamBankSubjectsController controller = (PrincipalExamBankSubjectsController) guiControl
 				.loadStage(ClientsConstants.Screens.PRINCIPAL_EXAM_BANK_PAGE.path);
-		guiControl.CountRequest();
 		controller.setPrincipalSubject();
 		controller.setRequestCounter();
 	}

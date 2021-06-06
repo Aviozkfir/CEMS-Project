@@ -49,14 +49,14 @@ public class PrincipalQuestionBankCoursesController extends PrincipalMainPageCon
 				StackPane root = fxmlLoader.load();
 				controller = (btnFolderController) fxmlLoader.getController();
 
-				controller.setChosenPath(ClientsConstants.Screens.PRINCIPAL_MAIN_PAGE.path);
+				controller.setChosenPath(ClientsConstants.Screens.PRINCIPAL_QUESTION_BANK_QUESTION.path);
 				controller.setText(courseList.get(i).getName());
 				controller.setObject(courseList.get(i));
-				controller.setConsumer((fxmlLocation, subject)->{   
+				controller.setConsumer((fxmlLocation, course)->{   
 					try {
-						
-						GUIControl.instance.loadStage(fxmlLocation);
-					
+						PrincipalQuestionBankQuestionsController contr =(PrincipalQuestionBankQuestionsController) GUIControl.instance.loadStage(fxmlLocation);
+						contr.setPrincipalCourse((Course)course);
+						contr.setRequestCounter();
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
