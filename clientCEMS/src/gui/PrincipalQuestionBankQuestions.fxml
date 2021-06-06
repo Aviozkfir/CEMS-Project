@@ -159,7 +159,7 @@
             <HBox prefHeight="30.0" prefWidth="851.0">
                <children>
                   <TextField fx:id="searchBar" prefHeight="25.0" prefWidth="203.0" />
-                  <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#btnSearchPressed" prefHeight="21.0" prefWidth="52.0" text="Search" />
+                  <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#btnSearchPressed" prefHeight="25.0" prefWidth="104.0" text="Search by No." />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="851.0">
