@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="469.0" prefWidth="829.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherCreateExamPage2Controller">
+   <children>
+      <VBox prefHeight="469.0" prefWidth="829.0" style="-fx-background-radius: 30 30 30 30; -fx-background-color: white;">
+         <children>
+            <HBox prefHeight="45.0" prefWidth="829.0">
+               <children>
+                  <Label prefHeight="28.0" prefWidth="124.0" style="-fx-border-color: #e8ebef; -fx-border-radius: 30 30 30 30; -fx-alignment: center; -fx-background-color: #4cb5f5; -fx-background-radius: 30 30 30 30;" text="Settings" textAlignment="CENTER">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="61.0" top="7.0" />
+                     </HBox.margin>
+                     <graphic>
+                        <ImageView fitHeight="19.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/checkMark.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+                  <Line endX="30.0" startX="-100.0" stroke="#e8ebef">
+                     <HBox.margin>
+                        <Insets top="21.0" />
+                     </HBox.margin>
+                  </Line>
+                  <Label prefHeight="28.0" prefWidth="155.0" style="-fx-border-color: #4cb5f5; -fx-border-radius: 30 30 30 30; -fx-alignment: center; -fx-border-width: 2;" text="Add Questions" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="19.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/2filled.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets top="7.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Line endX="30.0" startX="-100.0" stroke="#e8ebef">
+                     <HBox.margin>
+                        <Insets top="21.0" />
+                     </HBox.margin>
+                  </Line>
+                  <Label prefHeight="28.0" prefWidth="166.0" style="-fx-border-color: #E8EBEF; -fx-border-radius: 30 30 30 30; -fx-alignment: center;" text="Preview &amp; Publish" textAlignment="CENTER">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="19.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/3.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets top="7.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="11.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="25.0" prefWidth="829.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+               <children>
+                  <HBox prefHeight="25.0" prefWidth="829.0">
+                     <children>
+                        <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="*">
+                           <HBox.margin>
+                              <Insets left="19.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Please select the questions you want to add to the exam:" wrappingWidth="408.6171875">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="3.0" />
+                           </HBox.margin>
+                        </Text>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="42.0" style="-fx-background-color: white;">
+               <children>
+                  <Label alignment="CENTER" prefHeight="42.0" prefWidth="78.0" text="No." textAlignment="CENTER">
+                     <opaqueInsets>
+                        <Insets top="5.0" />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets left="67.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="42.0" prefWidth="348.0" text="Question" textAlignment="CENTER">
+                     <opaqueInsets>
+                        <Insets top="5.0" />
+                     </opaqueInsets>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="42.0" prefWidth="181.0" text="Last date modified" textAlignment="CENTER">
+                     <opaqueInsets>
+                        <Insets top="5.0" />
+                     </opaqueInsets>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="42.0" prefWidth="153.0" textAlignment="CENTER">
+                     <opaqueInsets>
+                        <Insets top="5.0" />
+                     </opaqueInsets>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets left="11.0" right="11.0" />
+               </VBox.margin>
+            </HBox>
+            <ScrollPane prefHeight="268.0" prefWidth="841.0" style="-fx-opacity: 1; -fx-border-color: #EBEBEB;">
+               <content>
+                  <VBox fx:id="vTable" prefHeight="1.0" prefWidth="803.0" style="-fx-background-color: white;" />
+               </content>
+               <VBox.margin>
+                  <Insets left="11.0" right="11.0" />
+               </VBox.margin>
+            </ScrollPane>
+            <HBox prefHeight="25.0" prefWidth="829.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#btnBackPressed" prefHeight="37.0" prefWidth="91.0" style="-fx-background-color: #6897E7; -fx-background-radius: 100;" text="Back">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/btnBack.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets right="610.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="91.0" style="-fx-background-color: #6897E7; -fx-background-radius: 100;" text="Next">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/btnForward.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+   </children>
+</AnchorPane>

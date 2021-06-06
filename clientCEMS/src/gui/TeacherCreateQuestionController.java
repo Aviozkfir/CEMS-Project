@@ -82,7 +82,7 @@ public class TeacherCreateQuestionController extends TeacherMainPageController {
 	    }
 
 	    @FXML
-	    void SavePressed(ActionEvent event) {
+	    void SavePressed(ActionEvent event) throws IOException {
 	    	
 	    	
 	    	if(textQuestion.getText().trim().equals("")) {
@@ -141,7 +141,7 @@ public class TeacherCreateQuestionController extends TeacherMainPageController {
 	    	}
 	    	else if(guiControl.getServerMsg().getType()==ServerMessageTypes.QUESTION_ADDED) {
 	    		GUIControl.popUpMessage("Success", "The question was Created.");
-	    		return; 
+	    		((TeacherCreateQuestionController)GUIControl.instance.loadStage("/gui/TeacherCreateQuestion.fxml")).setPage(course);
 	    	}if(guiControl.getServerMsg().getType()==ServerMessageTypes.QUESTION_NOT_ADDED) {
 	    		GUIControl.popUpMessage("Error", "Could not create question.");
 	    		return; 

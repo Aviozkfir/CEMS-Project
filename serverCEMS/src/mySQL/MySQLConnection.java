@@ -321,13 +321,13 @@ public class MySQLConnection {
 		ResultSet rs;
 		PreparedStatement logInPreparedStatement;
 		logInPreparedStatement = con
-				.prepareStatement("SELECT q.Qid, q.Text, q.Ans1, q.Ans2, q.Ans3, q.Ans4, q.CorrectAns, q.ID, q.DATE "
+				.prepareStatement("SELECT q.Text, q.Ans1, q.Ans2, q.Ans3, q.Ans4, q.Qid, q.ID, q.DATE, q.CorrectAns "
 						+ "FROM Questions q, Question_In_Course qc " + "where q.Qid=qc.Qid AND qc.Cid=?");
 		logInPreparedStatement.setString(1, course.getId());
 		rs = logInPreparedStatement.executeQuery();
 		while (rs.next()) {
-			//questionList.add(new Question(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
-					//rs.getString(5), rs.getString(6), rs.getInt(7), rs.getString(8), rs.getString(9)));
+			questionList.add(new Question(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
+					rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9)));
 		}
 		return questionList;
 	}

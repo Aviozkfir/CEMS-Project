@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="469.0" prefWidth="829.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherCreateExamPage1Controller">
+   <children>
+      <VBox prefHeight="469.0" prefWidth="829.0" style="-fx-background-radius: 30 30 30 30; -fx-background-color: white;">
+         <children>
+            <HBox prefHeight="45.0" prefWidth="829.0">
+               <children>
+                  <Label prefHeight="28.0" prefWidth="124.0" style="-fx-border-color: #4CB5F5; -fx-border-radius: 30 30 30 30; -fx-alignment: center; -fx-border-width: 2;" text="Settings" textAlignment="CENTER" textFill="#4cb5f5">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="61.0" top="7.0" />
+                     </HBox.margin>
+                     <graphic>
+                        <ImageView fitHeight="19.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/1filled.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+                  <Line endX="30.0" startX="-100.0" stroke="#e8ebef">
+                     <HBox.margin>
+                        <Insets top="21.0" />
+                     </HBox.margin>
+                  </Line>
+                  <Label prefHeight="28.0" prefWidth="155.0" style="-fx-border-color: #E8EBEF; -fx-border-radius: 30 30 30 30; -fx-alignment: center;" text="Add Questions" textAlignment="CENTER">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="19.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/2.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets top="7.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Line endX="30.0" startX="-100.0" stroke="#e8ebef">
+                     <HBox.margin>
+                        <Insets top="21.0" />
+                     </HBox.margin>
+                  </Line>
+                  <Label prefHeight="28.0" prefWidth="166.0" style="-fx-border-color: #E8EBEF; -fx-border-radius: 30 30 30 30; -fx-alignment: center;" text="Preview &amp; Publish" textAlignment="CENTER">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="19.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/3.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets top="7.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="11.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="25.0" prefWidth="829.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="General Details:" wrappingWidth="125.6171875">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="21.0" right="3.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="25.0" prefWidth="829.0">
+               <children>
+                  <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="*">
+                     <HBox.margin>
+                        <Insets left="19.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Exam Title: " wrappingWidth="74.6171875">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="3.0" />
+                     </HBox.margin>
+                  </Text>
+                  <TextField fx:id="examTitle" prefHeight="29.0" prefWidth="405.0" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="7.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="19.0" prefWidth="808.0">
+               <VBox.margin>
+                  <Insets bottom="7.0" left="21.0" />
+               </VBox.margin>
+               <children>
+                  <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="*">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Duration: " wrappingWidth="65.31298828125">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="3.0" />
+                     </HBox.margin>
+                  </Text>
+                  <TextField fx:id="examDuration" prefHeight="29.0" prefWidth="38.0">
+                     <HBox.margin>
+                        <Insets right="3.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="minutes" wrappingWidth="65.31298828125">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox prefHeight="21.0" prefWidth="829.0">
+               <children>
+                  <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="*">
+                     <HBox.margin>
+                        <Insets left="19.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Points for each question:" wrappingWidth="164.45458984375">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="3.0" />
+                     </HBox.margin>
+                  </Text>
+                  <TextField fx:id="points" prefHeight="29.0" prefWidth="45.0" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="7.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="25.0" prefWidth="829.0">
+               <children>
+                  <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="*">
+                     <HBox.margin>
+                        <Insets left="19.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Exam code:" wrappingWidth="82.45458984375">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="3.0" />
+                     </HBox.margin>
+                  </Text>
+                  <TextField fx:id="examCode" prefHeight="29.0" prefWidth="43.0" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="7.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="8.0" prefWidth="829.0">
+               <children>
+                  <HBox prefHeight="0.0" prefWidth="829.0">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <children>
+                        <Line endX="770.0" startX="-12.0" stroke="#e8ebef" strokeWidth="2.0">
+                           <HBox.margin>
+                              <Insets bottom="7.0" left="21.0" />
+                           </HBox.margin>
+                        </Line>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="25.0" prefWidth="829.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Optional Information:" wrappingWidth="181.6171875">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="21.0" right="3.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="38.0" prefWidth="829.0">
+               <children>
+                  <Text fill="#1dff00" strokeType="OUTSIDE" strokeWidth="0.0" text="*">
+                     <HBox.margin>
+                        <Insets left="19.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Notes/remarks for students: " wrappingWidth="199.6171875">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="3.0" />
+                     </HBox.margin>
+                  </Text>
+                  <TextArea fx:id="studentNotesText" prefHeight="38.0" prefWidth="577.0" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </HBox>
+            <HBox prefHeight="25.0" prefWidth="829.0">
+               <children>
+                  <ImageView fitHeight="19.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/warning.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="19.0" right="5.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pay attention:" wrappingWidth="100.45458984375">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Notes/remarks for students will be shown in the exam." wrappingWidth="376.45458984375">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="3.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="12.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="38.0" prefWidth="829.0">
+               <children>
+                  <Text fill="#1dff00" strokeType="OUTSIDE" strokeWidth="0.0" text="*">
+                     <HBox.margin>
+                        <Insets left="19.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Notes/remarks for teachers: " wrappingWidth="199.6171875">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="3.0" />
+                     </HBox.margin>
+                  </Text>
+                  <TextArea fx:id="teacherNotesText" prefHeight="38.0" prefWidth="577.0" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </HBox>
+            <HBox prefHeight="25.0" prefWidth="829.0">
+               <children>
+                  <ImageView fitHeight="19.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/warning.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="19.0" right="5.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pay attention:" wrappingWidth="100.45458984375">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Notes/remarks for teachers will be shown only to teachers." wrappingWidth="405.45458984375">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="3.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="25.0" prefWidth="829.0">
+               <children>
+                  <Button fx:id="btnBack" mnemonicParsing="false" onAction="#btnBackPressed" prefHeight="37.0" prefWidth="91.0" style="-fx-background-color: #6897E7; -fx-background-radius: 100;" text="Cancel">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets right="610.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnNext" mnemonicParsing="false" onAction="#btnNextPressed" prefHeight="37.0" prefWidth="91.0" style="-fx-background-color: #6897E7; -fx-background-radius: 100;" text="Next">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/btnForward.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+   </children>
+</AnchorPane>

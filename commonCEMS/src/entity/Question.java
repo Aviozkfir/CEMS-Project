@@ -59,7 +59,9 @@ public class Question implements Serializable {
 	
 	public Question() { }
 	
-	public Question(String text, String ansA, String ansB, String ansC, String ansD, String id, String author,
+	public Question(String text, String ansA, String ansB, String ansC,
+			String ansD, 
+			String id, String author,
 			String dateModified,int CorrectAnswer) {
 		this.text = text;
 		this.ans1 = ansA;

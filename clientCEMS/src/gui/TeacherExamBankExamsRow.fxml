@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherQuestionTableRowController">
+   <children>
+      <HBox prefHeight="45.0" prefWidth="800.0" style="-fx-background-color: white;">
+         <children>
+            <Button fx:id="btnView" mnemonicParsing="false" onAction="#btnViewQuestionPressed" prefHeight="39.0" prefWidth="60.0" style="-fx-background-color: white;">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../git/ProjectCEMS/clientCEMS/src/resources/btnView.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Button>
+            <Label fx:id="questionID" alignment="CENTER" prefHeight="42.0" prefWidth="78.0" text="020301" textAlignment="CENTER">
+               <opaqueInsets>
+                  <Insets top="5.0" />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" prefHeight="42.0" prefWidth="275.0" text="Exam Title" wrapText="true">
+               <opaqueInsets>
+                  <Insets top="5.0" />
+               </opaqueInsets>
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="date" alignment="CENTER" prefHeight="42.0" prefWidth="128.0" text="1/5/2021">
+               <opaqueInsets>
+                  <Insets top="5.0" />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets left="7.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="author" alignment="CENTER" prefHeight="42.0" prefWidth="138.0" text="Ploni Almoni">
+               <opaqueInsets>
+                  <Insets top="5.0" />
+               </opaqueInsets>
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnPublish" mnemonicParsing="false" onAction="#btnPublishPressed" prefHeight="42.0" prefWidth="39.0" style="-fx-background-color: white;">
+               <graphic>
+                  <ImageView fx:id="btnPublish" fitHeight="45.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../git/ProjectCEMS/clientCEMS/src/resources/btnPublish.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets left="43.0" right="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="btnEdit" mnemonicParsing="false" onAction="#btnEditPressed" prefHeight="38.0" prefWidth="48.0" style="-fx-background-color: white;">
+               <graphic>
+                  <ImageView fitHeight="45.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../git/ProjectCEMS/clientCEMS/src/resources/btnEdit.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Button>
+            <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#btnDeletePressed" prefHeight="42.0" prefWidth="39.0" style="-fx-background-color: white;">
+               <graphic>
+                  <ImageView fitHeight="45.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../git/ProjectCEMS/clientCEMS/src/resources/btnDelete.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Button>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </HBox>
+      <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="27.0" style="-fx-background-color: transperent;">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Button>
+   </children>
+</AnchorPane>
