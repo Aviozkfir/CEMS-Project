@@ -76,6 +76,7 @@ public class PrincipalMainPageController extends MainPageController  {
 		PrincipalRequestsController controller = (PrincipalRequestsController) guiControl
 				.loadStage(ClientsConstants.Screens.PRINCIPAL_REQUESTS_PAGE.path);
 		controller.GetRequestListFromDB();
+		controller.setPrincipalRequests();
 		
 	}
 	

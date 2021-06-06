@@ -38,6 +38,7 @@ public class PrincipalRequestsController extends PrincipalMainPageController {
 			}
 		}
 		SendAprrovedRequests(CheckedExams);
+		CheckIfEmpty(CheckedExams);
 	}
 	
 	
@@ -52,7 +53,7 @@ public class PrincipalRequestsController extends PrincipalMainPageController {
 			}
 		}
 		SendDeclinedRequests(CheckedExams);
-		
+		CheckIfEmpty(CheckedExams);
 	}
 	
 	
@@ -126,7 +127,7 @@ public class PrincipalRequestsController extends PrincipalMainPageController {
 		guiControl.sendToServer(msg);
 
 		if (guiControl.getServerMsg().getType() == ServerMessageTypes.PRINCIPAL_APPROVED_REQUESTS_ADDED) {
-			GUIControl.popUpError("Approved Requests has sent successfully");
+			
 		} else {
 
 			GUIControl.popUpError("Error-sending update for requests");
@@ -138,7 +139,6 @@ public class PrincipalRequestsController extends PrincipalMainPageController {
 		guiControl.sendToServer(msg);
 
 		if (guiControl.getServerMsg().getType() == ServerMessageTypes.PRINCIPAL_DECLINED_REQUESTS_ADDED) {
-			GUIControl.popUpError("Declined Requests has sent successfully");
 		} else {
 
 			GUIControl.popUpError("Error-sending update for requests");
@@ -155,5 +155,14 @@ public class PrincipalRequestsController extends PrincipalMainPageController {
 			GUIControl.popUpError("Error-sending update for requests status");
 		}
 		
+	}
+	
+	public void CheckIfEmpty(ArrayList<String> CheckedExams) {
+		if(CheckedExams.isEmpty()) {
+			GUIControl.popUpError("Error - No requests has been chosed");
+		}
+		else {
+			GUIControl.popUpError("Requests has sent successfully");
+		}
 	}
 }

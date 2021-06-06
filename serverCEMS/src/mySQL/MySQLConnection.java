@@ -399,7 +399,7 @@ public class MySQLConnection {
 		ResultSet rs;
 		PreparedStatement statment;
 		statment = con
-				.prepareStatement("SELECT r.Enum, r.title, r.currentDuration, r.newDuration, r.Tid  FROM Requests r WHERE r.Status = 'StandBy' AND (r.Status2 ='Waiting' OR Status2 ='Working')");
+				.prepareStatement("SELECT r.Enum, r.title, r.currentDuration, r.newDuration, r.Tid  FROM Requests r WHERE r.Status = 'StandBy'");
 		rs = statment.executeQuery();
 		while (rs.next()) {
 			requestList.add(
