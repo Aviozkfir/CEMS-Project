@@ -6,7 +6,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
-public class StudentMainPageController extends MainPageController {
+public class StudentMainPageController extends MainPageController  {
+	
+	
 	
 
 	    @FXML
@@ -23,15 +25,13 @@ public class StudentMainPageController extends MainPageController {
 	    void HomeButtonPressed(ActionEvent event) throws IOException {
 	    	dashBoardStudentControllerHome a = (dashBoardStudentControllerHome) guiControl
 					.loadStage(ClientsConstants.Screens.STUDENT_MAIN_PAGE.path);
-			//a.setWelcomeName();
 	    }
 
 	    @FXML
-	    void MyExamsButtonPressed(ActionEvent event) {
-	    	//StudentStartExamController a = (StudentStartExamController) guiControl.loadStage(ClientsConstants.Screens.STUDENT_START_EXAM_PAGE.path);
+	    void MyExamsButtonPressed(ActionEvent event) throws IOException {
+	    	StudentMyExamsController a = (StudentMyExamsController) guiControl.loadStage(ClientsConstants.Screens.STUDENT_MY_EXAMS_PAGE.path);
+	    	a.setStudentSubject();
 	    	
-	    	
-
 	    }
 
 	    @FXML

@@ -1,6 +1,7 @@
 package gui;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import client.ClientCEMS;
 import entity.PersonCEMS;
@@ -11,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -34,6 +36,8 @@ public class GUIControl {
 	private ServerMessage serverMsg;
 	private Object cmpc;
 	private int requestCounter = 0;
+	public static boolean res; // Checked whether yes or no pressed.
+
 
 	
 
@@ -185,6 +189,19 @@ public class GUIControl {
 			alert.showAndWait();
 		});
 	}
+	public static void popUpMessageYesNo(String title, String msg) {
+		
+		Alert alert = new Alert(AlertType.INFORMATION, msg, ButtonType.YES, ButtonType.NO);
+		alert.setTitle(title);
+		alert.setHeaderText("");
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.YES) {
+			res = true;
+		} else {
+			res = false;
+		}
+	
+}
 	
 	
 	public MainPageController loadStage(String chosenPath) throws IOException {

@@ -1,5 +1,10 @@
 package mySQL;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -26,6 +31,7 @@ import java.util.Map;
 import entity.Course;
 import entity.CourseReport;
 import entity.Exam;
+import entity.ManualExamFile;
 
 //import com.sun.javafx.webkit.ThemeClientImpl;
 
@@ -36,7 +42,9 @@ import entity.Exam;
 import entity.PersonCEMS;
 import entity.Principal;
 import entity.Question;
+import entity.QuestionInExam;
 import entity.Request;
+import entity.SolvedExam;
 import entity.Student;
 import entity.Subject;
 import entity.Teacher;
@@ -54,7 +62,7 @@ public class MySQLConnection {
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 		System.out.println("Driver definition succeed");
-		con = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/yguCgBTIbt?serverTimezone=IST",
+		con = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/yguCgBTIbt?autoReconnect=true&serverTimezone=IST",
 				"yguCgBTIbt", "y7ubDV7FNy");
 		System.out.println("SQL connection succeed");
 	}
@@ -272,7 +280,7 @@ public class MySQLConnection {
 		rs = logInPreparedStatement.executeQuery();
 		if (rs.next()) {
 			exam = new Exam(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-					rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10));
+					rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10),rs.getString(11));
 		}
 		return exam;
 	}
@@ -318,8 +326,8 @@ public class MySQLConnection {
 		logInPreparedStatement.setString(1, course.getId());
 		rs = logInPreparedStatement.executeQuery();
 		while (rs.next()) {
-			questionList.add(new Question(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
-					rs.getString(5), rs.getString(6), rs.getInt(7), rs.getString(8), rs.getString(9)));
+			//questionList.add(new Question(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
+					//rs.getString(5), rs.getString(6), rs.getInt(7), rs.getString(8), rs.getString(9)));
 		}
 		return questionList;
 	}
@@ -369,7 +377,7 @@ public class MySQLConnection {
 		addQuestion.setString(4, q.getAnsB());
 		addQuestion.setString(5, q.getAnsC());
 		addQuestion.setString(6, q.getAnsD());
-		addQuestion.setInt(7, q.getCorrectAnswar());
+		addQuestion.setInt(7, q.getCorrectAnswer());
 		addQuestion.setString(8, q.getAuthor());
 		addQuestion.setString(9, q.getModified());
 		addQuestion.setString(10, q.getSubject());
@@ -444,4 +452,172 @@ public class MySQLConnection {
 		}
 		return "Succeded";
 	}
+	
+
+	public static boolean validateStudentID(String StudentId) throws SQLException {
+		ResultSet rs;
+		PreparedStatement logInPreparedStatement;
+		logInPreparedStatement = con.prepareStatement("SELECT Id FROM Person WHERE Role='Student' AND Id=?");
+		logInPreparedStatement.setString(1, StudentId);
+		rs = logInPreparedStatement.executeQuery();
+		if (rs.next()) {
+			if (rs.getString(1).equals(StudentId)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static boolean uploadManualExam(Object[] details) throws SQLException, FileNotFoundException {
+		String Eid = (String) details[0];
+		File ExamFile = (File) details[1];
+		String ID = (String) details[2];
+		InputStream inputstream = new FileInputStream(ExamFile);
+		int rs;
+		PreparedStatement logInPreparedStatement;
+		logInPreparedStatement = con
+				.prepareStatement("INSERT INTO `Student_Manual_Exam` (`Eid`,`ExamFile` ,`ID`) VALUES (?,?,?)");
+		logInPreparedStatement.setString(1, Eid);
+		logInPreparedStatement.setBlob(2, inputstream);
+		logInPreparedStatement.setString(3, ID);
+		try {
+			rs = logInPreparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+
+		return true;
+
+	}
+
+	public static Object downloadManualExam(String ExamID) throws SQLException, IOException {
+		ResultSet rs;
+		PreparedStatement logInPreparedStatement;
+		logInPreparedStatement = con.prepareStatement("SELECT ExamFile FROM `Teacher_Manual_Exam` WHERE Eid=?");
+		logInPreparedStatement.setString(1, ExamID);
+		rs = logInPreparedStatement.executeQuery();
+		if (rs.next()) {
+			byte[] array = rs.getBytes("ExamFile");
+			ManualExamFile manualExam = new ManualExamFile(array);
+			return manualExam;
+
+		} else {
+			return null;
+		}
+
+	}
+
+	public static Object returnExamQuestions(String ExamID) throws SQLException {
+		boolean has = false;
+		ArrayList<QuestionInExam> questions = new ArrayList<QuestionInExam>();
+		ResultSet rs;
+		PreparedStatement logInPreparedStatement;
+		logInPreparedStatement = con.prepareStatement(
+				"SELECT q.Qid,q.Qpoint,q.QuestionNum,y.Text,y.Ans1,y.Ans2,y.Ans3,y.Ans4,y.CorrectAns,y.ID,y.DATE FROM Question_In_Exams q,Questions y WHERE q.Eid=? AND q.Qid=y.Qid");
+		logInPreparedStatement.setString(1, ExamID);
+		rs = logInPreparedStatement.executeQuery();
+		while (rs.next()) {
+			has = true;
+			questions.add(new QuestionInExam(rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7),
+					rs.getString(8), rs.getInt(2), rs.getInt(3), rs.getString(1), rs.getString(10), rs.getString(11),
+					rs.getInt(9)));
+		}
+		if (has == false) {
+			return null;
+		} else
+			return questions;
+
+	}
+
+	public static boolean insertExamQuestions(Object[] data) throws SQLException {
+		int rslt = -1;
+		boolean success = true;
+		PreparedStatement logInPreparedStatement;
+		ArrayList<QuestionInExam> questions = (ArrayList<QuestionInExam>) data[0];
+		String SEid = (String) data[1];
+		for (int i = 0; i < questions.size(); i++) {
+			QuestionInExam que = questions.get(i);
+			logInPreparedStatement = con.prepareStatement(
+					"INSERT INTO `AnsweredQuestionsForExams` (`SEid`, `Qid`, `Ans`, `Qpoints`, `NotesForStudent`) VALUES (?,?,?,?,?)");
+			logInPreparedStatement.setString(1, SEid);
+			logInPreparedStatement.setString(2, que.getId());
+			logInPreparedStatement.setInt(3, que.getChosenAnswer());
+			if (que.getChosenAnswer() == que.getCorrectAnswer()) {
+				logInPreparedStatement.setInt(4, que.getPointsQuestion());
+			} else {
+				logInPreparedStatement.setInt(4, 0);
+			}
+			logInPreparedStatement.setString(5, "");
+			rslt = logInPreparedStatement.executeUpdate();
+			if (rslt == 0) {
+				success = false;
+			}
+		}
+
+		return success;
+	}
+
+	public static String insertExamToDB(SolvedExam exam) throws SQLException, ParseException {
+		ResultSet rs;
+		int rslt;
+		PreparedStatement logInPreparedStatement;
+		logInPreparedStatement = con.prepareStatement("SELECT MAX(SEid) FROM SolvedExams");
+		rs = logInPreparedStatement.executeQuery();
+		String Eid = "";
+		if (rs.next()) {
+			String eid = rs.getString(1);
+			int i = Integer.parseInt(eid.trim());
+			i++;
+			Eid = String.format("%06d", i);
+
+		} else {
+			Eid = "000001";
+		}
+		Date dateInput = new SimpleDateFormat("yyyy-MM-dd").parse(exam.getFinishDate());
+		java.sql.Date dateInputData = new java.sql.Date(dateInput.getTime());
+		logInPreparedStatement = con.prepareStatement(
+				"INSERT INTO `SolvedExams` (`SEid`, `ID`, `Eid`, `DATE`, `Grade`, `TimeOfExe`,`NotesForStudent` ,`Submitted`, `Checked`) VALUES(?,?,?,?,?,?,?,?,?)");
+		logInPreparedStatement.setString(1, Eid);
+		logInPreparedStatement.setString(2, exam.getID());
+		logInPreparedStatement.setString(3, exam.getEid());
+		logInPreparedStatement.setDate(4, dateInputData);
+		logInPreparedStatement.setString(5, exam.getFinalGrade());
+		logInPreparedStatement.setString(6, exam.getFinishTime());
+		logInPreparedStatement.setString(7, "");
+		logInPreparedStatement.setString(8, exam.getSubmitted());
+		logInPreparedStatement.setString(9, "No");
+		rslt = logInPreparedStatement.executeUpdate();
+		return Eid;
+
+	}
+	public static Object getStudentSubjects(String studentID) throws SQLException {
+		ArrayList<Subject> subjectList = new ArrayList<Subject>();
+		ResultSet rs;
+		PreparedStatement logInPreparedStatement;
+		logInPreparedStatement = con.prepareStatement(
+				"SELECT DISTINCT s.Sid,s.name FROM Person_Enrolled_Course p, Course c, Subject s WHERE p.ID=? and c.Cid=p.Cid and c.Sid=s.Sid");
+		logInPreparedStatement.setString(1, studentID);
+		rs = logInPreparedStatement.executeQuery();
+		while (rs.next()) {
+			subjectList.add(new Subject(rs.getString(2), rs.getString(1)));
+		}
+		return subjectList;
+	}
+	
+	public static Object getStudentCourses(String studentID) throws SQLException {
+		ArrayList<Course> courseList = new ArrayList<Course>();
+		ResultSet rs;
+		PreparedStatement logInPreparedStatement;
+		logInPreparedStatement = con.prepareStatement(
+				"SELECT p.Cid,c.name,s.Sid,s.name FROM Person_Enrolled_Course p, Course c,Subject s WHERE p.ID=? and c.Cid=p.Cid and c.Sid=s.Sid");
+		logInPreparedStatement.setString(1, studentID);
+		rs = logInPreparedStatement.executeQuery();
+		while (rs.next()) {
+			courseList.add(new Course(rs.getString(2), rs.getString(1), new Subject(rs.getString(4), rs.getString(3))));
+		}
+		return courseList;
+	}
+	
 }

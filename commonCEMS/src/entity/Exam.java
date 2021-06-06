@@ -13,9 +13,10 @@ public class Exam implements Serializable {
 	String ID;
 	String TotalTime;
 	String Code;
+	String Mode;
 
 	public Exam(String eid, String sid, String cid, String name, String date, String tdescription, String sdescription,
-			String iD, String totalTime, String code) {
+			String iD, String totalTime, String code,String mode) {
 		super();
 		Eid = eid;
 		Sid = sid;
@@ -27,6 +28,7 @@ public class Exam implements Serializable {
 		ID = iD;
 		TotalTime = totalTime;
 		Code = code;
+		Mode = mode;
 	}
 
 	public String getEid() {
@@ -67,6 +69,10 @@ public class Exam implements Serializable {
 
 	public String getCode() {
 		return Code;
+	}
+
+	public String getMode() {
+		return this.Mode;
 	}
 
 }

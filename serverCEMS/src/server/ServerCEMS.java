@@ -15,6 +15,7 @@ import application.ServerMain;
 import entity.Course;
 import entity.PersonCEMS;
 import entity.Question;
+import entity.SolvedExam;
 import message.ClientMessage;
 import message.ServerMessage;
 import message.ServerMessageTypes;
@@ -168,24 +169,22 @@ public class ServerCEMS extends AbstractServer {
 					}
 					break;
 				case TEACHER_ADD_QUESTION:
-					type=ServerMessageTypes.QUESTION_ADDED;
-					Object[] arr =(Object[]) clientMsg.getMessage();
+					type = ServerMessageTypes.QUESTION_ADDED;
+					Object[] arr = (Object[]) clientMsg.getMessage();
 					try {
-					MySQLConnection.addQuestionByCourses((Question)arr[0], (ArrayList<Course>) arr[1]);
-					}
-					catch (Exception e1) {
-						type=ServerMessageTypes.QUESTION_NOT_ADDED;
+						MySQLConnection.addQuestionByCourses((Question) arr[0], (ArrayList<Course>) arr[1]);
+					} catch (Exception e1) {
+						type = ServerMessageTypes.QUESTION_NOT_ADDED;
 						e1.printStackTrace();
 					}
 					break;
 				case TEACHER_DELETE_QUESTION:
-					type=ServerMessageTypes.QUESTION_DELETED;
-					Question q =(Question) clientMsg.getMessage();
+					type = ServerMessageTypes.QUESTION_DELETED;
+					Question q = (Question) clientMsg.getMessage();
 					try {
-					MySQLConnection.deletedQuestion(q);
-					}
-					catch (Exception e1) {
-						type=ServerMessageTypes.QUESTION_NOT_DELETED;
+						MySQLConnection.deletedQuestion(q);
+					} catch (Exception e1) {
+						type = ServerMessageTypes.QUESTION_NOT_DELETED;
 						e1.printStackTrace();
 					}
 					break;
@@ -196,8 +195,8 @@ public class ServerCEMS extends AbstractServer {
 					} else {
 						type = ServerMessageTypes.PRINCIPAL_STUDENTS_ADDED;
 					}
-					break;	
-					
+					break;
+
 				case PRINCIPAL_TEACHERS_INFORMATION:
 					returnVal = MySQLConnection.getPrincipalTeacherList();
 					if (returnVal == null) {
@@ -205,8 +204,8 @@ public class ServerCEMS extends AbstractServer {
 					} else {
 						type = ServerMessageTypes.PRINCIPAL_TEACHERS_ADDED;
 					}
-					break;	
-					
+					break;
+
 				case PRINCIPAL_REPORT_TEACHER_INFORMATION:
 					returnVal = MySQLConnection.getPrincipalReportTeachers((String[]) clientMsg.getMessage());
 					if (returnVal != null) {
@@ -215,7 +214,7 @@ public class ServerCEMS extends AbstractServer {
 						type = ServerMessageTypes.PRINCIPAL_REPORT_TEACHER_NOT_ADDED;
 					}
 					break;
-					
+
 				case PRINCIPAL_REPORT_STUDENT_INFORMATION:
 					returnVal = MySQLConnection.getPrincipalReportStudents((String[]) clientMsg.getMessage());
 					if (returnVal != null) {
@@ -224,7 +223,7 @@ public class ServerCEMS extends AbstractServer {
 						type = ServerMessageTypes.PRINCIPAL_REPORT_STUDENT_NOT_ADDED;
 					}
 					break;
-					
+
 				case PRINCIPAL_REQUESTS_INFORMATION:
 					returnVal = MySQLConnection.getPrincipalRequests();
 					if (returnVal != null) {
@@ -233,32 +232,109 @@ public class ServerCEMS extends AbstractServer {
 						type = ServerMessageTypes.PRINCIPAL_REQUESTS_NOT_ADDED;
 					}
 					break;
-					
+
 				case PRINCIPAL_APPROVED_REQUESTS_UPDATE:
-					returnVal = MySQLConnection.updatePrincipalApprovedRequests((ArrayList<String>) clientMsg.getMessage());
+					returnVal = MySQLConnection
+							.updatePrincipalApprovedRequests((ArrayList<String>) clientMsg.getMessage());
 					if (returnVal != null) {
 						type = ServerMessageTypes.PRINCIPAL_APPROVED_REQUESTS_ADDED;
 					}
 					break;
-					
+
 				case PRINCIPAL_DECLINED_REQUESTS_UPDATE:
-					returnVal = MySQLConnection.updatePrincipalDeclinedRequests((ArrayList<String>) clientMsg.getMessage());
+					returnVal = MySQLConnection
+							.updatePrincipalDeclinedRequests((ArrayList<String>) clientMsg.getMessage());
 					if (returnVal != null) {
 						type = ServerMessageTypes.PRINCIPAL_DECLINED_REQUESTS_ADDED;
 					}
 					break;
-					
+
 				case PRINCIPAL_CHECK_REQUESTS_COUNTING:
 					returnVal = MySQLConnection.getRequestCount();
 					if (returnVal != null) {
 						type = ServerMessageTypes.PRINCIPAL_GOT_REQUESTS_COUNTING;
 					}
 					break;
-					
+
 				case PRINCIPAL_UPDATE_REQUESTS_STATUS:
-					returnVal = MySQLConnection.updatePrincipalRequestStatus((ArrayList<String>) clientMsg.getMessage());
+					returnVal = MySQLConnection
+							.updatePrincipalRequestStatus((ArrayList<String>) clientMsg.getMessage());
 					if (returnVal != null) {
 						type = ServerMessageTypes.PRINCIPAL_UPDATE_REQUESTS_STATUS_SUCCESS;
+					}
+					break;
+
+				case VALIDATE_STUDENT_ID:
+					returnVal = MySQLConnection.validateStudentID((String) clientMsg.getMessage());
+					if ((boolean) returnVal == false) {
+						type = ServerMessageTypes.STUDENT_ID_NOT_FOUND;
+					} else {
+						type = ServerMessageTypes.STUDENT_ID_FOUND;
+					}
+					break;
+				case UPLOAD_MANUAL_EXAM:
+					returnVal = MySQLConnection.uploadManualExam((Object[]) clientMsg.getMessage());
+					if ((boolean) returnVal == true) {
+						type = ServerMessageTypes.EXAM_UPLOADED_SUCCECFULLY;
+					} else {
+						type = ServerMessageTypes.EXAM_UPLOADING_FAILED;
+
+					}
+					break;
+				case DOWNLOAD_MANUAL_EXAM:
+					returnVal = MySQLConnection.downloadManualExam((String) clientMsg.getMessage());
+					if (returnVal == null) {
+						type = ServerMessageTypes.EXAM_DOWNLOAD_FAIL;
+					} else {
+						type = ServerMessageTypes.EXAM_DOWNLOAD_SUCCESS;
+					}
+
+					break;
+
+				case GET_EXAM_QUESTIONS:
+					returnVal = MySQLConnection.returnExamQuestions((String) clientMsg.getMessage());
+					if (returnVal == null) {
+						type = ServerMessageTypes.GET_EXAM_QUESTIONS_FAILED;
+					} else {
+						type = ServerMessageTypes.GET_EXAM_QUESTIONS_SUCCEDED;
+					}
+
+					break;
+				case INSERT_EXAM_TO_DB:
+					returnVal = MySQLConnection.insertExamToDB((SolvedExam) clientMsg.getMessage());
+					if (returnVal == null) {
+						type = ServerMessageTypes.GET_EXAM_QUESTIONS_FAILED;
+					} else {
+						type = ServerMessageTypes.GET_EXAM_QUESTIONS_SUCCEDED;
+					}
+
+					break;
+
+				case INSERT_EXAM_QUESTIONS:
+
+					returnVal = MySQLConnection.insertExamQuestions((Object[]) clientMsg.getMessage());
+					if ((boolean) returnVal == true) {
+						type = ServerMessageTypes.INSERT_EXAM_QUESTIONS_SUCCEEDED;
+					} else {
+						type = ServerMessageTypes.INSERT_EXAM_QUESTIONS_FAILED;
+					}
+
+					break;
+				case STUDENT_SUBJECTS_INFORMATION:
+					returnVal = MySQLConnection.getStudentSubjects((String) clientMsg.getMessage());
+					if (returnVal != null) {
+						type = ServerMessageTypes.STUDENT_SUBJECTS_ADDED;
+					} else {
+						type = ServerMessageTypes.STUDENT_SUBJECTS_NOT_ADDED;
+					}
+
+					break;
+				case STUDENT_COURSES_INFORMATION:
+					returnVal = MySQLConnection.getStudentCourses((String) clientMsg.getMessage());
+					if (returnVal != null) {
+						type = ServerMessageTypes.STUDENT_COURSES_ADDED;
+					} else {
+						type = ServerMessageTypes.STUDENT_COURSES_NOT_ADDED;
 					}
 					break;
 

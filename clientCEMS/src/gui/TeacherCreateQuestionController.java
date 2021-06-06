@@ -107,13 +107,13 @@ public class TeacherCreateQuestionController extends TeacherMainPageController {
 	    	}
 	    	
 	    	if(rbA.isSelected()) {
-	    		question.setCorrectAnswar(1);
+	    		question.setCorrectAnswer(1);
 	    	}else if(rbB.isSelected()) {
-	    		question.setCorrectAnswar(2);
+	    		question.setCorrectAnswer(2);
 	    	}else if(rbC.isSelected()) {
-	    		question.setCorrectAnswar(3);
+	    		question.setCorrectAnswer(3);
 	    	}else if(rbD.isSelected()) {
-	    		question.setCorrectAnswar(4);
+	    		question.setCorrectAnswer(4);
 	    	}else {
 	    		GUIControl.popUpMessage("Error", "Correct answer wasn't selected.");
 	    		return;

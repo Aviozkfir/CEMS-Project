@@ -8,6 +8,7 @@ import entity.Course;
 import entity.CourseReport;
 import entity.PersonCEMS;
 import entity.Principal;
+import entity.Student;
 import entity.Subject;
 import entity.Teacher;
 import javafx.event.ActionEvent;
@@ -125,6 +126,41 @@ public class LoginPageController {
 				requestThread.start();
 				break;
 			case "Student":
+				ClientMessage studentMsgSubjects = new ClientMessage(ClientMessageType.STUDENT_SUBJECTS_INFORMATION,
+
+						((Student) guiControl.getUser()).getId());
+
+				guiControl.sendToServer(studentMsgSubjects);
+
+				if (guiControl.getServerMsg().getType() == ServerMessageTypes.STUDENT_SUBJECTS_ADDED) {
+
+					ArrayList<Subject> subjects = (ArrayList<Subject>) guiControl.getServerMsg().getMessage();
+
+					((Student) person).setSubjectList(subjects);
+
+				} else {
+
+					GUIControl.popUpError("Error in loading subject list to Student");
+
+				}
+
+				ClientMessage studentMsgCourses = new ClientMessage(ClientMessageType.STUDENT_COURSES_INFORMATION,
+
+						((Student) guiControl.getUser()).getId());
+
+				guiControl.sendToServer(studentMsgCourses);
+
+				if (guiControl.getServerMsg().getType() == ServerMessageTypes.STUDENT_COURSES_ADDED) {
+
+					ArrayList<Course> courses = (ArrayList<Course>) guiControl.getServerMsg().getMessage();
+
+					((Student) person).setCourseList(courses);
+
+				} else {
+
+					GUIControl.popUpError("Error in loading courses list to Student");
+
+				}
 				chosenPath = ClientsConstants.Screens.STUDENT_MAIN_PAGE.path;
 				break;
 			}
