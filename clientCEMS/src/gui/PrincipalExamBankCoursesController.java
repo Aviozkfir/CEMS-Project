@@ -28,6 +28,7 @@ public class PrincipalExamBankCoursesController extends PrincipalMainPageControl
     void BackPressed(ActionEvent event) throws IOException {
     	PrincipalExamBankSubjectsController a = (PrincipalExamBankSubjectsController) guiControl.loadStage(ClientsConstants.Screens.PRINCIPAL_EXAM_BANK_PAGE.path);
 		a.setPrincipalSubject();
+		a.setRequestCounter();
     }
 
 

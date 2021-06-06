@@ -100,7 +100,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Text fx:id="requests" fill="#0a0a0a" layoutX="37.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="This is a massage" wrappingWidth="317.615234375">
+                  <Text fx:id="requests" fill="#0a0a0a" layoutX="59.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="This is a massage" wrappingWidth="317.615234375">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>

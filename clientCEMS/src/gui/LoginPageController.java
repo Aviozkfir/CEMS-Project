@@ -3,7 +3,7 @@ package gui;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import application.UpdateThread;
+import application.UpdateRequestThread;
 import entity.Course;
 import entity.CourseReport;
 import entity.PersonCEMS;
@@ -46,7 +46,7 @@ public class LoginPageController {
 			String role = person.getRole();
 			String chosenPath = null;
 			Object controller = null;
-			UpdateThread requestThread = new UpdateThread();
+			UpdateRequestThread requestThread = new UpdateRequestThread();
 			switch (role) {
 			case "Teacher":
 				chosenPath = ClientsConstants.Screens.TEACHER_WELCOME_PAGE.path;
@@ -123,6 +123,7 @@ public class LoginPageController {
 					GUIControl.popUpError("Error in loading courses list to Principal");
 				
 				}
+				guiControl.setRequestThread(requestThread);
 				requestThread.start();
 				break;
 			case "Student":

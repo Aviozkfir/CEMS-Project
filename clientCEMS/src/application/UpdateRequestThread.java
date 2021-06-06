@@ -2,11 +2,12 @@ package application;
 
 import gui.GUIControl;
 
-public class UpdateThread extends Thread{
+public class UpdateRequestThread extends Thread{
+private boolean exit = false;
 	private GUIControl guiControl = GUIControl.getInstance();
 		public void run(){  
 		System.out.println("thread is running...");  
-		while(true) {
+		while(!exit) {
 			try {
 				guiControl.CountRequest();
 				Thread.sleep(25000);
@@ -17,5 +18,10 @@ public class UpdateThread extends Thread{
 			
 		}
 		}  
-	  
-}
+		
+		// for stopping the thread
+	    public void exit()
+	    {
+	        exit = true;
+	    }
+	}

@@ -51,13 +51,17 @@ public class PrincipalFinalReportControl extends PrincipalMainPageController imp
 		if (Istype("Course")) {
 			PrincipalReportCourseControl controller = (PrincipalReportCourseControl) guiControl
 					.loadStage(ClientsConstants.Screens.PRINCIPAL_REPORT_COURSE_PAGE.path);
+			controller.setRequestCounter();
 		} else if (Istype("Teacher")) {
 			PrincipalReportTeacherControl controller = (PrincipalReportTeacherControl) guiControl
 					.loadStage(ClientsConstants.Screens.PRINCIPAL_REPORT_TEACHER_PAGE.path);
+			controller.setRequestCounter();
 		} else if (Istype("Student")) {
 			PrincipalReportStudentControl controller = (PrincipalReportStudentControl) guiControl
 					.loadStage(ClientsConstants.Screens.PRINCIPAL_REPORT_STUDENT_PAGE.path);
+			controller.setRequestCounter();
 		}
+		
 
 	}
 
@@ -73,7 +77,7 @@ public class PrincipalFinalReportControl extends PrincipalMainPageController imp
 
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void SetHistogram() {
 
 		barChart.setCategoryGap(0);

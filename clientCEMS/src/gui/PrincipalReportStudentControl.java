@@ -56,6 +56,7 @@ public class PrincipalReportStudentControl extends PrincipalMainPageController i
 	void BackPressed(ActionEvent event) throws IOException {
 		PrincipalReportController a = (PrincipalReportController) guiControl
 				.loadStage(ClientsConstants.Screens.PRINCIPAL_REPORT_PAGE.path);
+		a.setRequestCounter();
 	}
 
 	@FXML
