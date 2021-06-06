@@ -46,10 +46,10 @@ public class PrincipalReportTeacherControl extends PrincipalMainPageController i
 	@FXML
 	private Button GetButton;
 	private Report report;
-
-	ObservableList<Teacher> ObsCourseList = FXCollections.observableArrayList();
-	Principal principal = (Principal) guiControl.getUser();
-	String[] inputData = new String[2];
+	private boolean idInlist = false;
+	private ObservableList<Teacher> ObsCourseList = FXCollections.observableArrayList();
+	private Principal principal = (Principal) guiControl.getUser();
+	private String[] inputData = new String[2];
 
 	@FXML
 	void BackPressed(ActionEvent event) throws IOException {
@@ -59,34 +59,32 @@ public class PrincipalReportTeacherControl extends PrincipalMainPageController i
 
 	@FXML
 	void GetButtonPressed(ActionEvent event) throws IOException {
-
 		if (validateInput()) {
 
 			inputData[0] = IDtext.getText();
 			inputData[1] = datePicker.getValue().toString();
-			System.out.println(datePicker.getValue().toString());
 			ClientMessage msg = new ClientMessage(ClientMessageType.PRINCIPAL_REPORT_TEACHER_INFORMATION, inputData);
 			guiControl.sendToServer(msg);
 
 			if (guiControl.getServerMsg().getType() == ServerMessageTypes.PRINCIPAL_REPORT_TEACHER_ADDED) {
 
 				HashMap<String, String> reportData = (HashMap<String, String>) guiControl.getServerMsg().getMessage();
-				report = new Report(reportData);
-				principal.setReport(report);
-				SetMedianAndAverage();
-				SetYearRange();
+				if (!reportData.isEmpty()) {
+					report = new Report(reportData);
+					principal.setReport(report);
+					SetMedianAndAverage();
+					SetYearRange();
 
-			} else {
-				GUIControl.popUpError("Error in loading teachers-report list  to Principal");
+					PrincipalFinalReportControl controller = (PrincipalFinalReportControl) guiControl
+							.loadStage(ClientsConstants.Screens.PRINCIPAL_FINAL_REPORT_PAGE.path);
+					controller.setRequestCounter();
+				} else {
+					GUIControl.popUpMessage("The chosen Id and Date range for the report contains 0 solved exams.");
+				}
 			}
-
-			PrincipalFinalReportControl controller = (PrincipalFinalReportControl) guiControl
-					.loadStage(ClientsConstants.Screens.PRINCIPAL_FINAL_REPORT_PAGE.path);
-			controller.setRequestCounter();
-		} else {
-			GUIControl.popUpError("Problematic, ID:" + IDtext.getText() + "Year:" + datePicker.getValue().toString());
+			if (guiControl.getServerMsg().getType() == ServerMessageTypes.PRINCIPAL_REPORT_TEACHER_NOT_ADDED)
+				GUIControl.popUpError("Error in loading teachers-report list  to Principal");
 		}
-
 	}
 
 	@Override
@@ -99,11 +97,36 @@ public class PrincipalReportTeacherControl extends PrincipalMainPageController i
 	}
 
 	public boolean validateInput() {
-		if (IDtext.getText().isEmpty() || datePicker.getValue().toString().isEmpty()) {
-			GUIControl.popUpError("Please fill all the required fields.");
+		String[] date = new String[3];
+
+		try {
+			date = datePicker.getValue().toString().split("-"); // spliting the not manualy input date into yyyy,MM,dd.
+			if (IDtext.getText().isEmpty() || datePicker.getValue().toString().isEmpty()) {
+				GUIControl.popUpError("Please fill all the required fields.");
+				return false;
+			} else if (IDtext.getText().length() != 9 || !IDtext.getText().matches("[0-9]+")) {
+				GUIControl.popUpError("Invalid ID input.\nPlease insert only 9 digits");
+				return false;
+			} else if (date[0].length() != 4 || date[1].length() != 2 || date[2].length() != 2 || date.length != 3
+					|| !datePicker.getValue().toString().matches("[0-9\\-/]+")) {
+				GUIControl.popUpError("Invalid Date input.\nPlease insert legal date");
+				return false;
+			} else {
+				for (Teacher teacher : principal.getTeacherList()) {
+					if (IDtext.getText().equals(teacher.getId()))
+						idInlist = true;
+				}
+				if (!idInlist) {
+					GUIControl.popUpError("Id is not in the list.\n Please insert id from the list.");
+					return false;
+				}
+				idInlist = false;
+			}
+			return true;
+		} catch (Exception e) {
+			GUIControl.popUpError("Invalid Date input manualy.\nPlease insert legal date or use the button");
 			return false;
 		}
-		return true;
 	}
 
 	public void SetMedianAndAverage() {
