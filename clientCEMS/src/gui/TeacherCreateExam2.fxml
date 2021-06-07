@@ -13,9 +13,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="469.0" prefWidth="829.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherCreateExamPage2Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="477.0" prefWidth="844.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherCreateExamPage2Controller">
    <children>
-      <VBox prefHeight="469.0" prefWidth="829.0" style="-fx-background-radius: 30 30 30 30; -fx-background-color: white;">
+      <VBox prefHeight="469.0" prefWidth="829.0" style="-fx-background-radius: 30 30 30 30; -fx-background-color: white;" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
             <HBox prefHeight="45.0" prefWidth="829.0">
                <children>
@@ -39,7 +39,7 @@
                         <Insets top="21.0" />
                      </HBox.margin>
                   </Line>
-                  <Label prefHeight="28.0" prefWidth="155.0" style="-fx-border-color: #4cb5f5; -fx-border-radius: 30 30 30 30; -fx-alignment: center; -fx-border-width: 2;" text="Add Questions" textAlignment="CENTER">
+                  <Label prefHeight="28.0" prefWidth="155.0" style="-fx-border-color: #4cb5f5; -fx-border-radius: 30 30 30 30; -fx-alignment: center; -fx-border-width: 2;" text="Add Questions" textAlignment="CENTER" textFill="#4cb5f5">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
@@ -154,7 +154,7 @@
                   <Insets left="11.0" right="11.0" />
                </VBox.margin>
             </HBox>
-            <ScrollPane prefHeight="268.0" prefWidth="841.0" style="-fx-opacity: 1; -fx-border-color: #EBEBEB;">
+            <ScrollPane prefHeight="270.0" prefWidth="812.0" style="-fx-opacity: 1; -fx-border-color: #EBEBEB;">
                <content>
                   <VBox fx:id="vTable" prefHeight="1.0" prefWidth="803.0" style="-fx-background-color: white;" />
                </content>
@@ -164,7 +164,7 @@
             </ScrollPane>
             <HBox prefHeight="25.0" prefWidth="829.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#btnBackPressed" prefHeight="37.0" prefWidth="91.0" style="-fx-background-color: #6897E7; -fx-background-radius: 100;" text="Back">
+                  <Button fx:id="btnBack" mnemonicParsing="false" onAction="#btnBackPressed" prefHeight="37.0" prefWidth="91.0" style="-fx-background-color: #6897E7; -fx-background-radius: 100;" text="Back">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -182,7 +182,7 @@
                         <Insets right="610.0" />
                      </HBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="91.0" style="-fx-background-color: #6897E7; -fx-background-radius: 100;" text="Next">
+                  <Button fx:id="btnNext" mnemonicParsing="false" onAction="#btnNextPressed" prefHeight="37.0" prefWidth="91.0" style="-fx-background-color: #6897E7; -fx-background-radius: 100;" text="Next">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -202,7 +202,7 @@
                   <Insets />
                </opaqueInsets>
                <VBox.margin>
-                  <Insets left="20.0" right="20.0" />
+                  <Insets left="20.0" right="20.0" top="19.0" />
                </VBox.margin>
             </HBox>
          </children>

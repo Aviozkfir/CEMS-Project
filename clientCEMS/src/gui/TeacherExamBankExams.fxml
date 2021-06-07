@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="myRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherExamBankExamsController">
+<AnchorPane fx:id="myRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherExamBankExamsController">
    <children>
       <VBox prefHeight="600.0" prefWidth="175.0" style="-fx-background-color: #F7F7F7;">
          <children>
@@ -277,7 +277,7 @@
                   <VBox fx:id="vTable" prefHeight="1.0" prefWidth="812.0" style="-fx-background-color: white;" />
                </content>
             </ScrollPane>
-            <HBox prefHeight="39.0" prefWidth="851.0">
+            <HBox prefHeight="54.0" prefWidth="851.0" style="-fx-background-color: #EBEBEB;">
                <children>
                   <Button fx:id="btnBack" mnemonicParsing="false" onAction="#btnBackPressed" prefHeight="37.0" prefWidth="91.0" style="-fx-background-color: #6897E7; -fx-background-radius: 100;" text="Back">
                      <font>
@@ -294,16 +294,13 @@
                         </ImageView>
                      </graphic>
                      <HBox.margin>
-                        <Insets left="41.0" top="10.0" />
+                        <Insets left="10.0" top="6.0" />
                      </HBox.margin>
                   </Button>
                </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
             </HBox>
          </children></VBox>
    </children>

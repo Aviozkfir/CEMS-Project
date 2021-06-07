@@ -169,7 +169,7 @@
                   </Text>
                </children>
             </HBox>
-            <VBox prefHeight="454.0" prefWidth="829.0" style="-fx-background-radius: 30 30 30 30; -fx-background-color: white;">
+            <VBox prefHeight="450.0" prefWidth="829.0" style="-fx-background-radius: 30 30 30 30; -fx-background-color: white;">
                <VBox.margin>
                   <Insets left="11.0" right="11.0" />
                </VBox.margin>
@@ -395,7 +395,7 @@
                         </ImageView>
                      </graphic>
                      <HBox.margin>
-                        <Insets left="41.0" />
+                        <Insets left="10.0" />
                      </HBox.margin>
                   </Button>
                </children>
@@ -403,7 +403,7 @@
                   <Insets />
                </opaqueInsets>
                <VBox.margin>
-                  <Insets top="11.0" />
+                  <Insets top="6.0" />
                </VBox.margin>
             </HBox>
          </children></VBox>

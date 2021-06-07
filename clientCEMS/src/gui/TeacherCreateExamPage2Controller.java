@@ -11,15 +11,20 @@ public class TeacherCreateExamPage2Controller {
     @FXML
     private VBox vTable;
     
-private Course course;
+    private Course course;
     
     private VBox myVbox;
     
     private AnchorPane page1;
+    private AnchorPane page3;
 
     public void setPage1(AnchorPane page1) {
 		this.page1 = page1;
 	}
+    
+    public void setPage3(AnchorPane page3) {
+  		this.page3 = page3;
+  	}
 
 	public void setMyVbox(VBox myVbox) {
 		this.myVbox = myVbox;
@@ -33,6 +38,12 @@ private Course course;
     void btnBackPressed(ActionEvent event) {
     	myVbox.getChildren().remove(2);
     	myVbox.getChildren().add(page1);
+    }
+    
+    @FXML
+    void btnNextPressed(ActionEvent event) {
+    	myVbox.getChildren().remove(2);
+    	myVbox.getChildren().add(page3);
     }
 
 }
