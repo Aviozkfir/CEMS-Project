@@ -1,7 +1,7 @@
 package application;
 	
 import java.io.IOException;
-
+import java.net.InetAddress;
 import client.ClientCEMS;
 import gui.GUIControl;
 import javafx.application.Application;
@@ -17,7 +17,7 @@ public class ClientMain extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			client=new ClientCEMS("localhost",DEFAULT_PORT);
+			client=new ClientCEMS(InetAddress.getLocalHost().getHostAddress(),DEFAULT_PORT);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

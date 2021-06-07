@@ -2,7 +2,6 @@ package gui;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
 import entity.Course;
 import entity.Question;
 import entity.Teacher;
@@ -83,8 +82,6 @@ public class TeacherCreateQuestionController extends TeacherMainPageController {
 
 	    @FXML
 	    void SavePressed(ActionEvent event) throws IOException {
-	    	
-	    	
 	    	if(textQuestion.getText().trim().equals("")) {
 	    		GUIControl.popUpMessage("Error", "Question text wasn't inserted.");
 	    		return;
@@ -105,7 +102,6 @@ public class TeacherCreateQuestionController extends TeacherMainPageController {
 	    		GUIControl.popUpMessage("Error", "Answer D wasn't inserted.");
 	    		return;
 	    	}
-	    	
 	    	if(rbA.isSelected()) {
 	    		question.setCorrectAnswer(1);
 	    	}else if(rbB.isSelected()) {
@@ -118,23 +114,18 @@ public class TeacherCreateQuestionController extends TeacherMainPageController {
 	    		GUIControl.popUpMessage("Error", "Correct answer wasn't selected.");
 	    		return;
 	    	}
-	    	
 	    	question.setText(textQuestion.getText());
 	    	question.setAnsA(textA.getText());
 	    	question.setAnsB(textB.getText());
 	    	question.setAnsC(textC.getText());
 	    	question.setAnsD(textD.getText());
-	    	
 	    	question.setAuthor(((Teacher)guiControl.getUser()).getId());
 	    	question.setModified();
 	    	Object[] arr = new Object[2];
 	    	arr[0]=question;
 	    	arr[1]=list;
-	    	
-	    	
 	    	ClientMessage m1 = new ClientMessage(ClientMessageType.TEACHER_ADD_QUESTION, arr);
 	    	guiControl.sendToServer(m1);
-	    	
 	    	if(guiControl.getServerMsg().getType()==ServerMessageTypes.QUESTION_IS_ALREADY_IN_DATABASE) {
 	    		GUIControl.popUpMessage("Error", "The question already exists in" + ((String)guiControl.getServerMsg().getMessage())+" question bank." );
 	    		return; 
