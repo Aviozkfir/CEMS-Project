@@ -188,6 +188,16 @@ public class ServerCEMS extends AbstractServer {
 						e1.printStackTrace();
 					}
 					break;
+				case GET_EXAM_BY_COURSE:
+					type = ServerMessageTypes.EXAM_BY_COURSE_NOT_RECIVED;
+					Course c = (Course) clientMsg.getMessage();
+					try {
+						returnVal = MySQLConnection.getTeacherExamByCourse(c);
+					} catch (Exception e1) {
+						type = ServerMessageTypes.EXAM_BY_COURSE_RECIVED;
+						e1.printStackTrace();
+					}
+					break;
 				case PRINCIPAL_STUDENTS_INFORMATION:
 					returnVal = MySQLConnection.getPrincipalStudentList();
 					if (returnVal == null) {

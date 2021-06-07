@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import entity.Course;
 import entity.Exam;
+
 import entity.Question;
 import entity.Subject;
 import javafx.event.ActionEvent;
@@ -68,24 +69,24 @@ public class TeacherExamBankExamsController extends TeacherMainPageController {
     	courseName.setText(course.getName());
     	subjectName.setText(course.getSubject().getName());
     	
-//    	ClientMessage m1 = new ClientMessage(ClientMessageType.GET_EXAM_BY_COURSE, course);
-//    	guiControl.sendToServer(m1);
-//    	
-//    	allQuestions = (ArrayList<Exam>) guiControl.getServerMsg().getMessage();
-//    	
-//    	numberOfExams.setText(""+allQuestions.size());
-//    	
-//    	for(Exam q : allQuestions)
-//    	{
-//    		TeacherQuestionTableRowController controller;
-//			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/TeacherQuestionTableRow.fxml"));
-//			AnchorPane root = fxmlLoader.load();
-//			controller = (TeacherQuestionTableRowController) fxmlLoader.getController();
-//			controller.setQuestion(q);
-//			controller.setCourse(course);
-//			vTable.getChildren().add(root);
-//			
-//    	}
+    	ClientMessage m1 = new ClientMessage(ClientMessageType.GET_EXAM_BY_COURSE, course);
+    	guiControl.sendToServer(m1);
+    	
+    	allQuestions = (ArrayList<Exam>) guiControl.getServerMsg().getMessage();
+    	
+    	numberOfExams.setText(""+allQuestions.size());
+    	
+    	for(Exam e : allQuestions)
+    	{
+    		TeacherExamBankRowController controller;
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/TeacherExamBankExamsRow.fxml"));
+			AnchorPane root = fxmlLoader.load();
+			controller = (TeacherExamBankRowController) fxmlLoader.getController();
+			
+			controller.setExam(e);
+			vTable.getChildren().add(root);
+			
+    	}
     	
     }
 

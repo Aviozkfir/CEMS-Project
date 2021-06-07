@@ -3,6 +3,7 @@ package gui;
 import java.io.IOException;
 
 import entity.Course;
+import entity.Exam;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -43,6 +44,12 @@ public class TeacherCreateExamPage1Controller {
     
     private AnchorPane page2;
 
+    private Exam exam;
+    
+    public void setExam(Exam exam) {
+		this.exam = exam;
+	}
+    
     public void setPage2(AnchorPane page2) {
 		this.page2 = page2;
 	}
@@ -62,8 +69,43 @@ public class TeacherCreateExamPage1Controller {
 
     @FXML
     void btnNextPressed(ActionEvent event) {
+    	try {
+    	if((Integer.parseInt(examDuration.getText())<=0))
+    	{
+    		GUIControl.popUpMessage("Error", "Must enter a positive number of minutes.");
+    		return;
+    	}
+    	}catch(NumberFormatException e) {
+    		
+    		GUIControl.popUpMessage("Error", "Invalid exam duartion input.");
+    		return;
+    		
+    	}
+    	exam.setTotalTime(examDuration.getText());
+    	
+    	if(examTitle.getText().trim().equals("")) {
+    		GUIControl.popUpMessage("Error", "Answer B wasn't inserted.");
+    		return;
+    	}
+    	exam.setName(examTitle.getText());
+    	
+    	
+    	if(examCode.getText().trim().equals("")) {
+    		GUIControl.popUpMessage("Error", "Answer B wasn't inserted.");
+    		return;
+    	}
+    	exam.setCode(examCode.getText());
+    	
+    	if(teacherNotesText.getText().trim().equals("")) {
+    		GUIControl.popUpMessage("Error", "Answer B wasn't inserted.");
+    		return;
+    	}
+    	exam.setTdescription(teacherNotesText.getText());
+    	
+    	exam.setSdescription(studentNotesText.getText());
     	myVbox.getChildren().remove(2);
     	myVbox.getChildren().add(page2);
+    	
     }
 
 }

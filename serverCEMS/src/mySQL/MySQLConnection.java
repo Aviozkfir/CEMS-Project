@@ -31,6 +31,7 @@ import java.util.Map;
 import entity.Course;
 import entity.CourseReport;
 import entity.Exam;
+
 import entity.ManualExamFile;
 
 //import com.sun.javafx.webkit.ThemeClientImpl;
@@ -283,6 +284,40 @@ public class MySQLConnection {
 					rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10),rs.getString(11));
 		}
 		return exam;
+	}
+	
+	public static ArrayList<Exam> getTeacherExamByCourse(Course course) throws SQLException {
+		ArrayList<Exam> exams = new ArrayList<Exam>();
+		ResultSet rs;
+		PreparedStatement logInPreparedStatement;
+		logInPreparedStatement = con.prepareStatement("SELECT * FROM Exams WHERE Cid=?");
+		logInPreparedStatement.setString(1, course.getId());
+		rs = logInPreparedStatement.executeQuery();
+		while (rs.next()) {
+			exams.add(( new Exam(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+					rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10),rs.getString(11))));
+			
+		}
+		return exams;
+	}
+	
+	public static ArrayList<Question> setTeacherExamQuesstions(Exam exam) throws SQLException {
+		
+		ArrayList<Question> questionList = new ArrayList<Question>();
+		ResultSet rs;
+		PreparedStatement logInPreparedStatement;
+		logInPreparedStatement = con
+				.prepareStatement("SELECT q.Text, q.Ans1, q.Ans2, q.Ans3, q.Ans4, q.Qid, q.ID, q.DATE, q.CorrectAns "
+						+ "FROM Questions q, Question_In_Exam qe " + "where q.Qid=qc.Qid AND qc.Eid=?");
+		logInPreparedStatement.setString(1, exam.getEid());
+		rs = logInPreparedStatement.executeQuery();
+		while (rs.next()) {
+			questionList.add(new Question(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
+					rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9)));
+		}
+		
+		
+		return questionList;
 	}
 
 	

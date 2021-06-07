@@ -1,6 +1,7 @@
 package gui;
 
 import entity.Course;
+import entity.Exam;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -37,6 +38,13 @@ public class TeacherCreateExamPage3Controller {
     
     private AnchorPane page2;
     private AnchorPane page4;
+    
+ 
+    private Exam exam;
+    
+    public void setExam(Exam exam) {
+		this.exam = exam;
+	}
     
     public void setPage2(AnchorPane page2) {
 		this.page2 = page2;

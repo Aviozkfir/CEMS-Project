@@ -3,6 +3,7 @@ package gui;
 import java.io.IOException;
 
 import entity.Course;
+import entity.Exam;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -20,6 +21,12 @@ public class TeacherCreateExamPage4Controller {
     @FXML
     private Button btnBack;
 
+ 
+    private Exam exam;
+    
+    public void setExam(Exam exam) {
+		this.exam = exam;
+	}
     public void setMyVbox(VBox myVbox) {
 		this.myVbox = myVbox;
 	}

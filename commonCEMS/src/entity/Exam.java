@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class Exam implements Serializable {
 	String Eid;
+	
+
 	String Sid;
 	String Cid;
 	String Name;
@@ -14,7 +16,11 @@ public class Exam implements Serializable {
 	String TotalTime;
 	String Code;
 	String Mode;
-
+	
+	public Exam() {
+		
+	}
+	
 	public Exam(String eid, String sid, String cid, String name, String date, String tdescription, String sdescription,
 			String iD, String totalTime, String code,String mode) {
 		super();
@@ -75,4 +81,47 @@ public class Exam implements Serializable {
 		return this.Mode;
 	}
 
+	public void setEid(String eid) {
+		Eid = eid;
+	}
+
+	public void setSid(String sid) {
+		Sid = sid;
+	}
+
+	public void setCid(String cid) {
+		Cid = cid;
+	}
+
+	public void setName(String name) {
+		Name = name;
+	}
+
+	public void setDate(String date) {
+		Date = date;
+	}
+
+	public void setTdescription(String tdescription) {
+		Tdescription = tdescription;
+	}
+
+	public void setSdescription(String sdescription) {
+		Sdescription = sdescription;
+	}
+
+	public void setID(String iD) {
+		ID = iD;
+	}
+
+	public void setTotalTime(String totalTime) {
+		TotalTime = totalTime;
+	}
+
+	public void setCode(String code) {
+		Code = code;
+	}
+
+	public void setMode(String mode) {
+		Mode = mode;
+	}
 }

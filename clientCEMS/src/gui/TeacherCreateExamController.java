@@ -3,6 +3,8 @@ package gui;
 import java.io.IOException;
 
 import entity.Course;
+import entity.Exam;
+import entity.Teacher;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
@@ -13,6 +15,7 @@ public class TeacherCreateExamController extends TeacherMainPageController{
 
 	private Course course;
 
+	private Exam exam = new Exam();
     @FXML
     private VBox myVbox;
 
@@ -38,6 +41,12 @@ public class TeacherCreateExamController extends TeacherMainPageController{
     	subjectName.setText(course.getSubject().getName());
     	courseName.setText(course.getName());
     	
+    	
+    	exam.setCid(course.getId());
+    	exam.setSid(course.getSubject().getId());
+    	exam.setID(((Teacher)guiControl.getUser()).getFirstName()+" "+((Teacher)guiControl.getUser()).getLastName());
+    	exam.setMode("Manual");
+    	
     	FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("/gui/TeacherCreateExam1.fxml"));
 		page1 = fxmlLoader1.load();
 		page1Control = (TeacherCreateExamPage1Controller) fxmlLoader1.getController();
@@ -57,21 +66,23 @@ public class TeacherCreateExamController extends TeacherMainPageController{
 		page1Control.setCourse(course);
 		page1Control.setMyVbox(myVbox);
 		page1Control.setPage2(page2);
+		page1Control.setExam(exam);
 		
 		page2cortrol.setCourse(course);
 		page2cortrol.setMyVbox(myVbox);
 		page2cortrol.setPage1(page1);
 		page2cortrol.setPage3(page3);
-		
+		page2cortrol.setExam(exam);
 		
 		page3cortrol.setCourse(course);
 		page3cortrol.setMyVbox(myVbox);
-		page3cortrol.setPage2(page1);
+		page3cortrol.setPage2(page2);
 		page3cortrol.setPage4(page4);
+		page3cortrol.setExam(exam);
 		
 		page4cortrol.setCourse(course);
 		page4cortrol.setMyVbox(myVbox);
-		
+		page4cortrol.setExam(exam);
 		myVbox.getChildren().add(page1);
 		
     }
