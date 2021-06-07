@@ -1,9 +1,11 @@
 package gui;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import entity.Course;
 import entity.Exam;
+import entity.Question;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -46,6 +48,12 @@ public class TeacherCreateExamPage1Controller {
 
     private Exam exam;
     
+private ArrayList<Question> myQuestions;
+    
+    public void setMyQuestions(ArrayList<Question> myQuestions) {
+		this.myQuestions = myQuestions;
+	}
+    
     public void setExam(Exam exam) {
 		this.exam = exam;
 	}
@@ -69,6 +77,14 @@ public class TeacherCreateExamPage1Controller {
 
     @FXML
     void btnNextPressed(ActionEvent event) {
+    	
+    	if(examTitle.getText().trim().equals("")) {
+    		GUIControl.popUpMessage("Error", "Must enter exam title.");
+    		return;
+    	}
+    	exam.setName(examTitle.getText());
+    	
+    	
     	try {
     	if((Integer.parseInt(examDuration.getText())<=0))
     	{
@@ -83,26 +99,19 @@ public class TeacherCreateExamPage1Controller {
     	}
     	exam.setTotalTime(examDuration.getText());
     	
-    	if(examTitle.getText().trim().equals("")) {
-    		GUIControl.popUpMessage("Error", "Answer B wasn't inserted.");
-    		return;
-    	}
-    	exam.setName(examTitle.getText());
     	
     	
     	if(examCode.getText().trim().equals("")) {
-    		GUIControl.popUpMessage("Error", "Answer B wasn't inserted.");
+    		GUIControl.popUpMessage("Error", "Must enter exam code.");
     		return;
     	}
     	exam.setCode(examCode.getText());
     	
-    	if(teacherNotesText.getText().trim().equals("")) {
-    		GUIControl.popUpMessage("Error", "Answer B wasn't inserted.");
-    		return;
-    	}
-    	exam.setTdescription(teacherNotesText.getText());
+    	if(!teacherNotesText.getText().trim().equals("")) 
+    		exam.setTdescription(teacherNotesText.getText());
     	
-    	exam.setSdescription(studentNotesText.getText());
+    	if(!studentNotesText.getText().trim().equals(""))
+    		exam.setSdescription(studentNotesText.getText());
     	myVbox.getChildren().remove(2);
     	myVbox.getChildren().add(page2);
     	

@@ -1,9 +1,11 @@
 package gui;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import entity.Course;
 import entity.Exam;
+import entity.Question;
 import entity.Teacher;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +18,10 @@ public class TeacherCreateExamController extends TeacherMainPageController{
 	private Course course;
 
 	private Exam exam = new Exam();
+	
+	private ArrayList<Question> myQuestions = new ArrayList<Question>();
+    
+    
     @FXML
     private VBox myVbox;
 
@@ -32,9 +38,9 @@ public class TeacherCreateExamController extends TeacherMainPageController{
     private AnchorPane page4;
     
     private TeacherCreateExamPage1Controller page1Control;
-    private TeacherCreateExamPage2Controller page2cortrol;
-    private TeacherCreateExamPage3Controller page3cortrol;
-    private TeacherCreateExamPage4Controller page4cortrol;
+    private TeacherCreateExamPage2Controller page2Control;
+    private TeacherCreateExamPage3Controller page3Control;
+    private TeacherCreateExamPage4Controller page4Control;
     
     public void setTeacherCreateExam(Course course) throws IOException {
     	this.course=course;
@@ -53,36 +59,42 @@ public class TeacherCreateExamController extends TeacherMainPageController{
 		
 		FXMLLoader fxmlLoader2 = new FXMLLoader(getClass().getResource("/gui/TeacherCreateExam2.fxml"));
 		page2 = fxmlLoader2.load();
-		page2cortrol = (TeacherCreateExamPage2Controller) fxmlLoader2.getController();
+		page2Control = (TeacherCreateExamPage2Controller) fxmlLoader2.getController();
 		
 		FXMLLoader fxmlLoader3 = new FXMLLoader(getClass().getResource("/gui/TeacherCreateExam3.fxml"));
 		page3 = fxmlLoader3.load();
-		page3cortrol = (TeacherCreateExamPage3Controller) fxmlLoader3.getController();
+		page3Control = (TeacherCreateExamPage3Controller) fxmlLoader3.getController();
 		
 		FXMLLoader fxmlLoader4 = new FXMLLoader(getClass().getResource("/gui/TeacherCreateExam4.fxml"));
 		page4 = fxmlLoader4.load();
-		page4cortrol = (TeacherCreateExamPage4Controller) fxmlLoader4.getController();
+		page4Control = (TeacherCreateExamPage4Controller) fxmlLoader4.getController();
 		
+		
+		page1Control.setMyQuestions(myQuestions);
 		page1Control.setCourse(course);
 		page1Control.setMyVbox(myVbox);
 		page1Control.setPage2(page2);
 		page1Control.setExam(exam);
 		
-		page2cortrol.setCourse(course);
-		page2cortrol.setMyVbox(myVbox);
-		page2cortrol.setPage1(page1);
-		page2cortrol.setPage3(page3);
-		page2cortrol.setExam(exam);
+		page2Control.setMyQuestions(myQuestions);
+		page2Control.setCourse(course);
+		page2Control.setMyVbox(myVbox);
+		page2Control.setPage1(page1);
+		page2Control.setPage3(page3);
+		page2Control.setExam(exam);
 		
-		page3cortrol.setCourse(course);
-		page3cortrol.setMyVbox(myVbox);
-		page3cortrol.setPage2(page2);
-		page3cortrol.setPage4(page4);
-		page3cortrol.setExam(exam);
 		
-		page4cortrol.setCourse(course);
-		page4cortrol.setMyVbox(myVbox);
-		page4cortrol.setExam(exam);
+		page3Control.setMyQuestions(myQuestions);
+		page3Control.setCourse(course);
+		page3Control.setMyVbox(myVbox);
+		page3Control.setPage2(page2);
+		page3Control.setPage4(page4);
+		page3Control.setExam(exam);
+		
+		
+		page4Control.setCourse(course);
+		page4Control.setMyVbox(myVbox);
+		page4Control.setExam(exam);
 		myVbox.getChildren().add(page1);
 		
     }
