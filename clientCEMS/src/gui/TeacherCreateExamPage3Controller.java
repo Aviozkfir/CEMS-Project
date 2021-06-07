@@ -1,9 +1,14 @@
 package gui;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 import entity.Course;
 import entity.Exam;
+import entity.Question;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -39,6 +44,12 @@ public class TeacherCreateExamPage3Controller {
     private AnchorPane page2;
     private AnchorPane page4;
     
+private ArrayList<Question> myQuestions;
+    
+    public void setMyQuestions(ArrayList<Question> myQuestions) {
+		this.myQuestions = myQuestions;
+	}
+    
  
     private Exam exam;
     
@@ -70,8 +81,22 @@ public class TeacherCreateExamPage3Controller {
 
     @FXML
     void btnPublishPressed(ActionEvent event) {
+    	
+    	
+    	
     	myVbox.getChildren().remove(2);
     	myVbox.getChildren().add(page4);
     }
 
+    public void PrintSelectedQuestions() throws IOException {
+    	for(Question q : myQuestions)
+    	{
+    		TeacherExamBankSelectQuestionPointsRowController controller;
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/TeacherExamBankSelectQuestionPointsRow.fxml"));
+			AnchorPane root = fxmlLoader.load();
+			controller = (TeacherExamBankSelectQuestionPointsRowController) fxmlLoader.getController();
+			controller.setQuestion(q);
+			vTable.getChildren().add(root);
+    	}
+    }
 }

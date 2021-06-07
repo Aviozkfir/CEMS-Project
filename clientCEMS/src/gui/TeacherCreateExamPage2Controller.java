@@ -1,14 +1,30 @@
 package gui;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 import entity.Course;
 import entity.Exam;
+import entity.Question;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import message.ClientMessage;
+import message.ClientMessageType;
 
 public class TeacherCreateExamPage2Controller {
 
+	
+	@FXML
+    private Text numSelected;
+
+    @FXML
+    private Text numTotal;
+    
+    
     @FXML
     private VBox vTable;
     
@@ -21,7 +37,13 @@ public class TeacherCreateExamPage2Controller {
 
     private Exam exam;
     
-    public void setExam(Exam exam) {
+    private ArrayList<Question> myQuestions;
+    
+    public void setMyQuestions(ArrayList<Question> myQuestions) {
+		this.myQuestions = myQuestions;
+	}
+
+	public void setExam(Exam exam) {
 		this.exam = exam;
 	}
 
@@ -37,8 +59,30 @@ public class TeacherCreateExamPage2Controller {
 		this.myVbox = myVbox;
 	}
 
-	public void setCourse(Course course) {
+	public void setCourse(Course course) throws IOException {
 		this.course = course;
+		
+		ClientMessage m1 = new ClientMessage(ClientMessageType.GET_QUESTION_BY_COURSE, course);
+    	GUIControl.getInstance().sendToServer(m1);
+    	
+    	ArrayList<Question> allQuestions = (ArrayList<Question>) GUIControl.getInstance().getServerMsg().getMessage();
+    	
+    	numTotal.setText(""+allQuestions.size());
+    	numSelected.setText("0");
+    	
+    	
+    	for(Question q : allQuestions)
+    	{
+    		TeacherExamBankSelectQuestionsRowController controller;
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/TeacherExamBankSelectQuestionsRow.fxml"));
+			AnchorPane root = fxmlLoader.load();
+			controller = (TeacherExamBankSelectQuestionsRowController) fxmlLoader.getController();
+			controller.setQuestion(q);
+			controller.setList(myQuestions);
+			controller.setNumSelected(numSelected);
+			vTable.getChildren().add(root);
+			
+    	}
 	}
     
     @FXML
@@ -49,8 +93,13 @@ public class TeacherCreateExamPage2Controller {
     
     @FXML
     void btnNextPressed(ActionEvent event) {
+    	if(myQuestions.size()==0) {
+    		GUIControl.popUpMessage("Error", "Cannot create empty exam.");
+    		return;
+    	}
     	myVbox.getChildren().remove(2);
     	myVbox.getChildren().add(page3);
+    	
     }
 
 }
