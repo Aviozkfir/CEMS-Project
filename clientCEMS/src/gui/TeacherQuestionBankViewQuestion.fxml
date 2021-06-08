@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.PrincipalQuestionBankViewQuestionController">
+   <children>
+      <VBox prefHeight="600.0" prefWidth="206.0" style="-fx-background-color: #F7F7F7;">
+         <children>
+            <ImageView fitHeight="92.0" fitWidth="156.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/CEMSlogo.png" />
+               </image>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </ImageView>
+            <Button fx:id="HomePageButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#HomePageButtonPressed" prefHeight="46.0" prefWidth="172.0" style="-fx-background-color: #F7F7F7;" text="Home Page" textFill="#9b9c9f">
+               <font>
+                  <Font name="Ebrima" size="16.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="27.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/btnHomepage.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="QuestionBankButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#QuestionBankButtonPressed" prefHeight="46.0" prefWidth="172.0" style="-fx-background-color: #4CB5F5;" text="Question Bank">
+               <graphic>
+                  <ImageView fitHeight="27.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/btnQuestinBankOrange.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="Ebrima Bold" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="ExamBankButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#ExamBankButtonPressed" prefHeight="46.0" prefWidth="172.0" style="-fx-background-color: #F7F7F7;" text="Exam Bank" textFill="#9b9c9f">
+               <font>
+                  <Font name="Ebrima" size="16.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/btnExamBank.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="GetReportButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#GetReportButtonPressed" prefHeight="46.0" prefWidth="172.0" style="-fx-background-color: #F7F7F7;" text="Get Report" textFill="#9b9c9f">
+               <font>
+                  <Font name="Ebrima" size="16.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="27.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/btnStatistics.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="OnGoingButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#OnGoingPageButtonPressed" prefHeight="46.0" prefWidth="172.0" style="-fx-background-color: #F7F7F7;" text="On-going exams" textFill="#9b9c9f">
+               <font>
+                  <Font name="Ebrima" size="16.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/btnOngoingExam.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </VBox>
+      <VBox layoutX="173.0" prefHeight="600.0" prefWidth="851.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 30 0 0 0;">
+         <children>
+            <Pane opacity="0.82" prefHeight="36.0" prefWidth="851.0" style="-fx-background-color: #4CB5F5; -fx-background-radius: 30 0 0 0;">
+               <children>
+                  <Text fx:id="Name" fill="WHITE" layoutX="605.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Israel Israeli" textAlignment="CENTER" wrappingWidth="156.0">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Button fx:id="LogOutButton" layoutX="764.0" layoutY="4.0" mnemonicParsing="false" onAction="#LogOutButtonPressed" opacity="0.85" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #4CB5F5;" text="Logout" textFill="#1c251d">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+            <HBox prefHeight="44.0" prefWidth="851.0">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <children>
+                  <Text fill="#868282" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Question Bank" wrappingWidth="185.0">
+                     <font>
+                        <Font name="Ebrima" size="25.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" right="7.0" top="10.0" />
+                     </HBox.margin>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="&gt; ">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets top="12.0" />
+                     </HBox.margin>
+                  </Text>
+                  <Text fx:id="subjectName" strokeType="OUTSIDE" strokeWidth="0.0" text="SE ">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets top="12.0" />
+                     </HBox.margin>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="&gt; ">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets top="12.0" />
+                     </HBox.margin>
+                  </Text>
+                  <Text fx:id="courseName" strokeType="OUTSIDE" strokeWidth="0.0" text="SE ">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets top="12.0" />
+                     </HBox.margin>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="&gt; ">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets top="12.0" />
+                     </HBox.margin>
+                  </Text>
+                  <Text fx:id="questionName" fill="#868282" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Question ID" wrappingWidth="181.0">
+                     <font>
+                        <Font name="Ebrima" size="25.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+            </HBox>
+            <VBox prefHeight="450.0" prefWidth="829.0" style="-fx-background-radius: 30 30 30 30; -fx-background-color: white;">
+               <VBox.margin>
+                  <Insets left="11.0" right="11.0" />
+               </VBox.margin>
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Text fx:id="textQuestion" strokeType="OUTSIDE" strokeWidth="0.0" text="question text here" wrappingWidth="787.0">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="21.0" top="10.0" />
+                           </HBox.margin>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="19.0" prefWidth="808.0">
+                     <VBox.margin>
+                        <Insets bottom="3.0" left="21.0" />
+                     </VBox.margin>
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CORRECT">
+                           <HBox.margin>
+                              <Insets right="13.0" />
+                           </HBox.margin>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ANSWER OPTION" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="40.0" prefWidth="808.0">
+                     <children>
+                        <Pane prefHeight="39.0" prefWidth="50.0" style="-fx-border-color: #4CB5F5;">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <HBox.margin>
+                              <Insets left="1.0" right="14.0" />
+                           </HBox.margin>
+                           <children>
+                              <Label alignment="CENTER" layoutY="-1.0" prefHeight="21.0" prefWidth="50.0" style="-fx-background-color: #4CB5F5; -fx-font-weight: bold;" text="A" textAlignment="CENTER" textFill="WHITE">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <RadioButton fx:id="rbA" cache="true" disable="true" layoutX="16.0" layoutY="20.0" mnemonicParsing="false">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="rbGroup" />
+                                 </toggleGroup></RadioButton>
+                           </children>
+                        </Pane>
+                        <Text fx:id="textA" strokeType="OUTSIDE" strokeWidth="0.0" text="Answer A text" wrappingWidth="736.97265625">
+                           <font>
+                              <Font size="18.0" />
+                           </font></Text>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="11.0" left="21.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="40.0" prefWidth="808.0">
+                     <children>
+                        <Pane prefHeight="39.0" prefWidth="50.0" style="-fx-border-color: #4CB5F5;">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <HBox.margin>
+                              <Insets left="1.0" right="14.0" />
+                           </HBox.margin>
+                           <children>
+                              <Label alignment="CENTER" layoutY="-1.0" prefHeight="21.0" prefWidth="50.0" style="-fx-background-color: #4CB5F5; -fx-font-weight: bold;" text="B" textAlignment="CENTER" textFill="WHITE">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <RadioButton fx:id="rbB" disable="true" layoutX="16.0" layoutY="20.0" mnemonicParsing="false" toggleGroup="$rbGroup" />
+                           </children>
+                        </Pane>
+                        <Text fx:id="textB" strokeType="OUTSIDE" strokeWidth="0.0" text="Answer B text" wrappingWidth="739.111328125">
+                           <font>
+                              <Font size="18.0" />
+                           </font></Text>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="11.0" left="21.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="40.0" prefWidth="808.0">
+                     <children>
+                        <Pane prefHeight="39.0" prefWidth="50.0" style="-fx-border-color: #4CB5F5;">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <HBox.margin>
+                              <Insets left="1.0" right="14.0" />
+                           </HBox.margin>
+                           <children>
+                              <Label alignment="CENTER" layoutY="-1.0" prefHeight="21.0" prefWidth="50.0" style="-fx-background-color: #4CB5F5; -fx-font-weight: bold;" text="C" textAlignment="CENTER" textFill="WHITE">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <RadioButton fx:id="rbC" disable="true" layoutX="16.0" layoutY="20.0" mnemonicParsing="false" toggleGroup="$rbGroup" />
+                           </children>
+                        </Pane>
+                        <Text fx:id="textC" strokeType="OUTSIDE" strokeWidth="0.0" text="Answer C text" wrappingWidth="736.662109375">
+                           <font>
+                              <Font size="18.0" />
+                           </font></Text>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="11.0" left="21.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="40.0" prefWidth="808.0">
+                     <children>
+                        <Pane prefHeight="39.0" prefWidth="50.0" style="-fx-border-color: #4CB5F5;">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <HBox.margin>
+                              <Insets left="1.0" right="14.0" />
+                           </HBox.margin>
+                           <children>
+                              <Label alignment="CENTER" layoutY="-1.0" prefHeight="21.0" prefWidth="50.0" style="-fx-background-color: #4CB5F5; -fx-font-weight: bold;" text="D" textAlignment="CENTER" textFill="WHITE">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <RadioButton fx:id="rbD" disable="true" layoutX="16.0" layoutY="20.0" mnemonicParsing="false" toggleGroup="$rbGroup" />
+                           </children>
+                        </Pane>
+                        <Text fx:id="textD" strokeType="OUTSIDE" strokeWidth="0.0" text="Answer D text" wrappingWidth="739.974609375">
+                           <font>
+                              <Font size="18.0" />
+                           </font></Text>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="11.0" left="21.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
+            <HBox prefHeight="39.0" prefWidth="851.0">
+               <children>
+                  <Button fx:id="Back" mnemonicParsing="false" onAction="#BackPressed" prefHeight="37.0" prefWidth="91.0" style="-fx-background-color: #6897E7; -fx-background-radius: 100;" text="Back">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/btnBack.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets top="6.0" />
+               </VBox.margin>
+            </HBox>
+         </children></VBox>
+   </children>
+</AnchorPane>
