@@ -48,13 +48,15 @@ public class PrincipalExamBankCoursesController extends PrincipalMainPageControl
 					StackPane root = fxmlLoader.load();
 					controller = (btnFolderController) fxmlLoader.getController();
 
-					controller.setChosenPath(ClientsConstants.Screens.PRINCIPAL_MAIN_PAGE.path);
+					controller.setChosenPath(ClientsConstants.Screens.PRINCIPAL_EXAM_BANK_EXAM.path);
 					controller.setText(courseList.get(i).getName());
 					controller.setObject(courseList.get(i));
-					controller.setConsumer((fxmlLocation, subject)->{   
+					controller.setConsumer((fxmlLocation, course)->{   
 						try {
 							
-							GUIControl.instance.loadStage(fxmlLocation);
+							PrincipalExamBankExamsController contr =(PrincipalExamBankExamsController) GUIControl.instance.loadStage(fxmlLocation);
+							contr.setPrincipalCourse((Course)course);
+							contr.setRequestCounter();
 						
 						} catch (IOException e) {
 							// TODO Auto-generated catch block

@@ -14,9 +14,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="myRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.PrincipalQuestionBankQuestionsController">
+<AnchorPane fx:id="myRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.PrincipalExamBankExamsController">
    <children>
-      <VBox prefHeight="600.0" prefWidth="206.0" style="-fx-background-color: #F7F7F7;">
+      <VBox prefHeight="600.0" prefWidth="175.0" style="-fx-background-color: #F7F7F7;">
          <children>
             <ImageView fitHeight="92.0" fitWidth="156.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -38,26 +38,26 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="QuestionBankButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#QuestionBankButtonPressed" prefHeight="46.0" prefWidth="172.0" style="-fx-background-color: #4CB5F5;" text="Question Bank">
+            <Button fx:id="QuestionBankButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#QuestionBankButtonPressed" prefHeight="46.0" prefWidth="172.0" style="-fx-background-color: #F7F7F7;" text="Question Bank" textFill="#9b9c9f">
                <graphic>
                   <ImageView fitHeight="27.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/btnQuestinBankOrange.png" />
+                        <Image url="@../resources/btnQuestionBank.png" />
                      </image>
                   </ImageView>
                </graphic>
                <font>
-                  <Font name="Ebrima Bold" size="16.0" />
+                  <Font name="Ebrima" size="16.0" />
                </font>
             </Button>
-            <Button fx:id="ExamBankButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#ExamBankButtonPressed" prefHeight="46.0" prefWidth="172.0" style="-fx-background-color: #F7F7F7;" text="Exam Bank" textFill="#9b9c9f">
+            <Button fx:id="ExamBankButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#ExamBankButtonPressed" prefHeight="46.0" prefWidth="172.0" style="-fx-background-color: #4CB5F5;" text="Exam Bank">
                <font>
-                  <Font name="Ebrima" size="16.0" />
+                  <Font name="Ebrima Bold" size="17.0" />
                </font>
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/btnExamBank.png" />
+                        <Image url="@../resources/btnExamBankOrange.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -74,7 +74,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="RequestsButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#RequestsButtonPressed" prefHeight="46.0" prefWidth="172.0" style="-fx-background-color: #F7F7F7;" text="Requests" textFill="#9b9c9f">
+            <Button fx:id="RequestsButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#RequestsButtonPressed" prefHeight="46.0" prefWidth="173.0" style="-fx-background-color: #F7F7F7;" text="Requests" textFill="#9b9c9f">
                <font>
                   <Font name="Ebrima" size="16.0" />
                </font>
@@ -111,7 +111,7 @@
             </Pane>
             <HBox prefHeight="44.0" prefWidth="851.0">
                <children>
-                  <Text fill="#868282" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Question Bank" wrappingWidth="185.0">
+                  <Text fill="#868282" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Exam Bank" wrappingWidth="137.0">
                      <font>
                         <Font name="Ebrima" size="25.0" />
                      </font>
@@ -120,14 +120,14 @@
                      </HBox.margin>
                   </Text>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="&gt; ">
-                     <HBox.margin>
-                        <Insets top="12.0" />
-                     </HBox.margin>
                      <font>
                         <Font size="17.0" />
                      </font>
+                     <HBox.margin>
+                        <Insets top="12.0" />
+                     </HBox.margin>
                   </Text>
-                  <Text fx:id="subjectName" strokeType="OUTSIDE" strokeWidth="0.0" text="SE ">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Exams">
                      <font>
                         <Font size="17.0" />
                      </font>
@@ -143,9 +143,25 @@
                         <Insets top="12.0" />
                      </HBox.margin>
                   </Text>
-                  <Text fx:id="courseName" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Human-Computer Interaction">
+                  <Text fx:id="subjectName" strokeType="OUTSIDE" strokeWidth="0.0" text="Subject">
                      <font>
                         <Font size="17.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets top="12.0" />
+                     </HBox.margin>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="&gt; ">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets top="12.0" />
+                     </HBox.margin>
+                  </Text>
+                  <Text fx:id="courseName" strokeType="OUTSIDE" strokeWidth="0.0" text="Course">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
                      </font>
                      <HBox.margin>
                         <Insets top="12.0" />
@@ -158,56 +174,61 @@
             </HBox>
             <HBox prefHeight="30.0" prefWidth="851.0">
                <children>
-                  <TextField fx:id="searchBar" prefHeight="25.0" prefWidth="203.0" />
+                  <TextField fx:id="searchBar" prefHeight="23.0" prefWidth="247.0">
+                     <HBox.margin>
+                        <Insets right="2.0" />
+                     </HBox.margin>
+                  </TextField>
                   <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#btnSearchPressed" prefHeight="25.0" prefWidth="104.0" text="Search by No." />
-                  <Button fx:id="showAll" mnemonicParsing="false" onAction="#showAllPressed" prefHeight="25.0" prefWidth="124.0" text="Show all questions">
+                  <Button fx:id="showAll" mnemonicParsing="false" onAction="#showAllPressed" prefHeight="25.0" prefWidth="104.0" text="Show all exams">
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>
                   </Button>
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="851.0">
+            <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                  <HBox prefHeight="100.0" prefWidth="851.0">
                      <children>
-                        <Text fx:id="numberOfQuestions" fill="#2a73ff" strokeType="OUTSIDE" strokeWidth="0.0" text="2000" textAlignment="CENTER" wrappingWidth="94.95509719848633">
-                           <font>
-                              <Font name="System Bold" size="26.0" />
-                           </font>
-                        </Text>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Total in bank" textAlignment="CENTER">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Text>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Text fx:id="numberOfExams" fill="#2a73ff" strokeType="OUTSIDE" strokeWidth="0.0" text="2000" textAlignment="CENTER" wrappingWidth="94.95509719848633">
+                                 <font>
+                                    <Font name="System Bold" size="26.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Total in bank" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                           <HBox.margin>
+                              <Insets left="11.0" />
+                           </HBox.margin>
+                        </VBox>
                      </children>
-                     <HBox.margin>
+                     <opaqueInsets>
                         <Insets left="11.0" />
-                     </HBox.margin>
-                  </VBox>
+                     </opaqueInsets>
+                  </HBox>
                </children>
-               <opaqueInsets>
-                  <Insets left="11.0" />
-               </opaqueInsets>
             </HBox>
             <HBox prefHeight="42.0" style="-fx-background-color: white;">
-               <VBox.margin>
-                  <Insets bottom="10.0" left="11.0" right="11.0" />
-               </VBox.margin>
                <children>
                   <Label alignment="CENTER" prefHeight="42.0" prefWidth="78.0" text="No." textAlignment="CENTER">
                      <opaqueInsets>
                         <Insets top="5.0" />
                      </opaqueInsets>
                      <HBox.margin>
-                        <Insets left="62.0" />
+                        <Insets left="57.0" />
                      </HBox.margin>
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="42.0" prefWidth="319.0" text="Question" textAlignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="42.0" prefWidth="223.0" text="Exam Title" textAlignment="CENTER">
                      <opaqueInsets>
                         <Insets top="5.0" />
                      </opaqueInsets>
@@ -215,7 +236,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="42.0" prefWidth="165.0" text="Last date modified" textAlignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="42.0" prefWidth="128.0" text="Last date modified" textAlignment="CENTER">
                      <opaqueInsets>
                         <Insets top="5.0" />
                      </opaqueInsets>
@@ -223,15 +244,21 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="42.0" prefWidth="211.0" text="Options" textAlignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="42.0" prefWidth="138.0" text="Author" textAlignment="CENTER">
                      <opaqueInsets>
                         <Insets top="5.0" />
                      </opaqueInsets>
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
+                     <HBox.margin>
+                        <Insets right="21.0" />
+                     </HBox.margin>
                   </Label>
                </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="11.0" right="11.0" />
+               </VBox.margin>
             </HBox>
             <ScrollPane prefHeight="268.0" prefWidth="841.0" style="-fx-opacity: 1; -fx-border-color: #EBEBEB;">
                <VBox.margin>
@@ -241,7 +268,7 @@
                   <VBox fx:id="vTable" prefHeight="1.0" prefWidth="812.0" style="-fx-background-color: white;" />
                </content>
             </ScrollPane>
-            <HBox prefHeight="39.0" prefWidth="851.0">
+            <HBox prefHeight="54.0" prefWidth="851.0" style="-fx-background-color: #EBEBEB;">
                <children>
                   <Button fx:id="Back" mnemonicParsing="false" onAction="#BackPressed" prefHeight="37.0" prefWidth="91.0" style="-fx-background-color: #6897E7; -fx-background-radius: 100;" text="Back">
                      <font>
@@ -258,16 +285,13 @@
                         </ImageView>
                      </graphic>
                      <HBox.margin>
-                        <Insets left="41.0" top="10.0" />
+                        <Insets left="10.0" top="6.0" />
                      </HBox.margin>
                   </Button>
                </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
             </HBox>
          </children></VBox>
    </children>

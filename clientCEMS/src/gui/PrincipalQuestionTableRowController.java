@@ -1,5 +1,7 @@
 package gui;
 
+import java.io.IOException;
+
 import entity.Course;
 import entity.Question;
 import javafx.event.ActionEvent;
@@ -40,7 +42,10 @@ public class PrincipalQuestionTableRowController {
     }
 
     @FXML
-    void btnViewQuestionPressed(ActionEvent event) {
-
+    void btnViewQuestionPressed(ActionEvent event) throws IOException {
+     GUIControl guiControl = GUIControl.getInstance();
+    	PrincipalQuestionBankViewQuestionController a = (PrincipalQuestionBankViewQuestionController) guiControl.loadStage(gui.ClientsConstants.Screens.PRINCIPAL_QUESTION_VIEW.path);
+    			a.setPrincipalQuestion(q,c);
+    			a.setRequestCounter();
     }
 }

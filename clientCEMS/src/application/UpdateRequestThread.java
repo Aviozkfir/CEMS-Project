@@ -10,7 +10,7 @@ private boolean exit = false;
 		while(!exit) {
 			try {
 				guiControl.CountRequest();
-				Thread.sleep(25000);
+				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
