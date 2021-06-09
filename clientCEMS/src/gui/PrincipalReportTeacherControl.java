@@ -69,7 +69,7 @@ public class PrincipalReportTeacherControl extends PrincipalMainPageController i
 
 			if (guiControl.getServerMsg().getType() == ServerMessageTypes.PRINCIPAL_REPORT_TEACHER_ADDED) {
 
-				HashMap<String, String> reportData = (HashMap<String, String>) guiControl.getServerMsg().getMessage();
+				ArrayList<String> reportData= (ArrayList<String>) guiControl.getServerMsg().getMessage();
 				if (!reportData.isEmpty()) {
 					report = new Report(reportData);
 					principal.setReport(report);
@@ -131,7 +131,7 @@ public class PrincipalReportTeacherControl extends PrincipalMainPageController i
 	}
 
 	public void SetMedianAndAverage() {
-		ArrayList<String> gradesString = new ArrayList<String>(principal.getReport().getReportData().keySet()); // set
+		ArrayList<String> gradesString = new ArrayList<String>(principal.getReport().getReportData()); // set
 
 		ArrayList<Integer> grades = new ArrayList<Integer>();
 		for (String i : gradesString) {

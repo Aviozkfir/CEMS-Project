@@ -69,7 +69,8 @@ public class PrincipalReportCourseControl extends PrincipalMainPageController im
 
 			if (guiControl.getServerMsg().getType() == ServerMessageTypes.PRINCIPAL_REPORT_COURSES_ADDED) {
 
-				HashMap<String, String> reportData = (HashMap<String, String>) guiControl.getServerMsg().getMessage();
+				//HashMap<String, String> reportData = (HashMap<String, String>) guiControl.getServerMsg().getMessage();
+				ArrayList<String> reportData= (ArrayList<String>) guiControl.getServerMsg().getMessage();
 				if (!reportData.isEmpty()) {
 					report = new Report(reportData);
 					principal.setReport(report);
@@ -131,7 +132,7 @@ public class PrincipalReportCourseControl extends PrincipalMainPageController im
 	}
 
 	public void SetMedianAndAverage() {
-		ArrayList<String> gradesString = new ArrayList<String>(principal.getReport().getReportData().keySet()); // set
+		ArrayList<String> gradesString = new ArrayList<String>(principal.getReport().getReportData()); // set
 		// arraylist.
 		ArrayList<Integer> grades = new ArrayList<Integer>();
 		for (String i : gradesString) {

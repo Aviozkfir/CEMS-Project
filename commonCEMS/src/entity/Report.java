@@ -1,26 +1,28 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 @SuppressWarnings("serial")
 public class Report implements Serializable {
 
-	private HashMap<String, String> report = new HashMap<String, String>(); // (grade,Date).
+	//private HashMap<String, String> report = new HashMap<String, String>(); // (grade,Date).
+	private ArrayList<String> report = new ArrayList<String>();
 	private String Median;
 	private String Average;
 	private String yearRange;
 
 
-	public Report(HashMap<String, String> report) {
+	public Report(ArrayList<String> report) {
 		this.report = report;
 	}
 
-	public HashMap<String, String> getReportData() {
+	public ArrayList<String> getReportData() {
 		return report;
 	}
 
-	public void setReportData(HashMap<String, String> report) {
+	public void setReportData(ArrayList<String> report) {
 		this.report = report;
 	}
 
