@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.PrincipalExamBankRowController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.PrincipalExamViewQuestionTableRowController">
    <children>
       <HBox prefHeight="45.0" prefWidth="800.0" style="-fx-background-color: white;">
          <children>
@@ -28,7 +28,7 @@
                   <Insets />
                </HBox.margin>
             </Button>
-            <Label fx:id="questionID" alignment="CENTER" prefHeight="42.0" prefWidth="78.0" text="020301" textAlignment="CENTER">
+            <Label fx:id="questionID" alignment="CENTER" prefHeight="42.0" prefWidth="78.0" text="1005" textAlignment="CENTER">
                <opaqueInsets>
                   <Insets top="5.0" />
                </opaqueInsets>
@@ -38,22 +38,16 @@
                <font>
                   <Font size="14.0" />
                </font>
-               <padding>
-                  <Insets right="10.0" />
-               </padding>
             </Label>
-            <Label fx:id="examTitle" alignment="CENTER" prefHeight="42.0" prefWidth="275.0" text="Exam Title" wrapText="true">
+            <Label fx:id="questionText" prefHeight="42.0" prefWidth="319.0" text="The human Computer interaction is a core subject of:" wrapText="true">
                <opaqueInsets>
                   <Insets top="5.0" />
                </opaqueInsets>
                <font>
                   <Font size="13.0" />
                </font>
-               <padding>
-                  <Insets right="10.0" />
-               </padding>
             </Label>
-            <Label fx:id="date" alignment="CENTER" prefHeight="42.0" prefWidth="128.0" text="1/5/2021">
+            <Label fx:id="date" alignment="CENTER" prefHeight="42.0" prefWidth="165.0" text="1/5/2021">
                <opaqueInsets>
                   <Insets top="5.0" />
                </opaqueInsets>
@@ -63,23 +57,6 @@
                <font>
                   <Font size="13.0" />
                </font>
-               <padding>
-                  <Insets right="10.0" />
-               </padding>
-            </Label>
-            <Label fx:id="author" alignment="CENTER" prefHeight="42.0" prefWidth="138.0" text="Ploni Almoni">
-               <opaqueInsets>
-                  <Insets top="5.0" />
-               </opaqueInsets>
-               <font>
-                  <Font size="13.0" />
-               </font>
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-               <padding>
-                  <Insets right="10.0" />
-               </padding>
             </Label>
          </children>
          <opaqueInsets>

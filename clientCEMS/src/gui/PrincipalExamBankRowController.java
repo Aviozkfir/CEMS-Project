@@ -1,5 +1,8 @@
 package gui;
 
+import java.io.IOException;
+
+import entity.Course;
 import entity.Exam;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,9 +28,11 @@ public class PrincipalExamBankRowController {
 
 
     private Exam exam;
+    private Course course;
     
-    public void setExam(Exam exam) {
+    public void setExam(Exam exam,Course course) {
 		this.exam = exam;
+		this.course = course;
 		questionID.setText(exam.getEid());
 		author.setText(exam.getID());
 		date.setText(exam.getDate());
@@ -35,7 +40,10 @@ public class PrincipalExamBankRowController {
 	}
 
     @FXML
-    void btnViewQuestionPressed(ActionEvent event) {
-    	
+    void btnViewQuestionPressed(ActionEvent event) throws IOException {
+    	   GUIControl guiControl = GUIControl.getInstance();
+    	   PrincipalExamBankViewExamController a = (PrincipalExamBankViewExamController) guiControl.loadStage(gui.ClientsConstants.Screens.PRINCIPAL_EXAM_VIEW.path);
+       			a.setPrincipalExam(exam,course);
+       			a.setRequestCounter();
     }
 }

@@ -672,5 +672,21 @@ public static String addExam(Exam e, ArrayList<QuestionInExam> list) throws SQLE
 		return courseList;
 	}
 	
+	public static Object getQuestionByExam(Exam exam) throws SQLException {
+		ArrayList<Question> questionList = new ArrayList<Question>();
+		ResultSet rs;
+		PreparedStatement logInPreparedStatement;
+		logInPreparedStatement = con
+				.prepareStatement("SELECT q.Text, q.Ans1, q.Ans2, q.Ans3, q.Ans4, q.Qid, q.ID, q.DATE, q.CorrectAns "
+						+ "FROM Questions q, Question_In_Exams qie " + "where q.Qid=qie.Qid AND qie.Eid=?");
+		logInPreparedStatement.setString(1, exam.getEid());
+		rs = logInPreparedStatement.executeQuery();
+		while (rs.next()) {
+			questionList.add(new Question(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
+					rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9)));
+		}
+		return questionList;
+	}
+	
 	
 }

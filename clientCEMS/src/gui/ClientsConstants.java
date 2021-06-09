@@ -56,6 +56,9 @@ public class ClientsConstants {
 		PRINCIPAL_QUESTION_VIEW("/gui/PrincipalQuestionBankViewQuestion.fxml"),
 		PRINCIPAL_EXAM_BANK_EXAM("/gui/PrincipalExamBankExams.fxml"),
 		PRINCIPAL_EXAM_TABLE_ROW("/gui/PrincipalExamBankExamsRow.fxml"),
+		PRINCIPAL_EXAM_VIEW("/gui/PrincipalExamBankExamsViewExam.fxml"),
+		PRINCIPAL_EXAM_QUESTION_TABLE_ROW("/gui/PrincipalExamQuestionTableRow.fxml"),
+		PRINCIPAL_EXAM_VIEW_QUESTION_VIEW("/gui/PrincipalExamBankViewQuestion.fxml"),
 		STUDENT_CHOICE_EXAM_PAGE("/gui/studentExamChoice.fxml");
 
 		// DIFFERENCE_PARAMETER_UPDATE("/gui/DifferenceParameterUpdate.fxml"),

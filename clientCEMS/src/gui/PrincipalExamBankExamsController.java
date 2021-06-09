@@ -21,7 +21,7 @@ import message.ServerMessageTypes;
 public class PrincipalExamBankExamsController extends PrincipalMainPageController {
 
 	private ArrayList<Exam> allExams;
-	
+	ArrayList<PrincipalExamBankRowController> examControllerList = new ArrayList<PrincipalExamBankRowController> ();
 	
 	
     @FXML
@@ -143,13 +143,14 @@ public class PrincipalExamBankExamsController extends PrincipalMainPageControlle
     	}
     }
  
-	public void AddTableRow(Exam e) throws IOException {
+	public void AddTableRow(Exam exam) throws IOException {
 		PrincipalExamBankRowController controller;
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(gui.ClientsConstants.Screens.PRINCIPAL_EXAM_TABLE_ROW.path));
 		AnchorPane root = fxmlLoader.load();
 		controller = (PrincipalExamBankRowController) fxmlLoader.getController();
-		controller.setExam(e);
+		controller.setExam(exam,course);
 		vTable.getChildren().add(root);
+		examControllerList.add(controller);
 	}
 
 }

@@ -360,7 +360,15 @@ public class ServerCEMS extends AbstractServer {
 						type = ServerMessageTypes.STUDENT_COURSES_NOT_ADDED;
 					}
 					break;
-
+					
+				case GET_QUESTION_BY_EXAM:
+					returnVal = MySQLConnection.getQuestionByExam((Exam) clientMsg.getMessage());
+					if (returnVal == null) {
+						type = ServerMessageTypes.QUESTION_BY_EXAM_NOT_RECIVED;
+					} else {
+						type = ServerMessageTypes.QUESTION_BY_EXAM_RECIVED;
+					}
+					break;
 				}
 			}
 		} catch (Exception e) {

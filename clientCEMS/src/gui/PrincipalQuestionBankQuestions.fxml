@@ -223,14 +223,6 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="42.0" prefWidth="211.0" text="Options" textAlignment="CENTER">
-                     <opaqueInsets>
-                        <Insets top="5.0" />
-                     </opaqueInsets>
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
                </children>
             </HBox>
             <ScrollPane prefHeight="268.0" prefWidth="841.0" style="-fx-opacity: 1; -fx-border-color: #EBEBEB;">
