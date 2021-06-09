@@ -10,37 +10,14 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 
 import entity.Course;
-import entity.CourseReport;
 import entity.Exam;
-
 import entity.ManualExamFile;
-
-//import com.sun.javafx.webkit.ThemeClientImpl;
-
-//import org.omg.PortableServer.ID_ASSIGNMENT_POLICY_ID;
-
-//import com.sun.media.jfxmedia.events.NewFrameEvent;
-
-import entity.PersonCEMS;
 import entity.Principal;
 import entity.Question;
 import entity.QuestionInExam;
@@ -49,8 +26,6 @@ import entity.SolvedExam;
 import entity.Student;
 import entity.Subject;
 import entity.Teacher;
-import message.ServerMessage;
-import message.ServerMessageTypes;
 
 /**
  * class that holds static methods related to database actions such as
