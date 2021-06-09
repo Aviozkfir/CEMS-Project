@@ -97,7 +97,17 @@ private ArrayList<Question> myQuestions;
     		return;
     		
     	}
-    	exam.setTotalTime(examDuration.getText());
+    	if((Integer.parseInt(examDuration.getText())>3599)){
+    		GUIControl.popUpMessage("Error", "Exam is too long");
+    		return;
+    	}
+    	String h = (Integer.parseInt(examDuration.getText())/60)+"";
+    	String min = (Integer.parseInt(examDuration.getText())%60)+"";
+    	if(h.length()==1)
+    		h="0"+h;
+    	if(min.length()==1)
+    		min="0"+min;
+    	exam.setTotalTime(h+":"+min);
     	
     	
     	
@@ -109,9 +119,14 @@ private ArrayList<Question> myQuestions;
     	
     	if(!teacherNotesText.getText().trim().equals("")) 
     		exam.setTdescription(teacherNotesText.getText());
+    	else 
+    		exam.setTdescription("");
     	
     	if(!studentNotesText.getText().trim().equals(""))
     		exam.setSdescription(studentNotesText.getText());
+    	else
+    		exam.setSdescription("");
+    	
     	myVbox.getChildren().remove(2);
     	myVbox.getChildren().add(page2);
     	

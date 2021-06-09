@@ -2,6 +2,7 @@ package gui;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.function.Supplier;
 
 import entity.Course;
 import entity.Exam;
@@ -33,9 +34,16 @@ public class TeacherCreateExamPage2Controller {
     private VBox myVbox;
     
     private AnchorPane page1;
-    private AnchorPane page3;
 
-    private Exam exam;
+    private Supplier<AnchorPane> setPage3;
+
+    
+
+	public void setPage3setter(Supplier<AnchorPane> setPage3) {
+		this.setPage3 = setPage3;
+	}
+
+	private Exam exam;
     
     private ArrayList<Question> myQuestions;
     
@@ -51,9 +59,6 @@ public class TeacherCreateExamPage2Controller {
 		this.page1 = page1;
 	}
     
-    public void setPage3(AnchorPane page3) {
-  		this.page3 = page3;
-  	}
 
 	public void setMyVbox(VBox myVbox) {
 		this.myVbox = myVbox;
@@ -97,8 +102,11 @@ public class TeacherCreateExamPage2Controller {
     		GUIControl.popUpMessage("Error", "Cannot create empty exam.");
     		return;
     	}
+    	
+    	
+    	
     	myVbox.getChildren().remove(2);
-    	myVbox.getChildren().add(page3);
+    	myVbox.getChildren().add(setPage3.get());
     	
     }
 

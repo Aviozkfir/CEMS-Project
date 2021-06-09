@@ -100,6 +100,24 @@ public class Exam implements Serializable {
 	public void setDate(String date) {
 		Date = date;
 	}
+	public void setDate() {
+		int day = java.time.LocalDate.now().getDayOfMonth();
+    	int mounth =java.time.LocalDate.now().getMonthValue();
+    	int year=java.time.LocalDate.now().getYear();
+    	String s="";
+    	s=s.concat(""+year+"-");
+    	if(mounth<10)
+    		s=s.concat("0");
+    	s=s.concat(mounth+"-");
+    	if(day<10)
+    		s=s.concat("0");
+    	s=s.concat(day+"");
+    	
+    	
+    	//22-2-1012
+		Date = s;
+	}
+	
 
 	public void setTdescription(String tdescription) {
 		Tdescription = tdescription;

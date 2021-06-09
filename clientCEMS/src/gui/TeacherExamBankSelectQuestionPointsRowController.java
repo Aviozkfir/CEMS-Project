@@ -21,8 +21,8 @@ public class TeacherExamBankSelectQuestionPointsRowController {
     @FXML
     private TextField points;
 
-    public TextField getPoints() {
-		return points;
+    public String getPoints() {
+		return points.getText();
 	}
     
     
