@@ -79,10 +79,22 @@
                   <Insets bottom="11.0" />
                </VBox.margin>
             </HBox>
-            <ScrollPane prefHeight="349.0" prefWidth="812.0" style="-fx-opacity: 1; -fx-border-color: #EBEBEB;">
+            <ScrollPane prefHeight="354.0" prefWidth="812.0" style="-fx-opacity: 1; -fx-border-color: #EBEBEB;">
                <content>
-                  <VBox fx:id="vTable" prefHeight="325.0" prefWidth="803.0" style="-fx-background-color: white;">
+                  <VBox fx:id="vTable" prefHeight="350.0" prefWidth="729.0" style="-fx-background-color: white;">
                      <children>
+                        <HBox prefHeight="29.0" prefWidth="805.0">
+                           <children>
+                              <Text fill="#aaadb2" strokeType="OUTSIDE" strokeWidth="0.0" text="General Details" wrappingWidth="405.45458984375">
+                                 <font>
+                                    <Font name="System Bold" size="22.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="12.0" right="3.0" />
+                                 </HBox.margin>
+                              </Text>
+                           </children>
+                        </HBox>
                         <HBox prefHeight="25.0" prefWidth="829.0">
                            <opaqueInsets>
                               <Insets />
@@ -140,7 +152,7 @@
                                     </HBox>
                                     <HBox prefHeight="23.0" prefWidth="90.0">
                                        <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Points for each question: " wrappingWidth="198.6171875">
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of questions" wrappingWidth="198.6171875">
                                              <font>
                                                 <Font name="System Bold" size="16.0" />
                                              </font>
@@ -242,7 +254,7 @@
                               <Insets />
                            </VBox.margin>
                         </HBox>
-                        <HBox prefHeight="25.0" prefWidth="829.0">
+                        <HBox prefHeight="25.0" prefWidth="795.0">
                            <children>
                               <ImageView fitHeight="19.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -261,6 +273,33 @@
                                  </HBox.margin>
                               </Text>
                            </children>
+                           <VBox.margin>
+                              <Insets bottom="20.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefHeight="0.0" prefWidth="760.0">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <children>
+                              <Line endX="750.0" startX="-12.0" stroke="#e8ebef" strokeWidth="2.0">
+                                 <HBox.margin>
+                                    <Insets bottom="7.0" left="21.0" />
+                                 </HBox.margin>
+                              </Line>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="36.0" prefWidth="795.0">
+                           <children>
+                              <Text fill="#aaadb2" strokeType="OUTSIDE" strokeWidth="0.0" text="Questions" wrappingWidth="405.45458984375">
+                                 <font>
+                                    <Font name="System Bold" size="22.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="12.0" right="3.0" />
+                                 </HBox.margin>
+                              </Text>
+                           </children>
                         </HBox>
                      </children></VBox>
                </content>
@@ -270,7 +309,7 @@
             </ScrollPane>
             <HBox prefHeight="25.0" prefWidth="829.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#btnBackPressed" prefHeight="37.0" prefWidth="98.0" style="-fx-background-color: #6897E7; -fx-background-radius: 100;" text="Back">
+                  <Button mnemonicParsing="false" onAction="#btnBackPressed" prefHeight="37.0" prefWidth="91.0" style="-fx-background-color: #6897E7; -fx-background-radius: 100;" text="Back">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -285,10 +324,10 @@
                         </ImageView>
                      </graphic>
                      <HBox.margin>
-                        <Insets right="610.0" />
+                        <Insets right="227.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="btnPublish" mnemonicParsing="false" onAction="#btnPublishPressed" prefHeight="37.0" prefWidth="117.0" style="-fx-background-color: #6897E7; -fx-background-radius: 100;" text="Publish">
+                  <Button fx:id="btnPublish" mnemonicParsing="false" onAction="#btnPublishPressed" prefHeight="37.0" prefWidth="129.0" style="-fx-background-color: #3161C2; -fx-background-radius: 100;" text="Publish" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -308,7 +347,7 @@
                   <Insets />
                </opaqueInsets>
                <VBox.margin>
-                  <Insets left="20.0" right="20.0" top="19.0" />
+                  <Insets left="20.0" right="20.0" top="11.0" />
                </VBox.margin>
             </HBox>
          </children>

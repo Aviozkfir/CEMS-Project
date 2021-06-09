@@ -155,30 +155,6 @@
                   </Text>
                </children>
             </HBox>
-            <HBox prefHeight="21.0" prefWidth="829.0">
-               <children>
-                  <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="*">
-                     <HBox.margin>
-                        <Insets left="19.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Points for each question:" wrappingWidth="164.45458984375">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets right="3.0" />
-                     </HBox.margin>
-                  </Text>
-                  <TextField fx:id="points" prefHeight="29.0" prefWidth="45.0" />
-               </children>
-               <VBox.margin>
-                  <Insets bottom="7.0" />
-               </VBox.margin>
-            </HBox>
             <HBox prefHeight="25.0" prefWidth="829.0">
                <children>
                   <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="*">
@@ -381,7 +357,7 @@
                   <Insets />
                </opaqueInsets>
                <VBox.margin>
-                  <Insets left="20.0" right="20.0" top="20.0" />
+                  <Insets left="20.0" right="20.0" top="52.0" />
                </VBox.margin>
             </HBox>
          </children>

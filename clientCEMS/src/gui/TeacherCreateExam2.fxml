@@ -195,7 +195,7 @@
                   <Insets left="11.0" right="11.0" />
                </VBox.margin>
             </HBox>
-            <ScrollPane prefHeight="270.0" prefWidth="812.0" style="-fx-opacity: 1; -fx-border-color: #EBEBEB;">
+            <ScrollPane prefHeight="224.0" prefWidth="812.0" style="-fx-opacity: 1; -fx-border-color: #EBEBEB;">
                <content>
                   <VBox fx:id="vTable" prefHeight="1.0" prefWidth="803.0" style="-fx-background-color: white;" />
                </content>
@@ -243,7 +243,7 @@
                   <Insets />
                </opaqueInsets>
                <VBox.margin>
-                  <Insets left="20.0" right="20.0" top="19.0" />
+                  <Insets left="20.0" right="20.0" top="10.0" />
                </VBox.margin>
             </HBox>
          </children>
