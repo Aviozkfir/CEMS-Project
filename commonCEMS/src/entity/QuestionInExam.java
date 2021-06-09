@@ -16,6 +16,9 @@ public class QuestionInExam extends Question implements Serializable {
 		this.numOfQuestion = numOfQuestion;
 		
 	}
+	public QuestionInExam() {
+		// TODO Auto-generated constructor stub
+	}
 	public void setChosenAnswer(int chosenAnswer) {
 		this.chosenAnswer=chosenAnswer;
 	}
@@ -28,6 +31,12 @@ public class QuestionInExam extends Question implements Serializable {
 		return pointsQuestion;
 	}
 
+	public void setPointsQuestion(int pointsQuestion) {
+		this.pointsQuestion = pointsQuestion;
+	}
+	public void setNumOfQuestion(int numOfQuestion) {
+		this.numOfQuestion = numOfQuestion;
+	}
 	public int getNumOfQuestion() {
 		return numOfQuestion;
 	}

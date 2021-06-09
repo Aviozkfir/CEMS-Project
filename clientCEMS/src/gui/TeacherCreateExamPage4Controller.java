@@ -12,24 +12,20 @@ import javafx.scene.text.Text;
 
 public class TeacherCreateExamPage4Controller {
 
-	 private VBox myVbox;
 	 
-	 private Course course;
+	 
+	private Course course;
     @FXML
     private Text examID;
 
     @FXML
     private Button btnBack;
 
- 
-    private Exam exam;
     
-    public void setExam(Exam exam) {
-		this.exam = exam;
-	}
-    public void setMyVbox(VBox myVbox) {
-		this.myVbox = myVbox;
-	}
+    public  void setexamID(String s) {
+    	examID.setText(s);
+    }
+   
     
     public void setCourse(Course course) {
 		this.course = course;

@@ -13,8 +13,10 @@ import java.util.Map;
 
 import application.ServerMain;
 import entity.Course;
+import entity.Exam;
 import entity.PersonCEMS;
 import entity.Question;
+import entity.QuestionInExam;
 import entity.SolvedExam;
 import message.ClientMessage;
 import message.ServerMessage;
@@ -189,14 +191,25 @@ public class ServerCEMS extends AbstractServer {
 					}
 					break;
 				case GET_EXAM_BY_COURSE:
-					type = ServerMessageTypes.EXAM_BY_COURSE_NOT_RECIVED;
+					type = ServerMessageTypes.EXAM_BY_COURSE_RECIVED;
 					Course c = (Course) clientMsg.getMessage();
 					try {
 						returnVal = MySQLConnection.getTeacherExamByCourse(c);
 					} catch (Exception e1) {
-						type = ServerMessageTypes.EXAM_BY_COURSE_RECIVED;
+						type = ServerMessageTypes.EXAM_BY_COURSE_NOT_RECIVED;
 						e1.printStackTrace();
 					}
+					break;
+				case TEACHER_ADD_EXAM:
+					type = ServerMessageTypes.EXAM_ADDED;
+					Object[] examInfo = (Object[]) clientMsg.getMessage();
+					try {
+						returnVal = MySQLConnection.addExam((Exam)examInfo[0],(ArrayList<QuestionInExam>)examInfo[1]);
+					} catch (Exception e1) {
+						type = ServerMessageTypes.EXAM_NOT_ADDED;
+						e1.printStackTrace();
+					}
+			
 					break;
 				case PRINCIPAL_STUDENTS_INFORMATION:
 					returnVal = MySQLConnection.getPrincipalStudentList();

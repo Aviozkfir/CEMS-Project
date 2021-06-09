@@ -34,11 +34,14 @@ public class TeacherCreateExamController extends TeacherMainPageController{
 
     private AnchorPane page1;
     private AnchorPane page2;
-    private AnchorPane page3;
-    private AnchorPane page4;
     
     private TeacherCreateExamPage1Controller page1Control;
     private TeacherCreateExamPage2Controller page2Control;
+    
+    
+    private AnchorPane page3;
+    private AnchorPane page4;
+    
     private TeacherCreateExamPage3Controller page3Control;
     private TeacherCreateExamPage4Controller page4Control;
     
@@ -50,7 +53,7 @@ public class TeacherCreateExamController extends TeacherMainPageController{
     	
     	exam.setCid(course.getId());
     	exam.setSid(course.getSubject().getId());
-    	exam.setID(((Teacher)guiControl.getUser()).getFirstName()+" "+((Teacher)guiControl.getUser()).getLastName());
+    	exam.setID(((Teacher)guiControl.getUser()).getId());
     	exam.setMode("Manual");
     	
     	FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("/gui/TeacherCreateExam1.fxml"));
@@ -61,13 +64,7 @@ public class TeacherCreateExamController extends TeacherMainPageController{
 		page2 = fxmlLoader2.load();
 		page2Control = (TeacherCreateExamPage2Controller) fxmlLoader2.getController();
 		
-		FXMLLoader fxmlLoader3 = new FXMLLoader(getClass().getResource("/gui/TeacherCreateExam3.fxml"));
-		page3 = fxmlLoader3.load();
-		page3Control = (TeacherCreateExamPage3Controller) fxmlLoader3.getController();
 		
-		FXMLLoader fxmlLoader4 = new FXMLLoader(getClass().getResource("/gui/TeacherCreateExam4.fxml"));
-		page4 = fxmlLoader4.load();
-		page4Control = (TeacherCreateExamPage4Controller) fxmlLoader4.getController();
 		
 		
 		page1Control.setMyQuestions(myQuestions);
@@ -80,24 +77,49 @@ public class TeacherCreateExamController extends TeacherMainPageController{
 		page2Control.setCourse(course);
 		page2Control.setMyVbox(myVbox);
 		page2Control.setPage1(page1);
-		page2Control.setPage3(page3);
+		
 		page2Control.setExam(exam);
+		page2Control.setPage3setter(()->{
+				
+			try {
+				set3Page();
+				page3Control.PrintSelectedQuestions();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return page3;
+		});
+		myVbox.getChildren().add(page1);
 		
 		
+    }
+    
+    
+    public void set3Page() throws IOException {
+    	FXMLLoader fxmlLoader3 = new FXMLLoader(getClass().getResource("/gui/TeacherCreateExam3.fxml"));
+		page3 = fxmlLoader3.load();
+		page3Control = (TeacherCreateExamPage3Controller) fxmlLoader3.getController();
+		
+		FXMLLoader fxmlLoader4 = new FXMLLoader(getClass().getResource("/gui/TeacherCreateExam4.fxml"));
+		page4 = fxmlLoader4.load();
+		page4Control = (TeacherCreateExamPage4Controller) fxmlLoader4.getController();
 		page3Control.setMyQuestions(myQuestions);
 		page3Control.setCourse(course);
 		page3Control.setMyVbox(myVbox);
 		page3Control.setPage2(page2);
 		page3Control.setPage4(page4);
 		page3Control.setExam(exam);
-		
+		page3Control.setTeacherCreateExamPage4Controller(page4Control);
 		
 		page4Control.setCourse(course);
-		page4Control.setMyVbox(myVbox);
-		page4Control.setExam(exam);
-		myVbox.getChildren().add(page1);
+		
+		
+		
 		
     }
+    
     
 
 }
