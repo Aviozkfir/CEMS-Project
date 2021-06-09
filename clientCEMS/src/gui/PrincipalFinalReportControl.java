@@ -110,8 +110,8 @@ public class PrincipalFinalReportControl extends PrincipalMainPageController imp
 			yAxisGroup[i] = 0;
 		}
 		// Map.Entry<String, Object> entry : map.entrySet()
-		for (Entry<String, String> entry : principal.getReport().getReportData().entrySet()) {
-			int grade = Integer.parseInt(entry.getKey());
+		for (String currentgrade : principal.getReport().getReportData()) {
+			int grade = Integer.parseInt(currentgrade);
 			if (grade <= 55) {
 				yAxisGroup[0]++;
 			} else if (grade <= 65) {

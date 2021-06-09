@@ -184,49 +184,40 @@ public class MySQLConnection {
 	}
 
 	public static Object getPrincipalReportCourses(String[] data) throws SQLException, ParseException {
-		HashMap<String, String> report = new HashMap<String, String>();
+		ArrayList<String> report=new ArrayList<String>();
 		ResultSet rs;
 		PreparedStatement logInPreparedStatement;
-		String str;
-		String[] stringarr;
 		Date dateInput = new SimpleDateFormat("yyyy-MM-dd").parse(data[1]);
 		java.sql.Date dateInputData = new java.sql.Date(dateInput.getTime());
 
 		logInPreparedStatement = con.prepareStatement(
-				"SELECT s.Grade,s.Date FROM Exams e,SolvedExams s WHERE s.EId=e.Eid and ?=e.cid AND s.Date >=?");
+				"SELECT s.Grade FROM Exams e,SolvedExams s WHERE s.EId=e.Eid and ?=e.cid AND s.Date >=?");
 		logInPreparedStatement.setString(1, data[0]);
 		logInPreparedStatement.setDate(2, dateInputData);
 		rs = logInPreparedStatement.executeQuery();
 
 		while (rs.next()) {
-			str = rs.getString(2);
-			stringarr = str.split("-"); // split the date yyyy/mm/dd
-			report.put(rs.getString(1), stringarr[0]); // put grade and date
-
+            report.add(rs.getString(1));
 		}
 		return report;
 
 	}
 
 	public static Object getPrincipalReportStudents(String[] data) throws SQLException, ParseException {
-		HashMap<String, String> report = new HashMap<String, String>();
+		ArrayList<String> report=new ArrayList<String>();
 		ResultSet rs;
 		PreparedStatement logInPreparedStatement;
-		String str;
-		String[] stringarr;
 		Date dateInput = new SimpleDateFormat("yyyy-MM-dd").parse(data[1]);
 		java.sql.Date dateInputData = new java.sql.Date(dateInput.getTime());
 
 		logInPreparedStatement = con.prepareStatement(
-				"SELECT s.Grade,s.Date FROM Exams e,SolvedExams s WHERE s.EId=e.Eid and ?=s.ID AND s.Date >=?");
+				"SELECT s.Grade FROM Exams e,SolvedExams s WHERE s.EId=e.Eid and ?=s.ID AND s.Date >=?");
 		logInPreparedStatement.setString(1, data[0]);
 		logInPreparedStatement.setDate(2, dateInputData);
 		rs = logInPreparedStatement.executeQuery();
 
 		while (rs.next()) {
-			str = rs.getString(2);
-			stringarr = str.split("-"); // split the date yyyy/mm/dd
-			report.put(rs.getString(1), stringarr[0]); // put grade and date
+			report.add(rs.getString(1));
 
 		}
 		return report;
@@ -234,24 +225,21 @@ public class MySQLConnection {
 	}
 
 	public static Object getPrincipalReportTeachers(String[] data) throws SQLException, ParseException {
-		HashMap<String, String> report = new HashMap<String, String>();
+		ArrayList<String> report=new ArrayList<String>();
 		ResultSet rs;
 		PreparedStatement logInPreparedStatement;
-		String str;
-		String[] stringarr;
 		Date dateInput = new SimpleDateFormat("yyyy-MM-dd").parse(data[1]);
 		java.sql.Date dateInputData = new java.sql.Date(dateInput.getTime());
 
 		logInPreparedStatement = con.prepareStatement(
-				"SELECT s.Grade,s.Date FROM Exams e,SolvedExams s WHERE s.EId=e.Eid and ?=e.ID AND s.Date >=?");
+				"SELECT s.Grade FROM Exams e,SolvedExams s WHERE s.EId=e.Eid and ?=e.ID AND s.Date >=?");
 		logInPreparedStatement.setString(1, data[0]);
 		logInPreparedStatement.setDate(2, dateInputData);
 		rs = logInPreparedStatement.executeQuery();
 
 		while (rs.next()) {
-			str = rs.getString(2);
-			stringarr = str.split("-"); // split the date yyyy/mm/dd
-			report.put(rs.getString(1), stringarr[0]); // put grade and date
+			
+			report.add(rs.getString(1));
 
 		}
 		return report;
