@@ -416,6 +416,60 @@ public class MySQLConnection {
 			addToCourse.executeUpdate();
 		}
 	}
+	
+public static String addExam(Exam e, ArrayList<QuestionInExam> list) throws SQLException, ParseException {
+		
+		ResultSet maxID;
+		PreparedStatement getMaxID =con.prepareStatement("SELECT MAX(e.Eid) FROM Exams e where e.Sid=? AND e.Cid=?");
+		getMaxID.setString(1, e.getSid());
+		getMaxID.setString(2, e.getCid());
+		maxID=getMaxID.executeQuery();
+		String id;
+		
+		if(maxID.next()) {
+			id=(""+(1+Integer.parseInt(maxID.getNString(1))));
+			if(id.length()==5) {
+				id="0"+id;
+			}
+			
+		}
+		else 
+			id=e.getSid()+e.getCid()+"01";
+		e.setEid(id);
+		System.out.print(e.getID());
+		PreparedStatement addExam;
+		addExam = con
+				.prepareStatement("INSERT INTO Exams (Eid, Sid, Cid, Name, Date, Tdescription, Sdescription, ID, TotalTime, Code, Mode)"
+						+ "VALUES (?, ? ,? ,? ,? ,? ,? ,? ,? ,?, ? )");
+		addExam.setString(1, e.getEid());
+		addExam.setString(2, e.getSid());
+		addExam.setString(3, e.getCid());
+		addExam.setString(4, e.getName());
+		Date dateInput = new SimpleDateFormat("yyyy-MM-dd").parse(e.getDate());
+		java.sql.Date dateInputData = new java.sql.Date(dateInput.getTime());
+		addExam.setDate(5, dateInputData);
+		addExam.setString(6, e.getTdescription());
+		addExam.setString(7, e.getSdescription());
+		
+		addExam.setString(8, e.getID());
+		addExam.setString(9, e.getTotalTime());
+		addExam.setString(10, e.getCode());
+		addExam.setString(11, "Computerized");
+		addExam.executeUpdate();
+		
+		for(QuestionInExam q : list) {
+			PreparedStatement addToCourse =con
+					.prepareStatement("INSERT INTO Question_In_Exams (Eid,Qid,Qpoint,QuestionNum) "
+							+ "VALUES (?, ?,?,?)");
+			
+			addToCourse.setString(1, e.getEid());
+			addToCourse.setString(2, q.getId());
+			addToCourse.setString(3, ""+q.getPointsQuestion());
+			addToCourse.setString(4, ""+q.getNumOfQuestion());
+			addToCourse.executeUpdate();
+		}
+		return id;
+	}
 
 	public static Object getPrincipalRequests() throws SQLException {
 		ArrayList<Request> requestList = new ArrayList<Request>();
