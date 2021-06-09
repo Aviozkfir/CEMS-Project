@@ -85,7 +85,7 @@ public class TeacherCreateExamPage3Controller {
 		this.course = course;
 		
 	}
-
+///
     public void setDetailsReview() {
     	examTitle.setText(exam.getName());
     	time.setText(exam.getTotalTime()+":00");
