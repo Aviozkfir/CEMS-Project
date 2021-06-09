@@ -34,7 +34,10 @@ public class TeacherCreateExamPage3Controller {
     private Text time;
 
     @FXML
-    private Text points;
+    private Text qNum;
+
+    @FXML
+    private Text examCode;
 
     @FXML
     private Text studentNotes;
@@ -80,8 +83,18 @@ public class TeacherCreateExamPage3Controller {
     
     public void setCourse(Course course) {
 		this.course = course;
+		
 	}
 
+    public void setDetailsReview() {
+    	examTitle.setText(exam.getName());
+    	time.setText(exam.getTotalTime()+":00");
+    	studentNotes.setText(exam.getSdescription());
+    	teacherNotes.setText(exam.getTdescription());
+    	examCode.setText(exam.getCode());
+    	qNum.setText(""+myQuestions.size());
+    }
+    
     @FXML
     void btnBackPressed(ActionEvent event) {
     	myVbox.getChildren().remove(2);

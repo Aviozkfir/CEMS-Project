@@ -79,9 +79,9 @@
                   <Insets bottom="11.0" />
                </VBox.margin>
             </HBox>
-            <ScrollPane prefHeight="354.0" prefWidth="812.0" style="-fx-opacity: 1; -fx-border-color: #EBEBEB;">
+            <ScrollPane prefHeight="354.0" prefWidth="812.0" style="-fx-border-color: #EBEBEB;">
                <content>
-                  <VBox fx:id="vTable" prefHeight="350.0" prefWidth="729.0" style="-fx-background-color: white;">
+                  <VBox fx:id="vTable" prefHeight="350.0" prefWidth="791.0" style="-fx-background-color: white;">
                      <children>
                         <HBox prefHeight="29.0" prefWidth="805.0">
                            <children>
@@ -95,15 +95,23 @@
                               </Text>
                            </children>
                         </HBox>
-                        <HBox prefHeight="25.0" prefWidth="829.0">
+                        <HBox prefHeight="75.0" prefWidth="777.0">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
                            <children>
-                              <VBox prefHeight="80.0" prefWidth="399.0" style="-fx-border-color: #e8ebef; -fx-border-radius: 30 30 30 30; -fx-border-width: 4;">
+                              <VBox prefHeight="75.0" prefWidth="551.0" style="-fx-border-color: #e8ebef; -fx-border-radius: 30 30 30 30; -fx-border-width: 4;">
                                  <children>
                                     <HBox prefHeight="100.0" prefWidth="200.0">
                                        <children>
+                                          <ImageView fitHeight="20.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../resources/examBlack.png" />
+                                             </image>
+                                             <HBox.margin>
+                                                <Insets right="3.0" />
+                                             </HBox.margin>
+                                          </ImageView>
                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Exam Title: " wrappingWidth="88.6171875">
                                              <font>
                                                 <Font name="System Bold" size="16.0" />
@@ -122,8 +130,16 @@
                                           <Insets left="20.0" />
                                        </VBox.margin>
                                     </HBox>
-                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                    <HBox prefHeight="22.0" prefWidth="651.0">
                                        <children>
+                                          <ImageView fitHeight="20.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../resources/timeBlack.png" />
+                                             </image>
+                                             <HBox.margin>
+                                                <Insets right="3.0" />
+                                             </HBox.margin>
+                                          </ImageView>
                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Duration:" wrappingWidth="88.6171875">
                                              <font>
                                                 <Font name="System Bold" size="16.0" />
@@ -140,11 +156,6 @@
                                                 <Insets right="3.0" />
                                              </HBox.margin>
                                           </Text>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="minutes" wrappingWidth="88.6171875">
-                                             <font>
-                                                <Font size="16.0" />
-                                             </font>
-                                          </Text>
                                        </children>
                                        <VBox.margin>
                                           <Insets left="20.0" />
@@ -152,7 +163,15 @@
                                     </HBox>
                                     <HBox prefHeight="23.0" prefWidth="90.0">
                                        <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of questions" wrappingWidth="198.6171875">
+                                          <ImageView fitHeight="20.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../resources/question.png" />
+                                             </image>
+                                             <HBox.margin>
+                                                <Insets right="3.0" />
+                                             </HBox.margin>
+                                          </ImageView>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of questions" wrappingWidth="163.6171875">
                                              <font>
                                                 <Font name="System Bold" size="16.0" />
                                              </font>
@@ -160,7 +179,7 @@
                                                 <Insets right="5.0" />
                                              </HBox.margin>
                                           </Text>
-                                          <Text fx:id="points" strokeType="OUTSIDE" strokeWidth="0.0" text="10">
+                                          <Text fx:id="qNum" strokeType="OUTSIDE" strokeWidth="0.0" text="10">
                                              <font>
                                                 <Font size="17.0" />
                                              </font>
@@ -172,7 +191,52 @@
                                     </HBox>
                                  </children>
                                  <HBox.margin>
-                                    <Insets left="11.0" />
+                                    <Insets left="11.0" right="30.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox prefHeight="52.0" prefWidth="145.0" style="-fx-border-color: #e8ebef; -fx-border-radius: 30 30 30 30; -fx-border-width: 4;">
+                                 <children>
+                                    <HBox prefHeight="6.0" prefWidth="339.0">
+                                       <children>
+                                          <ImageView fitHeight="20.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../resources/passBlack.png" />
+                                             </image>
+                                             <HBox.margin>
+                                                <Insets right="3.0" />
+                                             </HBox.margin>
+                                          </ImageView>
+                                          <Text fill="#868282" strokeType="OUTSIDE" strokeWidth="0.0" text="Exam Code: " wrappingWidth="93.6171875">
+                                             <font>
+                                                <Font name="System Bold" size="16.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets right="5.0" />
+                                             </HBox.margin>
+                                          </Text>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets left="20.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox prefHeight="22.0" prefWidth="242.0">
+                                       <children>
+                                          <Text fx:id="examCode" strokeType="OUTSIDE" strokeWidth="0.0" text="code here" wrappingWidth="140.45458984375">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets right="3.0" />
+                                             </HBox.margin>
+                                          </Text>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets left="20.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets />
                                  </HBox.margin>
                               </VBox>
                            </children>
@@ -185,9 +249,9 @@
                               <Insets />
                            </opaqueInsets>
                            <children>
-                              <VBox prefHeight="48.0" prefWidth="582.0" style="-fx-border-color: #e8ebef; -fx-border-radius: 30 30 30 30; -fx-border-width: 4;">
+                              <VBox prefHeight="30.0" prefWidth="756.0" style="-fx-border-color: #e8ebef; -fx-border-radius: 30 30 30 30; -fx-border-width: 4;">
                                  <children>
-                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                    <HBox prefHeight="22.0" prefWidth="727.0">
                                        <children>
                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Notes/remarks for students:" wrappingWidth="212.6171875">
                                              <font>
@@ -222,7 +286,7 @@
                               <Insets />
                            </opaqueInsets>
                            <children>
-                              <VBox prefHeight="33.0" prefWidth="607.0" style="-fx-border-color: #e8ebef; -fx-border-radius: 30 30 30 30; -fx-border-width: 4;">
+                              <VBox prefHeight="30.0" prefWidth="756.0" style="-fx-border-color: #e8ebef; -fx-border-radius: 30 30 30 30; -fx-border-width: 4;">
                                  <children>
                                     <HBox prefHeight="25.0" prefWidth="582.0">
                                        <children>
@@ -299,6 +363,48 @@
                                     <Insets left="12.0" right="3.0" />
                                  </HBox.margin>
                               </Text>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="42.0" style="-fx-background-color: white;">
+                           <children>
+                              <Label prefHeight="42.0" prefWidth="205.0" text="No.">
+                                 <opaqueInsets>
+                                    <Insets top="5.0" />
+                                 </opaqueInsets>
+                                 <HBox.margin>
+                                    <Insets left="88.0" right="25.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" prefHeight="42.0" prefWidth="116.0" text="Question" textAlignment="CENTER">
+                                 <opaqueInsets>
+                                    <Insets top="5.0" />
+                                 </opaqueInsets>
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets right="120.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <Label alignment="CENTER" prefHeight="42.0" prefWidth="181.0" text="Set Points" textAlignment="CENTER">
+                                 <opaqueInsets>
+                                    <Insets top="5.0" />
+                                 </opaqueInsets>
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" prefHeight="42.0" prefWidth="153.0" textAlignment="CENTER">
+                                 <opaqueInsets>
+                                    <Insets top="5.0" />
+                                 </opaqueInsets>
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </HBox>
                      </children></VBox>

@@ -25,7 +25,6 @@ public class TeacherCreateExamController extends TeacherMainPageController{
     @FXML
     private VBox myVbox;
 
-   
     @FXML
     private Text subjectName;
 
@@ -96,21 +95,24 @@ public class TeacherCreateExamController extends TeacherMainPageController{
 		
     }
     
-    
+    //the page with the preview
     public void set3Page() throws IOException {
     	FXMLLoader fxmlLoader3 = new FXMLLoader(getClass().getResource("/gui/TeacherCreateExam3.fxml"));
 		page3 = fxmlLoader3.load();
 		page3Control = (TeacherCreateExamPage3Controller) fxmlLoader3.getController();
 		
+		//the page of sucsses
 		FXMLLoader fxmlLoader4 = new FXMLLoader(getClass().getResource("/gui/TeacherCreateExam4.fxml"));
 		page4 = fxmlLoader4.load();
 		page4Control = (TeacherCreateExamPage4Controller) fxmlLoader4.getController();
+		
 		page3Control.setMyQuestions(myQuestions);
 		page3Control.setCourse(course);
 		page3Control.setMyVbox(myVbox);
 		page3Control.setPage2(page2);
 		page3Control.setPage4(page4);
 		page3Control.setExam(exam);
+		page3Control.setDetailsReview();
 		page3Control.setTeacherCreateExamPage4Controller(page4Control);
 		
 		page4Control.setCourse(course);

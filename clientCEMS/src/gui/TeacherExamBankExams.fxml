@@ -198,7 +198,7 @@
                               <Insets left="11.0" />
                            </HBox.margin>
                         </VBox>
-                        <Button fx:id="btnCreateExam" mnemonicParsing="false" onAction="#btnCreateExamPressed" prefHeight="37.0" prefWidth="207.0" style="-fx-background-color: #6897E7; -fx-background-radius: 100;" text="+ Create New Exam">
+                        <Button fx:id="btnCreateExam" mnemonicParsing="false" onAction="#btnCreateExamPressed" prefHeight="47.0" prefWidth="321.0" style="-fx-background-color: #6897E7; -fx-background-radius: 100;" text="+ Create New Computerized Exam">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -208,6 +208,31 @@
                            <HBox.margin>
                               <Insets left="30.0" top="30.0" />
                            </HBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/computer.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="btnCreateManualExam" mnemonicParsing="false" onAction="#btnCreateManualExamPressed" prefHeight="37.0" prefWidth="321.0" style="-fx-background-color: #6897E7; -fx-background-radius: 100;" text="+ Create New Manual Exam">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <HBox.margin>
+                              <Insets left="30.0" top="30.0" />
+                           </HBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="34.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/hand.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
                         </Button>
                      </children>
                      <opaqueInsets>

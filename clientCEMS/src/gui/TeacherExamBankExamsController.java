@@ -41,12 +41,15 @@ public class TeacherExamBankExamsController extends TeacherMainPageController {
     @FXML
     private Button btnCreateExam;
 
+ 
     @FXML
     private VBox vTable;
 
     @FXML
     private Button btnBack;
 
+    @FXML
+    private Button btnCreateManualExam;
     
     private Course course;
 
@@ -60,6 +63,11 @@ public class TeacherExamBankExamsController extends TeacherMainPageController {
     @FXML
     void btnCreateExamPressed(ActionEvent event) throws IOException {
     	((TeacherCreateExamController) GUIControl.instance.loadStage("TeacherCreateExam.fxml")).setTeacherCreateExam(course);
+    }
+    
+    @FXML
+    void btnCreateManualExamPressed(ActionEvent event) {
+
     }
     
  public void setTeacherCourse(Course course) throws IOException {

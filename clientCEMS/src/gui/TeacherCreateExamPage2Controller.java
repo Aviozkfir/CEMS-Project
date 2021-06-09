@@ -104,7 +104,7 @@ public class TeacherCreateExamPage2Controller {
     	}
     	
     	
-    	
+    
     	myVbox.getChildren().remove(2);
     	myVbox.getChildren().add(setPage3.get());
     	

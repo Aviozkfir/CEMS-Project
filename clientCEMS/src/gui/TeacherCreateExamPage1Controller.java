@@ -23,9 +23,6 @@ public class TeacherCreateExamPage1Controller {
     private TextField examDuration;
 
     @FXML
-    private TextField points;
-
-    @FXML
     private TextField examCode;
 
     @FXML
@@ -48,7 +45,7 @@ public class TeacherCreateExamPage1Controller {
 
     private Exam exam;
     
-private ArrayList<Question> myQuestions;
+    private ArrayList<Question> myQuestions;
     
     public void setMyQuestions(ArrayList<Question> myQuestions) {
 		this.myQuestions = myQuestions;
