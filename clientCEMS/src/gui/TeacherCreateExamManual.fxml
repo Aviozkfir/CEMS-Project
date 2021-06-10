@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherCreateManualExamController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherCreateManualExamController">
    <children>
       <VBox prefHeight="600.0" prefWidth="175.0" style="-fx-background-color: #F7F7F7;">
          <children>
@@ -337,11 +337,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <TextField fx:id="filePath" prefHeight="25.0" prefWidth="304.0">
-                           <HBox.margin>
-                              <Insets top="6.0" />
-                           </HBox.margin>
-                        </TextField>
+                        <Text fx:id="filePath" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="43.47007942199707" />
                      </children>
                      <opaqueInsets>
                         <Insets />
