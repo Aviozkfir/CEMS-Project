@@ -2,6 +2,7 @@ package gui;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import entity.Course;
 import entity.Exam;
@@ -108,10 +109,11 @@ public class TeacherCreateExamPage1Controller {
     	
     	
     	
-    	if(examCode.getText().trim().equals("")) {
-    		GUIControl.popUpMessage("Error", "Must enter exam code.");
+    	if(!Pattern.compile("\\w{4}").matcher(examCode.getText()).matches()) {
+    		GUIControl.popUpMessage("Error", "Must enter a code with 4 digits and letters.");
     		return;
     	}
+    	
     	exam.setCode(examCode.getText());
     	
     	if(!teacherNotesText.getText().trim().equals("")) 
