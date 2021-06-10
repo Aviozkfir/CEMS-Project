@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -13,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherCreateManualExamController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherCreateManualExamController">
    <children>
       <VBox prefHeight="600.0" prefWidth="175.0" style="-fx-background-color: #F7F7F7;">
          <children>
@@ -319,6 +320,14 @@
                   </HBox>
                   <HBox prefHeight="25.0" prefWidth="829.0">
                      <children>
+                        <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="*">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="2.0" top="10.0" />
+                           </HBox.margin>
+                        </Text>
                         <Button fx:id="btnSelectExam" mnemonicParsing="false" onAction="#btnSelectPressed" prefHeight="37.0" prefWidth="181.0" style="-fx-background-color: #6897E7; -fx-background-radius: 100;" text="Select Exam File">
                            <font>
                               <Font name="System Bold" size="16.0" />
@@ -337,18 +346,172 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Text fx:id="filePath" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="43.47007942199707" />
+                        <Text fx:id="filePath" strokeType="OUTSIDE" strokeWidth="0.0" text="path here">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets top="7.0" />
+                           </HBox.margin>
+                        </Text>
                      </children>
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                      <VBox.margin>
-                        <Insets bottom="20.0" left="20.0" />
+                        <Insets bottom="8.0" left="20.0" />
                      </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="8.0" prefWidth="829.0">
+                     <children>
+                        <HBox prefHeight="0.0" prefWidth="829.0">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <children>
+                              <Line endX="770.0" startX="-12.0" stroke="#e8ebef" strokeWidth="2.0">
+                                 <HBox.margin>
+                                    <Insets bottom="7.0" left="21.0" />
+                                 </HBox.margin>
+                              </Line>
+                           </children>
+                        </HBox>
+                     </children>
                   </HBox>
                   <HBox prefHeight="25.0" prefWidth="829.0">
                      <children>
-                        <Button fx:id="publish" disable="true" mnemonicParsing="false" onAction="#btnPublishPressed" prefHeight="37.0" prefWidth="180.0" style="-fx-background-color: #3161C2; -fx-background-radius: 100;" text="Publish To Bank" textFill="WHITE">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Optional Information:" wrappingWidth="181.6171875">
+                           <font>
+                              <Font name="System Bold" size="17.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="21.0" right="3.0" />
+                           </HBox.margin>
+                        </Text>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </HBox>
+                  <HBox prefHeight="38.0" prefWidth="829.0">
+                     <children>
+                        <Text fill="#1dff00" strokeType="OUTSIDE" strokeWidth="0.0" text="*">
+                           <HBox.margin>
+                              <Insets left="19.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Notes/remarks for students: " wrappingWidth="199.6171875">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="3.0" />
+                           </HBox.margin>
+                        </Text>
+                        <TextArea fx:id="studentNotesText" prefHeight="38.0" prefWidth="577.0" />
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </HBox>
+                  <HBox prefHeight="25.0" prefWidth="829.0">
+                     <children>
+                        <ImageView fitHeight="19.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/warning.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="19.0" right="5.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pay attention:" wrappingWidth="100.45458984375">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Notes/remarks for students will be shown in the exam." wrappingWidth="376.45458984375">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="3.0" />
+                           </HBox.margin>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="38.0" prefWidth="829.0">
+                     <children>
+                        <Text fill="#1dff00" strokeType="OUTSIDE" strokeWidth="0.0" text="*">
+                           <HBox.margin>
+                              <Insets left="19.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Notes/remarks for teachers: " wrappingWidth="199.6171875">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="3.0" />
+                           </HBox.margin>
+                        </Text>
+                        <TextArea fx:id="teacherNotesText" prefHeight="38.0" prefWidth="577.0" />
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </HBox>
+                  <HBox prefHeight="25.0" prefWidth="829.0">
+                     <children>
+                        <ImageView fitHeight="19.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/warning.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="19.0" right="5.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pay attention:" wrappingWidth="100.45458984375">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Notes/remarks for teachers will be shown only to teachers." wrappingWidth="405.45458984375">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="3.0" />
+                           </HBox.margin>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="25.0" prefWidth="829.0">
+                     <children>
+                        <Button fx:id="btnBack" mnemonicParsing="false" onAction="#btnBackPressed" prefHeight="37.0" prefWidth="91.0" style="-fx-background-color: #6897E7; -fx-background-radius: 100;" text="Back">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <HBox.margin>
+                              <Insets right="227.0" />
+                           </HBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="18.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/btnBack.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="publish" mnemonicParsing="false" onAction="#btnPublishPressed" prefHeight="37.0" prefWidth="180.0" style="-fx-background-color: #3161C2; -fx-background-radius: 100;" text="Publish To Bank" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -371,35 +534,7 @@
                         <Insets />
                      </opaqueInsets>
                      <VBox.margin>
-                        <Insets left="20.0" />
-                     </VBox.margin>
-                  </HBox>
-                  <HBox prefHeight="25.0" prefWidth="829.0">
-                     <children>
-                        <Button fx:id="btnBack" mnemonicParsing="false" onAction="#btnBackPressed" prefHeight="37.0" prefWidth="91.0" style="-fx-background-color: #6897E7; -fx-background-radius: 100;" text="Back">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                           <HBox.margin>
-                              <Insets right="610.0" />
-                           </HBox.margin>
-                           <graphic>
-                              <ImageView fitHeight="18.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../resources/btnBack.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </children>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <VBox.margin>
-                        <Insets left="20.0" right="20.0" top="52.0" />
+                        <Insets left="20.0" right="20.0" top="3.0" />
                      </VBox.margin>
                   </HBox>
                </children>
