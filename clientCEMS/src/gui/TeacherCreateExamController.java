@@ -53,7 +53,7 @@ public class TeacherCreateExamController extends TeacherMainPageController{
     	exam.setCid(course.getId());
     	exam.setSid(course.getSubject().getId());
     	exam.setID(((Teacher)guiControl.getUser()).getId());
-    	exam.setMode("Manual");
+    	exam.setMode("Computerized");
     	
     	FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("/gui/TeacherCreateExam1.fxml"));
 		page1 = fxmlLoader1.load();

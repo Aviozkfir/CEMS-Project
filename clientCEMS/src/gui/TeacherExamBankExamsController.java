@@ -66,8 +66,8 @@ public class TeacherExamBankExamsController extends TeacherMainPageController {
     }
     
     @FXML
-    void btnCreateManualExamPressed(ActionEvent event) {
-
+    void btnCreateManualExamPressed(ActionEvent event) throws IOException {
+    	((TeacherCreateManualExamController) GUIControl.instance.loadStage("TeacherCreateExamManual.fxml")).setTeacherCreateExam(course);
     }
     
  public void setTeacherCourse(Course course) throws IOException {

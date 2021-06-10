@@ -170,9 +170,9 @@
                         <Insets top="12.0" />
                      </HBox.margin>
                   </Text>
-                  <Text fill="#868282" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Create New Exam" wrappingWidth="274.0">
+                  <Text fill="#868282" strokeType="OUTSIDE" strokeWidth="0.0" text="Create New Computerized Exam" wrappingWidth="318.0">
                      <font>
-                        <Font name="Ebrima" size="25.0" />
+                        <Font name="Ebrima Bold" size="20.0" />
                      </font>
                      <HBox.margin>
                         <Insets top="10.0" />
