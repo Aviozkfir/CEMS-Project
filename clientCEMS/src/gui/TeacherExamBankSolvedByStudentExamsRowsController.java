@@ -30,12 +30,12 @@ public class TeacherExamBankSolvedByStudentExamsRowsController {
     private Button btnCheckExam;
 
     @FXML
-    void btnBackPressed(ActionEvent event) {
+    void btnCheckPressed(ActionEvent event) {
 
     }
 
     @FXML
-    void btnViewQuestionPressed(ActionEvent event) {
+    void btnViewExamPressed(ActionEvent event) {
 
     }
 
