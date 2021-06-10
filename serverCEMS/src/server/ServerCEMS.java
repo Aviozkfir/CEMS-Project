@@ -4,12 +4,18 @@
 package server;
 
 import java.io.IOException;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+
 
 import application.ServerMain;
 import entity.Course;
@@ -96,6 +102,7 @@ public class ServerCEMS extends AbstractServer {
 							type = ServerMessageTypes.LOGIN_STUDENT;
 						case "Principal":
 							type = ServerMessageTypes.LOGIN_PRINCIPAL;
+							
 						}
 						if (userList.contains(returnVal)) // user already logged in
 							returnVal = "logged in";
@@ -197,6 +204,16 @@ public class ServerCEMS extends AbstractServer {
 						returnVal = MySQLConnection.getTeacherExamByCourse(c);
 					} catch (Exception e1) {
 						type = ServerMessageTypes.EXAM_BY_COURSE_NOT_RECIVED;
+						e1.printStackTrace();
+					}
+					break;
+				case GET_SOLVED_EXAM_BY_COURSE:
+					type = ServerMessageTypes.SOLVED_EXAM_BY_COURSE_RECIVED;
+					
+					try {
+						returnVal = MySQLConnection.getTeacherSolvedExamByCourse((Course) clientMsg.getMessage());
+					} catch (Exception e1) {
+						type = ServerMessageTypes.SOLVED_EXAM_BY_COURSE_NOT_RECIVED;
 						e1.printStackTrace();
 					}
 					break;
@@ -302,6 +319,16 @@ public class ServerCEMS extends AbstractServer {
 					} else {
 						type = ServerMessageTypes.EXAM_UPLOADING_FAILED;
 
+					}
+					break;
+				case UPLOAD_TEACHER_MANUAL_EXAM:
+					type = ServerMessageTypes.TEACHER_EXAM_UPLOADED_SUCCECFULLY;
+					Object[] EaF = (Object[]) clientMsg.getMessage();
+					try {
+					returnVal = MySQLConnection.addManualExam((Exam)EaF[0],(File)EaF[1]);
+					}catch (Exception e1) {
+						e1.printStackTrace();
+						type = ServerMessageTypes.TEACHER_EXAM_UPLOADING_FAILED;
 					}
 					break;
 				case DOWNLOAD_MANUAL_EXAM:

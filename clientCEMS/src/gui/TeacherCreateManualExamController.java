@@ -1,5 +1,6 @@
 package gui;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -10,11 +11,13 @@ import java.util.regex.Pattern;
 
 import entity.Course;
 import entity.Exam;
+import entity.Student;
 import entity.Teacher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -32,12 +35,18 @@ public class TeacherCreateManualExamController extends TeacherMainPageController
     @FXML
     private VBox myVbox;
 
+    @FXML
+    private TextArea studentNotesText;
+
+    @FXML
+    private TextArea teacherNotesText;
+
  //   @FXML
  //   private Text subjectName;
 
   //  @FXML
   //  private Text courseName;
-    private Exam exam;
+    private Exam exam = new Exam();
 
     @FXML
     private TextField examTitle;
@@ -72,7 +81,7 @@ public class TeacherCreateManualExamController extends TeacherMainPageController
     }
 
     @FXML
-    void btnPublishPressed(ActionEvent event) {
+    void btnPublishPressed(ActionEvent event) throws IOException {
     	if(examTitle.getText().trim().equals("")) {
     		GUIControl.popUpMessage("Error", "Must enter exam title.");
     		return;
@@ -130,6 +139,22 @@ public class TeacherCreateManualExamController extends TeacherMainPageController
     		exam.setSdescription(studentNotesText.getText());
     	else
     		exam.setSdescription("");
+    	
+    	exam.setDate();
+    	if(fileUploaded==false)
+    	{
+    		GUIControl.popUpMessage("Error", "Must select a file.");
+    		return;
+    	}
+    	Object[] toSend = { exam, fileToUpload};
+		ClientMessage FileMessage = new ClientMessage(ClientMessageType.UPLOAD_TEACHER_MANUAL_EXAM, toSend);
+		guiControl.sendToServer(FileMessage);
+		
+		if (guiControl.getServerMsg().getType()!= ServerMessageTypes.TEACHER_EXAM_UPLOADED_SUCCECFULLY) {
+			guiControl.popUpMessage("Error", "Failed to upload manual exam.");
+			return;
+		}
+		((TeacherExamBankExamsController)GUIControl.instance.loadStage("/gui/TeacherExamBankExams.fxml")).setTeacherCourse(course);
     }
 
     @FXML

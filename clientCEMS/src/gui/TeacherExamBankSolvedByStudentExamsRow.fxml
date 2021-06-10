@@ -9,17 +9,16 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="43.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherQuestionTableRowController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="43.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherExamBankSolvedByStudentExamsRowsController">
    <children>
       <HBox prefHeight="43.0" prefWidth="800.0" style="-fx-background-color: white;">
          <children>
-            <Button fx:id="btnView" mnemonicParsing="false" onAction="#btnViewQuestionPressed" prefHeight="39.0" prefWidth="60.0" style="-fx-background-color: white;">
+            <Button fx:id="btnView" mnemonicParsing="false" onAction="#btnViewExamPressed" prefHeight="39.0" prefWidth="60.0" style="-fx-background-color: white;">
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../git/ProjectCEMS/clientCEMS/src/resources/btnView.png" />
+                        <Image url="@../resources/btnView.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -62,28 +61,10 @@
             </Label>
             <VBox prefHeight="41.0" prefWidth="122.0">
                <children>
-                  <HBox prefHeight="13.0" prefWidth="122.0">
-                     <children>
-                        <Text fx:id="checkNum" fill="#26bfbc" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="29.955097198486328" HBox.hgrow="ALWAYS">
-                           <font>
-                              <Font size="26.0" />
-                           </font>
-                        </Text>
-                        <Text fill="#2a73ff" strokeType="OUTSIDE" strokeWidth="0.0" text="/" textAlignment="CENTER" wrappingWidth="14.955097198486328">
-                           <font>
-                              <Font name="System Bold" size="26.0" />
-                           </font>
-                        </Text>
-                        <Text fx:id="totalNum" fill="#2a73ff" strokeType="OUTSIDE" strokeWidth="0.0" text="100" textAlignment="CENTER" wrappingWidth="48.95509719848633">
-                           <font>
-                              <Font name="System Bold" size="26.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </HBox>
+                  <HBox prefHeight="13.0" prefWidth="122.0" />
                </children>
             </VBox>
-            <Button fx:id="btnCheckExam" mnemonicParsing="false" onAction="#btnBackPressed" prefHeight="37.0" prefWidth="121.0" style="-fx-background-color: #6897E7; -fx-background-radius: 100;" text="Check Exam">
+            <Button fx:id="btnCheckExam" mnemonicParsing="false" onAction="#btnCheckPressed" prefHeight="37.0" prefWidth="121.0" style="-fx-background-color: #6897E7; -fx-background-radius: 100;" text="Check Exams">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>

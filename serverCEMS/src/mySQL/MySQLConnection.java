@@ -249,6 +249,21 @@ public class MySQLConnection {
 		return exam;
 	}
 	
+	public static ArrayList<Exam> getTeacherSolvedExamByCourse(Course course) throws SQLException {
+		ArrayList<Exam> exams = new ArrayList<Exam>();
+		ResultSet rs;
+		PreparedStatement logInPreparedStatement;
+		logInPreparedStatement = con.prepareStatement("SELECT e FROM Exams e, SolvedExam se WHERE e.Cid=? AND e.LockExam=Yes AND se.Eid=e.Eid");
+		logInPreparedStatement.setString(1, course.getId());
+		rs = logInPreparedStatement.executeQuery();
+		while (rs.next()) {
+			exams.add(( new Exam(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+					rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10),rs.getString(11))));
+			
+		}
+		return exams;
+	}
+	
 	public static ArrayList<Exam> getTeacherExamByCourse(Course course) throws SQLException {
 		ArrayList<Exam> exams = new ArrayList<Exam>();
 		ResultSet rs;
@@ -392,7 +407,7 @@ public class MySQLConnection {
 		}
 	}
 	
-public static String addExam(Exam e, ArrayList<QuestionInExam> list) throws SQLException, ParseException {
+	public static String addExam(Exam e, ArrayList<QuestionInExam> list) throws SQLException, ParseException {
 		
 		ResultSet maxID;
 		PreparedStatement getMaxID =con.prepareStatement("SELECT MAX(e.Eid) FROM Exams e where e.Sid=? AND e.Cid=?");
@@ -443,6 +458,58 @@ public static String addExam(Exam e, ArrayList<QuestionInExam> list) throws SQLE
 			addToCourse.setString(4, ""+q.getNumOfQuestion());
 			addToCourse.executeUpdate();
 		}
+		return id;
+	}
+	
+	public static String addManualExam(Exam e, File ExamFile) throws SQLException, ParseException, FileNotFoundException {
+		
+		ResultSet maxID;
+		PreparedStatement getMaxID =con.prepareStatement("SELECT MAX(e.Eid) FROM Exams e where e.Sid=? AND e.Cid=?");
+		getMaxID.setString(1, e.getSid());
+		getMaxID.setString(2, e.getCid());
+		maxID=getMaxID.executeQuery();
+		String id;
+		
+		if(maxID.next()) {
+			id=(""+(1+Integer.parseInt(maxID.getNString(1))));
+			if(id.length()==5) {
+				id="0"+id;
+			}
+			
+		}
+		else 
+			id=e.getSid()+e.getCid()+"01";
+		e.setEid(id);
+		
+		PreparedStatement addExam;
+		addExam = con
+				.prepareStatement("INSERT INTO Exams (Eid, Sid, Cid, Name, Date, Tdescription, Sdescription, ID, TotalTime, Code, Mode)"
+						+ "VALUES (?, ? ,? ,? ,? ,? ,? ,? ,? ,?, ? )");
+		addExam.setString(1, e.getEid());
+		addExam.setString(2, e.getSid());
+		addExam.setString(3, e.getCid());
+		addExam.setString(4, e.getName());
+		Date dateInput = new SimpleDateFormat("yyyy-MM-dd").parse(e.getDate());
+		java.sql.Date dateInputData = new java.sql.Date(dateInput.getTime());
+		addExam.setDate(5, dateInputData);
+		addExam.setString(6, e.getTdescription());
+		addExam.setString(7, e.getSdescription());
+		
+		addExam.setString(8, e.getID());
+		addExam.setString(9, e.getTotalTime());
+		addExam.setString(10, e.getCode());
+		addExam.setString(11, "Manual");
+		addExam.executeUpdate();
+		
+		PreparedStatement addMExam;
+		addMExam = con
+				.prepareStatement("INSERT INTO Teacher_Manual_Exams (Eid, ExamFile, ID)"
+						+ "VALUES (?, ? ,?)");
+		addMExam.setString(1, e.getEid());
+		
+		InputStream inputstream = new FileInputStream(ExamFile);
+		addMExam.setBlob(2, inputstream);
+		addMExam.setString(3, e.getID());
 		return id;
 	}
 
