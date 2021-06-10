@@ -343,6 +343,16 @@ public class ServerCEMS extends AbstractServer {
 					}
 
 					break;
+				case TEACHER_CHECK_VALID_CODE:
+
+					
+					if (MySQLConnection.teacherValidExamCode((String) clientMsg.getMessage())) {
+						type = ServerMessageTypes.TEACHER_VALID_CODE;
+					} else {
+						type = ServerMessageTypes.TEACHER_INVALID_CODE;
+					}
+
+					break;
 				case STUDENT_SUBJECTS_INFORMATION:
 					returnVal = MySQLConnection.getStudentSubjects((String) clientMsg.getMessage());
 					if (returnVal != null) {

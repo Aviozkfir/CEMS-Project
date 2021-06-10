@@ -14,6 +14,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import message.ClientMessage;
+import message.ClientMessageType;
+import message.ServerMessageTypes;
 
 public class TeacherCreateExamPage1Controller {
 
@@ -114,6 +117,13 @@ public class TeacherCreateExamPage1Controller {
     		return;
     	}
     	
+    	ClientMessage m1 = new ClientMessage(ClientMessageType.TEACHER_CHECK_VALID_CODE, examCode.getText());
+    	GUIControl.instance.sendToServer(m1);
+    	
+    	if(GUIControl.instance.getServerMsg().getType()==ServerMessageTypes.TEACHER_INVALID_CODE){
+    		GUIControl.popUpMessage("Error", "This code is already being used in another exam");
+    		return;
+    	}
     	exam.setCode(examCode.getText());
     	
     	if(!teacherNotesText.getText().trim().equals("")) 
