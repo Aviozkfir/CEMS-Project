@@ -561,6 +561,19 @@ public static String addExam(Exam e, ArrayList<QuestionInExam> list) throws SQLE
 
 	}
 
+	public static boolean validExamCode(String ExamCode) throws SQLException {
+		PreparedStatement exams = con.prepareStatement(
+				"SELECT Eid FROM Exams WHERE Code=?");
+		exams.setString(1, ExamCode);
+		ResultSet rs = exams.executeQuery();
+		
+		if(rs.next())
+			return false;
+		return true;
+
+	}
+	
+	
 	public static Object returnExamQuestions(String ExamID) throws SQLException {
 		boolean has = false;
 		ArrayList<QuestionInExam> questions = new ArrayList<QuestionInExam>();
