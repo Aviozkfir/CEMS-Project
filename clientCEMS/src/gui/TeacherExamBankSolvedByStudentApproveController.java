@@ -62,6 +62,7 @@ public class TeacherExamBankSolvedByStudentApproveController extends TeacherMain
     }
    
     public void setExamType(SolvedExamType exam) {
+    	this.exam=exam;	
     	
     }
 
