@@ -43,7 +43,7 @@ public class TeacherExamBankSolvedByStudentExamsController  extends TeacherMainP
     }
 
     
-public void setTeacherCourse(Course course) throws IOException {
+    public void setTeacherCourse(Course course) throws IOException {
     	
     	this.course=course;
     	

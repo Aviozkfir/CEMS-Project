@@ -253,7 +253,7 @@ public class MySQLConnection {
 		ArrayList<Exam> exams = new ArrayList<Exam>();
 		ResultSet rs;
 		PreparedStatement logInPreparedStatement;
-		logInPreparedStatement = con.prepareStatement("SELECT e FROM Exams e, SolvedExam se WHERE e.Cid=? AND e.LockExam=Yes AND se.Eid=e.Eid");
+		logInPreparedStatement = con.prepareStatement("SELECT e FROM Exams e WHERE e.Cid=? AND e.Eid NOT IN(SELECT se.Eid FROM SolvedExam se WHERE se.Checked=Yes");
 		logInPreparedStatement.setString(1, course.getId());
 		rs = logInPreparedStatement.executeQuery();
 		while (rs.next()) {

@@ -1,5 +1,7 @@
 package gui;
 
+import java.util.function.BiConsumer;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -28,6 +30,14 @@ public class TeacherExamBankSolvedByStudentExamsRowsController {
 
     @FXML
     private Button btnCheckExam;
+    
+    
+    private  String chosenPath;
+
+    private Object object;
+   
+
+	private BiConsumer<String,Object> consumer;
 
     @FXML
     void btnCheckPressed(ActionEvent event) {
