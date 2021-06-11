@@ -63,7 +63,7 @@ public class TeacherExamBankSolvedByStudentExamsController  extends TeacherMainP
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/TeacherExamBankSolvedByStudentExamsRows.fxml"));
 			AnchorPane root = fxmlLoader.load();
 			controller = (TeacherQuestionTableRowController) fxmlLoader.getController();
-			controller.setQuestion(q);
+			//controller.setQuestion(q);
 			controller.setCourse(course);
 			vTable.getChildren().add(root);
 			

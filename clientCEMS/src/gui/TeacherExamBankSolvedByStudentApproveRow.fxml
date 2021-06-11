@@ -10,9 +10,9 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="53.0" prefWidth="841.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherOngioingExamRowController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="53.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherExamBankSolvedByStudentApproveRowController">
    <children>
-      <HBox prefHeight="53.0" prefWidth="841.0" style="-fx-background-color: white;">
+      <HBox prefHeight="53.0" prefWidth="816.0" style="-fx-background-color: white;">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
@@ -132,7 +132,7 @@
                   <Insets right="13.0" top="5.0" />
                </HBox.margin>
             </Button>
-            <Label fx:id="automaticGrade1" alignment="CENTER" prefHeight="42.0" prefWidth="95.0" text="Not Published!" wrapText="true">
+            <Label fx:id="publishStatus" alignment="CENTER" prefHeight="42.0" prefWidth="95.0" text="Not Published!" wrapText="true">
                <opaqueInsets>
                   <Insets top="5.0" />
                </opaqueInsets>
