@@ -24,7 +24,10 @@ public class TeacherExamBankSolvedByStudentExamsRowsController {
     private Label date;
 
     @FXML
-    private Label checkStatus;
+    private Text checkedNum;
+
+    @FXML
+    private Text totalNum;
     
     @FXML
     private Button btnCheckExam;
