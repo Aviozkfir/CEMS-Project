@@ -1,11 +1,21 @@
 package entity;
 
-public class SolvedExamType {
+import java.io.Serializable;
+
+public class SolvedExamType implements Serializable {
 
 
 	private String Eid;
 	
-	
+	private Course course;
+
+	public Course getCourse() {
+		return course;
+	}
+
+	public void setCourse(Course course) {
+		this.course = course;
+	}
 
 	private String Name;
 	private String Date;

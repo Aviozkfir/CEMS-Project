@@ -255,11 +255,11 @@ public class MySQLConnection {
 		
 		ResultSet rs1;
 		PreparedStatement logInPreparedStatement1;
-		logInPreparedStatement1 = con.prepareStatement("SELECT se.Eid, se.DATE, e.Name "
+		logInPreparedStatement1 = con.prepareStatement("SELECT seq.Eid, seq.DATE, e.Name "
 				+ "										FROM Exams e, "
 				+ "										(SELECT se.Eid, se.DATE FROM SolvedExams se GROUP BY se.Eid, se.DATE "
-				+ "										HAVING MAX(se.Checked)='Yes' AND MIN(se.Checked)='Yes' "
-				+ "										WHERE se.Eid=e.Eid AND e.Cid=? ");
+				+ "										HAVING MAX(se.Checked)='Yes' AND MIN(se.Checked)='Yes') AS seq "
+				+ "										WHERE seq.Eid=e.Eid AND e.Cid=? ");
 		logInPreparedStatement1.setString(1, course.getId());
 		rs1 = logInPreparedStatement1.executeQuery();
 		while (rs1.next()) {
@@ -268,11 +268,11 @@ public class MySQLConnection {
 		
 		ResultSet rs2;
 		PreparedStatement logInPreparedStatement2;
-		logInPreparedStatement2 = con.prepareStatement("SELECT se.Eid, se.DATE, e.Name "
+		logInPreparedStatement2 = con.prepareStatement("SELECT seq.Eid, seq.DATE, e.Name "
 				+ "										FROM Exams e, "
 				+ "										(SELECT se.Eid, se.DATE FROM SolvedExams se GROUP BY se.Eid, se.DATE "
-				+ "										HAVING MAX(se.Checked)='No' AND MIN(se.Checked)='Yes' "
-				+ "										WHERE se.Eid=e.Eid AND e.Cid=?");
+				+ "										HAVING MAX(se.Checked)='No' AND MIN(se.Checked)='Yes') AS seq "
+				+ "										WHERE seq.Eid=e.Eid AND e.Cid=?");
 		logInPreparedStatement2.setString(1, course.getId());
 		rs2 = logInPreparedStatement2.executeQuery();
 		while (rs2.next()) {
@@ -281,11 +281,11 @@ public class MySQLConnection {
 		
 		ResultSet rs3;
 		PreparedStatement logInPreparedStatement3;
-		logInPreparedStatement3 = con.prepareStatement("SELECT se.Eid, se.DATE, e.Name "
+		logInPreparedStatement3 = con.prepareStatement("SELECT seq.Eid, seq.DATE, e.Name "
 				+ "										FROM Exams e, "
 				+ "										(SELECT se.Eid, se.DATE FROM SolvedExams se GROUP BY se.Eid, se.DATE "
-				+ "										HAVING MAX(se.Checked)='No' AND MIN(se.Checked)='No' "
-				+ "										WHERE se.Eid=e.Eid AND e.Cid=?");
+				+ "										HAVING MAX(se.Checked)='No' AND MIN(se.Checked)='No') AS seq "
+				+ "										WHERE seq.Eid=e.Eid AND e.Cid=?");
 		logInPreparedStatement3.setString(1, course.getId());
 		rs3 = logInPreparedStatement3.executeQuery();
 		while (rs3.next()) {

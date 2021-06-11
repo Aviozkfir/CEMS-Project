@@ -2,6 +2,7 @@ package gui;
 
 import java.util.function.BiConsumer;
 
+import entity.SolvedExamType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -22,24 +23,27 @@ public class TeacherExamBankSolvedByStudentExamsRowsController {
     @FXML
     private Label date;
 
-    @FXML
-    private Text checkNum;
-
-    @FXML
-    private Text totalNum;
-
+    
     @FXML
     private Button btnCheckExam;
     
     
     private  String chosenPath;
 
-    private Object object;
+    private SolvedExamType exam;
    
+    
 
 	private BiConsumer<String,Object> consumer;
 
-    @FXML
+    public void setExam(SolvedExamType exam) {
+		this.exam = exam;
+		this.date.setText(exam.getDate());
+		this.examID.setText(exam.getEid());
+		this.examTitle.setText(exam.getName());
+	}
+
+	@FXML
     void btnCheckPressed(ActionEvent event) {
 
     }
