@@ -45,6 +45,8 @@ public class TeacherExamBankSolvedByStudentExamsRowsController {
 		this.date.setText(exam.getDate());
 		this.examID.setText(exam.getEid());
 		this.examTitle.setText(exam.getName());
+		this.totalNum.setText(exam.getTotal()+"");
+		this.checkedNum.setText(exam.getChecked()+"");
 	}
 
 	@FXML

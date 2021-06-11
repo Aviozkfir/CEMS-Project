@@ -25,7 +25,7 @@ public class SolvedExamType implements Serializable {
 	private String Date;
 	
 	
-	public SolvedExamType(String Eid, String Date, String Name, int total, int checked) {
+	public SolvedExamType(String Eid, String Date, String Name, int checked, int total) {
 		this.Eid=Eid;
 		this.Date=Date;
 		this.Name=Name;
