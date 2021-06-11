@@ -23,6 +23,8 @@ public class TeacherExamBankSolvedByStudentExamsRowsController {
     @FXML
     private Label date;
 
+    @FXML
+    private Label checkStatus;
     
     @FXML
     private Button btnCheckExam;
@@ -32,7 +34,6 @@ public class TeacherExamBankSolvedByStudentExamsRowsController {
 
     private SolvedExamType exam;
    
-    
 
 	private BiConsumer<String,Object> consumer;
 
