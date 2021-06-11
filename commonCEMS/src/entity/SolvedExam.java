@@ -10,6 +10,15 @@ public class SolvedExam extends Exam implements Serializable {
 	String Checked = "No";
 	String Submitted = "";
 
+	String student;
+	public String getStudent() {
+		return student;
+	}
+
+	public void setStudent(String student) {
+		this.student = student;
+	}
+
 	public SolvedExam(String eid, String sid, String cid, String name, String date, String tdescription,
 			String sdescription, String iD, String totalTime, String code, String mode, String finishTime,
 			String finishDate, String finalGrade) {

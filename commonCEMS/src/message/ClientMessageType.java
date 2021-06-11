@@ -42,7 +42,9 @@ public enum ClientMessageType {
 	INSERT_EXAM_TO_DB, 
 	STUDENT_COURSES_INFORMATION,
 	STUDENT_SUBJECTS_INFORMATION,
-	
+	TEAHCER_GET_SOLVED_EXAMS_BY_COURSE,//input: course, output: arraylist of exams types
+	TEAHCER_GET_SOLVED_EXAMS_BY_EXAM_TYPE,//input: exam type, output: arraylist of sovledExams
+	TEACHER_GET_SOLVED_EXAM_QUESTIONS_BY_STUDENT,//input solvedExam output: arraylist of solvedQuestions.
 	
 	
 	

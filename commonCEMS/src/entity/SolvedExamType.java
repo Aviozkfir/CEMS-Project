@@ -8,6 +8,5 @@ public class SolvedExamType {
 	private String Cid;
 	private String Name;
 	private String Date;
-	private int total;
-	private int checked;
+	private String type;
 }
