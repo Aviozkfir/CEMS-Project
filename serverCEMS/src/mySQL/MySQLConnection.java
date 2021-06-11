@@ -23,6 +23,7 @@ import entity.Question;
 import entity.QuestionInExam;
 import entity.Request;
 import entity.SolvedExam;
+import entity.SolvedExamType;
 import entity.Student;
 import entity.Subject;
 import entity.Teacher;
@@ -249,18 +250,48 @@ public class MySQLConnection {
 		return exam;
 	}
 	
-	public static ArrayList<Exam> getTeacherSolvedExamByCourse(Course course) throws SQLException {
-		ArrayList<Exam> exams = new ArrayList<Exam>();
-		ResultSet rs;
-		PreparedStatement logInPreparedStatement;
-		logInPreparedStatement = con.prepareStatement("SELECT e FROM Exams e WHERE e.Cid=? AND e.Eid NOT IN(SELECT se.Eid FROM SolvedExam se WHERE se.Checked=Yes");
-		logInPreparedStatement.setString(1, course.getId());
-		rs = logInPreparedStatement.executeQuery();
-		while (rs.next()) {
-			exams.add(( new Exam(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-					rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10),rs.getString(11))));
-			
+	public static ArrayList<SolvedExamType> getTeacherSolvedExamByCourse(Course course) throws SQLException {
+		ArrayList<SolvedExamType> exams = new ArrayList<SolvedExamType>();
+		
+		ResultSet rs1;
+		PreparedStatement logInPreparedStatement1;
+		logInPreparedStatement1 = con.prepareStatement("SELECT se.Eid, se.DATE, e.Name "
+				+ "										FROM Exams e, "
+				+ "										(SELECT se.Eid, se.DATE FROM SolvedExams se GROUP BY se.Eid, se.DATE "
+				+ "										HAVING MAX(se.Checked)='Yes' AND MIN(se.Checked)='Yes' "
+				+ "										WHERE se.Eid=e.Eid AND e.Cid=? ");
+		logInPreparedStatement1.setString(1, course.getId());
+		rs1 = logInPreparedStatement1.executeQuery();
+		while (rs1.next()) {
+			exams.add( new SolvedExamType(rs1.getString(1) ,rs1.getDate(2).toString(), rs1.getString(3),"Finished") );
 		}
+		
+		ResultSet rs2;
+		PreparedStatement logInPreparedStatement2;
+		logInPreparedStatement2 = con.prepareStatement("SELECT se.Eid, se.DATE, e.Name "
+				+ "										FROM Exams e, "
+				+ "										(SELECT se.Eid, se.DATE FROM SolvedExams se GROUP BY se.Eid, se.DATE "
+				+ "										HAVING MAX(se.Checked)='No' AND MIN(se.Checked)='Yes' "
+				+ "										WHERE se.Eid=e.Eid AND e.Cid=?");
+		logInPreparedStatement2.setString(1, course.getId());
+		rs2 = logInPreparedStatement2.executeQuery();
+		while (rs2.next()) {
+			exams.add( new SolvedExamType(rs2.getString(1) ,rs2.getDate(2).toString(), rs2.getString(3),"In Progress") );
+		}
+		
+		ResultSet rs3;
+		PreparedStatement logInPreparedStatement3;
+		logInPreparedStatement3 = con.prepareStatement("SELECT se.Eid, se.DATE, e.Name "
+				+ "										FROM Exams e, "
+				+ "										(SELECT se.Eid, se.DATE FROM SolvedExams se GROUP BY se.Eid, se.DATE "
+				+ "										HAVING MAX(se.Checked)='No' AND MIN(se.Checked)='No' "
+				+ "										WHERE se.Eid=e.Eid AND e.Cid=?");
+		logInPreparedStatement3.setString(1, course.getId());
+		rs3 = logInPreparedStatement3.executeQuery();
+		while (rs3.next()) {
+			exams.add( new SolvedExamType(rs3.getString(1) ,rs3.getDate(2).toString(), rs3.getString(3),"Start") );
+		}
+		
 		return exams;
 	}
 	
