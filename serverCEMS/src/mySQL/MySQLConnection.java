@@ -255,42 +255,17 @@ public class MySQLConnection {
 		
 		ResultSet rs1;
 		PreparedStatement logInPreparedStatement1;
-		logInPreparedStatement1 = con.prepareStatement("SELECT seq.Eid, seq.DATE, e.Name "
-				+ "										FROM Exams e, "
-				+ "										(SELECT se.Eid, se.DATE FROM SolvedExams se GROUP BY se.Eid, se.DATE "
-				+ "										HAVING MAX(se.Checked)='Yes' AND MIN(se.Checked)='Yes') AS seq "
-				+ "										WHERE seq.Eid=e.Eid AND e.Cid=? ");
+		logInPreparedStatement1 = con.prepareStatement("SELECT seq.Eid, seq.DATE, e.Name, seq.checkedAmount, seq.sumAmount FROM Exams e, "
+				+ "										(SELECT se.Eid, se.DATE, sum(case when Checked = 'Yes' then 1 else 0 end) as checkedAmount, "
+				+ "										COUNT(*) as sumAmount FROM SolvedExams se GROUP BY se.Eid, se.DATE ) AS seq WHERE"
+				+ "										 seq.Eid=e.Eid AND e.Cid=?");
 		logInPreparedStatement1.setString(1, course.getId());
 		rs1 = logInPreparedStatement1.executeQuery();
 		while (rs1.next()) {
-			exams.add( new SolvedExamType(rs1.getString(1) ,rs1.getDate(2).toString(), rs1.getString(3),"Finished") );
+			exams.add( new SolvedExamType(rs1.getString(1) ,rs1.getDate(2).toString(), rs1.getString(3), rs1.getInt(4),rs1.getInt(5)) );
 		}
 		
-		ResultSet rs2;
-		PreparedStatement logInPreparedStatement2;
-		logInPreparedStatement2 = con.prepareStatement("SELECT seq.Eid, seq.DATE, e.Name "
-				+ "										FROM Exams e, "
-				+ "										(SELECT se.Eid, se.DATE FROM SolvedExams se GROUP BY se.Eid, se.DATE "
-				+ "										HAVING MAX(se.Checked)='No' AND MIN(se.Checked)='Yes') AS seq "
-				+ "										WHERE seq.Eid=e.Eid AND e.Cid=?");
-		logInPreparedStatement2.setString(1, course.getId());
-		rs2 = logInPreparedStatement2.executeQuery();
-		while (rs2.next()) {
-			exams.add( new SolvedExamType(rs2.getString(1) ,rs2.getDate(2).toString(), rs2.getString(3),"In Progress") );
-		}
 		
-		ResultSet rs3;
-		PreparedStatement logInPreparedStatement3;
-		logInPreparedStatement3 = con.prepareStatement("SELECT seq.Eid, seq.DATE, e.Name "
-				+ "										FROM Exams e, "
-				+ "										(SELECT se.Eid, se.DATE FROM SolvedExams se GROUP BY se.Eid, se.DATE "
-				+ "										HAVING MAX(se.Checked)='No' AND MIN(se.Checked)='No') AS seq "
-				+ "										WHERE seq.Eid=e.Eid AND e.Cid=?");
-		logInPreparedStatement3.setString(1, course.getId());
-		rs3 = logInPreparedStatement3.executeQuery();
-		while (rs3.next()) {
-			exams.add( new SolvedExamType(rs3.getString(1) ,rs3.getDate(2).toString(), rs3.getString(3),"Start") );
-		}
 		
 		return exams;
 	}

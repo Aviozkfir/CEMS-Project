@@ -8,6 +8,10 @@ public class SolvedExamType implements Serializable {
 	private String Eid;
 	
 	private Course course;
+	
+	private int total;
+
+	private int checked;
 
 	public Course getCourse() {
 		return course;
@@ -19,22 +23,17 @@ public class SolvedExamType implements Serializable {
 
 	private String Name;
 	private String Date;
-	private String status;
 	
-	public SolvedExamType(String Eid, String Date, String Name, String status) {
+	
+	public SolvedExamType(String Eid, String Date, String Name, int total, int checked) {
 		this.Eid=Eid;
 		this.Date=Date;
 		this.Name=Name;
-		this.status=status;
+		this.checked=checked;
+		this.total=total;
 	}
 	
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
+	
 
 	public String getEid() {
 		return Eid;
@@ -58,5 +57,21 @@ public class SolvedExamType implements Serializable {
 
 	public void setDate(String date) {
 		Date = date;
+	}
+	
+	public int getTotal() {
+		return total;
+	}
+
+	public void setTotal(int total) {
+		this.total = total;
+	}
+
+	public int getChecked() {
+		return checked;
+	}
+
+	public void setChecked(int checked) {
+		this.checked = checked;
 	}
 }

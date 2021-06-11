@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import entity.Course;
+import entity.SolvedExamType;
 import entity.Subject;
 import entity.Teacher;
 import javafx.event.ActionEvent;
@@ -47,9 +48,12 @@ public class TeacherExamBankSolvedByStudentApproveController extends TeacherMain
     @FXML
     private Button btnBack;
 
+    
+    private SolvedExamType exam;
     @FXML
     void btnBackPressed(ActionEvent event) throws IOException {
     	TeacherExamBankSolvedByStudentExamsController a = ((TeacherExamBankSolvedByStudentExamsController) guiControl.loadStage("TeacherExamBankSolvedByStudentExams.fxml"));
+    	a.setTeacherCourse(exam.getCourse());
     }
 
     @FXML
@@ -57,5 +61,8 @@ public class TeacherExamBankSolvedByStudentApproveController extends TeacherMain
 
     }
    
+    public void setExamType(SolvedExamType exam) {
+    	
+    }
 
 }
