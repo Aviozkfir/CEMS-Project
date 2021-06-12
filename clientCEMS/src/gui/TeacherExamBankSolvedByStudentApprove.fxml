@@ -103,7 +103,7 @@
                   </Button>
                </children>
             </Pane>
-            <HBox prefHeight="44.0" prefWidth="851.0">
+            <HBox prefHeight="59.0" prefWidth="851.0">
                <children>
                   <Text fill="#868282" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Exam Bank" wrappingWidth="137.0">
                      <font>
@@ -169,7 +169,7 @@
                         <Insets top="12.0" />
                      </HBox.margin>
                   </Text>
-                  <Text fx:id="examName" strokeType="OUTSIDE" strokeWidth="0.0" text="Exam Name">
+                  <Text fx:id="examName" strokeType="OUTSIDE" strokeWidth="0.0" text="Exam Name" wrappingWidth="223.193359375" HBox.hgrow="SOMETIMES">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
@@ -178,17 +178,20 @@
                      </HBox.margin>
                   </Text>
                </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="851.0">
+            <HBox prefHeight="66.0" prefWidth="851.0">
                <children>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                  <VBox alignment="CENTER" prefHeight="84.0" prefWidth="100.0">
                      <children>
                         <Text fx:id="numOfExams" fill="#2a73ff" strokeType="OUTSIDE" strokeWidth="0.0" text="2000" textAlignment="CENTER" wrappingWidth="94.95509719848633">
                            <font>
                               <Font name="System Bold" size="26.0" />
                            </font>
                         </Text>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Total Exams&#10;Amount" textAlignment="CENTER">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Total Exams&#10;" textAlignment="CENTER">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -305,7 +308,7 @@
                   </Label>
                </children>
             </HBox>
-            <ScrollPane prefHeight="296.0" prefWidth="829.0" style="-fx-opacity: 1; -fx-border-color: #EBEBEB;">
+            <ScrollPane prefHeight="304.0" prefWidth="829.0" style="-fx-opacity: 1; -fx-border-color: #EBEBEB;">
                <VBox.margin>
                   <Insets left="11.0" right="11.0" />
                </VBox.margin>
@@ -330,7 +333,7 @@
                         </ImageView>
                      </graphic>
                      <HBox.margin>
-                        <Insets left="41.0" top="10.0" />
+                        <Insets left="10.0" top="10.0" />
                      </HBox.margin>
                   </Button>
                </children>

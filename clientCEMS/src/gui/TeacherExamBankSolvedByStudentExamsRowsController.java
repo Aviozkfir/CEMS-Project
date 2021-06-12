@@ -1,6 +1,8 @@
 package gui;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.function.BiConsumer;
 
 import entity.SolvedExamType;
@@ -43,7 +45,12 @@ public class TeacherExamBankSolvedByStudentExamsRowsController {
 
     public void setExam(SolvedExamType exam) {
 		this.exam = exam;
-		this.date.setText(exam.getDate());
+		//coverting fate from yyyy-mm-dd to dd-mm-yyyy
+    	String startDateString = exam.getDate().toString();
+        DateTimeFormatter oldFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter newFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    	//
+		this.date.setText(LocalDate.parse(startDateString, oldFormat).format(newFormat));
 		this.examID.setText(exam.getEid());
 		this.examTitle.setText(exam.getName());
 		this.totalNum.setText(exam.getTotal()+"");

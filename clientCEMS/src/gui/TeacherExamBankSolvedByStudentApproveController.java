@@ -68,7 +68,8 @@ public class TeacherExamBankSolvedByStudentApproveController extends TeacherMain
     	this.numOfGraded.setText(exam.getChecked()+"");
     	this.numOfNotGraded.setText((exam.getTotal()-exam.getChecked())+"");
     	this.subjectName.setText(exam.getCourse().getSubject().getName());
-    	this.courseName.setText(exam.getName());
+    	this.courseName.setText(exam.getCourse().getName());
+    	this.examName.setText(exam.getName());
     }
 
 }

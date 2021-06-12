@@ -1,5 +1,8 @@
 package gui;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import entity.Exam;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -38,7 +41,13 @@ public class TeacherExamBankRowController {
     public void setExam(Exam exam) {
 		this.exam = exam;
 		author.setText(exam.getID());
-		date.setText(exam.getDate());
+		
+		//coverting fate from yyyy-mm-dd to dd-mm-yyyy
+    	String startDateString = exam.getDate().toString();
+        DateTimeFormatter oldFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter newFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    	//
+    	date.setText(LocalDate.parse(startDateString, oldFormat).format(newFormat));
 		examTitle.setText(exam.getName());
 	}
 

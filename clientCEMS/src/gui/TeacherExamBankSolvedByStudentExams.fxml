@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="myRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherExamBankSolvedByStudentExamsController">
+<AnchorPane fx:id="myRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherExamBankSolvedByStudentExamsController">
    <children>
       <VBox prefHeight="600.0" prefWidth="206.0" style="-fx-background-color: #F7F7F7;">
          <children>
@@ -162,24 +162,30 @@
                      </HBox.margin>
                   </Text>
                </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="851.0">
+            <HBox prefHeight="90.0" prefWidth="851.0">
                <children>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                  <VBox alignment="CENTER" prefHeight="43.0" prefWidth="91.0">
                      <children>
                         <Text fx:id="numberOfExams" fill="#2a73ff" strokeType="OUTSIDE" strokeWidth="0.0" text="2000" textAlignment="CENTER" wrappingWidth="94.95509719848633">
                            <font>
                               <Font name="System Bold" size="26.0" />
                            </font>
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
                         </Text>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Total in bank" textAlignment="CENTER">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Total in bank&#10;" textAlignment="CENTER">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Text>
                      </children>
                      <HBox.margin>
-                        <Insets left="11.0" />
+                        <Insets left="16.0" />
                      </HBox.margin>
                   </VBox>
                </children>
@@ -237,7 +243,7 @@
                   </Label>
                </children>
             </HBox>
-            <ScrollPane prefHeight="268.0" prefWidth="841.0" style="-fx-opacity: 1; -fx-border-color: #EBEBEB;">
+            <ScrollPane prefHeight="304.0" prefWidth="829.0" style="-fx-opacity: 1; -fx-border-color: #EBEBEB;">
                <VBox.margin>
                   <Insets left="11.0" right="11.0" />
                </VBox.margin>
@@ -262,7 +268,7 @@
                         </ImageView>
                      </graphic>
                      <HBox.margin>
-                        <Insets left="41.0" top="10.0" />
+                        <Insets left="10.0" top="10.0" />
                      </HBox.margin>
                   </Button>
                </children>
