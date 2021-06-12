@@ -9,28 +9,51 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
+/**
+ * @author On Avioz Controller for each exam in the exam list inside specific
+ *         course.
+ */
 public class PrincipalExamBankRowController {
+	/**
+	 * Blue eye image button.
+	 */
+	@FXML
+	private Button btnView;
+	/**
+	 * The question id.
+	 */
+	@FXML
+	private Label questionID;
+	/**
+	 * The exam title.
+	 */
+	@FXML
+	private Label examTitle;
+	/**
+	 * Date of question.
+	 */
+	@FXML
+	private Label date;
+	/**
+	 * The author of the exam.
+	 */
+	@FXML
+	private Label author;
 
-    @FXML
-    private Button btnView;
+	/**
+	 * The exam.
+	 */
+	private Exam exam;
+	/**
+	 * The course of the question.
+	 */
+	private Course course;
 
-    @FXML
-    private Label questionID;
-
-    @FXML
-    private Label examTitle;
-
-    @FXML
-    private Label date;
-
-    @FXML
-    private Label author;
-
-
-    private Exam exam;
-    private Course course;
-    
-    public void setExam(Exam exam,Course course) {
+	/**
+	 * @param exam   The exam the user chose.
+	 * @param course The course the user chose. This method setting the exem.
+	 */
+	public void setExam(Exam exam, Course course) {
 		this.exam = exam;
 		this.course = course;
 		questionID.setText(exam.getEid());
@@ -39,11 +62,18 @@ public class PrincipalExamBankRowController {
 		examTitle.setText(exam.getName());
 	}
 
-    @FXML
-    void btnViewQuestionPressed(ActionEvent event) throws IOException {
-    	   GUIControl guiControl = GUIControl.getInstance();
-    	   PrincipalExamBankViewExamController a = (PrincipalExamBankViewExamController) guiControl.loadStage(gui.ClientsConstants.Screens.PRINCIPAL_EXAM_VIEW.path);
-       			a.setPrincipalExam(exam,course);
-       			a.setRequestCounter();
-    }
+	/**
+	 * @param event ActionEvent
+	 * @throws IOException When blue eye image button pressed, the user will see the
+	 *                     information of the exam, setting text new request if
+	 *                     necessary.
+	 */
+	@FXML
+	void btnViewQuestionPressed(ActionEvent event) throws IOException {
+		GUIControl guiControl = GUIControl.getInstance();
+		PrincipalExamBankViewExamController a = (PrincipalExamBankViewExamController) guiControl
+				.loadStage(gui.ClientsConstants.Screens.PRINCIPAL_EXAM_VIEW.path);
+		a.setPrincipalExam(exam, course);
+		a.setRequestCounter();
+	}
 }

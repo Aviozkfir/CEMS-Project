@@ -15,12 +15,12 @@ import message.ClientMessageType;
 import message.ServerMessageTypes;
 
 /**
- * @author On avioz
- * This class is the Main Controller for principal, all other controllers extends him.
+ * @author On avioz This class is the Main Controller for principal, all other
+ *         controllers extends him.
  * @extend MainPageController
  */
-public class PrincipalMainPageController extends MainPageController  {
-	
+public class PrincipalMainPageController extends MainPageController {
+
 	/**
 	 * HomePage button in menu.
 	 */
@@ -50,7 +50,7 @@ public class PrincipalMainPageController extends MainPageController  {
 	 */
 	@FXML
 	private Button RequestsButton;
-	
+
 	/**
 	 * Text that show number of new requests.
 	 */
@@ -59,8 +59,9 @@ public class PrincipalMainPageController extends MainPageController  {
 
 	/**
 	 * @param event actionEvent when question bank button in menu pressed.
-	 * @throws IOException 
-	 * This Method loading Principal question bank screen ,setting Subjects inside and setting the new request text message.
+	 * @throws IOException This Method loading Principal question bank screen
+	 *                     ,setting Subjects inside and setting the new request text
+	 *                     message.
 	 */
 	@FXML
 	void QuestionBankButtonPressed(ActionEvent event) throws IOException {
@@ -72,8 +73,8 @@ public class PrincipalMainPageController extends MainPageController  {
 
 	/**
 	 * @param event actionEvent when Home page button in menu pressed.
-	 * @throws IOException
-	 * This Method loading Principal home page screen  and setting the new request text message.
+	 * @throws IOException This Method loading Principal home page screen and
+	 *                     setting the new request text message.
 	 */
 	@FXML
 	void HomePageButtonPressed(ActionEvent event) throws IOException {
@@ -81,12 +82,13 @@ public class PrincipalMainPageController extends MainPageController  {
 		dashBoardPrincipalControllerHome controller = (dashBoardPrincipalControllerHome) guiControl
 				.loadStage(ClientsConstants.Screens.PRINCIPAL_MAIN_PAGE.path);
 		controller.setRequestCounter();
-		
+
 	}
+
 	/**
 	 * @param event actionEvent when Exam Bank button in menu pressed.
-	 * @throws IOException
-	 * This Method loading Principal Exam Bank screen, setting Subjects inside and setting the new request text message.
+	 * @throws IOException This Method loading Principal Exam Bank screen, setting
+	 *                     Subjects inside and setting the new request text message.
 	 */
 	@FXML
 	void ExamBankButtonPressed(ActionEvent event) throws IOException {
@@ -96,10 +98,11 @@ public class PrincipalMainPageController extends MainPageController  {
 		controller.setPrincipalSubject();
 		controller.setRequestCounter();
 	}
+
 	/**
 	 * @param event actionEvent when Report button in menu pressed.
-	 * @throws IOException
-	 * This Method loading Principal Reports screen  and setting the new request text message.
+	 * @throws IOException This Method loading Principal Reports screen and setting
+	 *                     the new request text message.
 	 */
 	@FXML
 	void GetReportButtonPressed(ActionEvent event) throws IOException {
@@ -108,10 +111,11 @@ public class PrincipalMainPageController extends MainPageController  {
 				.loadStage(ClientsConstants.Screens.PRINCIPAL_REPORT_PAGE.path);
 		controller.setRequestCounter();
 	}
+
 	/**
 	 * @param event actionEvent when Requests button in menu pressed.
-	 * @throws IOException
-	 * This Method loading Principal Requests screen, set requests inside  and setting the new request text message.
+	 * @throws IOException This Method loading Principal Requests screen, set
+	 *                     requests inside and setting the new request text message.
 	 */
 	@FXML
 	void RequestsButtonPressed(ActionEvent event) throws IOException {
@@ -120,26 +124,22 @@ public class PrincipalMainPageController extends MainPageController  {
 				.loadStage(ClientsConstants.Screens.PRINCIPAL_REQUESTS_PAGE.path);
 		controller.GetRequestListFromDB();
 		controller.setPrincipalRequests();
-		
+
 	}
-	
+
 	/**
-	 * This method get counting number for new requests and setting in text which became visible for principal,
-	 * if the counter equals zero, the text message is invisible
+	 * This method get counting number for new requests and setting in text which
+	 * became visible for principal, if the counter equals zero, the text message is
+	 * invisible
 	 */
 	public void setRequestCounter() {
 		int requestCounter = guiControl.getRequestCount();
-		if(requestCounter !=0) {
+		if (requestCounter != 0) {
 			requests.setVisible(true);
-			requests.setText("You Have "+ requestCounter+" new requests.");
-		}
-		else {
+			requests.setText("You Have " + requestCounter + " new requests.");
+		} else {
 			requests.setVisible(false);
 		}
 	}
-	
-	
-
-	
 
 }

@@ -52,7 +52,7 @@ public class PrincipalQuestionTableRowController {
 
     
     /**
-     * @param q The question the user chose.
+     * @param question The question the user chose.
      * This method setting the information of the question.
      */
     public void setQuestion(Question question) {
@@ -79,7 +79,7 @@ public class PrincipalQuestionTableRowController {
     @FXML
     void btnViewQuestionPressed(ActionEvent event) throws IOException {
      GUIControl guiControl = GUIControl.getInstance();
-    	PrincipalQuestionBankViewQuestionController a = (PrincipalQuestionBankViewQuestionController) guiControl.loadStage(gui.ClientsConstants.Screens.PRINCIPAL_QUESTION_VIEW.path);
+		PrincipalQuestionBankViewQuestionController a = (PrincipalQuestionBankViewQuestionController) guiControl.loadStage(gui.ClientsConstants.Screens.PRINCIPAL_QUESTION_VIEW.path);
     			a.setPrincipalQuestion(question,course);
     			a.setRequestCounter();
     }

@@ -21,13 +21,13 @@ import message.ServerMessageTypes;
 
 /**
  * @author On Avioz
- * @extend PrincipalMainPageController
- * Controller for each question inside chosen course inside chosen subject inside question bank screen.
+ * @extend PrincipalMainPageController Controller for each question inside
+ *         chosen course inside chosen subject inside question bank screen.
  *
  */
 public class PrincipalQuestionBankQuestionsController extends PrincipalMainPageController {
 	private ArrayList<Question> allQuestions;
-	ArrayList<PrincipalQuestionTableRowController> questionControllerList = new ArrayList<PrincipalQuestionTableRowController> ();
+	ArrayList<PrincipalQuestionTableRowController> questionControllerList = new ArrayList<PrincipalQuestionTableRowController>();
 
 	/**
 	 * The AnchorPane of question.
@@ -76,7 +76,7 @@ public class PrincipalQuestionBankQuestionsController extends PrincipalMainPageC
 	 */
 	@FXML
 	private Button Back;
-	
+
 	/**
 	 * showing all questions in the list, made for case when we filtering questions.
 	 */
@@ -89,10 +89,10 @@ public class PrincipalQuestionBankQuestionsController extends PrincipalMainPageC
 	private Course course;
 
 	/**
-     * @param event ActionEvent 
-     * @throws IOException.
-     * when Back button pressed, loading Question Bank screen, setting new requests text if necessary.
-     */
+	 * @param event ActionEvent
+	 * @throws IOException. when Back button pressed, loading Question Bank screen,
+	 *                      setting new requests text if necessary.
+	 */
 	@FXML
 	void BackPressed(ActionEvent event) throws IOException {
 		PrincipalQuestionBankCoursesController contr = (PrincipalQuestionBankCoursesController) GUIControl.instance
@@ -100,82 +100,84 @@ public class PrincipalQuestionBankQuestionsController extends PrincipalMainPageC
 		contr.setPrincipalCourse(course.getSubject());
 		contr.setRequestCounter();
 	}
+
 	/**
-     * @param event ActionEvent 
-     * @throws IOException.
-     * when search button pressed, filtering the wanted question by him number
-     */
+	 * @param event ActionEvent
+	 * @throws IOException. when search button pressed, filtering the wanted
+	 *                      question by him number.
+	 */
 	@FXML
 	void btnSearchPressed(ActionEvent event) throws IOException {
 		String questionID = searchBar.getText();
-		if(CheckInput()) {
-		vTable.getChildren().clear(); 
-		for (Question q : allQuestions) {
-			if (q.getId().equals(questionID)) {
-				AddTableRow(q);
-				break;
+		if (CheckInput()) {
+			vTable.getChildren().clear();
+			for (Question q : allQuestions) {
+				if (q.getId().equals(questionID)) {
+					AddTableRow(q);
+					break;
+				}
 			}
 		}
-		}
-		
+
 	}
-	
+
 	/**
-	 * This method check the input of the search field, only 5 numbers, exist question in list,numbers only will be valid.
-	 * if input is incorrect, the user will get pop up with the appropriate message of the error.
+	 * This method check if input is valid if input is incorrect, the user will get
+	 * pop up with the appropriate message of the error.
+	 * 
 	 * @return true if input is correct, false when incorrect input.
 	 */
 	private boolean CheckInput() {
 		String input = searchBar.getText();
 		boolean exist = false;
-		
+
 		for (Question q : allQuestions) {
 			if (q.getId().equals(input)) {
 				exist = true;
 			}
 		}
-		
-		
-		
-		 if (input.isEmpty()) {
+
+		if (input.isEmpty()) {
 			GUIControl.popUpError("Error - Field is empty, please write correct question number.");
 			return false;
-			}
-		
-		else if(!input.matches("[0-9]+")) {
+		}
+
+		else if (!input.matches("[0-9]+")) {
 			GUIControl.popUpError("Error - Please insert numbers only.");
 			return false;
 		}
-		
-		else if(input.length() != 5) {
+
+		else if (input.length() != 5) {
 			GUIControl.popUpError("Error - Question number length should be 5, please insert again.");
 			return false;
 		}
-		 
-		else if(!exist) {
+
+		else if (!exist) {
 			GUIControl.popUpError("Error - There is no such a question in the list.");
 			return false;
 		}
 		return true;
-		}
+	}
 
 	/**
 	 * @param event ActionEvent
-	 * @throws IOException
-	 * When showAll button pressed, the user get the original question list.
+	 * @throws IOException When showAll button pressed, the user get the original
+	 *                     question list.
 	 */
 	@FXML
 	void showAllPressed(ActionEvent event) throws IOException {
-		vTable.getChildren().clear(); 
+		vTable.getChildren().clear();
 		for (Question q : allQuestions) {
-				AddTableRow(q);
-			}
+			AddTableRow(q);
 		}
+	}
 
-	 /**
-     * @param course  the course that holds the question.
-	 * This method sending request message to server, and getting back question list of the desired course the user chose, setting question dynamically inside the Table.
-	 * for each question, setting question information.
+	/**
+	 * @param course the course that holds the question. This method sending request
+	 *               message to server, and getting back question list of the
+	 *               desired course the user chose, setting question dynamically
+	 *               inside the Table. for each question, setting question
+	 *               information.
 	 */
 	@SuppressWarnings("unchecked")
 	public void setPrincipalCourse(Course course) throws IOException {
@@ -196,15 +198,16 @@ public class PrincipalQuestionBankQuestionsController extends PrincipalMainPageC
 			AddTableRow(q);
 		}
 	}
-	
+
 	/**
-	 * @param q question from question list we got from server.
-	 * @throws IOException
-	 * This method setting the question in the table and setting text new request if necessary.
+	 * @param q an question from question list we got from server.
+	 * @throws IOException This method setting the question in the table and setting
+	 *                     text new request if necessary.
 	 */
 	public void AddTableRow(Question q) throws IOException {
 		PrincipalQuestionTableRowController controller;
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(gui.ClientsConstants.Screens.PRINCIPAL_QUESTION_TABLE_ROW.path));
+		FXMLLoader fxmlLoader = new FXMLLoader(
+				getClass().getResource(gui.ClientsConstants.Screens.PRINCIPAL_QUESTION_TABLE_ROW.path));
 		AnchorPane root = fxmlLoader.load();
 		controller = (PrincipalQuestionTableRowController) fxmlLoader.getController();
 		controller.setQuestion(q);

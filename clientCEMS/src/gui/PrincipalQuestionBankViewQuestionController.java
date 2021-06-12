@@ -11,10 +11,10 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.text.Text;
 
 /**
- * @author On Avioz.
- *Controller for question information, when user select question.
+ * @author On Avioz. Controller for question information, when user select
+ *         question.
  */
-public class PrincipalQuestionBankViewQuestionController extends PrincipalMainPageController{
+public class PrincipalQuestionBankViewQuestionController extends PrincipalMainPageController {
 	/**
 	 * The question.
 	 */
@@ -23,7 +23,7 @@ public class PrincipalQuestionBankViewQuestionController extends PrincipalMainPa
 	 * The course of the question.
 	 */
 	private Course course;
-	
+
 	/**
 	 * The name of the question's subject.
 	 */
@@ -35,26 +35,25 @@ public class PrincipalQuestionBankViewQuestionController extends PrincipalMainPa
 	 */
 	@FXML
 	private Text courseName;
-	
+
 	/**
 	 * The question name.
 	 */
 	@FXML
 	private Text questionName;
-	
+
 	/**
 	 * The text of the question.
 	 */
 	@FXML
 	private Text textQuestion;
-	
+
 	/**
 	 * Radio Button of answer A.
 	 */
 	@FXML
 	private RadioButton rbA;
-	
-	
+
 	/**
 	 * The text of answer A.
 	 */
@@ -90,18 +89,18 @@ public class PrincipalQuestionBankViewQuestionController extends PrincipalMainPa
 	 */
 	@FXML
 	private Text textD;
-	
+
 	/**
 	 * Back button.
 	 */
 	@FXML
 	private Button Back;
-	
+
 	/**
-     * @param event ActionEvent 
-     * @throws IOException.
-     * when Back button pressed, loading question list of the chosen course, setting new requests text if necessary.
-     */
+	 * @param event ActionEvent
+	 * @throws IOException. when Back button pressed, loading question list of the
+	 *                      chosen course, setting new requests text if necessary.
+	 */
 	@FXML
 	void BackPressed(ActionEvent event) throws IOException {
 		PrincipalQuestionBankQuestionsController contr = (PrincipalQuestionBankQuestionsController) GUIControl.instance
@@ -109,18 +108,20 @@ public class PrincipalQuestionBankViewQuestionController extends PrincipalMainPa
 		contr.setPrincipalCourse(course);
 		contr.setRequestCounter();
 	}
-	
-	 /**
-	 * @param question  The 
-     * @param course  The course that holds the question.
-	 * This method sending request message to server, and getting back question list of the desired course the user chose, setting question dynamically inside the Table.
-	 * for each question, setting question information.
+
+	/**
+	 * @param question The question.
+	 * @param course   The course that holds the question. This method sending
+	 *                 request message to server, and getting back question list of
+	 *                 the desired course the user chose, setting question
+	 *                 dynamically inside the Table. for each question, setting
+	 *                 question information.
 	 */
-	public void setPrincipalQuestion(Question question,Course course) throws IOException {
+	public void setPrincipalQuestion(Question question, Course course) throws IOException {
 
 		this.question = question;
 		this.course = course;
-		
+
 		courseName.setText(course.getName());
 		subjectName.setText(course.getSubject().getName());
 		questionName.setText(question.getId());
@@ -130,9 +131,7 @@ public class PrincipalQuestionBankViewQuestionController extends PrincipalMainPa
 		textC.setText(question.getAnsC());
 		textD.setText(question.getAnsD());
 		setCorrectAns();
-		
-		
-	
+
 	}
 
 	/**
@@ -140,22 +139,25 @@ public class PrincipalQuestionBankViewQuestionController extends PrincipalMainPa
 	 */
 	private void setCorrectAns() {
 		int correct = question.getCorrectAnswer();
-		switch(correct) {
-		
-		case 1: rbA.setSelected(true);
+		switch (correct) {
+
+		case 1:
+			rbA.setSelected(true);
 			break;
-		
-		case 2:rbB.setSelected(true);
+
+		case 2:
+			rbB.setSelected(true);
 			break;
-		
-		case 3:rbC.setSelected(true);
+
+		case 3:
+			rbC.setSelected(true);
 			break;
-		
-		case 4:rbD.setSelected(true);
+
+		case 4:
+			rbD.setSelected(true);
 			break;
 		}
-		
-		
-	}	
-	
+
+	}
+
 }

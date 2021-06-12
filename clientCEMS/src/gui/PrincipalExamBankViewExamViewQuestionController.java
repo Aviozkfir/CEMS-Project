@@ -11,71 +11,123 @@ import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.text.Text;
 
-public class PrincipalExamBankViewExamViewQuestionController extends PrincipalMainPageController{
+/**
+ * @author On Avioz. Controller for question information, when user select
+ *         question.
+ */
+public class PrincipalExamBankViewExamViewQuestionController extends PrincipalMainPageController {
 
-	
-    private Question question;
-	
+	/**
+	 * The question.
+	 */
+	private Question question;
+	/**
+	 * The course of the question.
+	 */
 	private Course course;
-	
+	/**
+	 * The exam that holds this question.
+	 */
 	private Exam exam;
-	
+	/**
+	 * The name of the question's subject.
+	 */
 	@FXML
 	private Text subjectName;
-
+	/**
+	 * The name of the question's course.
+	 */
 	@FXML
 	private Text courseName;
-	
+	/**
+	 * The question name.
+	 */
 	@FXML
 	private Text questionName;
-	
+	/**
+	 * The exam id that hold this question.
+	 */
 	@FXML
 	private Text examID;
-	
+	/**
+	 * The text of the question.
+	 */
 	@FXML
 	private Text textQuestion;
-	
+	/**
+	 * Radio Button of answer A.
+	 */
 	@FXML
 	private RadioButton rbA;
-	
+	/**
+	 * The text of answer A.
+	 */
 	@FXML
 	private Text textA;
-	
+	/**
+	 * Radio Button of answer B.
+	 */
 	@FXML
 	private RadioButton rbB;
-	
+	/**
+	 * Radio Button of answer C.
+	 */
 	@FXML
 	private Text textB;
-	
+	/**
+	 * The text of answer C.
+	 */
 	@FXML
 	private RadioButton rbC;
-	
+	/**
+	 * Radio Button of answer D.
+	 */
 	@FXML
 	private Text textC;
-	
+	/**
+	 * Radio Button of answer D.
+	 */
 	@FXML
 	private RadioButton rbD;
-	
+	/**
+	 * The text of answer D.
+	 */
 	@FXML
 	private Text textD;
-	
+	/**
+	 * Back button.
+	 */
 	@FXML
 	private Button Back;
-	
+
+	/**
+	 * @param event ActionEvent
+	 * @throws IOException. when Back button pressed, loading question list of the
+	 *                      chosen exam, setting new requests text if necessary.
+	 */
 	@FXML
 	void BackPressed(ActionEvent event) throws IOException {
 		PrincipalExamBankViewExamController contr = (PrincipalExamBankViewExamController) GUIControl.instance
 				.loadStage(gui.ClientsConstants.Screens.PRINCIPAL_EXAM_VIEW.path);
-		contr.setPrincipalExam(exam,course);
+		contr.setPrincipalExam(exam, course);
 		contr.setRequestCounter();
 	}
-	
-	public void setPrincipalQuestion(Question question,Course course, Exam exam) throws IOException {
+
+	/**
+	 * @param question The question.
+	 * @param course   The course that holds the question.
+	 * @param exam     The exam that holds the question. This method sending request
+	 *                 message to server, and getting back question list of the
+	 *                 desired exam the user chose, setting question dynamically
+	 *                 inside the Table. for each question, setting question
+	 *                 information.
+	 */
+	public void setPrincipalQuestion(Question question, Course course, Exam exam) throws IOException {
 
 		this.question = question;
 		this.course = course;
 		this.exam = exam;
-		
+
 		courseName.setText(course.getName());
 		subjectName.setText(course.getSubject().getName());
 		questionName.setText(question.getId());
@@ -88,24 +140,30 @@ public class PrincipalExamBankViewExamViewQuestionController extends PrincipalMa
 		setCorrectAns();
 	}
 
+	/**
+	 * This method setting the correct answer in the question.
+	 */
 	private void setCorrectAns() {
 		int correct = question.getCorrectAnswer();
-		switch(correct) {
-		
-		case 1: rbA.setSelected(true);
+		switch (correct) {
+
+		case 1:
+			rbA.setSelected(true);
 			break;
-		
-		case 2:rbB.setSelected(true);
+
+		case 2:
+			rbB.setSelected(true);
 			break;
-		
-		case 3:rbC.setSelected(true);
+
+		case 3:
+			rbC.setSelected(true);
 			break;
-		
-		case 4:rbD.setSelected(true);
+
+		case 4:
+			rbD.setSelected(true);
 			break;
 		}
-		
-		
-	}	
+
+	}
 
 }
