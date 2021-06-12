@@ -1,5 +1,7 @@
 package gui;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import entity.Question;
@@ -59,7 +61,13 @@ public class TeacherExamBankSelectQuestionsRowController {
     	question=q;
     	questionID.setText(q.getId());
     	questionText.setText(q.getText());
-    	date.setText(q.getModified());
+    	
+    	//coverting fate from yyyy-mm-dd to dd-mm-yyyy
+    	String startDateString = q.getModified().toString();
+        DateTimeFormatter oldFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter newFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    	//
+    	date.setText(LocalDate.parse(startDateString, oldFormat).format(newFormat));
     }
     
     public void setList(ArrayList<Question> l) {

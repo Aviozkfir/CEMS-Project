@@ -155,40 +155,38 @@
             </HBox>
             <HBox prefHeight="42.0" style="-fx-background-color: white;">
                <children>
-                  <Label alignment="CENTER" prefHeight="42.0" prefWidth="78.0" text="No." textAlignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="42.0" prefWidth="80.0" text="No." textAlignment="CENTER">
                      <opaqueInsets>
                         <Insets top="5.0" />
                      </opaqueInsets>
                      <HBox.margin>
-                        <Insets left="67.0" />
+                        <Insets left="60.0" right="104.0" />
                      </HBox.margin>
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="42.0" prefWidth="348.0" text="Question" textAlignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="42.0" prefWidth="220.0" text="Question" textAlignment="CENTER">
                      <opaqueInsets>
                         <Insets top="5.0" />
                      </opaqueInsets>
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
+                     <HBox.margin>
+                        <Insets right="76.0" />
+                     </HBox.margin>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="42.0" prefWidth="181.0" text="Last date modified" textAlignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="42.0" prefWidth="196.0" text="Last date modified" textAlignment="CENTER">
                      <opaqueInsets>
                         <Insets top="5.0" />
                      </opaqueInsets>
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
-                  </Label>
-                  <Label alignment="CENTER" prefHeight="42.0" prefWidth="153.0" textAlignment="CENTER">
-                     <opaqueInsets>
-                        <Insets top="5.0" />
-                     </opaqueInsets>
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
                   </Label>
                </children>
                <VBox.margin>
