@@ -79,7 +79,7 @@ public class TeacherCreateQuestionController extends TeacherMainPageController {
 	    void BackPressed(ActionEvent event) throws IOException {
 	    	((TeacherQuestionBankQuestionsController)GUIControl.instance.loadStage("/gui/TeacherQuestionBankQuestions.fxml")).setTeacherCourse(course);
 	    }
-
+	   
 	    @FXML
 	    void SavePressed(ActionEvent event) throws IOException {
 	    	if(textQuestion.getText().trim().equals("")) {

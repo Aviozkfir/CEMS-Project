@@ -78,7 +78,7 @@ public enum ServerMessageTypes {
 	TEACHER_GET_SOLVED_EXAM_QUESTIONS_BY_STUDENT_RECIVED,//input solvedExam output: arraylist of solvedQuestions.
 	TEAHCER_GET_SOLVED_EXAMS_BY_COURSE_NOT_RECIVED,//input: course, output: arraylist of exams types
 	TEAHCER_GET_SOLVED_EXAMS_BY_EXAM_TYPE_NOT_RECIVED,//input: exam type, output: arraylist of sovledExams
-	TEACHER_GET_SOLVED_EXAM_QUESTIONS_BY_STUDENT_NOT_RECIVED,//input solvedExam output: arraylist of solvedQuestions.
+	TEACHER_GET_SOLVED_EXAM_QUESTIONS_BY_STUDENT_NOT_RECIVED, EXAM_NOT_STARTED_YET,//input solvedExam output: arraylist of solvedQuestions.
 	
 	
 

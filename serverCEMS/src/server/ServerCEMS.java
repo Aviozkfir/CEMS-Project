@@ -24,6 +24,7 @@ import entity.PersonCEMS;
 import entity.Question;
 import entity.QuestionInExam;
 import entity.SolvedExam;
+
 import message.ClientMessage;
 import message.ServerMessage;
 import message.ServerMessageTypes;
@@ -35,6 +36,8 @@ import ocsf.server.ConnectionToClient;
  * This class overrides some of the methods in the abstract superclass in order
  * to give more functionality to the server.
  *
+ 
+ 
  
  * @author Dr Timothy C. Lethbridge
  * @author Dr Robert Lagani&egrave;re
@@ -50,7 +53,10 @@ public class ServerCEMS extends AbstractServer {
 	// Class variables *****************
 	private MySQLConnection cemsDataBase;
 	private ArrayList<Object> userList;
-
+	private ArrayList<ConnectionToClient> conToClientStudent;
+	private ArrayList<ConnectionToClient> conToClientTeacher;
+	private ArrayList<ConnectionToClient> conToClientMng;
+	private ArrayList<currentExam> currentExams;
 	// Constructors ******************
 
 	/**
@@ -62,6 +68,10 @@ public class ServerCEMS extends AbstractServer {
 	public ServerCEMS(int port) {
 		super(port);
 		userList = new ArrayList<>();
+		conToClientStudent=new ArrayList<>();
+		conToClientTeacher=new ArrayList<>();
+		conToClientMng=new ArrayList<>();
+		currentExams = new ArrayList<>();
 	}
 
 	// Instance methods ****************
@@ -155,19 +165,29 @@ public class ServerCEMS extends AbstractServer {
 					}
 					break;
 				case VALIDATE_EXAM_CODE:
+					
 					returnVal = MySQLConnection.validateExamCode((String) clientMsg.getMessage());
 					if ((boolean) returnVal == false) {
 						type = ServerMessageTypes.EXAM_CODE_NOT_FOUND;
 					} else {
+						
 						type = ServerMessageTypes.EXAM_CODE_FOUND;
 					}
 					break;
 				case GET_EXAM_INFORMATION:
+					type = ServerMessageTypes.EXAM_NOT_STARTED_YET;
 					returnVal = MySQLConnection.getExamInformation((String) clientMsg.getMessage());
 					if (returnVal == null) {
 						type = ServerMessageTypes.EXAM_INFORMATION_NOT_RECIVED;
 					} else {
-						type = ServerMessageTypes.EXAM_INFORMATION_RECIVED;
+						for( currentExam ce : currentExams) {
+							if(((Exam)returnVal).getEid().equals(ce.getEid()))
+									type = ServerMessageTypes.EXAM_INFORMATION_RECIVED;
+							ce.getConToClientStudent().add(client);
+						}
+						if(type != ServerMessageTypes.EXAM_INFORMATION_RECIVED)
+							returnVal=null;
+						
 					}
 					break;
 				case GET_QUESTION_BY_COURSE:
@@ -355,8 +375,12 @@ public class ServerCEMS extends AbstractServer {
 					returnVal = MySQLConnection.insertExamToDB((SolvedExam) clientMsg.getMessage());
 					if (returnVal == null) {
 						type = ServerMessageTypes.GET_EXAM_QUESTIONS_FAILED;
+						
 					} else {
 						type = ServerMessageTypes.GET_EXAM_QUESTIONS_SUCCEDED;
+						for(currentExam ce : currentExams)
+							if(ce.getEid()==((SolvedExam) clientMsg.getMessage()).getEid())
+								ce.getConToClientStudent().remove(client);
 					}
 
 					break;
@@ -366,6 +390,7 @@ public class ServerCEMS extends AbstractServer {
 					returnVal = MySQLConnection.insertExamQuestions((Object[]) clientMsg.getMessage());
 					if ((boolean) returnVal == true) {
 						type = ServerMessageTypes.INSERT_EXAM_QUESTIONS_SUCCEEDED;
+						
 					} else {
 						type = ServerMessageTypes.INSERT_EXAM_QUESTIONS_FAILED;
 					}
@@ -459,6 +484,8 @@ public class ServerCEMS extends AbstractServer {
 
 	@Override
 	protected void clientConnected(ConnectionToClient client) {
+		
+		
 		ServerMain.guiController.connectClient(client);
 	}
 

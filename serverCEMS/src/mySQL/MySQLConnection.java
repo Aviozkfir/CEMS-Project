@@ -346,7 +346,7 @@ public class MySQLConnection {
 		rs = logInPreparedStatement.executeQuery();
 		while (rs.next()) {
 			questionList.add(new Question(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
-					rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9)));
+					rs.getString(5), rs.getString(6), rs.getString(7), rs.getDate(8).toString(), rs.getInt(9)));
 		}
 		return questionList;
 	}
@@ -368,7 +368,7 @@ public class MySQLConnection {
 		
 	}
 	
-	public static void addQuestionByCourses(Question q, ArrayList<Course> course) throws SQLException {
+	public static void addQuestionByCourses(Question q, ArrayList<Course> course) throws SQLException, ParseException {
 		
 		ResultSet maxID;
 		PreparedStatement getMaxID =con.prepareStatement("SELECT MAX(q.Qid) FROM Questions q where q.Sid=?");
@@ -405,8 +405,9 @@ public class MySQLConnection {
 		addQuestion.setInt(7, q.getCorrectAnswer());
 		addQuestion.setString(8, q.getAuthor());
 		
-		
-		addQuestion.setString(9, q.getModified());
+		Date dateInput = new SimpleDateFormat("yyyy-MM-dd").parse(q.getModified());
+		java.sql.Date dateInputData = new java.sql.Date(dateInput.getTime());
+		addQuestion.setDate(9, dateInputData);
 		addQuestion.setString(10, q.getSubject());
 		addQuestion.executeUpdate();
 		System.out.print("slnfa;lsj;gnalj");
