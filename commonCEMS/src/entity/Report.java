@@ -12,6 +12,7 @@ public class Report implements Serializable {
 	private String Median;
 	private String Average;
 	private String yearRange;
+	private String selected;
 
 
 	public Report(ArrayList<String> report) {
@@ -48,6 +49,14 @@ public class Report implements Serializable {
 
 	public void setYearRange(String yearRange) {
 		this.yearRange = yearRange;
+	}
+
+	public String getSelected() {
+		return selected;
+	}
+
+	public void setSelected(String selected) {
+		this.selected = selected;
 	}
 
 

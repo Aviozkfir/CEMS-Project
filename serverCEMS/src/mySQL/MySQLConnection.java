@@ -27,6 +27,7 @@ import entity.SolvedExamType;
 import entity.Student;
 import entity.Subject;
 import entity.Teacher;
+import entity.TeachersExam;
 
 /**
  * class that holds static methods related to database actions such as
@@ -786,6 +787,40 @@ public class MySQLConnection {
 		}
 		return questionList;
 	}
+	public static Object getTeacherExamList(String teacherID) throws SQLException {
+		ArrayList<TeachersExam> examsList = new ArrayList<TeachersExam>();
+		ResultSet rs;
+		PreparedStatement logInPreparedStatement;
+		logInPreparedStatement = con.prepareStatement(
+				"SELECT s.Eid, s.Name,s.date FROM Exams s  WHERE s.ID = ?");
+		logInPreparedStatement.setString(1, teacherID);
+		rs = logInPreparedStatement.executeQuery();
+		while (rs.next()) {
+			examsList.add(new TeachersExam(rs.getString(1),rs.getString(2),rs.getString(3)));
+		}
+		return examsList;
+	}
 	
+	public static Object getTeacherSolvedExamReport(String[] data) throws SQLException, ParseException {
+		ArrayList<String> report=new ArrayList<String>();
+		ResultSet rs;
+		PreparedStatement logInPreparedStatement;
+		Date dateInput = new SimpleDateFormat("yyyy-MM-dd").parse(data[1]);
+		java.sql.Date dateInputData = new java.sql.Date(dateInput.getTime());
+
+		logInPreparedStatement = con.prepareStatement(
+				"SELECT e.Grade FROM SolvedExams e WHERE e.Eid=? AND e.Date >=?");
+		logInPreparedStatement.setString(1, data[0]);
+		logInPreparedStatement.setDate(2, dateInputData);
+		rs = logInPreparedStatement.executeQuery();
+
+		while (rs.next()) {
+			
+			report.add(rs.getString(1));
+
+		}
+		return report;
+
+	}
 	
 }

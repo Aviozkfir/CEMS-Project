@@ -46,6 +46,8 @@ public enum ClientMessageType {
 	TEAHCER_GET_SOLVED_EXAMS_BY_EXAM_TYPE,//input: exam type, output: arraylist of sovledExams
 	TEACHER_GET_SOLVED_EXAM_QUESTIONS_BY_STUDENT,//input solvedExam output: arraylist of solvedQuestions.
 	TEACHER_GET_CURRENT_EXAM,
+	TEACHER_GET_REPORT_EXAM_LIST,
+	TEACHER_REPORT_DATA,
 	
 	
 
