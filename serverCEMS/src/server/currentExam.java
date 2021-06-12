@@ -42,4 +42,14 @@ public class currentExam {
 			
 		
 
+		private int amountOfStudents;
+		private int amountOfFinishedStudents;
+		private String Name;
+		
+		public boolean allStudentAreFinished() {
+			amountOfFinishedStudents++;
+			if(amountOfStudents!=amountOfFinishedStudents)
+				return false;
+			return true;
+		}
 }

@@ -6,6 +6,7 @@ import gui.PrincipalMainPageController;
 import message.ClientMessage;
 import message.ClientMessageType;
 import message.ServerMessage;
+import message.ServerMessageTypes;
 import ocsf.client.AbstractClient;
 
 /**
@@ -69,6 +70,10 @@ public class ClientCEMS extends AbstractClient {
 //				PrincipalMainPageController controller = (PrincipalMainPageController) guiControl.getController();
 //				controller.setRequestCounter((int) serverMsg.getMessage());
 				break;
+				
+			case TECHER_EXAM_IS_DONE:
+				
+				
 			default:
 				guiControl.setServerMsg(serverMsg);
 				break;

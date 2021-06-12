@@ -379,8 +379,15 @@ public class ServerCEMS extends AbstractServer {
 					} else {
 						type = ServerMessageTypes.GET_EXAM_QUESTIONS_SUCCEDED;
 						for(currentExam ce : currentExams)
-							if(ce.getEid()==((SolvedExam) clientMsg.getMessage()).getEid())
+							if(ce.getEid()==((SolvedExam) clientMsg.getMessage()).getEid()) {
 								ce.getConToClientStudent().remove(client);
+								
+								if(ce.allStudentAreFinished()) {
+									currentExams.remove(ce);
+									ce.getTeacher().sendToClient(new ServerMessage(ServerMessageTypes.TECHER_EXAM_IS_DONE, ce.getEid()));
+								}
+									
+							}
 					}
 
 					break;
