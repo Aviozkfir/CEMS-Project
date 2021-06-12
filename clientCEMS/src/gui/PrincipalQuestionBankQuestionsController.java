@@ -19,39 +19,80 @@ import message.ClientMessage;
 import message.ClientMessageType;
 import message.ServerMessageTypes;
 
+/**
+ * @author On Avioz
+ * @extend PrincipalMainPageController
+ * Controller for each question inside chosen course inside chosen subject inside question bank screen.
+ *
+ */
 public class PrincipalQuestionBankQuestionsController extends PrincipalMainPageController {
 	private ArrayList<Question> allQuestions;
 	ArrayList<PrincipalQuestionTableRowController> questionControllerList = new ArrayList<PrincipalQuestionTableRowController> ();
 
+	/**
+	 * The AnchorPane of question.
+	 */
 	@FXML
 	private AnchorPane myRoot;
 
+	/**
+	 * Subject Name.
+	 */
 	@FXML
 	private Text subjectName;
 
+	/**
+	 * Course Name.
+	 */
 	@FXML
 	private Text courseName;
 
+	/**
+	 * Search field.
+	 */
 	@FXML
 	private TextField searchBar;
 
+	/**
+	 * Search button.
+	 */
 	@FXML
 	private Button btnSearch;
 
+	/**
+	 * Number of questions.
+	 */
 	@FXML
 	private Text numberOfQuestions;
 
+	/**
+	 * the table where questions setted on.
+	 */
 	@FXML
 	private VBox vTable;
 
+	/**
+	 * Back button.
+	 */
 	@FXML
 	private Button Back;
 	
+	/**
+	 * showing all questions in the list, made for case when we filtering questions.
+	 */
 	@FXML
 	private Button showAll;
 
+	/**
+	 * The course of the questions.
+	 */
 	private Course course;
 
+	/**
+     * @param event ActionEvent 
+     * @throws IOException.
+     * when Back button pressed, loading Question Bank screen, setting new requests text if necessary.
+     */
 	@FXML
 	void BackPressed(ActionEvent event) throws IOException {
 		PrincipalQuestionBankCoursesController contr = (PrincipalQuestionBankCoursesController) GUIControl.instance
@@ -59,7 +100,11 @@ public class PrincipalQuestionBankQuestionsController extends PrincipalMainPageC
 		contr.setPrincipalCourse(course.getSubject());
 		contr.setRequestCounter();
 	}
-
+	/**
+     * @param event ActionEvent 
+     * @throws IOException.
+     * when search button pressed, filtering the wanted question by him number
+     */
 	@FXML
 	void btnSearchPressed(ActionEvent event) throws IOException {
 		String questionID = searchBar.getText();
@@ -75,6 +120,11 @@ public class PrincipalQuestionBankQuestionsController extends PrincipalMainPageC
 		
 	}
 	
+	/**
+	 * This method check the input of the search field, only 5 numbers, exist question in list,numbers only will be valid.
+	 * if input is incorrect, the user will get pop up with the appropriate message of the error.
+	 * @return true if input is correct, false when incorrect input.
+	 */
 	private boolean CheckInput() {
 		String input = searchBar.getText();
 		boolean exist = false;
@@ -109,6 +159,11 @@ public class PrincipalQuestionBankQuestionsController extends PrincipalMainPageC
 		return true;
 		}
 
+	/**
+	 * @param event ActionEvent
+	 * @throws IOException
+	 * When showAll button pressed, the user get the original question list.
+	 */
 	@FXML
 	void showAllPressed(ActionEvent event) throws IOException {
 		vTable.getChildren().clear(); 
@@ -117,6 +172,11 @@ public class PrincipalQuestionBankQuestionsController extends PrincipalMainPageC
 			}
 		}
 
+	 /**
+     * @param course  the course that holds the question.
+	 * This method sending request message to server, and getting back question list of the desired course the user chose, setting question dynamically inside the Table.
+	 * for each question, setting question information.
+	 */
 	@SuppressWarnings("unchecked")
 	public void setPrincipalCourse(Course course) throws IOException {
 		Principal principal = (Principal) GUIControl.instance.getUser();
@@ -137,6 +197,11 @@ public class PrincipalQuestionBankQuestionsController extends PrincipalMainPageC
 		}
 	}
 	
+	/**
+	 * @param q question from question list we got from server.
+	 * @throws IOException
+	 * This method setting the question in the table and setting text new request if necessary.
+	 */
 	public void AddTableRow(Question q) throws IOException {
 		PrincipalQuestionTableRowController controller;
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(gui.ClientsConstants.Screens.PRINCIPAL_QUESTION_TABLE_ROW.path));

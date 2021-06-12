@@ -10,10 +10,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 
+/**
+ * @author On Avioz
+ * Controller for the exam bank screen.
+ * @extends PrincipalMainPageController.
+ */
 public class PrincipalExamBankSubjectsController extends PrincipalMainPageController {
 	@FXML
 	private GridPane grid;
 
+	/**
+	 * 
+	 */
 	public void setPrincipalSubject() {
 		int i;
 		Principal principal = (Principal) guiControl.getUser();

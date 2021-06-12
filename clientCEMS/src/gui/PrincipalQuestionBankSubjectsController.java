@@ -11,10 +11,24 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 
+/**
+ * @author On Avioz
+ * @extend PrincipalMainPageController
+ * Controller for question bank screen.
+ *
+ */
 public class PrincipalQuestionBankSubjectsController extends PrincipalMainPageController {
+	/**
+	 * grid which subject injected inside.
+	 */
 	@FXML
 	private GridPane grid;
 
+	/**
+	 * This method sending request message to server, and getting back subject list, setting subjects dynamically inside the grid.
+	 * each subject, setting courses list and setting text new request if necessary.
+	 * when clicking on subject we get his courses in other screen.
+	 */
 	public void setPrincipalSubject() {
 
 		int i;

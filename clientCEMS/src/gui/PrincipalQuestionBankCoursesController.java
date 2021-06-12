@@ -13,18 +13,37 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
-
+/**
+ * @author On Avioz
+ * @extend PrincipalMainPageController
+ * Controller for courses inside chosen subject inside question bank screen.
+ *
+ */
 public class PrincipalQuestionBankCoursesController extends PrincipalMainPageController {
 
+	/**
+	 * Text for subject name.
+	 */
 	@FXML
     private Text subjectName;
 
+	/**
+	 * back button.
+	 */
 	@FXML
     private Button Back;
 
+    /**
+     * grid for courses.
+     */
     @FXML
     private GridPane grid;
 
+    /**
+     * @param event ActionEvent 
+     * @throws IOException
+     * when Back button pressed, loading Question Bank screen, setting new requests text if necessary.
+     */
     @FXML
     void BackPressed(ActionEvent event) throws IOException {
     	PrincipalQuestionBankSubjectsController a = (PrincipalQuestionBankSubjectsController) guiControl.loadStage(ClientsConstants.Screens.PRINCIPAl_QUESTION_BANK_PAGE.path);
@@ -33,6 +52,12 @@ public class PrincipalQuestionBankCoursesController extends PrincipalMainPageCon
     }
 
 
+    /**
+     * @param sub - the subject that holds the courses.
+	 * This method sending request message to server, and getting back course list, setting courses dynamically inside the grid.
+	 * for each course, setting question list and setting text new request if necessary.
+	 * when clicking on course the user get  his questions in other screen.
+	 */
 	public void setPrincipalCourse(Subject sub) {
 		this.subjectName.setText(sub.getName());
     	int i;

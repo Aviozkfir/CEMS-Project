@@ -2,7 +2,6 @@ package client;
 
 import java.io.IOException;
 import gui.GUIControl;
-import gui.PrincipalMainPageController;
 import message.ClientMessage;
 import message.ClientMessageType;
 import message.ServerMessage;
@@ -70,10 +69,15 @@ public class ClientCEMS extends AbstractClient {
 //				PrincipalMainPageController controller = (PrincipalMainPageController) guiControl.getController();
 //				controller.setRequestCounter((int) serverMsg.getMessage());
 				break;
+			case QUESTION_BY_COURSE_RECIVED:
+
+				guiControl.getUpdateThread().Check();
+				break;
 				
 			case TECHER_EXAM_IS_DONE:
+				break;
 				
-				
+			
 			default:
 				guiControl.setServerMsg(serverMsg);
 				break;

@@ -3,7 +3,7 @@ package gui;
 import java.io.IOException;
 import java.util.Optional;
 
-import application.UpdateRequestThread;
+import application.UpdateThread;
 import client.ClientCEMS;
 import entity.PersonCEMS;
 import entity.Principal;
@@ -38,7 +38,7 @@ public class GUIControl {
 	private Object cmpc;
 	private int requestCounter = 0;
 	public static boolean res; // Checked whether yes or no pressed.
-	UpdateRequestThread requestThread;
+	UpdateThread requestThread;
 
 
 
@@ -108,10 +108,7 @@ public class GUIControl {
 	 * method to log out the current user
 	 */
 	public void logOut() {
-		if(currentUser instanceof Principal ) {
-			getRequestThread();
-			requestThread.exit();
-		}
+		getUpdateThread().exit();
 		ClientMessage cMsg = new ClientMessage(ClientMessageType.LOGOUT, currentUser);
 		sendToServer(cMsg);
 		currentUser = null;
@@ -255,11 +252,11 @@ public class GUIControl {
 		}
 	}
 	
-	public UpdateRequestThread getRequestThread() {
+	public UpdateThread getUpdateThread() {
 		return requestThread;
 	}
 
-	public void setRequestThread(UpdateRequestThread requestThread) {
+	public void setUpdateThread(UpdateThread requestThread) {
 		this.requestThread = requestThread;
 	}
 
