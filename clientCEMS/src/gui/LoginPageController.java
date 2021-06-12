@@ -3,7 +3,7 @@ package gui;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import application.UpdateRequestThread;
+import application.UpdateThread;
 import entity.Course;
 import entity.CourseReport;
 import entity.PersonCEMS;
@@ -46,7 +46,7 @@ public class LoginPageController {
 			String role = person.getRole();
 			String chosenPath = null;
 			Object controller = null;
-			UpdateRequestThread requestThread = new UpdateRequestThread();
+			UpdateThread requestThread = new UpdateThread();
 			switch (role) {
 			case "Teacher":
 				chosenPath = ClientsConstants.Screens.TEACHER_WELCOME_PAGE.path;
@@ -121,10 +121,10 @@ public class LoginPageController {
 				} else {
 
 					GUIControl.popUpError("Error in loading courses list to Principal");
-				
+
 				}
-				guiControl.setRequestThread(requestThread);
-				requestThread.start();
+				// guiControl.setRequestThread(requestThread);
+
 				break;
 			case "Student":
 				ClientMessage studentMsgSubjects = new ClientMessage(ClientMessageType.STUDENT_SUBJECTS_INFORMATION,
@@ -171,9 +171,9 @@ public class LoginPageController {
 			controller = (MainPageController) fxmlLoader.getController();
 			guiControl.setController(controller);
 			((MainPageController) controller).setUser((PersonCEMS) guiControl.getUser());
-			if(role.equals("Principal")) {
-			PrincipalMainPageController con = (PrincipalMainPageController) guiControl.getController();
-			con.setRequestCounter();
+			if (role.equals("Principal")) {
+				PrincipalMainPageController con = (PrincipalMainPageController) guiControl.getController();
+				con.setRequestCounter();
 			}
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
@@ -181,6 +181,8 @@ public class LoginPageController {
 				guiControl.disconnect();
 			});
 			primaryStage.show();
+			guiControl.setUpdateThread(requestThread);
+			requestThread.start();
 		}
 
 	}
