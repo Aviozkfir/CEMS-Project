@@ -1,5 +1,6 @@
 package gui;
 
+import java.io.IOException;
 import java.util.function.BiConsumer;
 
 import entity.SolvedExamType;
@@ -33,12 +34,12 @@ public class TeacherExamBankSolvedByStudentExamsRowsController {
     private Button btnCheckExam;
     
     
-    private  String chosenPath;
+    
 
     private SolvedExamType exam;
    
 
-	private BiConsumer<String,Object> consumer;
+	
 
     public void setExam(SolvedExamType exam) {
 		this.exam = exam;
@@ -50,8 +51,9 @@ public class TeacherExamBankSolvedByStudentExamsRowsController {
 	}
 
 	@FXML
-    void btnCheckPressed(ActionEvent event) {
-
+    void btnCheckPressed(ActionEvent event) throws IOException {
+		TeacherExamBankSolvedByStudentApproveController a = ((TeacherExamBankSolvedByStudentApproveController) GUIControl.instance.loadStage("TeacherExamBankSolvedByStudentApprove.fxml"));
+    	a.setExamType(exam);
     }
 
     @FXML

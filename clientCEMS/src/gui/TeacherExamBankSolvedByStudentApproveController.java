@@ -52,8 +52,9 @@ public class TeacherExamBankSolvedByStudentApproveController extends TeacherMain
     private SolvedExamType exam;
     @FXML
     void btnBackPressed(ActionEvent event) throws IOException {
-    	TeacherExamBankSolvedByStudentExamsController a = ((TeacherExamBankSolvedByStudentExamsController) guiControl.loadStage("TeacherExamBankSolvedByStudentExams.fxml"));
+    	TeacherExamBankSolvedByStudentExamsController a = ((TeacherExamBankSolvedByStudentExamsController) guiControl.loadStage("/gui/TeacherExamBankSolvedByStudentExams.fxml"));
     	a.setTeacherCourse(exam.getCourse());
+    	
     }
 
     @FXML
@@ -63,7 +64,11 @@ public class TeacherExamBankSolvedByStudentApproveController extends TeacherMain
    
     public void setExamType(SolvedExamType exam) {
     	this.exam=exam;	
-    	
+    	this.numOfExams.setText(exam.getTotal()+"");
+    	this.numOfGraded.setText(exam.getChecked()+"");
+    	this.numOfNotGraded.setText((exam.getTotal()-exam.getChecked())+"");
+    	this.subjectName.setText(exam.getCourse().getSubject().getName());
+    	this.courseName.setText(exam.getName());
     }
 
 }
