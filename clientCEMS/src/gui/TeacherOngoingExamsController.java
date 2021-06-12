@@ -1,17 +1,46 @@
 package gui;
 
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
-import javafx.scene.text.Text;
+import java.io.IOException;
+import java.util.ArrayList;
 
-public class TeacherOngoingExamsController extends TeacherMainPageController {
+import entity.Course;
+import entity.Exam;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import message.ClientMessage;
+import message.ClientMessageType;
+
+public class TeacherOngoingExamsController extends TeacherMainPageController{
+
 
     @FXML
-    private GridPane grid;
+    private VBox vTable;
+    
+    private ArrayList<Exam> allExams;
 
-
+    public void setOngoingExams() throws IOException {
+    	
+    	ClientMessage m1 = new ClientMessage(ClientMessageType.TEACHER_GET_CURRENT_EXAM,null);
+    	guiControl.sendToServer(m1);
+    	
+    	allExams = (ArrayList<Exam>) guiControl.getServerMsg().getMessage();
+    	
+    	for(Exam e : allExams)
+    	{
+    		TeacherExamBankRowController controller;
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/TeacherOngioingExamRowController"));
+			AnchorPane root = fxmlLoader.load();
+			controller = (TeacherExamBankRowController) fxmlLoader.getController();
+			
+			controller.setExam(e);
+			vTable.getChildren().add(root);
+			
+    	}
+    	
+    }
 
 }

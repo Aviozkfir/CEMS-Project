@@ -1,5 +1,6 @@
 package gui;
 
+import entity.Exam;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -32,7 +33,16 @@ public class TeacherOngioingExamRowController {
 
     @FXML
     private Button btnLockExam;
+    
+    private Exam exam;
 
+    public void setExam(Exam exam) {
+		this.exam = exam;
+		title.setText(exam.getName());
+		currentDuration.setText(exam.getTotalTime());
+		examStatus.setText("Not sent yet");
+	}
+    
     @FXML
     void btnChangeTimePressed(ActionEvent event) {
     //we need to send req to teacher
