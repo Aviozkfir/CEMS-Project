@@ -79,6 +79,10 @@ public enum ServerMessageTypes {
 	TEAHCER_GET_SOLVED_EXAMS_BY_COURSE_NOT_RECIVED,//input: course, output: arraylist of exams types
 	TEAHCER_GET_SOLVED_EXAMS_BY_EXAM_TYPE_NOT_RECIVED,//input: exam type, output: arraylist of sovledExams
 	TEACHER_GET_SOLVED_EXAM_QUESTIONS_BY_STUDENT_NOT_RECIVED,//input solvedExam output: arraylist of solvedQuestions.
+	TEACHER_GET_REPORT_EXAM_LIST_ADDED,
+	TEACHER_GET_REPORT_EXAM_LIST_NOT_ADDED,
+	TEACHER_REPORT_DATA_ADDED,
+	TEACHER_REPORT_DATA_NOT_ADDED,
 	
 	
 

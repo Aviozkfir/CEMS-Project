@@ -9,8 +9,15 @@ public class Teacher extends PersonCEMS implements Serializable {
 
 	private ArrayList<Subject> subjectList;
 	private ArrayList<Course> courseList; // Create an ArrayList object
+	private Report report;
+	private ArrayList<TeachersExam> examList;
 	
 	
+
+
+
+
+
 	public Teacher(String firstName, String lastName,String id, String email, String role) {
 		super(firstName,lastName,id,email,role);
 	}
@@ -43,6 +50,26 @@ public class Teacher extends PersonCEMS implements Serializable {
 
 	public void setCourseList(ArrayList<Course> courseList) {
 		this.courseList = courseList;
+	}
+
+
+	public Report getReport() {
+		return report;
+	}
+	
+	
+	public void setReport(Report report) {
+		this.report = report;
+	}
+
+
+	public ArrayList<TeachersExam> getExamList() {
+		return examList;
+	}
+
+
+	public void setExamList(ArrayList<TeachersExam> examList) {
+		this.examList = examList;
 	}
 	
 	
