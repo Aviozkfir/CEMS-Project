@@ -44,15 +44,17 @@ public class Question implements Serializable {
     	int mounth =java.time.LocalDate.now().getMonthValue();
     	int year=java.time.LocalDate.now().getYear();
     	String s="";
-    	if(day<10)
-    		s=s.concat("0");
-    	s=s.concat(day+"/");
-    	
+    	s=s.concat(""+year+"-");
     	if(mounth<10)
     		s=s.concat("0");
-    	s=s.concat(mounth+"/");
-    	s=s.concat(""+year);
+    	s=s.concat(mounth+"-");
+    	if(day<10)
+    		s=s.concat("0");
+    	s=s.concat(day+"");
     	
+    	
+    	//22-2-1012
+		
     	dateModified=s;
 	}
 	

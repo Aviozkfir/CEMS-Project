@@ -372,20 +372,26 @@ public class MySQLConnection {
 		
 		ResultSet maxID;
 		PreparedStatement getMaxID =con.prepareStatement("SELECT MAX(q.Qid) FROM Questions q where q.Sid=?");
+		System.out.print(course.size());
 		getMaxID.setString(1, course.get(0).getSubject().getId());
 		maxID=getMaxID.executeQuery();
+		maxID.next();
 		String id;
 		
-		if(maxID.next()) {
+		if(null!=maxID.getNString(1)) {
+			
+				System.out.print("in worng plase !");
+			
 			id=(""+(1+Integer.parseInt(maxID.getNString(1))));
 			if(id.length()==4) {
 				id="0"+id;
 			}
 			q.setId(id);
 		}
-		else 
+		else { 
+			System.out.print("in !");
 			q.setId(course.get(0).getSubject().getId()+"001");
-		
+		}
 		PreparedStatement addQuestion;
 		addQuestion = con
 				.prepareStatement("INSERT INTO Questions (Qid, Text, Ans1, Ans2, Ans3, Ans4, CorrectAns, ID,DATE,Sid) "
@@ -398,6 +404,8 @@ public class MySQLConnection {
 		addQuestion.setString(6, q.getAnsD());
 		addQuestion.setInt(7, q.getCorrectAnswer());
 		addQuestion.setString(8, q.getAuthor());
+		
+		
 		addQuestion.setString(9, q.getModified());
 		addQuestion.setString(10, q.getSubject());
 		addQuestion.executeUpdate();
@@ -429,8 +437,12 @@ public class MySQLConnection {
 			}
 			
 		}
-		else 
+		else {
+			
+				
+			
 			id=e.getSid()+e.getCid()+"01";
+		}
 		e.setEid(id);
 		System.out.print(e.getID());
 		PreparedStatement addExam;
