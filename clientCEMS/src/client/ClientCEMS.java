@@ -1,11 +1,11 @@
 package client;
 
 import java.io.IOException;
+
 import gui.GUIControl;
 import message.ClientMessage;
 import message.ClientMessageType;
 import message.ServerMessage;
-import message.ServerMessageTypes;
 import ocsf.client.AbstractClient;
 
 /**
@@ -21,7 +21,7 @@ public class ClientCEMS extends AbstractClient {
 	 */
 	public static boolean awaitResponse = false;
 	private GUIControl guiControl;
-	
+
 	// Constructors ****************************************************
 
 	/**
@@ -66,18 +66,11 @@ public class ClientCEMS extends AbstractClient {
 			case PRINCIPAL_GOT_REQUESTS_COUNTING:
 				guiControl.setServerMsg(serverMsg);
 				guiControl.SetRequestCount((int) serverMsg.getMessage());
-//				PrincipalMainPageController controller = (PrincipalMainPageController) guiControl.getController();
-//				controller.setRequestCounter((int) serverMsg.getMessage());
 				break;
 			case QUESTION_BY_COURSE_RECIVED:
-
+				guiControl.setServerMsg(serverMsg);
 				guiControl.getUpdateThread().Check();
-				break;
-				
-			case TECHER_EXAM_IS_DONE:
-				break;
-				
-			
+
 			default:
 				guiControl.setServerMsg(serverMsg);
 				break;
@@ -117,6 +110,7 @@ public class ClientCEMS extends AbstractClient {
 			quit();
 		}
 	}
+
 	/**
 	 * This method terminates the client.
 	 */
@@ -127,6 +121,5 @@ public class ClientCEMS extends AbstractClient {
 		}
 		System.exit(0);
 	}
-
 
 }
