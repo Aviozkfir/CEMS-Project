@@ -135,6 +135,8 @@ public class StudentManualExamController extends StudentMainPageController imple
 	 */
 	@FXML
 	private Text FilePathText;
+	
+	boolean addition=false;
 
 	/**
 	 * Used as a method to download file when download button is pressed.
@@ -280,6 +282,7 @@ public class StudentManualExamController extends StudentMainPageController imple
 					toPrintEveryTime = String.format("%02d:%02d%n", Minutes, Seconds);
 				}
 				TimeTick2.setText(toPrintEveryTime);
+				
 				Seconds++;
 				if (Seconds == 60) {
 					Seconds = 0;
@@ -326,6 +329,9 @@ public class StudentManualExamController extends StudentMainPageController imple
 		guiControl.popUpMessage("System Message", "Exam has been locked by Teacher");
 		guiControl.loadStage(ClientsConstants.Screens.STUDENT_MAIN_PAGE.path);
 
+	}
+	public void addition() {
+		
 	}
 
 }

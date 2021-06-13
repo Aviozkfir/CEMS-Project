@@ -213,15 +213,17 @@ public class ServerCEMS extends AbstractServer {
 						Iterator<currentExam> itce = currentExams.iterator();
 						while(itce.hasNext()) {
 							currentExam ce =itce.next();
-							if(((Exam)returnVal).getEid().equals(ce.getEid()))
+							if(((Exam)returnVal).getEid().equals(ce.getEid())) {
 									type = ServerMessageTypes.EXAM_INFORMATION_RECIVED;
 							ce.getConToClientStudent().add(client);
+							}
 						}
 						if(type != ServerMessageTypes.EXAM_INFORMATION_RECIVED)
 							returnVal=null;
 						
 					}
 					break;
+
 				case GET_QUESTION_BY_COURSE:
 					returnVal = MySQLConnection.getQuestionByCourse((Course) clientMsg.getMessage());
 					if (returnVal == null) {
