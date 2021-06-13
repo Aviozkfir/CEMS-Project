@@ -14,9 +14,9 @@ import message.ClientMessage;
 import message.ClientMessageType;
 import message.ServerMessageTypes;
 
-/**
- * @author On avioz,Kfir Avioz.
+/*
  * This class is the Main Controller for principal, all other controllers extends him.
+ * @author On avioz,Kfir Avioz.
  * @extend MainPageController
  */
 public class PrincipalMainPageController extends MainPageController {
@@ -58,10 +58,11 @@ public class PrincipalMainPageController extends MainPageController {
 	private Text requests;
 
 	/**
+	 * This Method loading Principal question bank screen ,setting Subjects inside
+	 * and setting the new request text message.
+	 * 
 	 * @param event actionEvent when question bank button in menu pressed.
-	 * @throws IOException This Method loading Principal question bank screen
-	 *                     ,setting Subjects inside and setting the new request text
-	 *                     message.
+	 * @throws IOException
 	 */
 	@FXML
 	void QuestionBankButtonPressed(ActionEvent event) throws IOException {
@@ -72,9 +73,11 @@ public class PrincipalMainPageController extends MainPageController {
 	}
 
 	/**
+	 * This Method loading Principal home page screen and setting the new request
+	 * text message.
+	 * 
 	 * @param event actionEvent when Home page button in menu pressed.
-	 * @throws IOException This Method loading Principal home page screen and
-	 *                     setting the new request text message.
+	 * @throws IOException
 	 */
 	@FXML
 	void HomePageButtonPressed(ActionEvent event) throws IOException {
@@ -86,9 +89,11 @@ public class PrincipalMainPageController extends MainPageController {
 	}
 
 	/**
+	 * This Method loading Principal Exam Bank screen, setting Subjects inside and
+	 * setting the new request text message.
+	 * 
 	 * @param event actionEvent when Exam Bank button in menu pressed.
-	 * @throws IOException This Method loading Principal Exam Bank screen, setting
-	 *                     Subjects inside and setting the new request text message.
+	 * @throws IOException
 	 */
 	@FXML
 	void ExamBankButtonPressed(ActionEvent event) throws IOException {
@@ -100,9 +105,11 @@ public class PrincipalMainPageController extends MainPageController {
 	}
 
 	/**
+	 * This Method loading Principal Reports screen and setting the new request text
+	 * message.
+	 * 
 	 * @param event actionEvent when Report button in menu pressed.
-	 * @throws IOException This Method loading Principal Reports screen and setting
-	 *                     the new request text message.
+	 * @throws IOException
 	 */
 	@FXML
 	void GetReportButtonPressed(ActionEvent event) throws IOException {
@@ -113,9 +120,11 @@ public class PrincipalMainPageController extends MainPageController {
 	}
 
 	/**
+	 * This Method loading Principal Requests screen, set requests inside and
+	 * setting the new request text message.
+	 * 
 	 * @param event actionEvent when Requests button in menu pressed.
-	 * @throws IOException This Method loading Principal Requests screen, set
-	 *                     requests inside and setting the new request text message.
+	 * @throws IOException
 	 */
 	@FXML
 	void RequestsButtonPressed(ActionEvent event) throws IOException {

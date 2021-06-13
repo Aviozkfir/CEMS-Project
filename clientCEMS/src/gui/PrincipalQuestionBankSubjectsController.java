@@ -12,10 +12,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 
 /**
+ * Controller for question bank screen.
+ * 
  * @author On Avioz,Kfir Avioz
  * @extend PrincipalMainPageController
- * Controller for question bank screen.
- *
  */
 public class PrincipalQuestionBankSubjectsController extends PrincipalMainPageController {
 	/**
@@ -25,21 +25,22 @@ public class PrincipalQuestionBankSubjectsController extends PrincipalMainPageCo
 	private GridPane grid;
 
 	/**
-	 * This method sending request message to server, and getting back subject list, setting subjects dynamically inside the grid.
-	 * each subject, setting courses list and setting text new request if necessary.
-	 * when clicking on subject we get his courses in other screen.
+	 * This method sending request message to server, and getting back subject list,
+	 * setting subjects dynamically inside the grid. each subject, setting courses
+	 * list and setting text new request if necessary. when clicking on subject we
+	 * get his courses in other screen.
 	 */
 	public void setPrincipalSubject() {
 
 		int i;
 		Principal principal = (Principal) guiControl.getUser();
-		
+
 		ArrayList<Subject> subjectList = principal.getSubjectList();
-		
-		System.out.println(subjectList.toString()+" "+principal.getCourseList().toString());
-		for(i=0;i<subjectList.size();i++)
+
+		System.out.println(subjectList.toString() + " " + principal.getCourseList().toString());
+		for (i = 0; i < subjectList.size(); i++)
 			try {
-			
+
 				btnFolderController controller;
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ClientsConstants.Screens.btnFolder.path));
 				StackPane root = fxmlLoader.load();
@@ -48,31 +49,27 @@ public class PrincipalQuestionBankSubjectsController extends PrincipalMainPageCo
 				controller.setChosenPath(ClientsConstants.Screens.PRINCIPAl_QUESTION_BANK_COURSES.path);
 				controller.setText(subjectList.get(i).getName());
 				controller.setObject(subjectList.get(i));
-				
-				controller.setConsumer((fxmlLocation, subject)->{   
+
+				controller.setConsumer((fxmlLocation, subject) -> {
 					try {
-						PrincipalQuestionBankCoursesController contr =(PrincipalQuestionBankCoursesController) GUIControl.instance.loadStage(fxmlLocation);
-					
-						contr.setPrincipalCourse((Subject)subject);
+						PrincipalQuestionBankCoursesController contr = (PrincipalQuestionBankCoursesController) GUIControl.instance
+								.loadStage(fxmlLocation);
+
+						contr.setPrincipalCourse((Subject) subject);
 						contr.setRequestCounter();
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					
+
 				});
-				
-				
-				grid.add(root,i%4 , i/4);
-				
-						
-				
-				
-				
+
+				grid.add(root, i % 4, i / 4);
+
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-    	
-    }
+
+	}
 }

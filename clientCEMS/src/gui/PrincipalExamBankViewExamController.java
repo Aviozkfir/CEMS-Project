@@ -18,12 +18,20 @@ import message.ClientMessageType;
 import message.ServerMessageTypes;
 
 /**
+ * Controller for exam information, when user select exam.
+ * 
  * @author On Avioz,Kfir Avioz.
  * @extend PrincipalMainPageController
- *  Controller for exam information, when user select exam.
+ * 
  */
 public class PrincipalExamBankViewExamController extends PrincipalMainPageController {
+	/**
+	 * Array list that holds all questions.
+	 */
 	private ArrayList<Question> allQuestions;
+	/**
+	 * Array list that holds the dynamic controllers of the questions.
+	 */
 	ArrayList<PrincipalExamViewQuestionTableRowController> questionControllerList = new ArrayList<PrincipalExamViewQuestionTableRowController>();
 
 	/**
@@ -86,9 +94,11 @@ public class PrincipalExamBankViewExamController extends PrincipalMainPageContro
 	private VBox vTable;
 
 	/**
+	 * when Back button pressed, loading exam list of the chosen course, setting new
+	 * requests text if necessary.
+	 * 
 	 * @param event ActionEvent
-	 * @throws IOException. when Back button pressed, loading exam list of the
-	 *                      chosen course, setting new requests text if necessary.
+	 * @throws IOException.
 	 */
 	@FXML
 	void BackPressed(ActionEvent event) throws IOException {
@@ -99,12 +109,12 @@ public class PrincipalExamBankViewExamController extends PrincipalMainPageContro
 	}
 
 	/**
+	 * This method sending request message to server, and getting back question list
+	 * of the desired exam the user chose, setting question dynamically inside the
+	 * Table. for each question, setting question information.
+	 * 
 	 * @param exam   The exam.
-	 * @param course The course that holds the exam. This method sending request
-	 *               message to server, and getting back question list of the
-	 *               desired exam the user chose, setting question dynamically
-	 *               inside the Table. for each question, setting question
-	 *               information.
+	 * @param course The course that holds the exam.
 	 */
 	public void setPrincipalExam(Exam exam, Course course) throws IOException {
 
@@ -132,13 +142,20 @@ public class PrincipalExamBankViewExamController extends PrincipalMainPageContro
 		}
 	}
 
-	public void AddTableRow(Question q) throws IOException {
+	/**
+	 * This method adding dynamically the questions into the list of questions in
+	 * the exam.
+	 * 
+	 * @param question The question of the exam that the user chose.
+	 * @throws IOException
+	 */
+	public void AddTableRow(Question question) throws IOException {
 		PrincipalExamViewQuestionTableRowController controller;
 		FXMLLoader fxmlLoader = new FXMLLoader(
 				getClass().getResource(gui.ClientsConstants.Screens.PRINCIPAL_EXAM_QUESTION_TABLE_ROW.path));
 		AnchorPane root = fxmlLoader.load();
 		controller = (PrincipalExamViewQuestionTableRowController) fxmlLoader.getController();
-		controller.setQuestion(q);
+		controller.setQuestion(question);
 		controller.setCourse(course);
 		controller.setExam(exam);
 		vTable.getChildren().add(root);

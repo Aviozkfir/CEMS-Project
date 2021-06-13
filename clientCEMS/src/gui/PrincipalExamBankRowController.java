@@ -10,8 +10,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 /**
+ * Controller for each exam in the exam list inside specific course.
+ * 
  * @author On Avioz ,Kfir Avioz
- *  Controller for each exam in the exam list inside specific course.
+ * 
  */
 public class PrincipalExamBankRowController {
 	/**
@@ -50,8 +52,10 @@ public class PrincipalExamBankRowController {
 	private Course course;
 
 	/**
+	 * This method setting the exem.
+	 * 
 	 * @param exam   The exam the user chose.
-	 * @param course The course the user chose. This method setting the exem.
+	 * @param course The course the user chose.
 	 */
 	public void setExam(Exam exam, Course course) {
 		this.exam = exam;
@@ -63,10 +67,12 @@ public class PrincipalExamBankRowController {
 	}
 
 	/**
+	 * When blue eye image button pressed, the user will see the information of the
+	 * exam, setting text new request if necessary.
+	 * 
 	 * @param event ActionEvent
-	 * @throws IOException 
-	 * When blue eye image button pressed, the user will see the
-	 * information of the exam, setting text new request if necessary.
+	 * @throws IOException
+	 *
 	 */
 	@FXML
 	void btnViewQuestionPressed(ActionEvent event) throws IOException {

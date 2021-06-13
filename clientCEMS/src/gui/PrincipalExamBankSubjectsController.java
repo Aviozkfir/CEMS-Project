@@ -11,8 +11,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 
 /**
- * @author On Avioz ,Kfir Avioz
  * Controller of principal "Exam Bank" screen.
+ * 
+ * @author On Avioz ,Kfir Avioz
+ * 
  * @extends PrincipalMainPageController.
  */
 public class PrincipalExamBankSubjectsController extends PrincipalMainPageController {
@@ -20,9 +22,10 @@ public class PrincipalExamBankSubjectsController extends PrincipalMainPageContro
 	private GridPane grid;
 
 	/**
-	 * This method sending request message to server, and getting back subject list, setting subjects dynamically inside the grid.
-	 * each subject, setting courses list and setting text new request if necessary.
-	 * when clicking on subject we get his courses in other screen.
+	 * This method sending request message to server, and getting back subject list,
+	 * setting subjects dynamically inside the grid. each subject, setting courses
+	 * list and setting text new request if necessary. when clicking on subject we
+	 * get his courses in other screen.
 	 */
 	public void setPrincipalSubject() {
 		int i;

@@ -18,8 +18,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
- * @author On Avioz ,Kfir Avioz.
  * Controller of principal "HomePage" screen.
+ * 
+ * @author On Avioz ,Kfir Avioz.
  * @extend PrincipalMainPageController.
  * @implements Initializable interface.
  * 
@@ -31,18 +32,18 @@ public class dashBoardPrincipalControllerHome extends PrincipalMainPageControlle
 	@FXML
 	private Text HelloNameMessage;
 
-	
-	
 	/**
-	 * This Method initialize the HomePage screen for principal when he set the name of the principal in HelloNameMessege.
-	 *@param arg0 URL for initialize, not used.
-	 *@param arg1 ResourceBundl for initialize, not used.
+	 * This Method initialize the HomePage screen for principal when he set the name
+	 * of the principal in HelloNameMessege.
+	 * 
+	 * @param arg0 URL for initialize, not used.
+	 * @param arg1 ResourceBundl for initialize, not used.
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-			
-			PersonCEMS principal = (Principal) guiControl.getUser();
-			HelloNameMessage.setText(principal.getFirstName() + " " + principal.getLastName());
-		
+
+		PersonCEMS principal = (Principal) guiControl.getUser();
+		HelloNameMessage.setText(principal.getFirstName() + " " + principal.getLastName());
+
 	}
 }

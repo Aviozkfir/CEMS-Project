@@ -19,14 +19,23 @@ import message.ClientMessageType;
 import message.ServerMessageTypes;
 
 /**
+ * Controller for each exam inside chosen course inside chosen subject inside
+ * exam bank screen.
+ * 
  * @author On Avioz ,Kfir Avioz
  * @extend PrincipalMainPageController
- *  Controller for each exam inside chosen course inside chosen subject inside exam bank screen.
+ * 
  *
  */
 public class PrincipalExamBankExamsController extends PrincipalMainPageController {
 
+	/**
+	 * array list that holds the exams.
+	 */
 	private ArrayList<Exam> allExams;
+	/**
+	 * array list that holds the dynamic controllers of the exams.
+	 */
 	ArrayList<PrincipalExamBankRowController> examControllerList = new ArrayList<PrincipalExamBankRowController>();
 
 	/**
@@ -82,9 +91,11 @@ public class PrincipalExamBankExamsController extends PrincipalMainPageControlle
 	private Course course;
 
 	/**
+	 * when Back button pressed, loading exam Bank screen, setting new requests text
+	 * if necessary
+	 * 
 	 * @param event ActionEvent
-	 * @throws IOException. when Back button pressed, loading exam Bank screen,
-	 *                      setting new requests text if necessary.
+	 * @throws IOException. .
 	 */
 	@FXML
 	void BackPressed(ActionEvent event) throws IOException {
@@ -96,9 +107,10 @@ public class PrincipalExamBankExamsController extends PrincipalMainPageControlle
 	}
 
 	/**
+	 * when search button pressed, filtering the wanted exam by him number.
+	 * 
 	 * @param event ActionEvent
-	 * @throws IOException. when search button pressed, filtering the wanted exam by
-	 *                      him number.
+	 * @throws IOException.
 	 */
 	@FXML
 	void btnSearchPressed(ActionEvent event) throws IOException {
@@ -153,9 +165,10 @@ public class PrincipalExamBankExamsController extends PrincipalMainPageControlle
 	}
 
 	/**
+	 * When showAll button pressed, the user get the original exam list.
+	 * 
 	 * @param event ActionEvent
-	 * @throws IOException When showAll button pressed, the user get the original
-	 *                     exam list.
+	 * @throws IOException
 	 */
 	@FXML
 	void showAllPressed(ActionEvent event) throws IOException {
@@ -166,10 +179,11 @@ public class PrincipalExamBankExamsController extends PrincipalMainPageControlle
 	}
 
 	/**
-	 * @param course the course that holds the exam. This method sending request
-	 *               message to server, and getting back exam list of the desired
-	 *               course the user chose, setting exam dynamically inside the
-	 *               Table. for each exam, setting exam information.
+	 * This method sending request message to server, and getting back exam list of
+	 * the desired course the user chose, setting exam dynamically inside the Table.
+	 * for each exam, setting exam information.
+	 * 
+	 * @param course the course that holds the exam.
 	 */
 	public void setPrincipalCourse(Course course) throws IOException {
 
@@ -192,9 +206,11 @@ public class PrincipalExamBankExamsController extends PrincipalMainPageControlle
 	}
 
 	/**
+	 * This method setting the exam in the table and setting text new request if
+	 * necessary.
+	 * 
 	 * @param exam an exam from exam list we got from server.
-	 * @throws IOException This method setting the exam in the table and setting
-	 *                     text new request if necessary.
+	 * @throws IOException
 	 */
 	public void AddTableRow(Exam exam) throws IOException {
 		PrincipalExamBankRowController controller;

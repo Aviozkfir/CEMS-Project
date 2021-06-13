@@ -18,13 +18,22 @@ import message.ClientMessageType;
 import message.ServerMessageTypes;
 
 /**
+ * Controller for each question inside chosen course inside chosen subject
+ * inside question bank screen.
+ * 
  * @author On Avioz,Kfir Avioz.
  * @extend PrincipalMainPageController
- *  Controller for each question inside chosen course inside chosen subject inside question bank screen.
+ *
  *
  */
 public class PrincipalQuestionBankQuestionsController extends PrincipalMainPageController {
+	/**
+	 * Array list that holds all questions.
+	 */
 	private ArrayList<Question> allQuestions;
+	/**
+	 * Array list that holds all the dynamic controllers for the questions.
+	 */
 	ArrayList<PrincipalQuestionTableRowController> questionControllerList = new ArrayList<PrincipalQuestionTableRowController>();
 
 	/**
@@ -64,7 +73,7 @@ public class PrincipalQuestionBankQuestionsController extends PrincipalMainPageC
 	private Text numberOfQuestions;
 
 	/**
-	 * the table where questions setted on.
+	 * the table where questions settled on.
 	 */
 	@FXML
 	private VBox vTable;
@@ -87,9 +96,11 @@ public class PrincipalQuestionBankQuestionsController extends PrincipalMainPageC
 	private Course course;
 
 	/**
+	 * when Back button pressed, loading Question Bank screen, setting new requests
+	 * text if necessary.
+	 * 
 	 * @param event ActionEvent
-	 * @throws IOException. when Back button pressed, loading Question Bank screen,
-	 *                      setting new requests text if necessary.
+	 * @throws IOException.
 	 */
 	@FXML
 	void BackPressed(ActionEvent event) throws IOException {
@@ -100,9 +111,10 @@ public class PrincipalQuestionBankQuestionsController extends PrincipalMainPageC
 	}
 
 	/**
+	 * when search button pressed, filtering the wanted question by him number.
+	 * 
 	 * @param event ActionEvent
-	 * @throws IOException. when search button pressed, filtering the wanted
-	 *                      question by him number.
+	 * @throws IOException.
 	 */
 	@FXML
 	void btnSearchPressed(ActionEvent event) throws IOException {
@@ -158,9 +170,10 @@ public class PrincipalQuestionBankQuestionsController extends PrincipalMainPageC
 	}
 
 	/**
+	 * When showAll button pressed, the user get the original question list.
+	 * 
 	 * @param event ActionEvent
-	 * @throws IOException When showAll button pressed, the user get the original
-	 *                     question list.
+	 * @throws IOException
 	 */
 	@FXML
 	void showAllPressed(ActionEvent event) throws IOException {
@@ -171,11 +184,11 @@ public class PrincipalQuestionBankQuestionsController extends PrincipalMainPageC
 	}
 
 	/**
-	 * @param course the course that holds the question. This method sending request
-	 *               message to server, and getting back question list of the
-	 *               desired course the user chose, setting question dynamically
-	 *               inside the Table. for each question, setting question
-	 *               information.
+	 * This method sending request message to server, and getting back question list
+	 * of the desired course the user chose, setting question dynamically inside the
+	 * Table. for each question, setting question information.
+	 * 
+	 * @param course the course that holds the question.
 	 */
 	@SuppressWarnings("unchecked")
 	public void setPrincipalCourse(Course course) throws IOException {
@@ -198,9 +211,11 @@ public class PrincipalQuestionBankQuestionsController extends PrincipalMainPageC
 	}
 
 	/**
+	 * This method setting the question in the table and setting text new request if
+	 * necessary.
+	 * 
 	 * @param q an question from question list we got from server.
-	 * @throws IOException This method setting the question in the table and setting
-	 *                     text new request if necessary.
+	 * @throws IOException
 	 */
 	public void AddTableRow(Question q) throws IOException {
 		PrincipalQuestionTableRowController controller;

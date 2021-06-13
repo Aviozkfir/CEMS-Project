@@ -11,8 +11,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 /**
+ * Controller for each question in the question list inside specific exam.
+ * 
  * @author On Avioz,Kfir Avioz.
- *  Controller for each question in the question list inside specific exam.
+ * 
  */
 public class PrincipalExamViewQuestionTableRowController {
 
@@ -50,8 +52,9 @@ public class PrincipalExamViewQuestionTableRowController {
 	private Label date;
 
 	/**
-	 * @param question The question the user chose. This method setting the
-	 *                 information of the question.
+	 * This method setting the information of the question.
+	 * 
+	 * @param question The question the user chose.
 	 */
 	public void setQuestion(Question question) {
 		this.question = question;
@@ -62,18 +65,20 @@ public class PrincipalExamViewQuestionTableRowController {
 	}
 
 	/**
-	 * @param course The course of the question the user chose. This method setting
-	 *               the course of the question the user chose.
+	 * This method setting the course of the question the user chose.
+	 * 
+	 * @param course The course of the question the user chose.
 	 */
 	public void setCourse(Course course) {
 		this.course = course;
 	}
 
 	/**
+	 * When blue eye image button pressed, the user will see the information of the
+	 * question, setting text new request if necessary.
+	 * 
 	 * @param event ActionEvent
-	 * @throws IOException When blue eye image button pressed, the user will see the
-	 *                     information of the question, setting text new request if
-	 *                     necessary.
+	 * @throws IOException
 	 */
 	@FXML
 	void btnViewQuestionPressed(ActionEvent event) throws IOException {
@@ -85,8 +90,9 @@ public class PrincipalExamViewQuestionTableRowController {
 	}
 
 	/**
-	 * @param exam The exam of the question the user chose. This method setting the
-	 *             exam of the question the user chose.
+	 * This method setting the exam of the question the user chose.
+	 * 
+	 * @param exam The exam of the question the user chose.
 	 */
 	public void setExam(Exam exam) {
 		this.exam = exam;

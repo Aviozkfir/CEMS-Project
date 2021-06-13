@@ -14,9 +14,12 @@ import javafx.scene.layout.GridPane;
 import message.ClientMessage;
 import message.ClientMessageType;
 import message.ServerMessageTypes;
+
 /**
+ * * Controller of principal "Request" screen.
+ * 
  * @author On Avioz, Kfir Avioz.
- * Controller of principal "Request" screen.
+ * 
  * @extends PrincipalMainPageController.
  */
 public class PrincipalRequestsController extends PrincipalMainPageController {
@@ -27,7 +30,7 @@ public class PrincipalRequestsController extends PrincipalMainPageController {
 	/**
 	 * Request controller list that holds all dynamic requests that we have added.
 	 */
-	ArrayList<PrincipalRequestTableRowControl> requestControllerList = new ArrayList<PrincipalRequestTableRowControl> ();
+	ArrayList<PrincipalRequestTableRowControl> requestControllerList = new ArrayList<PrincipalRequestTableRowControl>();
 
 	/**
 	 * The grid for requests.
@@ -48,54 +51,57 @@ public class PrincipalRequestsController extends PrincipalMainPageController {
 	private Button Decline;
 
 	/**
+	 * This method works when approve button pressed, he sets all chose requests
+	 * status from "StandBy" to "Approved" in DB.
+	 * 
 	 * @param event ActionEvent
 	 * @throws IOException
-	 * This method works when approve button pressed, 
-	 * he sets all chose requests status from "StandBy" to "Approved" in DB.
+	 * 
 	 */
 	@FXML
 	void ApproveButtonPressed(ActionEvent event) throws IOException {
 		ArrayList<String> CheckedExams = new ArrayList<String>();
 		ArrayList<Request> requestList = principal.getRequestList();
-		for(int i = 0 ; i< requestList.size();i++) {
-			if(requestList.get(i).getcBox()) {
+		for (int i = 0; i < requestList.size(); i++) {
+			if (requestList.get(i).getcBox()) {
 				CheckedExams.add(requestList.get(i).getNum());
 			}
 		}
 		SendAprrovedRequests(CheckedExams);
 		CheckIfEmpty(CheckedExams);
 	}
-	
-	
+
 	/**
+	 * This method works when decline button pressed, he sets all chose requests
+	 * status from "StandBy" to "Declined" in DB.
+	 * 
 	 * @param event ActionEvent
 	 * @throws IOException
-	 * This method works when decline button pressed, 
-	 * he sets all chose requests status from "StandBy" to "Declined" in DB.
+	 *
 	 */
 	@FXML
 	void DeclineButtonPressed(ActionEvent event) throws IOException {
 		ArrayList<String> CheckedExams = new ArrayList<String>();
 		ArrayList<Request> requestList = principal.getRequestList();
-		for(int i = 0 ; i< requestList.size();i++) {
-			if(requestList.get(i).getcBox()) {
+		for (int i = 0; i < requestList.size(); i++) {
+			if (requestList.get(i).getcBox()) {
 				CheckedExams.add(requestList.get(i).getNum());
 			}
 		}
 		SendDeclinedRequests(CheckedExams);
 		CheckIfEmpty(CheckedExams);
 	}
-	
+
 	/**
-	 * This method sending request message to server, and getting back requests list, setting requests dynamically inside the grid.
-	 * setting new requests text if necessary.
-	 * the user can choose multiple requests.
+	 * This method sending request message to server, and getting back requests
+	 * list, setting requests dynamically inside the grid. setting new requests text
+	 * if necessary. the user can choose multiple requests.
 	 */
 	public void setPrincipalRequests() {
 		int i;
 		Principal principal = (Principal) guiControl.getUser();
 		ArrayList<Request> requestList = principal.getRequestList();
-		
+
 		for (i = 0; i < requestList.size(); i++)
 			try {
 
@@ -145,9 +151,9 @@ public class PrincipalRequestsController extends PrincipalMainPageController {
 			ArrayList<Request> requestList = (ArrayList<Request>) guiControl.getServerMsg().getMessage();
 
 			principal.setRequestList(requestList);
-			
+
 			ArrayList<String> requestNumList = new ArrayList<String>();
-			for(int i = 0 ; i< requestList.size();i++) {
+			for (int i = 0; i < requestList.size(); i++) {
 				requestNumList.add(requestList.get(i).getNum());
 			}
 			UpdateRequestStatus(requestNumList);
@@ -160,27 +166,36 @@ public class PrincipalRequestsController extends PrincipalMainPageController {
 	}
 
 	/**
-	 * @param ApprovedRequests array list that holds all chose requests that principal want to approve.
-	 * This method sending request msg, and sets the chose requests as "Approved" in DB.
+	 * This method sending request msg, and sets the chose requests as "Approved" in
+	 * DB.
+	 * 
+	 * @param ApprovedRequests array list that holds all chose requests that
+	 *                         principal want to approve.
+	 * 
 	 */
 	public void SendAprrovedRequests(ArrayList<String> ApprovedRequests) {
-		ClientMessage msg = new ClientMessage(ClientMessageType.PRINCIPAL_APPROVED_REQUESTS_UPDATE,ApprovedRequests);
+		ClientMessage msg = new ClientMessage(ClientMessageType.PRINCIPAL_APPROVED_REQUESTS_UPDATE, ApprovedRequests);
 		guiControl.sendToServer(msg);
 
 		if (guiControl.getServerMsg().getType() == ServerMessageTypes.PRINCIPAL_APPROVED_REQUESTS_ADDED) {
-			
+
 		} else {
 
 			GUIControl.popUpError("Error-sending update for requests");
 
 		}
 	}
+
 	/**
-	 * @param DeclinedRequests array list that holds all chose requests that principal want to decline.
-	 * This method sending request msg, and sets the chose requests as "Approved" in DB.
+	 * This method sending request msg, and sets the chose requests as "Approved" in
+	 * DB.
+	 * 
+	 * @param DeclinedRequests array list that holds all chose requests that
+	 *                         principal want to decline.
+	 *
 	 */
 	public void SendDeclinedRequests(ArrayList<String> DeclinedRequests) {
-		ClientMessage msg = new ClientMessage(ClientMessageType.PRINCIPAL_DECLINED_REQUESTS_UPDATE,DeclinedRequests);
+		ClientMessage msg = new ClientMessage(ClientMessageType.PRINCIPAL_DECLINED_REQUESTS_UPDATE, DeclinedRequests);
 		guiControl.sendToServer(msg);
 
 		if (guiControl.getServerMsg().getType() == ServerMessageTypes.PRINCIPAL_DECLINED_REQUESTS_ADDED) {
@@ -190,31 +205,37 @@ public class PrincipalRequestsController extends PrincipalMainPageController {
 
 		}
 	}
-	
+
 	/**
+	 * This method update for all requests the status2 from "Waiting" to "Working"
+	 * in DB, when principal clicks on request button in menu.
+	 * 
 	 * @param allRequests array list that holds all requests.
-	 * This method update for all requests the status2 from "Waiting" to "Working" in DB, when principal clicks on request button in menu.
+	 *
 	 */
 	public void UpdateRequestStatus(ArrayList<String> allRequests) {
-		ClientMessage msg = new ClientMessage(ClientMessageType.PRINCIPAL_UPDATE_REQUESTS_STATUS,allRequests);
+		ClientMessage msg = new ClientMessage(ClientMessageType.PRINCIPAL_UPDATE_REQUESTS_STATUS, allRequests);
 		guiControl.sendToServer(msg);
 
 		if (guiControl.getServerMsg().getType() == ServerMessageTypes.PRINCIPAL_UPDATE_REQUESTS_STATUS_SUCCESS) {
 		} else {
 			GUIControl.popUpError("Error-sending update for requests status");
 		}
-		
+
 	}
-	
+
 	/**
-	 * @param CheckedRequests Array list that holds all the checked requests and check if there is requests that go checked.
-	 * if none requests checked , the user gets error pop up , else the user get success pop up.  
+	 * if none requests checked , the user gets error pop up , else the user get
+	 * success pop up.
+	 * 
+	 * @param CheckedRequests Array list that holds all the checked requests and
+	 *                        check if there is requests that go checked.
+	 *
 	 */
 	public void CheckIfEmpty(ArrayList<String> CheckedRequests) {
-		if(CheckedRequests.isEmpty()) {
+		if (CheckedRequests.isEmpty()) {
 			GUIControl.popUpError("Error - No requests has been chosed");
-		}
-		else {
+		} else {
 			GUIControl.popUpError("Requests has sent successfully");
 		}
 	}

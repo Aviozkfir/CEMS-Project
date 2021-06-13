@@ -15,9 +15,11 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 
 /**
- * @author On Avioz ,Kfir Avioz
- * @extend PrincipalMainPageController 
  * Controller for courses inside chosen subject inside exam bank screen.
+ * 
+ * @author On Avioz ,Kfir Avioz
+ * @extend PrincipalMainPageController
+ * 
  *
  */
 public class PrincipalExamBankCoursesController extends PrincipalMainPageController {
@@ -38,9 +40,11 @@ public class PrincipalExamBankCoursesController extends PrincipalMainPageControl
 	private GridPane grid;
 
 	/**
+	 * when Back button pressed, loading exam bank screen, setting new requests text
+	 * if necessary.
+	 * 
 	 * @param event ActionEvent
-	 * @throws IOException when Back button pressed, loading exam bank screen,
-	 *                     setting new requests text if necessary.
+	 * @throws IOException
 	 */
 	@FXML
 	void BackPressed(ActionEvent event) throws IOException {
@@ -51,11 +55,12 @@ public class PrincipalExamBankCoursesController extends PrincipalMainPageControl
 	}
 
 	/**
-	 * @param sub - the subject that holds the courses. This method sending request
-	 *            message to server, and getting back course list, setting courses
-	 *            dynamically inside the grid. for each course, setting exam list
-	 *            and setting text new request if necessary. when clicking on course
-	 *            the user get his exams in other screen.
+	 * This method sending request message to server, and getting back course list,
+	 * setting courses dynamically inside the grid. for each course, setting exam
+	 * list and setting text new request if necessary. when clicking on course the
+	 * user get his exams in other screen.
+	 * 
+	 * @param sub The subject that holds the courses.
 	 */
 	public void setPrincipalCourse(Subject sub) {
 		this.subjectName.setText(sub.getName());

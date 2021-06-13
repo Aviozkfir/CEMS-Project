@@ -12,9 +12,11 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.text.Text;
 
 /**
+ * Controller for question information, when user select question.
+ * 
  * @author On Avioz,Kfir Avioz.
  * @extend PrincipalMainPageController.
- *  Controller for question information, when user select question.
+ * 
  */
 public class PrincipalExamBankViewExamViewQuestionController extends PrincipalMainPageController {
 
@@ -102,9 +104,11 @@ public class PrincipalExamBankViewExamViewQuestionController extends PrincipalMa
 	private Button Back;
 
 	/**
+	 * when Back button pressed, loading question list of the chosen exam, setting
+	 * new requests text if necessary.
+	 * 
 	 * @param event ActionEvent
-	 * @throws IOException. when Back button pressed, loading question list of the
-	 *                      chosen exam, setting new requests text if necessary.
+	 * @throws IOException.
 	 */
 	@FXML
 	void BackPressed(ActionEvent event) throws IOException {
@@ -115,13 +119,13 @@ public class PrincipalExamBankViewExamViewQuestionController extends PrincipalMa
 	}
 
 	/**
+	 * This method sending request message to server, and getting back question list
+	 * of the desired exam the user chose, setting question dynamically inside the
+	 * Table. for each question, setting question information.
+	 * 
 	 * @param question The question.
 	 * @param course   The course that holds the question.
-	 * @param exam     The exam that holds the question. This method sending request
-	 *                 message to server, and getting back question list of the
-	 *                 desired exam the user chose, setting question dynamically
-	 *                 inside the Table. for each question, setting question
-	 *                 information.
+	 * @param exam     The exam that holds the question.
 	 */
 	public void setPrincipalQuestion(Question question, Course course, Exam exam) throws IOException {
 
