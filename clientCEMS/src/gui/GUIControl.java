@@ -40,7 +40,7 @@ public class GUIControl {
 	private Object cmpc;
 	private int requestCounter = 0;
 	public static boolean res; // Checked whether yes or no pressed.
-	UpdateThread requestThread;
+	UpdateThread updateThread;
 
 	private GUIControl() {
 	}
@@ -235,14 +235,23 @@ public class GUIControl {
 		primaryStage.show();
 	}
 
+	/**getter for requests count.
+	 * @return return the counter of new requests.
+	 */
 	public int getRequestCount() {
 		return requestCounter;
 	}
 
+	/**setter for requests count.
+	 * @param requestCounter The counter of the new requests.
+	 */
 	public void SetRequestCount(int requestCounter) {
 		this.requestCounter = requestCounter;
 	}
 
+	/**
+	 * This method counting the new requests from the DB for the principal and return the counting number.
+	 */
 	public void CountRequest() {
 
 		ClientMessage msg = new ClientMessage(ClientMessageType.PRINCIPAL_CHECK_REQUESTS_COUNTING,
@@ -253,12 +262,18 @@ public class GUIControl {
 		}
 	}
 
+	/**getter for update thread.
+	 * @return UpdateThread Thread that check some scenarios.
+	 */
 	public UpdateThread getUpdateThread() {
-		return requestThread;
+		return updateThread;
 	}
 
+	/****getter for update thread.
+	 * @param requestThread Thread that check some scenarios.
+	 */
 	public void setUpdateThread(UpdateThread requestThread) {
-		this.requestThread = requestThread;
+		this.updateThread = requestThread;
 	}
 
 	public void exeThread() {
