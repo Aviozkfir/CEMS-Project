@@ -146,7 +146,8 @@ public class StudentManualExamController extends StudentMainPageController imple
 	 */
 	@FXML
 	void DownloadFileButtonPressed(ActionEvent event) throws FileNotFoundException, IOException, SQLException {
-		ClientMessage downloadMessage = new ClientMessage(ClientMessageType.DOWNLOAD_MANUAL_EXAM, exam.getEid());
+		Object[] data= {exam.getEid(),exam};
+		ClientMessage downloadMessage = new ClientMessage(ClientMessageType.DOWNLOAD_MANUAL_EXAM, data);
 		guiControl.sendToServer(downloadMessage);
 		if ((ManualExamFile) guiControl.getServerMsg().getMessage() == null) {
 			guiControl.popUpMessage("System Message",
@@ -194,7 +195,7 @@ public class StudentManualExamController extends StudentMainPageController imple
 
 			else {
 				timer.stop();
-				Object[] toSend = { exam.getEid(), fileToUpload, ((Student) guiControl.getUser()).getId() };
+				Object[] toSend = { exam.getEid(), fileToUpload, ((Student) guiControl.getUser()).getId(),exam };
 				ClientMessage FileMessage = new ClientMessage(ClientMessageType.UPLOAD_MANUAL_EXAM, toSend);
 				guiControl.sendToServer(FileMessage);
 				if (guiControl.getServerMsg().getType() == ServerMessageTypes.EXAM_UPLOADED_SUCCECFULLY) {
@@ -236,6 +237,7 @@ public class StudentManualExamController extends StudentMainPageController imple
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+	
 		lstFile = new ArrayList<>();
 		lstFile.add("*.doc");
 		lstFile.add("*.docx");
