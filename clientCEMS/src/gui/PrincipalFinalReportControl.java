@@ -14,13 +14,14 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.text.Text;
 import javafx.util.StringConverter;
+
 /**
+ * * Controller for the principal report that presents the report by the options
+ * the princial chose.
+ * 
  * @author On Avioz,Kfir Avioz.
  * @extend PrincipalMainPageController
  * @implements Initializable interface.
- *  Controller for the principal report that presents
- *  the report by the options the princial chose.
- *
  */
 public class PrincipalFinalReportControl extends PrincipalMainPageController implements Initializable {
 	/**
@@ -37,17 +38,17 @@ public class PrincipalFinalReportControl extends PrincipalMainPageController imp
 	 * text that presents the number of the students in the report.
 	 */
 	@FXML
-	private Text totalStudentsText;  
+	private Text totalStudentsText;
 	/**
 	 * text that presents the number of the students that failed in the report.
 	 */
 	@FXML
-	private Text totalFailedText; 
+	private Text totalFailedText;
 	/**
 	 * text that presents the year range in the report.
 	 */
 	@FXML
-	private Text yearsText;	
+	private Text yearsText;
 	/**
 	 * text that presents the report explanations.
 	 */
@@ -78,9 +79,10 @@ public class PrincipalFinalReportControl extends PrincipalMainPageController imp
 	Principal principal = (Principal) guiControl.getUser();
 
 	/**
+	 * The user can get back to the previous page, by the type of report he chose.
+	 * 
 	 * @param event
 	 * @throws IOException
-	 * The user can get back to the previous page, by the type of report he chose.
 	 */
 	@FXML
 	void BackPressed(ActionEvent event) throws IOException {
@@ -97,14 +99,15 @@ public class PrincipalFinalReportControl extends PrincipalMainPageController imp
 					.loadStage(ClientsConstants.Screens.PRINCIPAL_REPORT_STUDENT_PAGE.path);
 			controller.setRequestCounter();
 		}
-		
 
 	}
 
 	/**
+	 * Shows the report details(histogram,average,median,etc..) immidiatly when the
+	 * user gets into the final report fxml.
+	 * 
 	 * @param location
 	 * @param resources
-	 * Shows the report details(histogram,average,median,etc..) immidiatly when the user gets into the final report fxml.
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -118,10 +121,9 @@ public class PrincipalFinalReportControl extends PrincipalMainPageController imp
 
 	}
 
-	
 	/**
-	 * This method is to set the histogram when x's axis index =10.
-	 * the method counts every instance in each bin and sets the histogram result. 
+	 * This method is to set the histogram when x's axis index =10. the method
+	 * counts every instance in each bin and sets the histogram result.
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void SetHistogram() {
@@ -149,15 +151,15 @@ public class PrincipalFinalReportControl extends PrincipalMainPageController imp
 		}
 
 	}
+
 	/**
-	 *groupData counts each instance in the histogram's bins.
+	 * groupData counts each instance in the histogram's bins.
 	 */
 	private void groupData() {
 
 		for (int i = 0; i < 9; i++) {
 			yAxisGroup[i] = 0;
 		}
-		// Map.Entry<String, Object> entry : map.entrySet()
 		for (String currentgrade : principal.getReport().getReportData()) {
 			int grade = Integer.parseInt(currentgrade);
 			if (grade <= 55) {
@@ -181,32 +183,35 @@ public class PrincipalFinalReportControl extends PrincipalMainPageController imp
 			}
 		}
 	}
+
 	/**
-	 * @param type
 	 * IsType returns the type of report : course,student,teacher.
+	 * 
+	 * @param type
 	 */
-	public boolean Istype(String type) { 
+	public boolean Istype(String type) {
 		if (principal.getReportType().equals(type))
 			return true;
 		return false;
 	}
 
 	/**
+	 * Class to fix scenebuilder: yaxis shows integers instead of doubls.
+	 * 
 	 * @author On Avioz,Kfir Avioz.
 	 * @extend StringConverter<Number>.
-	 * Class to fix scenebuilder: yaxis shows integers instead of doubls.
-	 *
 	 */
-	class IntegerStringConverter extends StringConverter<Number> { 
+	class IntegerStringConverter extends StringConverter<Number> {
 		/**
 		 * IntegerStringConverter empty constructor.
-		 * 
 		 */
 		public IntegerStringConverter() {
 		}
+
 		/**
+		 * converts an integer to string.
+		 * 
 		 * @param object
-		 * converts an integer to string
 		 */
 		@Override
 		public String toString(Number object) {
@@ -214,9 +219,11 @@ public class PrincipalFinalReportControl extends PrincipalMainPageController imp
 				return "";
 			return "" + (object.intValue());
 		}
+
 		/**
-		 * @param object
 		 * converts a string to integer
+		 * 
+		 * @param object
 		 */
 		@Override
 		public Number fromString(String string) {
@@ -224,12 +231,14 @@ public class PrincipalFinalReportControl extends PrincipalMainPageController imp
 			return val.intValue();
 		}
 	}
+
 	/**
 	 * PageExplainTextset sets text explanation for gui.
 	 * 
 	 */
 	public void PageExplainTextset() {
-		PageExplainText.setText("Distribution of grades- exams of chosen " + principal.getReportType()+" with id: "+principal.getReport().getSelected());
+		PageExplainText.setText("Distribution of grades- exams of chosen " + principal.getReportType() + " with id: "
+				+ principal.getReport().getSelected());
 
 	}
 
