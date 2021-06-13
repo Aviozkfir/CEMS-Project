@@ -15,13 +15,15 @@ import javafx.scene.control.ComboBox;
 import message.ClientMessage;
 import message.ClientMessageType;
 import message.ServerMessageTypes;
+
 /**
+ * Controller for choosing the type of report the principal wants to choose.
+ * 
  * @author On Avioz,Kfir Avioz.
  * @extend PrincipalMainPageController
  * @implements Initializable interface.
- *  Controller for choosing the type of report the principal wants to choose.
  */
-public class PrincipalReportController extends PrincipalMainPageController implements Initializable{
+public class PrincipalReportController extends PrincipalMainPageController implements Initializable {
 	/**
 	 * combo box for choosing the type of report.
 	 */
@@ -35,25 +37,29 @@ public class PrincipalReportController extends PrincipalMainPageController imple
 	/**
 	 * string to save selected report type.
 	 */
-	private String SelectedReport=null;
+	private String SelectedReport = null;
 	/**
 	 * principal instance.
 	 */
 	Principal principal = (Principal) guiControl.getUser();
-	
+
 	/**
+	 * the principal can choose the type of report he desire in the combobox.
+	 * 
 	 * @param event
 	 * @throws IOException
-	 * the principal can choose the type of report he desire in the combobox.
 	 */
-	@FXML void ChooseReportCombo(ActionEvent event) throws IOException {
+	@FXML
+	void ChooseReportCombo(ActionEvent event) throws IOException {
 		SelectedReport = ReportTypeCombo.getSelectionModel().getSelectedItem();
 	}
+
 	/**
+	 * when the principal push the button "Create",the system will get the principal
+	 * to the next page by the type of course he chose.
+	 * 
 	 * @param event
 	 * @throws IOException
-	 * when the principal push the button "Create",the system will get the principal 
-	 * to the next page by the type of course he chose.
 	 */
 	@FXML
 	void CreateButtonPressed(ActionEvent event) throws IOException {
@@ -63,7 +69,7 @@ public class PrincipalReportController extends PrincipalMainPageController imple
 					.loadStage(ClientsConstants.Screens.PRINCIPAL_REPORT_COURSE_PAGE.path);
 			controller.setRequestCounter();
 		}
-		
+
 		else if (Istype("Teacher")) {
 			principal.setReportType("Teacher");
 			GetTeacherListFromDB();
@@ -71,7 +77,7 @@ public class PrincipalReportController extends PrincipalMainPageController imple
 					.loadStage(ClientsConstants.Screens.PRINCIPAL_REPORT_TEACHER_PAGE.path);
 			controller.setRequestCounter();
 		}
-		
+
 		else if (Istype("Student")) {
 			principal.setReportType("Student");
 			GetStudentListFromDB();
@@ -81,27 +87,32 @@ public class PrincipalReportController extends PrincipalMainPageController imple
 		}
 
 	}
+
 	/**
-	 * @param type
 	 * IsType returns the type of report : course,student,teacher.
+	 * 
+	 * @param type
 	 */
 	public boolean Istype(String type) {
 		if (SelectedReport.equals(type))
 			return true;
 		return false;
 	}
+
 	/**
-	 * When the principal reach to the main page for report the combobox already has its options ready.
+	 * When the principal reach to the main page for report the combobox already has
+	 * its options ready.
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		ReportTypeCombo.getItems().addAll("Teacher","Course","Student");
+		ReportTypeCombo.getItems().addAll("Teacher", "Course", "Student");
 	}
+
 	/**
-	 * GetTeacherListFromDB gets from the server the list of teachers in the db.
-	 * and set the teacherlist array list in principal.
+	 * GetTeacherListFromDB gets from the server the list of teachers in the db. and
+	 * set the teacherlist array list in principal.
 	 */
-	public void GetTeacherListFromDB(){
+	public void GetTeacherListFromDB() {
 		ClientMessage msg = new ClientMessage(ClientMessageType.PRINCIPAL_TEACHERS_INFORMATION,
 
 				((Principal) guiControl.getUser()).getId());
@@ -120,11 +131,12 @@ public class PrincipalReportController extends PrincipalMainPageController imple
 
 		}
 	}
+
 	/**
-	 * GetStudentListFromDB gets from the server the list of students in the db.
-	 * and set the studentlist array list in principal.
+	 * GetStudentListFromDB gets from the server the list of students in the db. and
+	 * set the studentlist array list in principal.
 	 */
-	public void GetStudentListFromDB(){
+	public void GetStudentListFromDB() {
 		ClientMessage msg1 = new ClientMessage(ClientMessageType.PRINCIPAL_STUDENTS_INFORMATION,
 
 				((Principal) guiControl.getUser()).getId());
