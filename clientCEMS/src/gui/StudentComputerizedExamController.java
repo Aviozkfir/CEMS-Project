@@ -68,9 +68,9 @@ public class StudentComputerizedExamController extends StudentMainPageController
 	private Button BackButton;
 
 	/**
+	 * Used to go to the previous controller page where exam code is being inserted.
 	 * @param ActionEvent event
 	 * @throws IOException
-	 * Used to go to the previous controller page where exam code is being inserted.
 	 */
 	@FXML
 	void BackButtonPressed(ActionEvent event) throws IOException {
@@ -78,9 +78,9 @@ public class StudentComputerizedExamController extends StudentMainPageController
 	}
 
 	/**
+	 * Used to check whther the ID is true or false, if true goes to computerized exam page execution.
 	 * @param ActionEvent event
 	 * @throws IOException
-	 * Used to check whther the ID is true or false, if true goes to computerized exam page execution.
 	 */
 	@FXML
 	void ForwardButtonPressed(ActionEvent event) throws IOException {

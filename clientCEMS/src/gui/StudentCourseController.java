@@ -50,9 +50,9 @@ public static ArrayList<Subject> subjects=new ArrayList<Subject>() ;
 	private Button Back;
 
 	/**
+	 * 	Used to go back to subject page.
 	 * @param ActionEvent event
 	 * @throws IOException
-	 * Used to go back to subject page.
 	 * 
 	 */
 	@FXML
@@ -63,8 +63,8 @@ public static ArrayList<Subject> subjects=new ArrayList<Subject>() ;
 	}
 
 	/**
-	 * @param subject
 	 * Used to set the courses of student as folders.
+	 * @param subject
 	 */
 	public void setStudentCourse(Subject subject) {
 

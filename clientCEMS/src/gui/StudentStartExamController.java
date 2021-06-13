@@ -15,9 +15,10 @@ import message.ClientMessageType;
 import message.ServerMessageTypes;
 
 /**
+ * Used as a controller to enter Exam Code.
+ * 
  * @author Shalom and Omer
  * @extend StudentMainPageController
- * Used as a controller to enter Exam Code.
  *
  */
 public class StudentStartExamController extends StudentMainPageController {
@@ -25,7 +26,6 @@ public class StudentStartExamController extends StudentMainPageController {
 	 * used to hold the exam details.
 	 */
 	public static Exam exam;
-	
 
 	/**
 	 * Used to hold the written code.
@@ -40,10 +40,11 @@ public class StudentStartExamController extends StudentMainPageController {
 	private Button SubmitStartExam;
 
 	/**
+	 * Used as a method to start the exam after code is inserted and determine
+	 * whether the exam is manual or computerized
 	 * @param ActionEvent event
 	 * @throws IOException
-	 * Used as a method to start the exam after code is inserted
-	 * and determine whether the exam is manual or computerized
+	 * 
 	 */
 	@FXML
 	void SubmitStartExamPressed(ActionEvent event) throws IOException {
@@ -64,10 +65,9 @@ public class StudentStartExamController extends StudentMainPageController {
 			} else {
 				ClientMessage msg2 = new ClientMessage(ClientMessageType.GET_EXAM_INFORMATION, examCode);
 				guiControl.sendToServer(msg2);
-				if (guiControl.getServerMsg().getType() == ServerMessageTypes.EXAM_INFORMATION_NOT_RECIVED) {	
+				if (guiControl.getServerMsg().getType() == ServerMessageTypes.EXAM_INFORMATION_NOT_RECIVED) {
 					guiControl.popUpError("Exam code not found");
-				} 
-				else if(guiControl.getServerMsg().getType() == ServerMessageTypes.EXAM_NOT_STARTED_YET)
+				} else if (guiControl.getServerMsg().getType() == ServerMessageTypes.EXAM_NOT_STARTED_YET)
 					guiControl.popUpError("Exam hasn't been started yet");
 				else {
 					exam = ((Exam) guiControl.getServerMsg().getMessage());

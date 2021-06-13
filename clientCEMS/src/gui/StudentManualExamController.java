@@ -45,10 +45,12 @@ import message.ClientMessageType;
 import message.ServerMessageTypes;
 
 /**
+ * Used to manage manual exam
+ * 
  * @author Shalom and Omer
  * @extend StudentMainPageController
- * Used to manage manual exam
  *
+ * 
  */
 public class StudentManualExamController extends StudentMainPageController implements Initializable {
 	/**
@@ -75,7 +77,7 @@ public class StudentManualExamController extends StudentMainPageController imple
 	 * Used to indicate whether file has been chosen
 	 */
 	boolean fileUploaded = false;
-	
+
 	/**
 	 * Used to indicate whether time is over
 	 */
@@ -135,11 +137,12 @@ public class StudentManualExamController extends StudentMainPageController imple
 	private Text FilePathText;
 
 	/**
+	 * Used as a method to download file when download button is pressed.
+	 * 
 	 * @param ActionEvent event
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 * @throws SQLException
-	 * Used as a method to download file when download button is pressed.
 	 */
 	@FXML
 	void DownloadFileButtonPressed(ActionEvent event) throws FileNotFoundException, IOException, SQLException {
@@ -176,9 +179,9 @@ public class StudentManualExamController extends StudentMainPageController imple
 	}
 
 	/**
+	 *Used as a method to take care of submmision
 	 * @param ActionEvent event
-	 * @throws IOException
-	 * Used as a method to take care of submmision
+	 * @throws IOException 
 	 */
 	@FXML
 	void SubmitButon2Pressed(ActionEvent event) throws IOException {
@@ -194,7 +197,7 @@ public class StudentManualExamController extends StudentMainPageController imple
 				Object[] toSend = { exam.getEid(), fileToUpload, ((Student) guiControl.getUser()).getId() };
 				ClientMessage FileMessage = new ClientMessage(ClientMessageType.UPLOAD_MANUAL_EXAM, toSend);
 				guiControl.sendToServer(FileMessage);
-				if ( guiControl.getServerMsg().getType() == ServerMessageTypes.EXAM_UPLOADED_SUCCECFULLY) {
+				if (guiControl.getServerMsg().getType() == ServerMessageTypes.EXAM_UPLOADED_SUCCECFULLY) {
 					guiControl.popUpMessage("System Message", "Exam has been uploaded");
 					guiControl.loadStage(ClientsConstants.Screens.STUDENT_MAIN_PAGE.path);
 
@@ -210,9 +213,9 @@ public class StudentManualExamController extends StudentMainPageController imple
 	}
 
 	/**
+	 *Used as a button to upload a file
 	 * @param ActionEvent event
-	 * @throws FileNotFoundException
-	 * Used as a button to upload a file
+	 * @throws FileNotFoundException 
 	 * 
 	 */
 	@FXML
@@ -229,7 +232,7 @@ public class StudentManualExamController extends StudentMainPageController imple
 	}
 
 	/**
-	 *Sets the timer and file extensions
+	 * Sets the timer and file extensions
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -304,10 +307,14 @@ public class StudentManualExamController extends StudentMainPageController imple
 		timer.start();
 
 	}
+	
+
+	/**
+	 * Stops the exam when a messages is recivied from teacher.
+	 */
 	public void stopExam() {
 		timer.stop();
-		
-		
+
 	}
 
 }

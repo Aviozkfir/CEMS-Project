@@ -27,10 +27,10 @@ import entity.Student;
 import javafx.fxml.Initializable;
 
 /**
+ *  A class Used to manage a computerized exam.
+ * 
  * @author Shalom and Omer
  * @extend StudentComputerizedExamController
- * Used to manage a computerized exam.
- * 
  *
  */
 public class StudentExamExecutionController extends StudentComputerizedExamController implements Initializable {
@@ -195,8 +195,9 @@ public class StudentExamExecutionController extends StudentComputerizedExamContr
 	private Button SubmitButton;
 
 	/**
-	 * @param ActionEvent event
 	 * Used to go to the next question and sets all the next question details.
+	 * 
+	 * @param ActionEvent event
 	 */
 	@FXML
 	void NextQuestionButtonPressed(ActionEvent event) {
@@ -237,8 +238,8 @@ public class StudentExamExecutionController extends StudentComputerizedExamContr
 	}
 
 	/**
-	 * @param ActionEvent event
 	 * Used to go to previous question and sets all the previous question details
+	 * @param ActionEvent event 
 	 */
 	@FXML
 	void PreviousQuestionButtonPressed(ActionEvent event) {
@@ -271,9 +272,10 @@ public class StudentExamExecutionController extends StudentComputerizedExamContr
 	}
 
 	/**
-	 * @param ActionEvent event
-	 * @throws IOException
+	 * 
 	 * Used to submit the exam and insert it to database.
+	 * @param ActionEvent event
+	 * @throws IOException 
 	 */
 	@FXML
 	void SubmitButtonPressed(ActionEvent event) throws IOException {
@@ -327,7 +329,7 @@ public class StudentExamExecutionController extends StudentComputerizedExamContr
 	}
 
 	/**
-	 *Used to set the current exam, sort the questions array, set the timer.
+	 * Used to set the current exam, sort the questions array, set the timer.
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -421,8 +423,8 @@ public class StudentExamExecutionController extends StudentComputerizedExamContr
 	}
 
 	/**
-	 * @param num - number of question
-	 * sets the number of question given the number of question.
+	 * @param num - number of question sets the number of question given the number
+	 *            of question.
 	 */
 	public void setQuestion(int num) {
 
@@ -437,8 +439,7 @@ public class StudentExamExecutionController extends StudentComputerizedExamContr
 	}
 
 	/**
-	 * @param ActionEvent event
-	 * Sets the radio button if option 1 is selected.
+	 * @param ActionEvent event Sets the radio button if option 1 is selected.
 	 */
 	@FXML
 	void Option1IsSelected(ActionEvent event) {
@@ -446,8 +447,7 @@ public class StudentExamExecutionController extends StudentComputerizedExamContr
 	}
 
 	/**
-	 * @param ActionEvent event
-	 * Sets the radio button if option 2 is selected.
+	 * @param ActionEvent event Sets the radio button if option 2 is selected.
 	 */
 	@FXML
 	void Option2IsSelected(ActionEvent event) {
@@ -455,8 +455,7 @@ public class StudentExamExecutionController extends StudentComputerizedExamContr
 	}
 
 	/**
-	 * @param ActionEvent event
-	 * Sets the radio button if option 3 is selected.
+	 * @param ActionEvent event Sets the radio button if option 3 is selected.
 	 */
 	@FXML
 	void Option3IsSelected(ActionEvent event) {
@@ -465,76 +464,70 @@ public class StudentExamExecutionController extends StudentComputerizedExamContr
 	}
 
 	/**
-	 * @param ActionEvent event
-	 * Sets the radio button if option 4 is selected.
+	 * @param ActionEvent event Sets the radio button if option 4 is selected.
 	 */
 	@FXML
 	void Option4IsSelected(ActionEvent event) {
 		questions.get(currentQuestion).setChosenAnswer(4);
 
 	}
-	
 
 	/**
 	 * @param minutes
-	 * @param seconds
-	 * Used to save the time passed since the beggining of the exam
+	 * @param seconds Used to save the time passed since the beggining of the exam
 	 */
 	public void updateTime(int minutes, int seconds) {
 		this.tickMinutes = minutes;
 		this.tickSeconds = seconds;
 	}
-	
+
 	/**
-	 * @throws IOException
-	 * Used to stop the exam if the teacher locked it
+	 * @throws IOException Used to stop the exam if the teacher locked it
 	 */
 	public void stopExam() throws IOException {
 		GUIControl.popUpMessage("System Message", "Exam has been locked by Teacher");
-			for (int i = 0; i < questions.size(); i++) {
-				QuestionInExam que = questions.get(i);
-				if (que.getChosenAnswer() != -1 && que.getChosenAnswer() == que.getCorrectAnswer()) {
-					TotalGrade += que.getPointsQuestion();
-				}
+		for (int i = 0; i < questions.size(); i++) {
+			QuestionInExam que = questions.get(i);
+			if (que.getChosenAnswer() != -1 && que.getChosenAnswer() == que.getCorrectAnswer()) {
+				TotalGrade += que.getPointsQuestion();
 			}
-			String timeTaken;
-			if (minutes >= 100) {
-				timeTaken = String.format("%03d:%02d%n", tickMinutes, tickSeconds);
+		}
+		String timeTaken;
+		if (minutes >= 100) {
+			timeTaken = String.format("%03d:%02d%n", tickMinutes, tickSeconds);
 
-			} else {
-				timeTaken = String.format("%02d:%02d%n", tickMinutes, tickSeconds);
+		} else {
+			timeTaken = String.format("%02d:%02d%n", tickMinutes, tickSeconds);
 
-			}
+		}
 
-			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-			Date date = new Date();
-			String currentDate = dateFormat.format(date);
-			SolvedExam solvedExam = new SolvedExam(exam.getEid(), exam.getSid(), exam.getCid(), exam.getName(),
-					exam.getDate(), exam.getTdescription(), exam.getSdescription(),
-					((Student) guiControl.getUser()).getId(), exam.getTotalTime(), exam.getCode(), exam.getMode(),
-					timeTaken, currentDate, TotalGrade + "");
-			solvedExam.setSubmitted("Yes");
-			ClientMessage examMessage = new ClientMessage(ClientMessageType.INSERT_EXAM_TO_DB, solvedExam);
-			guiControl.sendToServer(examMessage);
-			String SEid = (String) guiControl.getServerMsg().getMessage();
-			if (SEid == null) {
-				SEid = "000001";
-			}
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		String currentDate = dateFormat.format(date);
+		SolvedExam solvedExam = new SolvedExam(exam.getEid(), exam.getSid(), exam.getCid(), exam.getName(),
+				exam.getDate(), exam.getTdescription(), exam.getSdescription(),
+				((Student) guiControl.getUser()).getId(), exam.getTotalTime(), exam.getCode(), exam.getMode(),
+				timeTaken, currentDate, TotalGrade + "");
+		solvedExam.setSubmitted("Yes");
+		ClientMessage examMessage = new ClientMessage(ClientMessageType.INSERT_EXAM_TO_DB, solvedExam);
+		guiControl.sendToServer(examMessage);
+		String SEid = (String) guiControl.getServerMsg().getMessage();
+		if (SEid == null) {
+			SEid = "000001";
+		}
 
-			Object[] toSend = new Object[] { questions, SEid };
-			ClientMessage questionsMessage = new ClientMessage(ClientMessageType.INSERT_EXAM_QUESTIONS, toSend);
-			guiControl.sendToServer(questionsMessage);
-			boolean sent = (boolean) guiControl.getServerMsg().getMessage();
-			if (sent == false) {
-				guiControl.popUpMessage("System Message", "There was a problem with submission of question");
-			} else {
-				timer.stop();
-				guiControl.loadStage(ClientsConstants.Screens.STUDENT_MAIN_PAGE.path);
+		Object[] toSend = new Object[] { questions, SEid };
+		ClientMessage questionsMessage = new ClientMessage(ClientMessageType.INSERT_EXAM_QUESTIONS, toSend);
+		guiControl.sendToServer(questionsMessage);
+		boolean sent = (boolean) guiControl.getServerMsg().getMessage();
+		if (sent == false) {
+			guiControl.popUpMessage("System Message", "There was a problem with submission of question");
+		} else {
+			timer.stop();
+			guiControl.loadStage(ClientsConstants.Screens.STUDENT_MAIN_PAGE.path);
 
-			}
+		}
 
-		
-		
 	}
 
 }

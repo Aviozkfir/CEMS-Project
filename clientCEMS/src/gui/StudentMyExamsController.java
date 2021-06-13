@@ -15,9 +15,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 
 /**
+ * Used to set student subjects as folders
  * @author Shalom and Omer
  * @extend StudentMainPageController
- * Used to set student subjects as folders
  *
  */
 public class StudentMyExamsController extends StudentMainPageController {

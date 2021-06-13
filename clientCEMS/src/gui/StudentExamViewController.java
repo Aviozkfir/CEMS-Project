@@ -18,16 +18,17 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.text.Text;
 
 /**
+ * Used to view the solved exam.
+ * 
  * @author Shalom and Omer
  * @extend StudentMainPageController
- * Used to view the solved exam.
  *
  */
-public class StudentExamViewController extends StudentMainPageController  {
+public class StudentExamViewController extends StudentMainPageController {
 	/**
-	 * Holds the index of the current question 
+	 * Holds the index of the current question
 	 */
-	private int currentQuestion=0;
+	private int currentQuestion = 0;
 	/**
 	 * Used to hold the details for solved exam.
 	 */
@@ -137,8 +138,9 @@ public class StudentExamViewController extends StudentMainPageController  {
 	private Button NextQuestionButton;
 
 	/**
-	 * @param ActionEvent event
 	 * Used to go to next question and sets all the details of next question
+	 * 
+	 * @param ActionEvent event
 	 */
 	@FXML
 	void NextQuestionButtonPressed(ActionEvent event) {
@@ -157,13 +159,13 @@ public class StudentExamViewController extends StudentMainPageController  {
 			guiControl.popUpMessage("System Error", "This is the last question");
 
 		}
-		
 
 	}
 
 	/**
-	 * @param ActionEvent event
 	 * Used to go to previous question and sets all the details of previous question
+	 * 
+	 * @param ActionEvent event
 	 */
 	@FXML
 	void PreviousQuestionButtonPressed(ActionEvent event) {
@@ -183,20 +185,20 @@ public class StudentExamViewController extends StudentMainPageController  {
 
 	}
 
-
-
 	/**
-	 * @return exam
 	 * returns current exam
+	 * 
+	 * @return SolvedExamToView exam
 	 */
 	public SolvedExamToView getExam() {
 		return exam;
 	}
 
 	/**
+	 * A button when pressed goes back to table of exams.
+	 * 
 	 * @param ActionEvent event
 	 * @throws IOException
-	 * A button when pressed goes back to table of exams.
 	 */
 	@FXML
 	void BackToMyExamsButtonPressed(ActionEvent event) throws IOException {
@@ -207,8 +209,10 @@ public class StudentExamViewController extends StudentMainPageController  {
 	}
 
 	/**
-	 * @param num
-	 * Used to set questions details and the answer the student chose and correct answer.
+	 * Used to set questions details and the answer the student chose and correct
+	 * answer.
+	 * 
+	 * @param int num
 	 */
 	public void setQuestion(int num) {
 
@@ -275,29 +279,30 @@ public class StudentExamViewController extends StudentMainPageController  {
 	}
 
 	/**
-	 * @param exam
 	 * Sets the relevant exam
+	 * 
+	 * @param SolvedExamToView exam
 	 */
 	public void setExam(SolvedExamToView exam) {
 		this.exam = exam;
 	}
 
 	/**
-	 * @param questions
 	 * sets the array of questions
+	 * 
+	 * @param ArrayList<SolvedQuestionToView> questions
 	 */
 	public void setQuestions(ArrayList<SolvedQuestionToView> questions) {
 		this.questions = questions;
 	}
-	
+
 	/**
-	 * @param course
 	 * sets the course
+	 * 
+	 * @param course
 	 */
 	public void setCourse(Course course) {
 		this.course = course;
 	}
-	
-	
 
 }

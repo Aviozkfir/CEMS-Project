@@ -22,19 +22,20 @@ import message.ClientMessageType;
 
 /**
  * @author Shalom and Omer
- * Used to present an exam in course as a row in table
+ * 
+ *         Used to present an exam in course as a row in table
  *
  */
 public class StudentExamTableRowController {
 	/**
 	 * Holds the exam details
 	 */
-	public  SolvedExamToView exam;
-	
+	public SolvedExamToView exam;
+
 	/**
 	 * Holds the questions of the exam
 	 */
-	public  ArrayList<SolvedQuestionToView> questions;
+	public ArrayList<SolvedQuestionToView> questions;
 	/**
 	 * used to hold the current course
 	 */
@@ -77,39 +78,42 @@ public class StudentExamTableRowController {
 	private Label Grade;
 
 	/**
+	 * Shows all the exam questions when pressed
+	 * 
 	 * @param ActionEvent event
 	 * @throws IOException
-	 * Shows all the exam questions when pressed
 	 */
 	@FXML
 	void btnViewExamPressed(ActionEvent event) throws IOException {
 		GUIControl guiControl = GUIControl.getInstance();
-		StudentExamViewController a = (StudentExamViewController) guiControl.loadStage(gui.ClientsConstants.Screens.STUDENT_EXAM_VIEW.path);
-	    			a.setQuestions(questions);
-	    			a.setExam(exam);
-	    			a.setCourse(course);
-	    			questions.sort(new Comparator<SolvedQuestionToView>() {
-	    				@Override
-	    				public int compare(SolvedQuestionToView o1, SolvedQuestionToView o2) {
+		StudentExamViewController a = (StudentExamViewController) guiControl
+				.loadStage(gui.ClientsConstants.Screens.STUDENT_EXAM_VIEW.path);
+		a.setQuestions(questions);
+		a.setExam(exam);
+		a.setCourse(course);
+		questions.sort(new Comparator<SolvedQuestionToView>() {
+			@Override
+			public int compare(SolvedQuestionToView o1, SolvedQuestionToView o2) {
 
-	    					if (o1.getQuestionNum() == o2.getQuestionNum())
-	    						return 0;
-	    					else if (o1.getQuestionNum() < o2.getQuestionNum())
-	    						return -1;
-	    					else
-	    						return 1;
+				if (o1.getQuestionNum() == o2.getQuestionNum())
+					return 0;
+				else if (o1.getQuestionNum() < o2.getQuestionNum())
+					return -1;
+				else
+					return 1;
 
-	    				}
+			}
 
-	    			});
-	    			a.setQuestion(0);
+		});
+		a.setQuestion(0);
 
 	}
 
 	/**
+	 * Sets the exam and its course in order to take details to show.
+	 * 
 	 * @param exam
 	 * @param course
-	 * Sets the exam and its course in order to take details to show.
 	 */
 	public void setExam(SolvedExamToView exam, Course course) {
 		this.exam = exam;
@@ -121,24 +125,22 @@ public class StudentExamTableRowController {
 	}
 
 	/**
-	 * @param exam
 	 * Used to take all questions of certain exam.
+	 * 
+	 * @param SolvedExamToView exam
 	 */
 	public void setQuestions(SolvedExamToView exam) {
 		ClientMessage m = new ClientMessage(ClientMessageType.GET_QUESTIONS_FOR_SOLVED_EXAM, exam.getSEid());
 		GUIControl guiControl = GUIControl.getInstance();
 		guiControl.sendToServer(m);
 		questions = (ArrayList<SolvedQuestionToView>) guiControl.getServerMsg().getMessage();
-		
-		
-		
-		
 
 	}
 
 	/**
-	 * @return questions
 	 * used to return all questions of exam
+	 * 
+	 * @return questions
 	 */
 	public ArrayList<SolvedQuestionToView> getQuestions() {
 		return questions;

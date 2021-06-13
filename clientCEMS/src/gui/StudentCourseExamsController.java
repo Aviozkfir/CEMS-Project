@@ -24,9 +24,9 @@ import message.ClientMessage;
 import message.ClientMessageType;
 
 /**
+ *  Sets the exam as rows in table and has a back button for previous page.
  * @author Shalom and Omer
  * @extend StudentMainPageController
- * Sets the exam as rows in table.
  *
  */
 public class StudentCourseExamsController extends StudentMainPageController {
@@ -83,9 +83,9 @@ public class StudentCourseExamsController extends StudentMainPageController {
 
 
 	/**
+	 * Used to go back to subjects of student.
 	 * @param ActionEvent event
 	 * @throws IOException
-	 * Used to go back to subjects of student.
 	 */
 	@FXML
 	void BackPressed(ActionEvent event) throws IOException {
@@ -96,9 +96,9 @@ public class StudentCourseExamsController extends StudentMainPageController {
 
 
 	/**
+	* Used to set all exams of student given the subject and course.
 	 * @param Course course
 	 * @throws IOException
-	 * Used to set all exams of student given the subject and course.
 	 */
 	public void setStudentExams(Course course) throws IOException {
 		this.course = course;
