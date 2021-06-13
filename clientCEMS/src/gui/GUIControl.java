@@ -289,7 +289,7 @@ public class GUIControl {
 					if (getController() instanceof StudentExamExecutionController)
 						try {
 							if(getServerMsg().getType()==ServerMessageTypes.STUDENT_EXTEND_TIME) {
-								((StudentExamExecutionController) getController()).setAddition(getServerMsg().getMessage());
+								//((StudentExamExecutionController) getController()).setAddition(getServerMsg().getMessage());
 
 							}
 							else
@@ -302,7 +302,7 @@ public class GUIControl {
 					else if(getController() instanceof StudentManualExamController) {
 						try {
 							if(getServerMsg().getType()==ServerMessageTypes.STUDENT_EXTEND_TIME) {
-								((StudentExamExecutionController) getController()).setAddition(getServerMsg().getMessage());
+								((StudentManualExamController) getController()).setAddition(getServerMsg().getMessage());
 
 							}
 							else

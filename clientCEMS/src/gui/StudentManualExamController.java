@@ -136,7 +136,7 @@ public class StudentManualExamController extends StudentMainPageController imple
 	@FXML
 	private Text FilePathText;
 	
-	boolean addition=false;
+	int addition=0;
 
 	/**
 	 * Used as a method to download file when download button is pressed.
@@ -276,6 +276,11 @@ public class StudentManualExamController extends StudentMainPageController imple
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				String toPrintEveryTime = null;
+				if (addition != 0) {
+					guiControl.popUpMessage("System Message", addition + " Minutes have been added!");
+					Minutes += addition;
+					addition = 0;
+				}
 				if (minutes >= 100) {
 					toPrintEveryTime = String.format("%03d:%02d%n", Minutes, Seconds);
 				} else {
@@ -330,8 +335,9 @@ public class StudentManualExamController extends StudentMainPageController imple
 		guiControl.loadStage(ClientsConstants.Screens.STUDENT_MAIN_PAGE.path);
 
 	}
-	public void addition() {
-		
+	public void setAddition(Object additionTime) {
+		String time=(String)additionTime;
+		addition=Integer.parseInt(time);
 	}
 
 }
