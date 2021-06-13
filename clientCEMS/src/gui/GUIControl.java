@@ -7,6 +7,8 @@ import application.UpdateThread;
 import client.ClientCEMS;
 import entity.PersonCEMS;
 import entity.Principal;
+import entity.Student;
+import entity.Teacher;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -258,6 +260,35 @@ public class GUIControl {
 
 	public void setUpdateThread(UpdateThread requestThread) {
 		this.requestThread = requestThread;
+	}
+	
+	public void exeThread() {
+		if(getUser() instanceof Principal) {
+			CountRequest();
+			}
+			else if(getUser() instanceof Student) {
+				if(getController() instanceof StudentExamExecutionController)
+					try {
+						((StudentExamExecutionController)getController()).stopExam();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+			}
+			else if(getUser() instanceof Teacher) {
+				if(getController() instanceof TeacherOngoingExamsController) {
+					
+					
+					try {
+						TeacherOngoingExamsController a = (TeacherOngoingExamsController) GUIControl.getInstance().loadStage(ClientsConstants.Screens.TEACHER_ONGOING_EXAMS_PAGE.path);
+						a.setOngoingExams();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+					
+			}
 	}
 
 }
