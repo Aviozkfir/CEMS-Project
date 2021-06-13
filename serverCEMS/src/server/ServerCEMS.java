@@ -333,6 +333,12 @@ public class ServerCEMS extends AbstractServer {
 							.updatePrincipalApprovedRequests((ArrayList<String>) clientMsg.getMessage());
 					if (returnVal != null) {
 						type = ServerMessageTypes.PRINCIPAL_APPROVED_REQUESTS_ADDED;
+						for(currentExam tce :currentExams)
+							for(String eid : (ArrayList<String>) clientMsg.getMessage()) {
+								if(tce.getEid().equals(eid)) {
+									tce.getTeacher().sendToClient(clientMsg);
+								}
+							}
 					}
 					break;
 
@@ -542,8 +548,11 @@ public class ServerCEMS extends AbstractServer {
 					
 				case TEACHER_SEND_REQUEST:
 					returnVal = MySQLConnection.sendNewRequest((ArrayList<String>) clientMsg.getMessage());
+					
 					if ((boolean) returnVal) {
 						type = ServerMessageTypes.TEACHER_REQUEST_RECIVED;
+						for(ConnectionToClient mn : conToClientMng)
+							mn.sendToClient(new ServerMessage(ServerMessageTypes.PRINCIPAL_GOT_NEW_REQUEST, null));
 					}
 					else {
 						type = ServerMessageTypes.TEACHER_REQUEST_NOT_RECIVED;

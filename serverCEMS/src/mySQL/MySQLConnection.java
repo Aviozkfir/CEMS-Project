@@ -598,6 +598,9 @@ public class MySQLConnection {
 			statment.setString(1, request);
 			statment.executeUpdate();
 		}
+		//return an array list of eid
+		//return an array list of new time
+		
 		return "Succeded";
 	}
 	
