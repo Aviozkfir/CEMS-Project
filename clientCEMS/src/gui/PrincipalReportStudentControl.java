@@ -167,6 +167,7 @@ public class PrincipalReportStudentControl extends PrincipalMainPageController i
 	/**
 	 * validateInput covers all the input validation that have to be checked and
 	 * gives the right messages.
+	 * @return boolean
 	 */
 	public boolean validateInput() {
 		String[] date = new String[3];
@@ -221,6 +222,7 @@ public class PrincipalReportStudentControl extends PrincipalMainPageController i
 	 * Calculating the Median from the report-data.
 	 * 
 	 * @param values
+	 * @return String
 	 */
 	public static String Median(ArrayList<Integer> values) {
 		String convertStr = null;
@@ -235,6 +237,7 @@ public class PrincipalReportStudentControl extends PrincipalMainPageController i
 	 * Calculating the average from the report-data.
 	 * 
 	 * @param values
+	 * @return String
 	 */
 	public static String Average(ArrayList<Integer> values) {
 		String convertStr = null;

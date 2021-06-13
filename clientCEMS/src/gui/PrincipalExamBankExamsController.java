@@ -24,8 +24,6 @@ import message.ServerMessageTypes;
  * 
  * @author On Avioz ,Kfir Avioz
  * @extend PrincipalMainPageController
- * 
- *
  */
 public class PrincipalExamBankExamsController extends PrincipalMainPageController {
 

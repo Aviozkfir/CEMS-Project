@@ -92,6 +92,7 @@ public class PrincipalReportController extends PrincipalMainPageController imple
 	 * IsType returns the type of report : course,student,teacher.
 	 * 
 	 * @param type
+	 * @return boolean
 	 */
 	public boolean Istype(String type) {
 		if (SelectedReport.equals(type))

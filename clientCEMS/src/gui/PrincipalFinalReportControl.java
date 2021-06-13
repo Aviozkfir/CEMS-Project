@@ -188,6 +188,7 @@ public class PrincipalFinalReportControl extends PrincipalMainPageController imp
 	 * IsType returns the type of report : course,student,teacher.
 	 * 
 	 * @param type
+	 * @return String
 	 */
 	public boolean Istype(String type) {
 		if (principal.getReportType().equals(type))
@@ -212,6 +213,7 @@ public class PrincipalFinalReportControl extends PrincipalMainPageController imp
 		 * converts an integer to string.
 		 * 
 		 * @param object
+		 * @return String
 		 */
 		@Override
 		public String toString(Number object) {
@@ -224,6 +226,7 @@ public class PrincipalFinalReportControl extends PrincipalMainPageController imp
 		 * converts a string to integer
 		 * 
 		 * @param object
+		 * @return Number
 		 */
 		@Override
 		public Number fromString(String string) {
