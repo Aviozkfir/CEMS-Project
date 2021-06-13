@@ -1,5 +1,8 @@
 package gui;
 
+import java.io.IOException;
+
+import client.ClientCEMS;
 import entity.Exam;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -7,6 +10,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import message.ClientMessage;
+import message.ClientMessageType;
 
 public class TeacherOngioingExamRowController {
 
@@ -49,8 +54,24 @@ public class TeacherOngioingExamRowController {
     }
 
     @FXML
-    void btnLockExamPressed(ActionEvent event) {
-    //the exam should be stopped
+    void btnLockExamPressed(ActionEvent event) throws IOException {
+    
+    	ClientMessage m1 = new ClientMessage(ClientMessageType.TEACHER_LOCK_EXAM,exam);
+    	GUIControl.getInstance().sendToServer(m1);
+    	
+  
+			 
+			
+			
+    	TeacherOngoingExamsController a = (TeacherOngoingExamsController) GUIControl.getInstance().loadStage(ClientsConstants.Screens.TEACHER_ONGOING_EXAMS_PAGE.path);
+			
+				a.setOngoingExams();
+				
+			
+		
+		
+			
+    	
     }
 
 }

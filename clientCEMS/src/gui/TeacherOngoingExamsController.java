@@ -31,10 +31,10 @@ public class TeacherOngoingExamsController extends TeacherMainPageController{
     	
     	for(Exam e : allExams)
     	{
-    		TeacherExamBankRowController controller;
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/TeacherOngioingExamRowController"));
+    		TeacherOngioingExamRowController controller;
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/TeacherOngioingExamRow.fxml"));
 			AnchorPane root = fxmlLoader.load();
-			controller = (TeacherExamBankRowController) fxmlLoader.getController();
+			controller = (TeacherOngioingExamRowController) fxmlLoader.getController();
 			
 			controller.setExam(e);
 			vTable.getChildren().add(root);

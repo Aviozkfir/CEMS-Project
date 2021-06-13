@@ -83,6 +83,18 @@ public class MySQLConnection {
 		return null;
 	}
 
+
+	public static int numOfStudentsInCourse(String Cid) throws SQLException {
+		PreparedStatement exams = con.prepareStatement(
+				"SELECT COUNT(ID) FROM Person_Enrolled_Course WHERE Cid=?");
+		exams.setString(1, Cid);
+		
+		ResultSet rs = exams.executeQuery();
+		rs.next();
+		return rs.getInt(1);
+	}
+	
+
 	public static Object getTeacherSubjects(String teacherID) throws SQLException {
 		ArrayList<Subject> subjectList = new ArrayList<Subject>();
 		ResultSet rs;

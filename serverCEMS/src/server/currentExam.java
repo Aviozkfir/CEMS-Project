@@ -2,14 +2,25 @@ package server;
 
 import java.util.ArrayList;
 
+import entity.Exam;
 import ocsf.server.ConnectionToClient;
 
 
 
 public class currentExam {
 
-	
+	private Exam exam;
 
+	public Exam getExam() {
+		return exam;
+	}
+
+	public currentExam(Exam exam, int amountOfStudents, ConnectionToClient teacher) {
+		this.amountOfStudents=amountOfStudents;
+		this.Eid=exam.getEid();
+		this.exam=exam;
+		this.teacher=teacher;
+	}
 		private ArrayList<ConnectionToClient> conToClientStudent=new ArrayList<>();	
 
 		public ArrayList<ConnectionToClient> getConToClientStudent() {
@@ -44,7 +55,6 @@ public class currentExam {
 
 		private int amountOfStudents;
 		private int amountOfFinishedStudents;
-		private String Name;
 		
 		public boolean allStudentAreFinished() {
 			amountOfFinishedStudents++;

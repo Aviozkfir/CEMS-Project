@@ -64,6 +64,7 @@ public class TeacherMainPageController extends MainPageController {
 	 @FXML
 	 void OnGoingPageButtonPressed(ActionEvent event) throws IOException {
 		 TeacherOngoingExamsController a = (TeacherOngoingExamsController) guiControl.loadStage(ClientsConstants.Screens.TEACHER_ONGOING_EXAMS_PAGE.path);
+		 a.setOngoingExams();
 	 }
 //	
 //	 public void CheckForRefreshOfQuestions() {

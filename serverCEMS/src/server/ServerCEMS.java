@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,11 +53,9 @@ import ocsf.server.ConnectionToClient;
 public class ServerCEMS extends AbstractServer {
 	// Class variables *****************
 	private MySQLConnection cemsDataBase;
-//	private ArrayList<Object> userList;
-//	private ArrayList<ConnectionToClient> conToClientStudent;
-//	private ArrayList<ConnectionToClient> conToClientTeacher;
-//	private ArrayList<ConnectionToClient> conToClientMng;
-//	private ArrayList<currentExam> currentExams;
+
+	private ArrayList<ConnectionToClient> conToClientMng;
+	private ArrayList<currentExam> currentExams;
 	// Constructors ******************
 
 	/**
@@ -67,11 +66,9 @@ public class ServerCEMS extends AbstractServer {
 	 */
 	public ServerCEMS(int port) {
 		super(port);
-//		userList = new ArrayList<>();
-//		conToClientStudent=new ArrayList<>();
-//		conToClientTeacher=new ArrayList<>();
-//		conToClientMng=new ArrayList<>();
-//		currentExams = new ArrayList<>();
+
+		conToClientMng=new ArrayList<>();
+		currentExams = new ArrayList<>();
 	}
 
 	// Instance methods ****************
@@ -140,6 +137,17 @@ public class ServerCEMS extends AbstractServer {
 						type = ServerMessageTypes.TEACHER_COURSES_NOT_ADDED;
 					}
 					break;
+				case TEACHER_PUBLISH_EXAM:
+					
+					type = ServerMessageTypes.TEACHER_PUBLISH_EXAM_RECIVED;
+					Exam exam1= (Exam) clientMsg.getMessage();
+					for(currentExam oce: currentExams)
+						if(oce.getEid().equals(exam1.getEid()))
+							type = ServerMessageTypes.TEACHER_PUBLISH_EXAM_NOT_RECIVED;
+					if(type == ServerMessageTypes.TEACHER_PUBLISH_EXAM_RECIVED)
+						currentExams.add(new currentExam(exam1,MySQLConnection.numOfStudentsInCourse(exam1.getCid()),client));
+					break;
+					
 				case PRINCIPAL_SUBJECTS_INFORMATION:
 					returnVal = MySQLConnection.getPrincipalSubjects((String) clientMsg.getMessage());
 					if (returnVal != null) {
@@ -175,23 +183,22 @@ public class ServerCEMS extends AbstractServer {
 					}
 					break;
 				case GET_EXAM_INFORMATION:
-					//type = ServerMessageTypes.EXAM_NOT_STARTED_YET;
+					type = ServerMessageTypes.EXAM_NOT_STARTED_YET;
 					returnVal = MySQLConnection.getExamInformation((String) clientMsg.getMessage());
 					if (returnVal == null) {
 						type = ServerMessageTypes.EXAM_INFORMATION_NOT_RECIVED;
-					} 
-					else
-						type = ServerMessageTypes.EXAM_INFORMATION_RECIVED;
-					//else {
-//						for( currentExam ce : currentExams) {
-//							if(((Exam)returnVal).getEid().equals(ce.getEid()))
-//									type = ServerMessageTypes.EXAM_INFORMATION_RECIVED;
-//							ce.getConToClientStudent().add(client);
-//						}
-//						if(type != ServerMessageTypes.EXAM_INFORMATION_RECIVED)
-//							returnVal=null;
-//						
-//					}
+					} else {
+						Iterator<currentExam> itce = currentExams.iterator();
+						while(itce.hasNext()) {
+							currentExam ce =itce.next();
+							if(((Exam)returnVal).getEid().equals(ce.getEid()))
+									type = ServerMessageTypes.EXAM_INFORMATION_RECIVED;
+							ce.getConToClientStudent().add(client);
+						}
+						if(type != ServerMessageTypes.EXAM_INFORMATION_RECIVED)
+							returnVal=null;
+						
+					}
 					break;
 				case GET_QUESTION_BY_COURSE:
 					returnVal = MySQLConnection.getQuestionByCourse((Course) clientMsg.getMessage());
@@ -364,7 +371,19 @@ public class ServerCEMS extends AbstractServer {
 					}
 
 					break;
+				case TEACHER_GET_CURRENT_EXAM:
+					ArrayList<Exam> returnValAsList = new ArrayList<Exam>();
+					
+					for( currentExam myce : currentExams)
+						if(myce.getTeacher()==client) {
+							returnValAsList.add(myce.getExam());
+						}
+					
+					type = ServerMessageTypes.TEACHER_GET_CURRENT_EXAMS_RECIVED;
+						
+					returnVal=returnValAsList;
 
+					break;
 				case GET_EXAM_QUESTIONS:
 					returnVal = MySQLConnection.returnExamQuestions((String) clientMsg.getMessage());
 					if (returnVal == null) {
@@ -381,16 +400,16 @@ public class ServerCEMS extends AbstractServer {
 						
 					} else {
 						type = ServerMessageTypes.GET_EXAM_QUESTIONS_SUCCEDED;
-//						for(currentExam ce : currentExams)
-//							if(ce.getEid()==((SolvedExam) clientMsg.getMessage()).getEid()) {
-//								ce.getConToClientStudent().remove(client);
-//								
-//								if(ce.allStudentAreFinished()) {
-//									currentExams.remove(ce);
-//									ce.getTeacher().sendToClient(new ServerMessage(ServerMessageTypes.TECHER_EXAM_IS_DONE, ce.getEid()));
-//								}
-//									
-//							}
+						for(currentExam ce : currentExams)
+							if(ce.getEid()==((SolvedExam) clientMsg.getMessage()).getEid()) {
+								ce.getConToClientStudent().remove(client);
+								
+								if(ce.allStudentAreFinished()) {
+									currentExams.remove(ce);
+									ce.getTeacher().sendToClient(new ServerMessage(ServerMessageTypes.TEACHER_REFRSH_ONGOING_EXAM_PAGE, ce.getEid()));
+								}
+									
+							}
 					}
 
 					break;
@@ -484,6 +503,19 @@ public class ServerCEMS extends AbstractServer {
 						type = ServerMessageTypes.STUDENT_SOLVED_EXAMS_IMPORTED;
 					} else {
 						type = ServerMessageTypes.STUDENT_SOLVED_EXAMS_NOT_IMPORTED;
+					}
+					break;
+				case TEACHER_LOCK_EXAM:
+					
+					Iterator<currentExam> it= currentExams.iterator();
+					while(it.hasNext()) {
+						currentExam dce =it.next();
+						if(dce.getTeacher().equals(client)&&dce.getEid().equals(((Exam)clientMsg.getMessage()).getEid())) {
+							it.remove();
+							type=ServerMessageTypes.TEACHER_REFRSH_ONGOING_EXAM_PAGE;
+							for(ConnectionToClient ctc:dce.getConToClientStudent())
+								ctc.sendToClient(new ServerMessage(ServerMessageTypes.STOP_EXAM, clientMsg.getMessage()));
+						}
 					}
 					break;
 			

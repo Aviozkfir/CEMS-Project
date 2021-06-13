@@ -1,14 +1,13 @@
 package gui;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 import entity.Exam;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import message.ClientMessage;
+import message.ClientMessageType;
 
 public class TeacherExamBankRowController {
 
@@ -41,14 +40,9 @@ public class TeacherExamBankRowController {
     public void setExam(Exam exam) {
 		this.exam = exam;
 		author.setText(exam.getID());
-		
-		//coverting fate from yyyy-mm-dd to dd-mm-yyyy
-    	String startDateString = exam.getDate().toString();
-        DateTimeFormatter oldFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        DateTimeFormatter newFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-    	//
-    	date.setText(LocalDate.parse(startDateString, oldFormat).format(newFormat));
+		date.setText(exam.getDate());
 		examTitle.setText(exam.getName());
+		questionID.setText(exam.getEid());
 	}
 
 	@FXML
@@ -63,7 +57,8 @@ public class TeacherExamBankRowController {
 
     @FXML
     void btnPublishPressed(ActionEvent event) {
-
+    	ClientMessage m1 = new ClientMessage(ClientMessageType.TEACHER_PUBLISH_EXAM, exam);
+    	GUIControl.instance.sendToServer(m1);
     }
 
     @FXML
