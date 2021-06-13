@@ -23,7 +23,9 @@ import entity.Question;
 import entity.QuestionInExam;
 import entity.Request;
 import entity.SolvedExam;
+import entity.SolvedExamToView;
 import entity.SolvedExamType;
+import entity.SolvedQuestionToView;
 import entity.Student;
 import entity.Subject;
 import entity.Teacher;
@@ -711,39 +713,7 @@ public class MySQLConnection {
 		return success;
 	}
 
-	public static String insertExamToDB(SolvedExam exam) throws SQLException, ParseException {
-		ResultSet rs;
-		int rslt;
-		PreparedStatement logInPreparedStatement;
-		logInPreparedStatement = con.prepareStatement("SELECT MAX(SEid) FROM SolvedExams");
-		rs = logInPreparedStatement.executeQuery();
-		String Eid = "";
-		if (rs.next()) {
-			String eid = rs.getString(1);
-			int i = Integer.parseInt(eid.trim());
-			i++;
-			Eid = String.format("%06d", i);
 
-		} else {
-			Eid = "000001";
-		}
-		Date dateInput = new SimpleDateFormat("yyyy-MM-dd").parse(exam.getFinishDate());
-		java.sql.Date dateInputData = new java.sql.Date(dateInput.getTime());
-		logInPreparedStatement = con.prepareStatement(
-				"INSERT INTO `SolvedExams` (`SEid`, `ID`, `Eid`, `DATE`, `Grade`, `TimeOfExe`,`NotesForStudent` ,`Submitted`, `Checked`) VALUES(?,?,?,?,?,?,?,?,?)");
-		logInPreparedStatement.setString(1, Eid);
-		logInPreparedStatement.setString(2, exam.getID());
-		logInPreparedStatement.setString(3, exam.getEid());
-		logInPreparedStatement.setDate(4, dateInputData);
-		logInPreparedStatement.setString(5, exam.getFinalGrade());
-		logInPreparedStatement.setString(6, exam.getFinishTime());
-		logInPreparedStatement.setString(7, "");
-		logInPreparedStatement.setString(8, exam.getSubmitted());
-		logInPreparedStatement.setString(9, "No");
-		rslt = logInPreparedStatement.executeUpdate();
-		return Eid;
-
-	}
 	public static Object getStudentSubjects(String studentID) throws SQLException {
 		ArrayList<Subject> subjectList = new ArrayList<Subject>();
 		ResultSet rs;
@@ -822,5 +792,81 @@ public class MySQLConnection {
 		return report;
 
 	}
+	public static Object getQuestionsForExamSEid(String SEid) throws SQLException {
+		ArrayList<SolvedQuestionToView> questions = new ArrayList<SolvedQuestionToView>();
+		ResultSet rs;
+		PreparedStatement logInPreparedStatement;
+		logInPreparedStatement = con.prepareStatement(
+				"SELECT q.Qid,a.Ans,a.NotesForStudent,q.Text,q.Ans1,q.Ans2,q.Ans3,q.Ans4,q.CorrectAns,k.QuestionNum FROM AnsweredQuestionsForExams a,SolvedExams s,Questions q,Question_In_Exams k WHERE s.SEid=? AND a.Qid=k.Qid AND s.Eid=k.Eid AND s.SEid=a.SEid AND a.Qid=q.Qid");
+		logInPreparedStatement.setString(1, SEid);
+		rs = logInPreparedStatement.executeQuery();
+		while (rs.next()) {
+			questions.add(new SolvedQuestionToView(rs.getString(1), rs.getInt(2), rs.getString(3), rs.getString(4),
+					rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), rs.getInt(10)));
+		}
+		rs.close();
+		return questions;
+	}
+	public static Object getStudentExamCourses(Student student) throws SQLException {
+		ArrayList<SolvedExamToView> solvedExamsList = new ArrayList<SolvedExamToView>();
+		ResultSet rs;
+		PreparedStatement logInPreparedStatement;
+		logInPreparedStatement = con.prepareStatement(
+				"SELECT s.SEid,s.Eid,s.DATE,e.Name,s.Grade FROM SolvedExams s,Exams e WHERE s.Eid=e.Eid AND s.ID=? AND s.Checked=?");
+		logInPreparedStatement.setString(1, student.getId());
+		logInPreparedStatement.setString(2, "Yes");
+
+		rs = logInPreparedStatement.executeQuery();
+		while (rs.next()) {
+			solvedExamsList.add(new SolvedExamToView(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
+					rs.getString(5)));
+		}
+		rs.close();
+		return solvedExamsList;
+
+	}
+	public static String insertExamToDB(SolvedExam exam) throws SQLException, ParseException {
+		ResultSet rs;
+		int rslt;
+		PreparedStatement logInPreparedStatement;
+		logInPreparedStatement = con.prepareStatement("SELECT MAX(SEid) FROM SolvedExams");
+		rs = logInPreparedStatement.executeQuery();
+		String Eid = "";
+		if (rs.next()) {
+			String eid = rs.getString(1);
+			if (!(eid == null)) {
+				System.out.println(eid);
+				int i = Integer.parseInt(eid.trim());
+				i++;
+				Eid = String.format("%06d", i);
+			} else {
+				Eid = "000001";
+			}
+
+		} else {
+			Eid = "000001";
+		}
+		rs.close();
+		Date dateInput = new SimpleDateFormat("yyyy-MM-dd").parse(exam.getFinishDate());
+		java.sql.Date dateInputData = new java.sql.Date(dateInput.getTime());
+		logInPreparedStatement = con.prepareStatement(
+				"INSERT INTO `SolvedExams` (`SEid`, `ID`, `Eid`, `DATE`, `Grade`, `TimeOfExe`,`NotesForStudent` ,`Submitted`, `Checked`) VALUES(?,?,?,?,?,?,?,?,?)");
+		logInPreparedStatement.setString(1, Eid);
+		logInPreparedStatement.setString(2, exam.getID());
+		logInPreparedStatement.setString(3, exam.getEid());
+		logInPreparedStatement.setDate(4, dateInputData);
+		logInPreparedStatement.setString(5, exam.getFinalGrade());
+		logInPreparedStatement.setString(6, exam.getFinishTime());
+		logInPreparedStatement.setString(7, "");
+		logInPreparedStatement.setString(8, exam.getSubmitted());
+		logInPreparedStatement.setString(9, "No");
+		rslt = logInPreparedStatement.executeUpdate();
+		rs.close();
+		return Eid;
+
+	}
+	
+
+
 	
 }

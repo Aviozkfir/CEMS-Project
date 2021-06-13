@@ -70,6 +70,7 @@ public class ClientCEMS extends AbstractClient {
 			case QUESTION_BY_COURSE_RECIVED:
 				guiControl.setServerMsg(serverMsg);
 				guiControl.getUpdateThread().Check();
+				break;
 
 			default:
 				guiControl.setServerMsg(serverMsg);

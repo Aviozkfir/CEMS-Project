@@ -43,9 +43,12 @@ public class StudentStartExamController extends StudentMainPageController {
 			} else {
 				ClientMessage msg2 = new ClientMessage(ClientMessageType.GET_EXAM_INFORMATION, examCode);
 				guiControl.sendToServer(msg2);
-				if (guiControl.getServerMsg().getType() == ServerMessageTypes.EXAM_INFORMATION_NOT_RECIVED) {
+				if (guiControl.getServerMsg().getType() == ServerMessageTypes.EXAM_INFORMATION_NOT_RECIVED) {	
 					guiControl.popUpError("Exam code not found");
-				} else {
+				} 
+				else if(guiControl.getServerMsg().getType() == ServerMessageTypes.EXAM_NOT_STARTED_YET)
+					guiControl.popUpError("Exam hasn't been started yet");
+				else {
 					exam = ((Exam) guiControl.getServerMsg().getMessage());
 					if (exam.getMode().equals("Computerized")) {
 						guiControl.loadStage(ClientsConstants.Screens.STUDENT_COMPUTERIZED_EXAM_EXECUTION.path);

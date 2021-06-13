@@ -60,8 +60,9 @@ public class ClientsConstants {
 		PRINCIPAL_EXAM_VIEW("/gui/PrincipalExamBankExamsViewExam.fxml"),
 		PRINCIPAL_EXAM_QUESTION_TABLE_ROW("/gui/PrincipalExamQuestionTableRow.fxml"),
 		PRINCIPAL_EXAM_VIEW_QUESTION_VIEW("/gui/PrincipalExamBankViewQuestion.fxml"),
-		STUDENT_CHOICE_EXAM_PAGE("/gui/studentExamChoice.fxml");
-
+		STUDENT_CHOICE_EXAM_PAGE("/gui/studentExamChoice.fxml"),
+		STUDENT_EXAM_VIEW("StudentExamView.fxml"),
+		STUDENT_TABLE_ROW("/gui/StudentExamTableRowController.fxml");
 		// DIFFERENCE_PARAMETER_UPDATE("/gui/DifferenceParameterUpdate.fxml"),
 		// ENTRY_CONTROL_PAGE("/gui/EntryControlPane.fxml"),
 

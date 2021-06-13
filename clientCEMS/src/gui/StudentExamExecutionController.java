@@ -23,6 +23,7 @@ import javax.swing.Timer;
 import entity.ExamForStudent;
 import entity.QuestionInExam;
 import entity.SolvedExam;
+import entity.Student;
 import javafx.fxml.Initializable;
 
 public class StudentExamExecutionController extends StudentComputerizedExamController implements Initializable {
@@ -190,12 +191,16 @@ public class StudentExamExecutionController extends StudentComputerizedExamContr
 			Date date = new Date();
 			String currentDate = dateFormat.format(date);
 			SolvedExam solvedExam = new SolvedExam(exam.getEid(), exam.getSid(), exam.getCid(), exam.getName(),
-					exam.getDate(), exam.getTdescription(), exam.getSdescription(), exam.getID(), exam.getTotalTime(),
-					exam.getCode(), exam.getMode(), timeTaken, currentDate, TotalGrade + "");
+					exam.getDate(), exam.getTdescription(), exam.getSdescription(),
+					((Student) guiControl.getUser()).getId(), exam.getTotalTime(), exam.getCode(), exam.getMode(),
+					timeTaken, currentDate, TotalGrade + "");
 			solvedExam.setSubmitted("Yes");
 			ClientMessage examMessage = new ClientMessage(ClientMessageType.INSERT_EXAM_TO_DB, solvedExam);
 			guiControl.sendToServer(examMessage);
 			String SEid = (String) guiControl.getServerMsg().getMessage();
+			if (SEid == null) {
+				SEid = "000001";
+			}
 
 			Object[] toSend = new Object[] { questions, SEid };
 			ClientMessage questionsMessage = new ClientMessage(ClientMessageType.INSERT_EXAM_QUESTIONS, toSend);
@@ -226,7 +231,7 @@ public class StudentExamExecutionController extends StudentComputerizedExamContr
 		questions = exam.getExamQuestions();
 		String Time = exam.getTotalTime();
 		NumOfQuestionsText.setText("# of questions: " + exam.getExamQuestions().size());
-		NotesToStudent.setText(exam.getTdescription());
+		NotesToStudent.setText(exam.getSdescription());
 		String[] TotalTimeString = Time.split(":");
 		minutes = Integer.parseInt(TotalTimeString[0]);
 		seconds = Integer.parseInt(TotalTimeString[1]);
@@ -317,10 +322,6 @@ public class StudentExamExecutionController extends StudentComputerizedExamContr
 
 	}
 
-	public void insertQuestionsToDB() {
-
-	}
-
 	@FXML
 	void Option1IsSelected(ActionEvent event) {
 		questions.get(currentQuestion).setChosenAnswer(1);
@@ -346,6 +347,55 @@ public class StudentExamExecutionController extends StudentComputerizedExamContr
 	public void updateTime(int minutes, int seconds) {
 		this.tickMinutes = minutes;
 		this.tickSeconds = seconds;
+	}
+	
+	public void stopExam() throws IOException {
+		GUIControl.popUpMessageYesNo("System Message", "Exam has been locked by Teacher");
+			for (int i = 0; i < questions.size(); i++) {
+				QuestionInExam que = questions.get(i);
+				if (que.getChosenAnswer() != -1 && que.getChosenAnswer() == que.getCorrectAnswer()) {
+					TotalGrade += que.getPointsQuestion();
+				}
+			}
+			String timeTaken;
+			if (minutes >= 100) {
+				timeTaken = String.format("%03d:%02d%n", tickMinutes, tickSeconds);
+
+			} else {
+				timeTaken = String.format("%02d:%02d%n", tickMinutes, tickSeconds);
+
+			}
+
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			Date date = new Date();
+			String currentDate = dateFormat.format(date);
+			SolvedExam solvedExam = new SolvedExam(exam.getEid(), exam.getSid(), exam.getCid(), exam.getName(),
+					exam.getDate(), exam.getTdescription(), exam.getSdescription(),
+					((Student) guiControl.getUser()).getId(), exam.getTotalTime(), exam.getCode(), exam.getMode(),
+					timeTaken, currentDate, TotalGrade + "");
+			solvedExam.setSubmitted("Yes");
+			ClientMessage examMessage = new ClientMessage(ClientMessageType.INSERT_EXAM_TO_DB, solvedExam);
+			guiControl.sendToServer(examMessage);
+			String SEid = (String) guiControl.getServerMsg().getMessage();
+			if (SEid == null) {
+				SEid = "000001";
+			}
+
+			Object[] toSend = new Object[] { questions, SEid };
+			ClientMessage questionsMessage = new ClientMessage(ClientMessageType.INSERT_EXAM_QUESTIONS, toSend);
+			guiControl.sendToServer(questionsMessage);
+			boolean sent = (boolean) guiControl.getServerMsg().getMessage();
+			if (sent == false) {
+				guiControl.popUpMessage("System Message", "There was a problem with submission of question");
+			} else {
+				guiControl.popUpMessage("System Message", "Exam Submitted Succesfully");
+				timer.stop();
+				guiControl.loadStage(ClientsConstants.Screens.STUDENT_MAIN_PAGE.path);
+
+			}
+
+		
+		
 	}
 
 }

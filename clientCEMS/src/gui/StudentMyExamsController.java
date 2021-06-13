@@ -16,6 +16,7 @@ import javafx.scene.text.Text;
 
 public class StudentMyExamsController extends StudentMainPageController {
 
+
 	@FXML
 	private GridPane grid;
 
@@ -34,7 +35,7 @@ public class StudentMyExamsController extends StudentMainPageController {
 					StackPane root = fxmlLoader.load();
 					controller = (btnFolderController) fxmlLoader.getController();
 
-					controller.setChosenPath("myExamsCourses.fxml");
+					controller.setChosenPath("/gui/myExamsCourses.fxml");
 					controller.setText(subjectList.get(i).getName());
 					controller.setObject(subjectList.get(i));
 					

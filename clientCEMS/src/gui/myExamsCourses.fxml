@@ -82,7 +82,7 @@
             </Pane>
             <HBox prefHeight="44.0" prefWidth="851.0">
                <children>
-                  <Text fill="#868282" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Question Bank" wrappingWidth="185.0">
+                  <Text fill="#868282" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="My Exams" wrappingWidth="129.0">
                      <font>
                         <Font name="Ebrima" size="25.0" />
                      </font>
