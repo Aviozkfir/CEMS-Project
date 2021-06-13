@@ -10,6 +10,11 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+/**
+ * @author Guy and Sharon
+ *TeacherCreateExamPage4Controller - controller of the fourth page of creating exam
+ *(Page with success message of creation and the generated exam number ).
+ */
 public class TeacherCreateExamPage4Controller {
 
 	 

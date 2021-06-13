@@ -78,13 +78,19 @@ public class TeacherQuestionTableRowController {
     }
 
     @FXML
-    void btnEditPressed(ActionEvent event) {
-    	
+    void btnEditPressed(ActionEvent event) throws IOException {
+    	GUIControl guiControl = GUIControl.getInstance();
+    	TeacherEditQuestionController a = (TeacherEditQuestionController) guiControl
+				.loadStage(gui.ClientsConstants.Screens.TEACHER_EDIT_QUESTION.path);
+		a.setTeacherQuestion(q, c);
     }
 
     @FXML
-    void btnViewQuestionPressed(ActionEvent event) {
-
+    void btnViewQuestionPressed(ActionEvent event) throws IOException {
+    	GUIControl guiControl = GUIControl.getInstance();
+    	TeacherViewQuestionController a = (TeacherViewQuestionController) guiControl
+				.loadStage(gui.ClientsConstants.Screens.TEACHER_VIEW_QUESTION.path);
+		a.setTeacherQuestion(q, c);
     }
 
 }

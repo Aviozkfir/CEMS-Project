@@ -18,7 +18,9 @@ public class ClientsConstants {
 		TEACHER_MAIN_EXAM_PAGE("/gui/TeacherMainExamBank.fxml"),
 		TEACHER_ONGOING_EXAMS_PAGE("/gui/TeacherOngoingExams.fxml"),
 		TEACHER_FINAL_REPORT("/gui/teacherFinalReport.fxml"),
-
+		TEACHER_EDIT_QUESTION("/gui/TeacherEditQuestion.fxml"),
+		TEACHER_VIEW_QUESTION("/gui/TeacherViewQuestion.fxml"),
+		
 		QUESTION_BANK_COURSES("/gui/questionBankCourses.fxml"),
 
 		STUDENT_MAIN_PAGE("/gui/dashBoardStudentView.fxml"), PRINCIPAL_MAIN_PAGE("/gui/dashBoardPrincipalView.fxml"),

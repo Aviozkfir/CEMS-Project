@@ -16,6 +16,11 @@ import javafx.scene.text.Text;
 import message.ClientMessage;
 import message.ClientMessageType;
 
+/**
+ * @author Guy and Sharon
+ *TeacherCreateExamPage2Controller-controller of the second page of creating exam(selection
+ *of the wanted question for the exam).
+ */
 public class TeacherCreateExamPage2Controller {
 
 	
