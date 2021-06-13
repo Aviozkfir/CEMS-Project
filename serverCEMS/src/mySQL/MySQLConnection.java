@@ -87,7 +87,7 @@ public class MySQLConnection {
 
 	public static int numOfStudentsInCourse(String Cid) throws SQLException {
 		PreparedStatement exams = con.prepareStatement(
-				"SELECT COUNT(ID) FROM Person_Enrolled_Course WHERE Cid=?");
+				"SELECT COUNT(ID) FROM Person_Enrolled_Course pec, Person p WHERE pec.Cid=? AND pec.ID=p.ID AND p.Role=Student");
 		exams.setString(1, Cid);
 		
 		ResultSet rs = exams.executeQuery();
@@ -556,7 +556,7 @@ public class MySQLConnection {
 		
 		InputStream inputstream = new ByteArrayInputStream(ExamFile);
 		
-		addMExam.setBlob(2, inputstream);
+		addMExam.setBinaryStream(2, inputstream);
 		addMExam.setString(3, e.getID());
 		return id;
 	}
