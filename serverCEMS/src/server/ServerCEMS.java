@@ -543,10 +543,10 @@ public class ServerCEMS extends AbstractServer {
 				case TEACHER_SEND_REQUEST:
 					returnVal = MySQLConnection.sendNewRequest((ArrayList<String>) clientMsg.getMessage());
 					if ((boolean) returnVal) {
-						type = ServerMessageTypes.TEACHER_REQUEST_NOT_RECIVED;
+						type = ServerMessageTypes.TEACHER_REQUEST_RECIVED;
 					}
 					else {
-						type = ServerMessageTypes.TEACHER_REQUEST_RECIVED;
+						type = ServerMessageTypes.TEACHER_REQUEST_NOT_RECIVED;
 					}
 					break;
 			
