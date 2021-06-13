@@ -457,8 +457,8 @@ public class MySQLConnection {
 		getMaxID.setString(2, e.getCid());
 		maxID=getMaxID.executeQuery();
 		String id;
-		
-		if(maxID.next()) {
+		maxID.next();
+		if(maxID.getNString(1)!=null) {
 			id=(""+(1+Integer.parseInt(maxID.getNString(1))));
 			if(id.length()==5) {
 				id="0"+id;
