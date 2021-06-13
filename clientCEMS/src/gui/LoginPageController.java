@@ -11,6 +11,7 @@ import entity.Principal;
 import entity.Student;
 import entity.Subject;
 import entity.Teacher;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

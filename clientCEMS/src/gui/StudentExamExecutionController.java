@@ -490,7 +490,7 @@ public class StudentExamExecutionController extends StudentComputerizedExamContr
 	 * Used to stop the exam if the teacher locked it
 	 */
 	public void stopExam() throws IOException {
-		GUIControl.popUpMessageYesNo("System Message", "Exam has been locked by Teacher");
+		GUIControl.popUpMessage("System Message", "Exam has been locked by Teacher");
 			for (int i = 0; i < questions.size(); i++) {
 				QuestionInExam que = questions.get(i);
 				if (que.getChosenAnswer() != -1 && que.getChosenAnswer() == que.getCorrectAnswer()) {
@@ -528,7 +528,6 @@ public class StudentExamExecutionController extends StudentComputerizedExamContr
 			if (sent == false) {
 				guiControl.popUpMessage("System Message", "There was a problem with submission of question");
 			} else {
-				guiControl.popUpMessage("System Message", "Exam Submitted Succesfully");
 				timer.stop();
 				guiControl.loadStage(ClientsConstants.Screens.STUDENT_MAIN_PAGE.path);
 

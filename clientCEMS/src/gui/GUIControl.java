@@ -42,8 +42,6 @@ public class GUIControl {
 	public static boolean res; // Checked whether yes or no pressed.
 	UpdateThread requestThread;
 
-
-
 	private GUIControl() {
 	}
 
@@ -121,7 +119,7 @@ public class GUIControl {
 	 */
 	public void openLoginPage() {
 		try {
-	
+
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/CEMSlogin.fxml"));
 			AnchorPane root = fxmlLoader.load();
 			Scene scene = new Scene(root);
@@ -175,7 +173,7 @@ public class GUIControl {
 
 	public static void popUpMessage(String msg) {
 		popUpMessage("Message", msg);
-		}
+	}
 
 	/*
 	 * method that displays a message in an alert
@@ -193,8 +191,9 @@ public class GUIControl {
 			alert.showAndWait();
 		});
 	}
+
 	public static void popUpMessageYesNo(String title, String msg) {
-		
+
 		Alert alert = new Alert(AlertType.INFORMATION, msg, ButtonType.YES, ButtonType.NO);
 		alert.setTitle(title);
 		alert.setHeaderText("");
@@ -204,10 +203,9 @@ public class GUIControl {
 		} else {
 			res = false;
 		}
-	
-}
-	
-	
+
+	}
+
 	public MainPageController loadStage(String chosenPath) throws IOException {
 		MainPageController controller;
 		Stage primaryStage = getStage();
@@ -224,11 +222,11 @@ public class GUIControl {
 		primaryStage.show();
 		return controller;
 	}
-	
+
 	public void loadStage(AnchorPane root) throws IOException {
 
 		Stage primaryStage = getStage();
-		
+
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setOnCloseRequest(e -> {
@@ -240,20 +238,21 @@ public class GUIControl {
 	public int getRequestCount() {
 		return requestCounter;
 	}
-	
+
 	public void SetRequestCount(int requestCounter) {
 		this.requestCounter = requestCounter;
 	}
-	
+
 	public void CountRequest() {
 
-		ClientMessage msg = new ClientMessage(ClientMessageType.PRINCIPAL_CHECK_REQUESTS_COUNTING, ((PersonCEMS) getUser()).getId());
+		ClientMessage msg = new ClientMessage(ClientMessageType.PRINCIPAL_CHECK_REQUESTS_COUNTING,
+				((PersonCEMS) getUser()).getId());
 		instance.sendToServer(msg);
 		if (instance.getServerMsg().getType() == ServerMessageTypes.PRINCIPAL_DIDNT_GOT_REQUESTS_COUNTING) {
 			GUIControl.popUpError("There was a problem to check if there is new requests for principal");
 		}
 	}
-	
+
 	public UpdateThread getUpdateThread() {
 		return requestThread;
 	}
@@ -261,34 +260,42 @@ public class GUIControl {
 	public void setUpdateThread(UpdateThread requestThread) {
 		this.requestThread = requestThread;
 	}
-	
+
 	public void exeThread() {
-		if(getUser() instanceof Principal) {
-			CountRequest();
-			}
-			else if(getUser() instanceof Student) {
-				if(getController() instanceof StudentExamExecutionController)
-					try {
-						((StudentExamExecutionController)getController()).stopExam();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+
+		Platform.runLater(new Runnable() {
+
+			@Override
+			public void run() {
+				if (getUser() instanceof Principal) {
+					CountRequest();
+				} else if (getUser() instanceof Student) {
+					if (getController() instanceof StudentExamExecutionController)
+						try {
+							((StudentExamExecutionController) getController()).stopExam();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+				} else if (getUser() instanceof Teacher) {
+					if (getController() instanceof TeacherOngoingExamsController) {
+
+						try {
+							TeacherOngoingExamsController a = (TeacherOngoingExamsController) GUIControl.getInstance()
+									.loadStage(ClientsConstants.Screens.TEACHER_ONGOING_EXAMS_PAGE.path);
+							a.setOngoingExams();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
-			}
-			else if(getUser() instanceof Teacher) {
-				if(getController() instanceof TeacherOngoingExamsController) {
-					
-					
-					try {
-						TeacherOngoingExamsController a = (TeacherOngoingExamsController) GUIControl.getInstance().loadStage(ClientsConstants.Screens.TEACHER_ONGOING_EXAMS_PAGE.path);
-						a.setOngoingExams();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+
 				}
-					
+
 			}
+
+		});
+
 	}
 
 }
