@@ -73,6 +73,28 @@ public class ServerCEMS extends AbstractServer {
 
 	// Instance methods ****************
 
+	
+	
+	
+	
+	private void removeStudentFromTest(Exam exam, ConnectionToClient client) throws IOException {
+		Iterator<currentExam> it=currentExams.iterator();
+		currentExam ce=null;
+		while(it.hasNext())
+			ce=it.next();
+			if(ce.getEid().equals(exam.getEid())) {
+				ce.getConToClientStudent().remove(client);
+				
+				if(ce.allStudentAreFinished()) {
+					currentExams.remove(ce);
+					ce.getTeacher().sendToClient(new ServerMessage(ServerMessageTypes.TEACHER_REFRSH_ONGOING_EXAM_PAGE, ce.getEid()));
+				}
+					
+			}
+	}
+	
+	
+	
 	/**
 	 * This method handles any messages received from the client.
 	 *
@@ -344,13 +366,17 @@ public class ServerCEMS extends AbstractServer {
 					}
 					break;
 				case UPLOAD_MANUAL_EXAM:
+					Object[] t= (Object[]) clientMsg.getMessage();
+					removeStudentFromTest((Exam) t[3],client);
 					returnVal = MySQLConnection.uploadManualExam((Object[]) clientMsg.getMessage());
 					if ((boolean) returnVal == true) {
 						type = ServerMessageTypes.EXAM_UPLOADED_SUCCECFULLY;
+						
 					} else {
 						type = ServerMessageTypes.EXAM_UPLOADING_FAILED;
 
 					}
+					
 					break;
 				case UPLOAD_TEACHER_MANUAL_EXAM:
 					type = ServerMessageTypes.TEACHER_EXAM_UPLOADED_SUCCECFULLY;
@@ -395,21 +421,13 @@ public class ServerCEMS extends AbstractServer {
 					break;
 				case INSERT_EXAM_TO_DB:
 					returnVal = MySQLConnection.insertExamToDB((SolvedExam) clientMsg.getMessage());
+					removeStudentFromTest((Exam) clientMsg.getMessage(), client);
 					if (returnVal == null) {
 						type = ServerMessageTypes.GET_EXAM_QUESTIONS_FAILED;
 						
 					} else {
 						type = ServerMessageTypes.GET_EXAM_QUESTIONS_SUCCEDED;
-						for(currentExam ce : currentExams)
-							if(ce.getEid()==((SolvedExam) clientMsg.getMessage()).getEid()) {
-								ce.getConToClientStudent().remove(client);
-								
-								if(ce.allStudentAreFinished()) {
-									currentExams.remove(ce);
-									ce.getTeacher().sendToClient(new ServerMessage(ServerMessageTypes.TEACHER_REFRSH_ONGOING_EXAM_PAGE, ce.getEid()));
-								}
-									
-							}
+						
 					}
 
 					break;

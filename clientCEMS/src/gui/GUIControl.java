@@ -292,6 +292,9 @@ public class GUIControl {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
+					else if(getController() instanceof StudentManualExamController) {
+						((StudentManualExamController) getController()).stopExam();
+					}
 				} else if (getUser() instanceof Teacher) {
 					if (getController() instanceof TeacherOngoingExamsController) {
 
