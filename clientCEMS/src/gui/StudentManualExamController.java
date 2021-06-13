@@ -276,9 +276,17 @@ public class StudentManualExamController extends StudentMainPageController imple
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				String toPrintEveryTime = null;
+				String toPrint=null;
 				if (addition != 0) {
 					guiControl.popUpMessage("System Message", addition + " Minutes have been added!");
-					Minutes += addition;
+					minutes += addition;
+					if (minutes >= 100) {
+						 toPrint = String.format("Total Time is:\n %03d:%02d%n", minutes, seconds);
+					} else {
+						 toPrint = String.format("Total Time is:\n %02d:%02d%n", minutes, seconds);
+						
+					}
+					TimeOfExam2.setText(toPrint);
 					addition = 0;
 				}
 				if (minutes >= 100) {
@@ -302,8 +310,8 @@ public class StudentManualExamController extends StudentMainPageController imple
 						public void run() {
 							try {
 								timer.stop();
-								stopExam();
-								// guiControl.loadStage(ClientsConstants.Screens.STUDENT_MAIN_PAGE.path);
+								//stopExam();
+								guiControl.loadStage(ClientsConstants.Screens.STUDENT_MAIN_PAGE.path);
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
