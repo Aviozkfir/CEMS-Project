@@ -27,7 +27,6 @@ import message.ServerMessageTypes;
 
 public class LoginPageController {
 	GUIControl guiControl = GUIControl.getInstance();
-//	ThreadUpdate thread = new ThreadUpdate();
 	@FXML
 	private PasswordField PasswordFieldText;
 

@@ -1,18 +1,10 @@
 package gui;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import entity.PersonCEMS;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
-import message.ClientMessage;
-import message.ClientMessageType;
-import message.ServerMessageTypes;
 
 /*
  * This class is the Main Controller for principal, all other controllers extends him.
