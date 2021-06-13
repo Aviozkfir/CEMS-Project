@@ -2,6 +2,7 @@ package gui;
 
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -73,6 +74,7 @@ public class TeacherCreateManualExamController extends TeacherMainPageController
     
 	private Course course;
 
+	private byte[] f;
    
 
     @FXML
@@ -146,7 +148,7 @@ public class TeacherCreateManualExamController extends TeacherMainPageController
     		GUIControl.popUpMessage("Error", "Must select a file.");
     		return;
     	}
-    	Object[] toSend = { exam, fileToUpload};
+    	Object[] toSend = { exam, f};
 		ClientMessage FileMessage = new ClientMessage(ClientMessageType.UPLOAD_TEACHER_MANUAL_EXAM, toSend);
 		guiControl.sendToServer(FileMessage);
 		
@@ -165,7 +167,7 @@ public class TeacherCreateManualExamController extends TeacherMainPageController
 		if (fileToUpload != null) {
 			fileUploaded = true;
 			filePath.setText("Selected File::" + fileToUpload.getAbsolutePath());
-
+			f= readFileToByteArray(fileToUpload);
 		}
     }
 
@@ -185,5 +187,21 @@ public class TeacherCreateManualExamController extends TeacherMainPageController
 		lstFile.add("*.DOC");
 		lstFile.add("*.DOCX");
 	}
+	
+	
+	 private static byte[] readFileToByteArray(File file){
+		    FileInputStream fis = null;
+		    // Creating a byte array using the length of the file
+		    // file.length returns long which is cast to int
+		    byte[] bArray = new byte[(int) file.length()];
+		    try{
+		      fis = new FileInputStream(file);
+		      fis.read(bArray);
+		      fis.close();                   
+		    }catch(IOException ioExp){
+		      ioExp.printStackTrace();
+		    }
+		    return bArray;
+		  }
 
 }

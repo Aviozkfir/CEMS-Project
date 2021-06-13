@@ -1,5 +1,6 @@
 package mySQL;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -42,15 +43,14 @@ public class MySQLConnection {
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 		System.out.println("Driver definition succeed");
-		con = DriverManager.getConnection(
-				"jdbc:mysql://remotemysql.com:3306/yguCgBTIbt?autoReconnect=true&serverTimezone=IST", "yguCgBTIbt",
-				"y7ubDV7FNy");
+		con = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/yguCgBTIbt?autoReconnect=true&serverTimezone=IST",
+				"yguCgBTIbt", "y7ubDV7FNy");
 		System.out.println("SQL connection succeed");
 	}
 
 	/**
-	 * A method that returns an entity(Student or Teacher or Principal). 
-	 * The method validates the person is in database.
+	 * A method that returns an entity(Student or Teacher or Principal) . Insert to DataBase if there is not.
+	 * 
 	 * @param idAndPassword
 	 * @return entity or null
 	 * @throws SQLException
@@ -84,14 +84,17 @@ public class MySQLConnection {
 		return null;
 	}
 
-	public static int numOfStudentsInCourse(String Cid) throws SQLException {
-		PreparedStatement exams = con.prepareStatement("SELECT COUNT(ID) FROM Person_Enrolled_Course WHERE Cid=?");
-		exams.setString(1, Cid);
 
+	public static int numOfStudentsInCourse(String Cid) throws SQLException {
+		PreparedStatement exams = con.prepareStatement(
+				"SELECT COUNT(ID) FROM Person_Enrolled_Course WHERE Cid=?");
+		exams.setString(1, Cid);
+		
 		ResultSet rs = exams.executeQuery();
 		rs.next();
 		return rs.getInt(1);
 	}
+	
 
 	public static Object getTeacherSubjects(String teacherID) throws SQLException {
 		ArrayList<Subject> subjectList = new ArrayList<Subject>();
@@ -121,12 +124,6 @@ public class MySQLConnection {
 		return courseList;
 	}
 
-	/**
-	 * This method get all subject list from DB and return it to the principal.
-	 * @param principalID the id of the principal.
-	 * @return ArrayList<Subject> List of all subjects.
-	 * @throws SQLException
-	 */
 	public static Object getPrincipalSubjects(String principalID) throws SQLException {
 		ArrayList<Subject> subjectList = new ArrayList<Subject>();
 		ResultSet rs;
@@ -139,12 +136,6 @@ public class MySQLConnection {
 		return subjectList;
 	}
 
-	/**
-	 * This method get all course list from DB and return it to the principal.
-	 * @param principalID the id of the principal.
-	 * @return ArrayList<Course> List of all courses.
-	 * @throws SQLException
-	 */
 	public static Object getPrincipalCourses(String principalID) throws SQLException {
 		ArrayList<Course> courseList = new ArrayList<Course>();
 		ResultSet rs;
@@ -185,7 +176,7 @@ public class MySQLConnection {
 	}
 
 	public static Object getPrincipalReportCourses(String[] data) throws SQLException, ParseException {
-		ArrayList<String> report = new ArrayList<String>();
+		ArrayList<String> report=new ArrayList<String>();
 		ResultSet rs;
 		PreparedStatement logInPreparedStatement;
 		Date dateInput = new SimpleDateFormat("yyyy-MM-dd").parse(data[1]);
@@ -198,14 +189,14 @@ public class MySQLConnection {
 		rs = logInPreparedStatement.executeQuery();
 
 		while (rs.next()) {
-			report.add(rs.getString(1));
+            report.add(rs.getString(1));
 		}
 		return report;
 
 	}
 
 	public static Object getPrincipalReportStudents(String[] data) throws SQLException, ParseException {
-		ArrayList<String> report = new ArrayList<String>();
+		ArrayList<String> report=new ArrayList<String>();
 		ResultSet rs;
 		PreparedStatement logInPreparedStatement;
 		Date dateInput = new SimpleDateFormat("yyyy-MM-dd").parse(data[1]);
@@ -226,7 +217,7 @@ public class MySQLConnection {
 	}
 
 	public static Object getPrincipalReportTeachers(String[] data) throws SQLException, ParseException {
-		ArrayList<String> report = new ArrayList<String>();
+		ArrayList<String> report=new ArrayList<String>();
 		ResultSet rs;
 		PreparedStatement logInPreparedStatement;
 		Date dateInput = new SimpleDateFormat("yyyy-MM-dd").parse(data[1]);
@@ -239,7 +230,7 @@ public class MySQLConnection {
 		rs = logInPreparedStatement.executeQuery();
 
 		while (rs.next()) {
-
+			
 			report.add(rs.getString(1));
 
 		}
@@ -248,11 +239,10 @@ public class MySQLConnection {
 	}
 
 	/**
+	 * @param examCode
+	 * @return boolean
+	 * @throws SQLException
 	 * checks whether the exam code is correct
-	 * returns whether the calidation was succesful or not.
-	 * @param String examCode
-	 * @return boolean 
-	 * @throws SQLException 
 	 */
 	public static boolean validateExamCode(String examCode) throws SQLException {
 		ResultSet rs;
@@ -269,11 +259,10 @@ public class MySQLConnection {
 	}
 
 	/**
-	 * Gets exam details from DB
-	 * Returns Exam entity with details of the exam
 	 * @param examCode
 	 * @return exam
-	 * @throws SQLException 
+	 * @throws SQLException
+	 * Returns Exam entity with details of the exam
 	 */
 	public static Object getExamInformation(String examCode) throws SQLException {
 		Exam exam = null;
@@ -284,39 +273,31 @@ public class MySQLConnection {
 		rs = logInPreparedStatement.executeQuery();
 		if (rs.next()) {
 			exam = new Exam(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-					rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10),
-					rs.getString(11));
+					rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10),rs.getString(11));
 		}
 		return exam;
 	}
-
+	
 	public static ArrayList<SolvedExamType> getTeacherSolvedExamByCourse(Course course) throws SQLException {
 		ArrayList<SolvedExamType> exams = new ArrayList<SolvedExamType>();
-
+		
 		ResultSet rs1;
 		PreparedStatement logInPreparedStatement1;
-		logInPreparedStatement1 = con
-				.prepareStatement("SELECT seq.Eid, seq.DATE, e.Name, seq.checkedAmount, seq.sumAmount FROM Exams e, "
-						+ "										(SELECT se.Eid, se.DATE, sum(case when Checked = 'Yes' then 1 else 0 end) as checkedAmount, "
-						+ "										COUNT(*) as sumAmount FROM SolvedExams se GROUP BY se.Eid, se.DATE ) AS seq WHERE"
-						+ "										 seq.Eid=e.Eid AND e.Cid=?");
+		logInPreparedStatement1 = con.prepareStatement("SELECT seq.Eid, seq.DATE, e.Name, seq.checkedAmount, seq.sumAmount FROM Exams e, "
+				+ "										(SELECT se.Eid, se.DATE, sum(case when Checked = 'Yes' then 1 else 0 end) as checkedAmount, "
+				+ "										COUNT(*) as sumAmount FROM SolvedExams se GROUP BY se.Eid, se.DATE ) AS seq WHERE"
+				+ "										 seq.Eid=e.Eid AND e.Cid=?");
 		logInPreparedStatement1.setString(1, course.getId());
 		rs1 = logInPreparedStatement1.executeQuery();
 		while (rs1.next()) {
-			exams.add(new SolvedExamType(rs1.getString(1), rs1.getDate(2).toString(), rs1.getString(3), rs1.getInt(4),
-					rs1.getInt(5)));
+			exams.add( new SolvedExamType(rs1.getString(1) ,rs1.getDate(2).toString(), rs1.getString(3), rs1.getInt(4),rs1.getInt(5)) );
 		}
-
+		
+		
+		
 		return exams;
 	}
-
-	/**
-	 * This method get from DB a list of questions by exam id.
-	 * 
-	 * @param course The course that holds the exam.
-	 * @return ArrayList<Exam> list of exams by course.
-	 * @throws SQLException
-	 */
+	
 	public static ArrayList<Exam> getTeacherExamByCourse(Course course) throws SQLException {
 		ArrayList<Exam> exams = new ArrayList<Exam>();
 		ResultSet rs;
@@ -325,16 +306,15 @@ public class MySQLConnection {
 		logInPreparedStatement.setString(1, course.getId());
 		rs = logInPreparedStatement.executeQuery();
 		while (rs.next()) {
-			exams.add((new Exam(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-					rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10),
-					rs.getString(11))));
-
+			exams.add(( new Exam(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+					rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10),rs.getString(11))));
+			
 		}
 		return exams;
 	}
-
+	
 	public static ArrayList<Question> setTeacherExamQuesstions(Exam exam) throws SQLException {
-
+		
 		ArrayList<Question> questionList = new ArrayList<Question>();
 		ResultSet rs;
 		PreparedStatement logInPreparedStatement;
@@ -347,9 +327,13 @@ public class MySQLConnection {
 			questionList.add(new Question(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
 					rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9)));
 		}
-
+		
+		
 		return questionList;
 	}
+
+	
+	
 
 //
 //	public static Object checkForDuplicateQuestion(Question q, ArrayList<Course> course) throws SQLException {
@@ -378,14 +362,7 @@ public class MySQLConnection {
 //		}
 //		return questionList;
 //	}
-
-	/**
-	 * This method get from DB a list of questions by course id.
-	 * 
-	 * @param course The course that holds the question.
-	 * @return ArrayList<Question> list of questions by course.
-	 * @throws SQLException
-	 */
+	
 	public static Object getQuestionByCourse(Course course) throws SQLException {
 		ArrayList<Question> questionList = new ArrayList<Question>();
 		ResultSet rs;
@@ -401,42 +378,47 @@ public class MySQLConnection {
 		}
 		return questionList;
 	}
-
+	
+	
 	public static void deletedQuestion(Question q) throws SQLException {
-
-		PreparedStatement delQ = con.prepareStatement("DELETE FROM Questions WHERE Qid=?");
+		
+		
+		PreparedStatement delQ =con.prepareStatement("DELETE FROM Questions WHERE Qid=?");
 		delQ.setString(1, q.getId());
 		delQ.executeUpdate();
-
+		
+		
+		
 		PreparedStatement delQC;
 		delQC = con.prepareStatement("DELETE FROM Question_In_Course WHERE Qid=?");
 		delQC.setString(1, q.getId());
 		delQC.executeUpdate();
-
+		
 	}
-
+	
 	public static void addQuestionByCourses(Question q, ArrayList<Course> course) throws SQLException, ParseException {
-
+		
 		ResultSet maxID;
-		PreparedStatement getMaxID = con.prepareStatement("SELECT MAX(q.Qid) FROM Questions q where q.Sid=?");
+		PreparedStatement getMaxID =con.prepareStatement("SELECT MAX(q.Qid) FROM Questions q where q.Sid=?");
 		System.out.print(course.size());
 		getMaxID.setString(1, course.get(0).getSubject().getId());
-		maxID = getMaxID.executeQuery();
+		maxID=getMaxID.executeQuery();
 		maxID.next();
 		String id;
-
-		if (null != maxID.getNString(1)) {
-
-			System.out.print("in worng plase !");
-
-			id = ("" + (1 + Integer.parseInt(maxID.getNString(1))));
-			if (id.length() == 4) {
-				id = "0" + id;
+		
+		if(null!=maxID.getNString(1)) {
+			
+				System.out.print("in worng plase !");
+			
+			id=(""+(1+Integer.parseInt(maxID.getNString(1))));
+			if(id.length()==4) {
+				id="0"+id;
 			}
 			q.setId(id);
-		} else {
+		}
+		else { 
 			System.out.print("in !");
-			q.setId(course.get(0).getSubject().getId() + "001");
+			q.setId(course.get(0).getSubject().getId()+"001");
 		}
 		PreparedStatement addQuestion;
 		addQuestion = con
@@ -450,47 +432,51 @@ public class MySQLConnection {
 		addQuestion.setString(6, q.getAnsD());
 		addQuestion.setInt(7, q.getCorrectAnswer());
 		addQuestion.setString(8, q.getAuthor());
-
+		
 		Date dateInput = new SimpleDateFormat("yyyy-MM-dd").parse(q.getModified());
 		java.sql.Date dateInputData = new java.sql.Date(dateInput.getTime());
 		addQuestion.setDate(9, dateInputData);
 		addQuestion.setString(10, q.getSubject());
 		addQuestion.executeUpdate();
 		System.out.print("slnfa;lsj;gnalj");
-		for (Course c : course) {
-			PreparedStatement addToCourse = con
-					.prepareStatement("INSERT INTO Question_In_Course (Qid,Cid) " + "VALUES (?, ?)");
-
+		for(Course c : course) {
+			PreparedStatement addToCourse =con
+					.prepareStatement("INSERT INTO Question_In_Course (Qid,Cid) "
+							+ "VALUES (?, ?)");
+			
 			addToCourse.setString(1, q.getId());
 			addToCourse.setString(2, c.getId());
 			addToCourse.executeUpdate();
 		}
 	}
-
+	
 	public static String addExam(Exam e, ArrayList<QuestionInExam> list) throws SQLException, ParseException {
-
+		
 		ResultSet maxID;
-		PreparedStatement getMaxID = con.prepareStatement("SELECT MAX(e.Eid) FROM Exams e where e.Sid=? AND e.Cid=?");
+		PreparedStatement getMaxID =con.prepareStatement("SELECT MAX(e.Eid) FROM Exams e where e.Sid=? AND e.Cid=?");
 		getMaxID.setString(1, e.getSid());
 		getMaxID.setString(2, e.getCid());
-		maxID = getMaxID.executeQuery();
+		maxID=getMaxID.executeQuery();
 		String id;
 		maxID.next();
-		if (maxID.getNString(1) != null) {
-			id = ("" + (1 + Integer.parseInt(maxID.getNString(1))));
-			if (id.length() == 5) {
-				id = "0" + id;
+		if(maxID.getNString(1)!=null) {
+			id=(""+(1+Integer.parseInt(maxID.getNString(1))));
+			if(id.length()==5) {
+				id="0"+id;
 			}
-
-		} else {
-
-			id = e.getSid() + e.getCid() + "01";
+			
+		}
+		else {
+			
+				
+			
+			id=e.getSid()+e.getCid()+"01";
 		}
 		e.setEid(id);
 		System.out.print(e.getID());
 		PreparedStatement addExam;
-		addExam = con.prepareStatement(
-				"INSERT INTO Exams (Eid, Sid, Cid, Name, Date, Tdescription, Sdescription, ID, TotalTime, Code, Mode)"
+		addExam = con
+				.prepareStatement("INSERT INTO Exams (Eid, Sid, Cid, Name, Date, Tdescription, Sdescription, ID, TotalTime, Code, Mode)"
 						+ "VALUES (?, ? ,? ,? ,? ,? ,? ,? ,? ,?, ? )");
 		addExam.setString(1, e.getEid());
 		addExam.setString(2, e.getSid());
@@ -501,49 +487,50 @@ public class MySQLConnection {
 		addExam.setDate(5, dateInputData);
 		addExam.setString(6, e.getTdescription());
 		addExam.setString(7, e.getSdescription());
-
+		
 		addExam.setString(8, e.getID());
 		addExam.setString(9, e.getTotalTime());
 		addExam.setString(10, e.getCode());
 		addExam.setString(11, "Computerized");
 		addExam.executeUpdate();
-
-		for (QuestionInExam q : list) {
-			PreparedStatement addToCourse = con.prepareStatement(
-					"INSERT INTO Question_In_Exams (Eid,Qid,Qpoint,QuestionNum) " + "VALUES (?, ?,?,?)");
-
+		
+		for(QuestionInExam q : list) {
+			PreparedStatement addToCourse =con
+					.prepareStatement("INSERT INTO Question_In_Exams (Eid,Qid,Qpoint,QuestionNum) "
+							+ "VALUES (?, ?,?,?)");
+			
 			addToCourse.setString(1, e.getEid());
 			addToCourse.setString(2, q.getId());
-			addToCourse.setString(3, "" + q.getPointsQuestion());
-			addToCourse.setString(4, "" + q.getNumOfQuestion());
+			addToCourse.setString(3, ""+q.getPointsQuestion());
+			addToCourse.setString(4, ""+q.getNumOfQuestion());
 			addToCourse.executeUpdate();
 		}
 		return id;
 	}
-
-	public static String addManualExam(Exam e, File ExamFile)
-			throws SQLException, ParseException, FileNotFoundException {
-
+	
+	public static String addManualExam(Exam e, byte[] ExamFile) throws SQLException, ParseException, FileNotFoundException {
+		
 		ResultSet maxID;
-		PreparedStatement getMaxID = con.prepareStatement("SELECT MAX(e.Eid) FROM Exams e where e.Sid=? AND e.Cid=?");
+		PreparedStatement getMaxID =con.prepareStatement("SELECT MAX(e.Eid) FROM Exams e where e.Sid=? AND e.Cid=?");
 		getMaxID.setString(1, e.getSid());
 		getMaxID.setString(2, e.getCid());
-		maxID = getMaxID.executeQuery();
+		maxID=getMaxID.executeQuery();
 		String id;
-
-		if (maxID.next()) {
-			id = ("" + (1 + Integer.parseInt(maxID.getNString(1))));
-			if (id.length() == 5) {
-				id = "0" + id;
+		
+		if(maxID.next()) {
+			id=(""+(1+Integer.parseInt(maxID.getNString(1))));
+			if(id.length()==5) {
+				id="0"+id;
 			}
-
-		} else
-			id = e.getSid() + e.getCid() + "01";
+			
+		}
+		else 
+			id=e.getSid()+e.getCid()+"01";
 		e.setEid(id);
-
+		
 		PreparedStatement addExam;
-		addExam = con.prepareStatement(
-				"INSERT INTO Exams (Eid, Sid, Cid, Name, Date, Tdescription, Sdescription, ID, TotalTime, Code, Mode)"
+		addExam = con
+				.prepareStatement("INSERT INTO Exams (Eid, Sid, Cid, Name, Date, Tdescription, Sdescription, ID, TotalTime, Code, Mode)"
 						+ "VALUES (?, ? ,? ,? ,? ,? ,? ,? ,? ,?, ? )");
 		addExam.setString(1, e.getEid());
 		addExam.setString(2, e.getSid());
@@ -554,121 +541,91 @@ public class MySQLConnection {
 		addExam.setDate(5, dateInputData);
 		addExam.setString(6, e.getTdescription());
 		addExam.setString(7, e.getSdescription());
-
+		
 		addExam.setString(8, e.getID());
 		addExam.setString(9, e.getTotalTime());
 		addExam.setString(10, e.getCode());
 		addExam.setString(11, "Manual");
 		addExam.executeUpdate();
-
+		
 		PreparedStatement addMExam;
-		addMExam = con.prepareStatement("INSERT INTO Teacher_Manual_Exams (Eid, ExamFile, ID)" + "VALUES (?, ? ,?)");
+		addMExam = con
+				.prepareStatement("INSERT INTO Teacher_Manual_Exams (Eid, ExamFile, ID)"
+						+ "VALUES (?, ? ,?)");
 		addMExam.setString(1, e.getEid());
-
-		InputStream inputstream = new FileInputStream(ExamFile);
+		
+		InputStream inputstream = new ByteArrayInputStream(ExamFile);
+		
 		addMExam.setBlob(2, inputstream);
 		addMExam.setString(3, e.getID());
 		return id;
 	}
 
-	/**
-	 * This method get request list from DB for the principal.
-	 * 
-	 * @return ArrayList<Request> list of requests.
-	 * @throws SQLException
-	 */
 	public static Object getPrincipalRequests() throws SQLException {
 		ArrayList<Request> requestList = new ArrayList<Request>();
 		ResultSet rs;
 		PreparedStatement statment;
-		statment = con.prepareStatement(
-				"SELECT r.Enum, r.title, r.currentDuration, r.newDuration, r.Tid  FROM Requests r WHERE r.Status = 'StandBy'");
+		statment = con
+				.prepareStatement("SELECT r.Enum, r.title, r.currentDuration, r.newDuration, r.Tid  FROM Requests r WHERE r.Status = 'StandBy'");
 		rs = statment.executeQuery();
 		while (rs.next()) {
 			requestList.add(
 					new Request(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
 		}
-
+		
 		return requestList;
 	}
 
-	/**
-	 * This method update the status of the approved requests from StandBy to
-	 * Approved.
-	 * 
-	 * @param RequestList The list of the requests that approved by principal.
-	 * @return string "Succeed".
-	 * @throws SQLException
-	 */
 	public static Object updatePrincipalApprovedRequests(ArrayList<String> RequestList) throws SQLException {
 		PreparedStatement statment;
 		for (String request : RequestList) {
-			statment = con.prepareStatement("UPDATE `Requests` SET `Status` = 'Approved' WHERE `Requests`.`Enum` = ?");
+			statment = con
+					.prepareStatement("UPDATE `Requests` SET `Status` = 'Approved' WHERE `Requests`.`Enum` = ?");
 			statment.setString(1, request);
 			statment.executeUpdate();
 		}
-		return "Succeed";
+		return "Succeded";
 	}
-
-	/**
-	 * This method update the status of the declined requests from StandBy to
-	 * Declined.
-	 * 
-	 * @param RequestList The list of the requests that declined by principal.
-	 * @return string "Succeed".
-	 * @throws SQLException
-	 */
+	
 	public static Object updatePrincipalDeclinedRequests(ArrayList<String> RequestList) throws SQLException {
 		PreparedStatement statment;
 		for (String request : RequestList) {
-			statment = con.prepareStatement("UPDATE `Requests` SET `Status` = 'Declined' WHERE `Requests`.`Enum` = ?");
+			statment = con
+					.prepareStatement("UPDATE `Requests` SET `Status` = 'Declined' WHERE `Requests`.`Enum` = ?");
 			statment.setString(1, request);
 			statment.executeUpdate();
 		}
-		return "Succeed";
+		return "Succeded";
 	}
-
-	/**
-	 * This method counting the new requests from the DB for the principal and
-	 * return the counting number.
-	 * 
-	 * @return int Counter.
-	 * @throws SQLException
-	 */
+	
 	public static Object getRequestCount() throws SQLException {
 		int Counter = 0;
 		ResultSet rs;
 		PreparedStatement statment;
-		statment = con.prepareStatement(
-				"SELECT COUNT(*) FROM Requests r WHERE r.Status = 'StandBy' AND r.Status2 = 'Waiting'");
+		statment = con.prepareStatement("SELECT COUNT(*) FROM Requests r WHERE r.Status = 'StandBy' AND r.Status2 = 'Waiting'");
 		rs = statment.executeQuery();
 		rs.next();
-		Counter = rs.getInt(1);
+			 Counter = rs.getInt(1);
 		return Counter;
 	}
-
-	/**
-	 * This method update the status2 of requests in DB from Waiting to Working.
-	 * 
-	 * @param RequestList - List of all requests.
-	 * @return string "Succeed".
-	 * @throws SQLException
-	 */
+	
 	public static Object updatePrincipalRequestStatus(ArrayList<String> RequestList) throws SQLException {
 		PreparedStatement statment;
 		for (String request : RequestList) {
-			statment = con.prepareStatement("UPDATE `Requests` SET `Status2` = 'Working' WHERE `Requests`.`Enum` = ?");
+			statment = con
+					.prepareStatement("UPDATE `Requests` SET `Status2` = 'Working' WHERE `Requests`.`Enum` = ?");
 			statment.setString(1, request);
 			statment.executeUpdate();
 		}
-		return "Succeed";
+		return "Succeded";
 	}
+	
 
 	/**
-	 * checks whether the ID of student is in DataBase returns true if yes and false if no
 	 * @param StudentId
-	 * @return boolean 
-	 * @throws SQLException 
+	 * @return boolean
+	 * @throws SQLException
+	 * checks whether the ID of student is in DataBase
 	 */
 	public static boolean validateStudentID(String StudentId) throws SQLException {
 		ResultSet rs;
@@ -685,12 +642,11 @@ public class MySQLConnection {
 	}
 
 	/**
-	 * Gets the exam file and uploads it to DataBase
-	 * returns if uploading manual exam was succesful or not
 	 * @param Object[] details
-	 * @return boolean 
+	 * @return boolean
 	 * @throws SQLException
-	 * @throws FileNotFoundException 
+	 * @throws FileNotFoundException
+	 * Gets the exam file and uploads it to DataBase
 	 */
 	public static boolean uploadManualExam(Object[] details) throws SQLException, FileNotFoundException {
 		String Eid = (String) details[0];
@@ -717,13 +673,11 @@ public class MySQLConnection {
 	}
 
 	/**
-	 * Gets the manual exam uploaded by teacher given the exam
-	 *ID 
-	 *returns a class that holds byte array of file
 	 * @param ExamID
-	 * @return ManualExamFile 
+	 * @return ManualExamFile
 	 * @throws SQLException
-	 * @throws IOException  
+	 * @throws IOException
+	 * Gets the manual exam uploaded by teacher given the exam ID
 	 */
 	public static Object downloadManualExam(String ExamID) throws SQLException, IOException {
 		ResultSet rs;
@@ -743,22 +697,23 @@ public class MySQLConnection {
 	}
 
 	public static boolean teacherValidExamCode(String ExamCode) throws SQLException {
-		PreparedStatement exams = con.prepareStatement("SELECT Eid FROM Exams WHERE Code=?");
+		PreparedStatement exams = con.prepareStatement(
+				"SELECT Eid FROM Exams WHERE Code=?");
 		exams.setString(1, ExamCode);
 		ResultSet rs = exams.executeQuery();
-
-		if (rs.next())
+		
+		if(rs.next())
 			return false;
 		return true;
 
 	}
-
+	
+	
 	/**
+	 * @param ExamID
+	 * @return ArrayList<QuestionInExam>
+	 * @throws SQLException
 	 * returns all the question of exam given the ExamID
-	 * returns an array of questions
-	 * @param  String ExamID
-	 * @return ArrayList<QuestionInExam> 
-	 * @throws SQLException 
 	 */
 	public static Object returnExamQuestions(String ExamID) throws SQLException {
 		boolean has = false;
@@ -783,12 +738,10 @@ public class MySQLConnection {
 	}
 
 	/**
-	 * Inserts all questions of solved exam by student to
-	 * DataBase
-	 * returns whether insert was succescful or not.
-	 * @param Object[] data
-	 * @return boolean 
-	 * @throws SQLException 
+	 * @param data
+	 * @return
+	 * @throws SQLException
+	 * Inserts all questions of solved exam by student to DataBase
 	 */
 	public static boolean insertExamQuestions(Object[] data) throws SQLException {
 		int rslt = -1;
@@ -818,11 +771,12 @@ public class MySQLConnection {
 		return success;
 	}
 
+
 	/**
+	 * @param studentID
+	 * @return ArrayList<Subject>
+	 * @throws SQLException
 	 * returns all subjects list of student given studentID
-	 * @param String studentID
-	 * @return ArrayList<Subject> 
-	 * @throws SQLException 
 	 */
 	public static Object getStudentSubjects(String studentID) throws SQLException {
 		ArrayList<Subject> subjectList = new ArrayList<Subject>();
@@ -837,12 +791,12 @@ public class MySQLConnection {
 		}
 		return subjectList;
 	}
-
+	
 	/**
+	 * @param studentID
+	 * @return ArrayList<Course>
+	 * @throws SQLException
 	 * Returns all student courses given studentID
-	 * @param String studentID
-	 * @return Object 
-	 * @throws SQLException 
 	 */
 	public static Object getStudentCourses(String studentID) throws SQLException {
 		ArrayList<Course> courseList = new ArrayList<Course>();
@@ -857,15 +811,7 @@ public class MySQLConnection {
 		}
 		return courseList;
 	}
-
-	/**
-	 * This method get a list of question by exam id from the DB and returns it to
-	 * the client.
-	 * returns list of questions by exam id.
-	 * @param Exam
-	 * @return ArrayList<Question> 
-	 * @throws SQLException
-	 */
+	
 	public static Object getQuestionByExam(Exam exam) throws SQLException {
 		ArrayList<Question> questionList = new ArrayList<Question>();
 		ResultSet rs;
@@ -881,47 +827,46 @@ public class MySQLConnection {
 		}
 		return questionList;
 	}
-
 	public static Object getTeacherExamList(String teacherID) throws SQLException {
 		ArrayList<TeachersExam> examsList = new ArrayList<TeachersExam>();
 		ResultSet rs;
 		PreparedStatement logInPreparedStatement;
-		logInPreparedStatement = con.prepareStatement("SELECT s.Eid, s.Name,s.date FROM Exams s  WHERE s.ID = ?");
+		logInPreparedStatement = con.prepareStatement(
+				"SELECT s.Eid, s.Name,s.date FROM Exams s  WHERE s.ID = ?");
 		logInPreparedStatement.setString(1, teacherID);
 		rs = logInPreparedStatement.executeQuery();
 		while (rs.next()) {
-			examsList.add(new TeachersExam(rs.getString(1), rs.getString(2), rs.getString(3)));
+			examsList.add(new TeachersExam(rs.getString(1),rs.getString(2),rs.getString(3)));
 		}
 		return examsList;
 	}
-
+	
 	public static Object getTeacherSolvedExamReport(String[] data) throws SQLException, ParseException {
-		ArrayList<String> report = new ArrayList<String>();
+		ArrayList<String> report=new ArrayList<String>();
 		ResultSet rs;
 		PreparedStatement logInPreparedStatement;
 		Date dateInput = new SimpleDateFormat("yyyy-MM-dd").parse(data[1]);
 		java.sql.Date dateInputData = new java.sql.Date(dateInput.getTime());
 
-		logInPreparedStatement = con.prepareStatement("SELECT e.Grade FROM SolvedExams e WHERE e.Eid=? AND e.Date >=?");
+		logInPreparedStatement = con.prepareStatement(
+				"SELECT e.Grade FROM SolvedExams e WHERE e.Eid=? AND e.Date >=?");
 		logInPreparedStatement.setString(1, data[0]);
 		logInPreparedStatement.setDate(2, dateInputData);
 		rs = logInPreparedStatement.executeQuery();
 
 		while (rs.next()) {
-
+			
 			report.add(rs.getString(1));
 
 		}
 		return report;
 
 	}
-
 	/**
-	 * Returns all question of exam given SEid which is a
-	 * certain submission
-	 * @param  String SEid
-	 * @return ArrayList<SolvedQuestionToView> 
-	 * @throws SQLException 
+	 * @param SEid
+	 * @return ArrayList<SolvedQuestionToView>
+	 * @throws SQLException
+	 * Returns all question of exam given SEid which is a certain submission
 	 */
 	public static Object getQuestionsForExamSEid(String SEid) throws SQLException {
 		ArrayList<SolvedQuestionToView> questions = new ArrayList<SolvedQuestionToView>();
@@ -938,13 +883,44 @@ public class MySQLConnection {
 		rs.close();
 		return questions;
 	}
-
+	public static Object teacherGetExamsResults(String Eid, String sdate) throws SQLException, ParseException {
+		ArrayList<String[]> list = new ArrayList<>();
+		ResultSet rs;
+		PreparedStatement logInPreparedStatement;
+		logInPreparedStatement = con.prepareStatement(
+				"(SELECT s.ID, SUM(case when q.CorrectAns=aqe.Ans then 1 else 0 end) as grade, 'yes' FROM SolvedExams s, AnsweredQuestionsForExams aqe, Questions q\n"
+				+ "WHERE s.Eid=? AND s.DATE=? AND s.SEid=aqe.SEid AND q.Qid=aqe.Qid GROUP BY s.ID HAVING s.ID IN (SELECT s1.ID FROM SolvedExams s1, SolvedExams s2, AnsweredQuestionsForExams aqe1, AnsweredQuestionsForExams aqe2 WHERE s1.Eid=s2.Eid AND s1.DATE=s2.DATE AND s1.Eid=? AND s1.DATE=? AND aqe1.SEid=s1.SEid AND aqe2.SEid=s2.SEid AND aqe2.Qid=aqe1.Qid AND s1.ID!=s2.ID GROUP BY s1.ID, s2.ID HAVING SUM(case when aqe2.Ans!=aqe1.Ans OR aqe2.Ans=-1 then 1 else 0 end)=0))\n"
+				+ "UNION\n"
+				+ "(SELECT s.ID, SUM(case when q.CorrectAns=aqe.Ans then 1 else 0 end) as grade, 'NO' FROM SolvedExams s, AnsweredQuestionsForExams aqe, Questions q\n"
+				+ "WHERE s.Eid=? AND s.DATE=? AND s.SEid=aqe.SEid AND q.Qid=aqe.Qid GROUP BY s.ID HAVING s.ID NOT IN (SELECT s1.ID FROM SolvedExams s1, SolvedExams s2, AnsweredQuestionsForExams aqe1, AnsweredQuestionsForExams aqe2 WHERE s1.Eid=s2.Eid AND s1.DATE=s2.DATE AND s1.Eid=? AND s1.DATE=? AND aqe1.SEid=s1.SEid AND aqe2.SEid=s2.SEid AND aqe2.Qid=aqe1.Qid AND s1.ID!=s2.ID GROUP BY s1.ID, s2.ID HAVING SUM(case when aqe2.Ans!=aqe1.Ans OR aqe2.Ans=-1 then 1 else 0 end)=0))\n"
+				+ "");
+		
+		logInPreparedStatement.setString(1, Eid);
+		Date dateInput = new SimpleDateFormat("yyyy-MM-dd").parse(sdate);
+		java.sql.Date dateInputData = new java.sql.Date(dateInput.getTime());
+		logInPreparedStatement.setDate(2, dateInputData);
+		
+		
+		logInPreparedStatement.setString(3, Eid);
+		logInPreparedStatement.setDate(4, dateInputData);
+		logInPreparedStatement.setString(5, Eid);
+		logInPreparedStatement.setDate(6, dateInputData);
+		logInPreparedStatement.setString(7, Eid);
+		logInPreparedStatement.setDate(8, dateInputData);
+		
+		rs = logInPreparedStatement.executeQuery();
+		while (rs.next()) {
+			String[] a = {rs.getString(1),rs.getInt(2)+"",rs.getString(3)};
+			list.add(a);
+		}
+		rs.close();
+		return list;
+	}
 	/**
+	 * @param student
+	 * @return ArrayList<SolvedExamToView>
+	 * @throws SQLException
 	 * Gets all exams of student given Student entity.
-	 * returns an array list of exams
-	 * @param Student student
-	 * @return ArrayList<SolvedExamToView> 
-	 * @throws SQLException 
 	 */
 	public static Object getStudentExamCourses(Student student) throws SQLException {
 		ArrayList<SolvedExamToView> solvedExamsList = new ArrayList<SolvedExamToView>();
@@ -964,14 +940,12 @@ public class MySQLConnection {
 		return solvedExamsList;
 
 	}
-
 	/**
-	 * inserts exam to DB and returns the SEid of that exam.
-	 * returns the submission exam ID for further use
-	 * @param SolvedExam exam
-	 * @return String Eid 
+	 * @param exam
+	 * @return String Eid
 	 * @throws SQLException
-	 * @throws ParseException 
+	 * @throws ParseException
+	 * inserts exam to DB and returns the SEid of that exam.
 	 */
 	public static String insertExamToDB(SolvedExam exam) throws SQLException, ParseException {
 		ResultSet rs;
@@ -1013,5 +987,8 @@ public class MySQLConnection {
 		return Eid;
 
 	}
+	
 
+
+	
 }

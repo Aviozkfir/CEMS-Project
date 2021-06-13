@@ -382,7 +382,7 @@ public class ServerCEMS extends AbstractServer {
 					type = ServerMessageTypes.TEACHER_EXAM_UPLOADED_SUCCECFULLY;
 					Object[] EaF = (Object[]) clientMsg.getMessage();
 					try {
-					returnVal = MySQLConnection.addManualExam((Exam)EaF[0],(File)EaF[1]);
+					returnVal = MySQLConnection.addManualExam((Exam)EaF[0],(byte[])EaF[1]);
 					}catch (Exception e1) {
 						e1.printStackTrace();
 						type = ServerMessageTypes.TEACHER_EXAM_UPLOADING_FAILED;
