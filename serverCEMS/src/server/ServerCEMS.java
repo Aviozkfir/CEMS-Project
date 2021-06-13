@@ -215,7 +215,11 @@ public class ServerCEMS extends AbstractServer {
 							currentExam ce =itce.next();
 							if(((Exam)returnVal).getEid().equals(ce.getEid())) {
 									type = ServerMessageTypes.EXAM_INFORMATION_RECIVED;
+<<<<<<< HEAD
 									ce.getConToClientStudent().add(client);
+=======
+							ce.getConToClientStudent().add(client);
+>>>>>>> refs/heads/guyNewBranch
 							}
 						}
 						if(type != ServerMessageTypes.EXAM_INFORMATION_RECIVED)
@@ -223,6 +227,7 @@ public class ServerCEMS extends AbstractServer {
 						
 					}
 					break;
+
 				case GET_QUESTION_BY_COURSE:
 					returnVal = MySQLConnection.getQuestionByCourse((Course) clientMsg.getMessage());
 					if (returnVal == null) {
@@ -332,6 +337,12 @@ public class ServerCEMS extends AbstractServer {
 							.updatePrincipalApprovedRequests((ArrayList<String>) clientMsg.getMessage());
 					if (returnVal != null) {
 						type = ServerMessageTypes.PRINCIPAL_APPROVED_REQUESTS_ADDED;
+						for(currentExam tce :currentExams)
+							for(String eid : (ArrayList<String>) clientMsg.getMessage()) {
+								if(tce.getEid().equals(eid)) {
+									tce.getTeacher().sendToClient(clientMsg);
+								}
+							}
 					}
 					break;
 
@@ -390,7 +401,7 @@ public class ServerCEMS extends AbstractServer {
 					}
 					break;
 				case DOWNLOAD_MANUAL_EXAM:
-					returnVal = MySQLConnection.downloadManualExam((String) clientMsg.getMessage());
+					returnVal = MySQLConnection.downloadManualExam((Object[]) clientMsg.getMessage());
 					if (returnVal == null) {
 						type = ServerMessageTypes.EXAM_DOWNLOAD_FAIL;
 					} else {
@@ -536,6 +547,19 @@ public class ServerCEMS extends AbstractServer {
 							for(ConnectionToClient ctc:dce.getConToClientStudent())
 								ctc.sendToClient(new ServerMessage(ServerMessageTypes.STOP_EXAM, clientMsg.getMessage()));
 						}
+					}
+					break;
+					
+				case TEACHER_SEND_REQUEST:
+					returnVal = MySQLConnection.sendNewRequest((ArrayList<String>) clientMsg.getMessage());
+					
+					if ((boolean) returnVal) {
+						type = ServerMessageTypes.TEACHER_REQUEST_RECIVED;
+						for(ConnectionToClient mn : conToClientMng)
+							mn.sendToClient(new ServerMessage(ServerMessageTypes.PRINCIPAL_GOT_NEW_REQUEST, null));
+					}
+					else {
+						type = ServerMessageTypes.TEACHER_REQUEST_NOT_RECIVED;
 					}
 					break;
 			
