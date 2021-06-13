@@ -15,23 +15,46 @@ import javafx.scene.control.ComboBox;
 import message.ClientMessage;
 import message.ClientMessageType;
 import message.ServerMessageTypes;
-
+/**
+ * @author On Avioz,Kfir Avioz.
+ * @extend PrincipalMainPageController
+ * @implements Initializable interface.
+ *  Controller for choosing the type of report the principal wants to choose.
+ */
 public class PrincipalReportController extends PrincipalMainPageController implements Initializable{
-	
-	private String SelectedReport=null;
-	
-	Principal principal = (Principal) guiControl.getUser();
+	/**
+	 * combo box for choosing the type of report.
+	 */
 	@FXML
 	private ComboBox<String> ReportTypeCombo;
+	/**
+	 * button for start creating the report with the chosen type.
+	 */
 	@FXML
 	private Button CreateButton;
+	/**
+	 * string to save selected report type.
+	 */
+	private String SelectedReport=null;
+	/**
+	 * principal instance.
+	 */
+	Principal principal = (Principal) guiControl.getUser();
 	
-	
-
+	/**
+	 * @param event
+	 * @throws IOException
+	 * the principal can choose the type of report he desire in the combobox.
+	 */
 	@FXML void ChooseReportCombo(ActionEvent event) throws IOException {
 		SelectedReport = ReportTypeCombo.getSelectionModel().getSelectedItem();
 	}
-
+	/**
+	 * @param event
+	 * @throws IOException
+	 * when the principal push the button "Create",the system will get the principal 
+	 * to the next page by the type of course he chose.
+	 */
 	@FXML
 	void CreateButtonPressed(ActionEvent event) throws IOException {
 		if (Istype("Course")) {
@@ -58,18 +81,26 @@ public class PrincipalReportController extends PrincipalMainPageController imple
 		}
 
 	}
-
+	/**
+	 * @param type
+	 * IsType returns the type of report : course,student,teacher.
+	 */
 	public boolean Istype(String type) {
 		if (SelectedReport.equals(type))
 			return true;
 		return false;
 	}
-
+	/**
+	 * When the principal reach to the main page for report the combobox already has its options ready.
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		ReportTypeCombo.getItems().addAll("Teacher","Course","Student");
 	}
-	
+	/**
+	 * GetTeacherListFromDB gets from the server the list of teachers in the db.
+	 * and set the teacherlist array list in principal.
+	 */
 	public void GetTeacherListFromDB(){
 		ClientMessage msg = new ClientMessage(ClientMessageType.PRINCIPAL_TEACHERS_INFORMATION,
 
@@ -89,7 +120,10 @@ public class PrincipalReportController extends PrincipalMainPageController imple
 
 		}
 	}
-	
+	/**
+	 * GetStudentListFromDB gets from the server the list of students in the db.
+	 * and set the studentlist array list in principal.
+	 */
 	public void GetStudentListFromDB(){
 		ClientMessage msg1 = new ClientMessage(ClientMessageType.PRINCIPAL_STUDENTS_INFORMATION,
 

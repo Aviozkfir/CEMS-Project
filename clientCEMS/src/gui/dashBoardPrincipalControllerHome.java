@@ -18,7 +18,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
- * @author On Avioz.
+ * @author On Avioz ,Kfir Avioz.
  * Controller of principal "HomePage" screen.
  * @extend PrincipalMainPageController.
  * @implements Initializable interface.

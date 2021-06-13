@@ -5,14 +5,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.ResourceBundle;
 
-import entity.Course;
 import entity.Principal;
 import entity.Report;
 import entity.Student;
-import entity.Teacher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,38 +24,92 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import message.ClientMessage;
 import message.ClientMessageType;
 import message.ServerMessageTypes;
-
+/**
+ * @author On Avioz,Kfir Avioz.
+ * @extend PrincipalMainPageController
+ * @implements Initializable interface.
+ *  Controller for creating report of desired course, where the princiapl enters 
+ *  the ID he wants from the list in the table and Date (date chosen-today).
+ */
 public class PrincipalReportStudentControl extends PrincipalMainPageController implements Initializable {
+	/**
+	 * back button to get back to the previous page.
+	 */
 	@FXML
 	private Button Back;
+	/**
+	 * Table for the student's list from the db
+	 */
 	@FXML
 	private TableView<Student> TableView;
+	/**
+	 * ID column in the table.
+	 */
 	@FXML
 	private TableColumn<Student, String> IDColumn;
+	/**
+	 * First name column in the table.
+	 */
 	@FXML
 	private TableColumn<Student, String> FirstNameColumn;
+	/**
+	 * Last name column in the table.
+	 */
 	@FXML
 	private TableColumn<Student, String> LastNameColumn;
+	/**
+	 * text for ID - principal enters desired course id.
+	 */
 	@FXML
 	private TextField IDtext;
+	/**
+	 * date button.
+	 */
 	@FXML
 	private DatePicker datePicker;
+	/**
+	 * button that takes the data that the princiapl entered to get the desired report.
+	 */
 	@FXML
 	private Button GetButton;
+	/**
+	 * report instance
+	 */
 	private Report report;
-
+	/**
+	 * boolean var that checks if the chosen id is in the list (in the table)
+	 */
 	private boolean idInlist = false;
+	/**
+	 * Observable List for the table that will show the courses from db.
+	 */
 	private ObservableList<Student> ObsCourseList = FXCollections.observableArrayList();
+	/**
+	 * Principal instance.
+	 */
 	private Principal principal = (Principal) guiControl.getUser();
+	/**
+	 * Array of 2 strings: inputData[0]=chosen id ,inputData[1]=date picked.
+	 */
 	private String[] inputData = new String[2];
-
+	/**
+	 * @param event
+	 * @throws IOException
+	 * The user can get back to the previous page.
+	 */
 	@FXML
 	void BackPressed(ActionEvent event) throws IOException {
 		PrincipalReportController a = (PrincipalReportController) guiControl
 				.loadStage(ClientsConstants.Screens.PRINCIPAL_REPORT_PAGE.path);
 		a.setRequestCounter();
 	}
-
+	/**
+	 * @param event
+	 * @throws IOException
+	 * When the princiapl clicks on get button, the id,date that he chose are sent to
+	 * the server and returns the desired data to a report entity and sets into principal.
+	 * than moves to the next page that visualy presents the report data. 
+	 */
 	@FXML
 	void GetButtonPressed(ActionEvent event) throws IOException {
 
@@ -90,7 +141,12 @@ public class PrincipalReportStudentControl extends PrincipalMainPageController i
 		}
 
 	}
-
+	/**
+	 * @param arg0
+	 * @param arg1
+	 * after the principal chose "students" report and clicked Create he immidiatly 
+	 * see the Table with the Courses in the db.
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		ObsCourseList.addAll(principal.getStudentList());
@@ -99,7 +155,10 @@ public class PrincipalReportStudentControl extends PrincipalMainPageController i
 		LastNameColumn.setCellValueFactory(new PropertyValueFactory<Student, String>("lastName"));
 		TableView.getItems().setAll(ObsCourseList);
 	}
-
+	/**
+	 * validateInput covers all the input validation that have to be checked and gives
+	 * the right messages.
+	 */
 	public boolean validateInput() {
 		String[] date = new String[3];
 
@@ -132,7 +191,11 @@ public class PrincipalReportStudentControl extends PrincipalMainPageController i
 			return false;
 		}
 	}
-
+	/**
+	 *SetMedianAndAverage, takes the report data strings,
+	 * converts to integers and calculate median and average.
+	 * afterwards saves the results in principal.
+	 */
 	public void SetMedianAndAverage() {
 		ArrayList<String> gradesString = new ArrayList<String>(principal.getReport().getReportData()); // set
 
@@ -144,7 +207,10 @@ public class PrincipalReportStudentControl extends PrincipalMainPageController i
 		principal.getReport().setMedian(Median(grades));
 		principal.getReport().setAverage(Average(grades));
 	}
-
+	/**
+	 * @param values
+	 * Calculating the Median from the report-data.
+	 */
 	public static String Median(ArrayList<Integer> values) {
 		String convertStr = null;
 		Collections.sort(values);
@@ -153,7 +219,10 @@ public class PrincipalReportStudentControl extends PrincipalMainPageController i
 
 		return convertStr.valueOf((int) ((lower + upper) / 2.0));
 	}
-
+	/**
+	 * @param values
+	 * Calculating the average from the report-data.
+	 */
 	public static String Average(ArrayList<Integer> values) {
 		String convertStr = null;
 		int sum = 0;
@@ -161,7 +230,10 @@ public class PrincipalReportStudentControl extends PrincipalMainPageController i
 			sum += values.get(i);
 		return convertStr.valueOf(sum / values.size());
 	}
-
+	/**
+	 * 
+	 * set the year-range by chosen year and current year in principal.
+	 */
 	public void SetYearRange() {
 		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
 		int pickedYear = datePicker.getValue().getYear();

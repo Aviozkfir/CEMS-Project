@@ -19,9 +19,9 @@ import message.ClientMessageType;
 import message.ServerMessageTypes;
 
 /**
- * @author On Avioz
- * @extend PrincipalMainPageController Controller for each exam inside chosen
- *         course inside chosen subject inside exam bank screen.
+ * @author On Avioz ,Kfir Avioz
+ * @extend PrincipalMainPageController
+ *  Controller for each exam inside chosen course inside chosen subject inside exam bank screen.
  *
  */
 public class PrincipalExamBankExamsController extends PrincipalMainPageController {

@@ -11,7 +11,7 @@ import javafx.scene.control.Label;
 
 
 /**
- * @author On Avioz
+ * @author On Avioz,Kfir Avioz
  *Controller for each question in the question list inside specific course.
  */
 public class PrincipalQuestionTableRowController {

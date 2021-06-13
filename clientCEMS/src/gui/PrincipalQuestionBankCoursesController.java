@@ -15,9 +15,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 
 /**
- * @author On Avioz
- * @extend PrincipalMainPageController Controller for courses inside chosen
- *         subject inside question bank screen.
+ * @author On Avioz,Kfir Avioz.
+ * @extend PrincipalMainPageController 
+ * Controller for courses inside chosen subject inside question bank screen.
  *
  */
 public class PrincipalQuestionBankCoursesController extends PrincipalMainPageController {

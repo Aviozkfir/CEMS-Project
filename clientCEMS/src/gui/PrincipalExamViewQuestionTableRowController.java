@@ -11,8 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 /**
- * @author On Avioz Controller for each question in the question list inside
- *         specific exam.
+ * @author On Avioz,Kfir Avioz.
+ *  Controller for each question in the question list inside specific exam.
  */
 public class PrincipalExamViewQuestionTableRowController {
 

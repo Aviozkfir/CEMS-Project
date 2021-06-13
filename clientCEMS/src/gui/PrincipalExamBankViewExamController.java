@@ -18,7 +18,9 @@ import message.ClientMessageType;
 import message.ServerMessageTypes;
 
 /**
- * @author On Avioz. Controller for exam information, when user select exam.
+ * @author On Avioz,Kfir Avioz.
+ * @extend PrincipalMainPageController
+ *  Controller for exam information, when user select exam.
  */
 public class PrincipalExamBankViewExamController extends PrincipalMainPageController {
 	private ArrayList<Question> allQuestions;

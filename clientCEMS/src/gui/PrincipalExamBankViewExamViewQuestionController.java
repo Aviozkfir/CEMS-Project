@@ -12,8 +12,9 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.text.Text;
 
 /**
- * @author On Avioz. Controller for question information, when user select
- *         question.
+ * @author On Avioz,Kfir Avioz.
+ * @extend PrincipalMainPageController.
+ *  Controller for question information, when user select question.
  */
 public class PrincipalExamBankViewExamViewQuestionController extends PrincipalMainPageController {
 
