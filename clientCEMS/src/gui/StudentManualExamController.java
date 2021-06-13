@@ -294,7 +294,8 @@ public class StudentManualExamController extends StudentMainPageController imple
 						public void run() {
 							try {
 								timer.stop();
-								guiControl.loadStage(ClientsConstants.Screens.STUDENT_MAIN_PAGE.path);
+								stopExam();
+								// guiControl.loadStage(ClientsConstants.Screens.STUDENT_MAIN_PAGE.path);
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
@@ -322,11 +323,8 @@ public class StudentManualExamController extends StudentMainPageController imple
 		Object[] data = { null, null, null, exam };
 		ClientMessage FileMessage = new ClientMessage(ClientMessageType.UPLOAD_MANUAL_EXAM, data);
 		guiControl.sendToServer(FileMessage);
-		if (guiControl.getServerMsg().getType() == ServerMessageTypes.EXAM_UPLOADING_FAILED) {
-			guiControl.popUpMessage("System Message", "Exam has been locked by Teacher");
-			guiControl.loadStage(ClientsConstants.Screens.STUDENT_MAIN_PAGE.path);
-
-		}
+		guiControl.popUpMessage("System Message", "Exam has been locked by Teacher");
+		guiControl.loadStage(ClientsConstants.Screens.STUDENT_MAIN_PAGE.path);
 
 	}
 

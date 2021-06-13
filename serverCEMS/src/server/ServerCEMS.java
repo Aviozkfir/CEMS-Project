@@ -389,7 +389,7 @@ public class ServerCEMS extends AbstractServer {
 					}
 					break;
 				case DOWNLOAD_MANUAL_EXAM:
-					returnVal = MySQLConnection.downloadManualExam((String) clientMsg.getMessage());
+					returnVal = MySQLConnection.downloadManualExam((Object[]) clientMsg.getMessage());
 					if (returnVal == null) {
 						type = ServerMessageTypes.EXAM_DOWNLOAD_FAIL;
 					} else {

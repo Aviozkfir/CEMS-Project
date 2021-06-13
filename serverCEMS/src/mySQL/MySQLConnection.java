@@ -90,7 +90,7 @@ public class MySQLConnection {
 
 	public static int numOfStudentsInCourse(String Cid) throws SQLException {
 		PreparedStatement exams = con.prepareStatement(
-				"SELECT COUNT(ID) FROM Person_Enrolled_Course pec, Person p WHERE pec.Cid=? AND pec.ID=p.ID AND p.Role=Student");
+				"SELECT COUNT(pec.ID) FROM Person_Enrolled_Course pec, Person p WHERE pec.Cid=? AND pec.ID=p.ID AND p.Role=\"Student\"");
 		exams.setString(1, Cid);
 		
 		ResultSet rs = exams.executeQuery();
@@ -519,8 +519,9 @@ public class MySQLConnection {
 		getMaxID.setString(2, e.getCid());
 		maxID=getMaxID.executeQuery();
 		String id;
+		maxID.next();
 		
-		if(maxID.next()) {
+		if(maxID.getString(1)!=null) {
 			id=(""+(1+Integer.parseInt(maxID.getNString(1))));
 			if(id.length()==5) {
 				id="0"+id;
@@ -553,21 +554,24 @@ public class MySQLConnection {
 		
 		PreparedStatement addMExam;
 		addMExam = con
-				.prepareStatement("INSERT INTO Teacher_Manual_Exams (Eid, ExamFile, ID)"
+				.prepareStatement("INSERT INTO Teacher_Manual_Exam (Eid, ExamFile, ID)"
 						+ "VALUES (?, ? ,?)");
+		
 		addMExam.setString(1, e.getEid());
 		
 		
 		
-		File newFile = new File ("C:\\"+e.getName()+"_CemsExam.docx");
+		File newFile = new File ("D:\\"+e.getName()+"_CemsExam.docx");
 					  
 		try (FileOutputStream outputStream = new FileOutputStream(newFile)) {
 		    outputStream.write(ExamFile);
 		}  
-		InputStream inputstream = new FileInputStream("C:\\"+e.getName()+"_CemsExam.docx");
+		InputStream inputstream = new FileInputStream("D:\\"+e.getName()+"_CemsExam.docx");
 
 		addMExam.setBlob(2, inputstream);
 		addMExam.setString(3, e.getID());
+		addMExam.executeUpdate();
+		
 		return id;
 	}
 
@@ -689,11 +693,11 @@ public class MySQLConnection {
 	 * @throws IOException
 	 * Gets the manual exam uploaded by teacher given the exam ID
 	 */
-	public static Object downloadManualExam(String ExamID) throws SQLException, IOException {
+	public static Object downloadManualExam(Object[] data) throws SQLException, IOException {
 		ResultSet rs;
 		PreparedStatement logInPreparedStatement;
 		logInPreparedStatement = con.prepareStatement("SELECT ExamFile FROM `Teacher_Manual_Exam` WHERE Eid=?");
-		logInPreparedStatement.setString(1, ExamID);
+		logInPreparedStatement.setString(1, (String)data[0]);
 		rs = logInPreparedStatement.executeQuery();
 		if (rs.next()) {
 			byte[] array = rs.getBytes("ExamFile");
