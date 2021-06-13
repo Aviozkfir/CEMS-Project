@@ -14,12 +14,24 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 
+/**
+ * @author Shalom and Omer
+ * @extend StudentMainPageController
+ * Used to set student subjects as folders
+ *
+ */
 public class StudentMyExamsController extends StudentMainPageController {
 
 
+	/**
+	 * A grid used as a window to hold subjects as folders.
+	 */
 	@FXML
 	private GridPane grid;
 
+	/**
+	 * Used to set subjects as folders.
+	 */
 	public void setStudentSubject() {
 	   	int i;
 			Student student = (Student) guiControl.getUser();

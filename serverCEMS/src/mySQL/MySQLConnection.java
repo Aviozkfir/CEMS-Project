@@ -48,10 +48,10 @@ public class MySQLConnection {
 	}
 
 	/**
-	 * A method that returns a Visitor with id. Insert to DataBase if there is not.
+	 * A method that returns an entity(Student or Teacher or Principal) . Insert to DataBase if there is not.
 	 * 
-	 * @param id
-	 * @return Subscriber or null
+	 * @param idAndPassword
+	 * @return entity or null
 	 * @throws SQLException
 	 */
 	public static Object validatePerson(String[] idAndPassword) throws SQLException {
@@ -225,6 +225,12 @@ public class MySQLConnection {
 
 	}
 
+	/**
+	 * @param examCode
+	 * @return boolean
+	 * @throws SQLException
+	 * checks whether the exam code is correct
+	 */
 	public static boolean validateExamCode(String examCode) throws SQLException {
 		ResultSet rs;
 		PreparedStatement logInPreparedStatement;
@@ -239,6 +245,12 @@ public class MySQLConnection {
 		return false;
 	}
 
+	/**
+	 * @param examCode
+	 * @return exam
+	 * @throws SQLException
+	 * Returns Exam entity with details of the exam
+	 */
 	public static Object getExamInformation(String examCode) throws SQLException {
 		Exam exam = null;
 		ResultSet rs;
@@ -595,6 +607,12 @@ public class MySQLConnection {
 	}
 	
 
+	/**
+	 * @param StudentId
+	 * @return boolean
+	 * @throws SQLException
+	 * checks whether the ID of student is in DataBase
+	 */
 	public static boolean validateStudentID(String StudentId) throws SQLException {
 		ResultSet rs;
 		PreparedStatement logInPreparedStatement;
@@ -609,6 +627,13 @@ public class MySQLConnection {
 		return false;
 	}
 
+	/**
+	 * @param Object[] details
+	 * @return boolean
+	 * @throws SQLException
+	 * @throws FileNotFoundException
+	 * Gets the exam file and uploads it to DataBase
+	 */
 	public static boolean uploadManualExam(Object[] details) throws SQLException, FileNotFoundException {
 		String Eid = (String) details[0];
 		File ExamFile = (File) details[1];
@@ -633,6 +658,13 @@ public class MySQLConnection {
 
 	}
 
+	/**
+	 * @param ExamID
+	 * @return ManualExamFile
+	 * @throws SQLException
+	 * @throws IOException
+	 * Gets the manual exam uploaded by teacher given the exam ID
+	 */
 	public static Object downloadManualExam(String ExamID) throws SQLException, IOException {
 		ResultSet rs;
 		PreparedStatement logInPreparedStatement;
@@ -663,6 +695,12 @@ public class MySQLConnection {
 	}
 	
 	
+	/**
+	 * @param ExamID
+	 * @return ArrayList<QuestionInExam>
+	 * @throws SQLException
+	 * returns all the question of exam given the ExamID
+	 */
 	public static Object returnExamQuestions(String ExamID) throws SQLException {
 		boolean has = false;
 		ArrayList<QuestionInExam> questions = new ArrayList<QuestionInExam>();
@@ -685,6 +723,12 @@ public class MySQLConnection {
 
 	}
 
+	/**
+	 * @param data
+	 * @return
+	 * @throws SQLException
+	 * Inserts all questions of solved exam by student to DataBase
+	 */
 	public static boolean insertExamQuestions(Object[] data) throws SQLException {
 		int rslt = -1;
 		boolean success = true;
@@ -714,6 +758,12 @@ public class MySQLConnection {
 	}
 
 
+	/**
+	 * @param studentID
+	 * @return ArrayList<Subject>
+	 * @throws SQLException
+	 * returns all subjects list of student given studentID
+	 */
 	public static Object getStudentSubjects(String studentID) throws SQLException {
 		ArrayList<Subject> subjectList = new ArrayList<Subject>();
 		ResultSet rs;
@@ -728,6 +778,12 @@ public class MySQLConnection {
 		return subjectList;
 	}
 	
+	/**
+	 * @param studentID
+	 * @return ArrayList<Course>
+	 * @throws SQLException
+	 * Returns all student courses given studentID
+	 */
 	public static Object getStudentCourses(String studentID) throws SQLException {
 		ArrayList<Course> courseList = new ArrayList<Course>();
 		ResultSet rs;
@@ -792,6 +848,12 @@ public class MySQLConnection {
 		return report;
 
 	}
+	/**
+	 * @param SEid
+	 * @return ArrayList<SolvedQuestionToView>
+	 * @throws SQLException
+	 * Returns all question of exam given SEid which is a certain submission
+	 */
 	public static Object getQuestionsForExamSEid(String SEid) throws SQLException {
 		ArrayList<SolvedQuestionToView> questions = new ArrayList<SolvedQuestionToView>();
 		ResultSet rs;
@@ -807,6 +869,12 @@ public class MySQLConnection {
 		rs.close();
 		return questions;
 	}
+	/**
+	 * @param student
+	 * @return ArrayList<SolvedExamToView>
+	 * @throws SQLException
+	 * Gets all exams of student given Student entity.
+	 */
 	public static Object getStudentExamCourses(Student student) throws SQLException {
 		ArrayList<SolvedExamToView> solvedExamsList = new ArrayList<SolvedExamToView>();
 		ResultSet rs;
@@ -825,6 +893,13 @@ public class MySQLConnection {
 		return solvedExamsList;
 
 	}
+	/**
+	 * @param exam
+	 * @return String Eid
+	 * @throws SQLException
+	 * @throws ParseException
+	 * inserts exam to DB and returns the SEid of that exam.
+	 */
 	public static String insertExamToDB(SolvedExam exam) throws SQLException, ParseException {
 		ResultSet rs;
 		int rslt;

@@ -23,35 +23,70 @@ import javafx.scene.text.Text;
 import message.ClientMessage;
 import message.ClientMessageType;
 
+/**
+ * @author Shalom and Omer
+ * @extend StudentMainPageController
+ * Sets the exam as rows in table.
+ *
+ */
 public class StudentCourseExamsController extends StudentMainPageController {
+	/**
+	 * A spesific course, used to hold the course we want to see exams of.
+	 */
 	private Course course;
 
 
+	/**
+	 * Used to hold all exams of course.
+	 */
 	private ArrayList<SolvedExamToView> allExams;
 
 	
 
+	/**
+	 * Used to hold the window of controller
+	 */
 	@FXML
 	private AnchorPane myRoot;
 
+	/**
+	 * used to show the current subject.
+	 */
 	@FXML
 	private Text subjectName;
 
+	/**
+	 * used to show the current course.
+	 */
 	@FXML
 	private Text courseName;
 
 
+	/**
+	 * Used to show the total number of exams.
+	 */
 	@FXML
 	private Text numberOfExams;
 
+	/**
+	 * Used to hold the table
+	 */
 	@FXML
 	private VBox vTable;
 
+	/**
+	 * Used to go back to previous page.
+	 */
 	@FXML
 	private Button Back;
 
 
 
+	/**
+	 * @param ActionEvent event
+	 * @throws IOException
+	 * Used to go back to subjects of student.
+	 */
 	@FXML
 	void BackPressed(ActionEvent event) throws IOException {
 		StudentCourseController contr = (StudentCourseController) GUIControl.instance.loadStage("myExamsCourses.fxml");
@@ -60,6 +95,11 @@ public class StudentCourseExamsController extends StudentMainPageController {
 
 
 
+	/**
+	 * @param Course course
+	 * @throws IOException
+	 * Used to set all exams of student given the subject and course.
+	 */
 	public void setStudentExams(Course course) throws IOException {
 		this.course = course;
 		ArrayList<SolvedExamToView> examsCourse = new ArrayList<SolvedExamToView>();

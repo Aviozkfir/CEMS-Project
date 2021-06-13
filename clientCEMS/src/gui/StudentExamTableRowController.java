@@ -20,29 +20,67 @@ import javafx.scene.layout.AnchorPane;
 import message.ClientMessage;
 import message.ClientMessageType;
 
+/**
+ * @author Shalom and Omer
+ * Used to present an exam in course as a row in table
+ *
+ */
 public class StudentExamTableRowController {
+	/**
+	 * Holds the exam details
+	 */
 	public  SolvedExamToView exam;
+	
+	/**
+	 * Holds the questions of the exam
+	 */
 	public  ArrayList<SolvedQuestionToView> questions;
+	/**
+	 * used to hold the current course
+	 */
 	public Course course;
 
+	/**
+	 * A button in order to view the exam details when pressed.
+	 */
 	@FXML
 	private Button btnView;
 
+	/**
+	 * Holds the image of the view button
+	 */
 	@FXML
 	private ImageView watch;
 
+	/**
+	 * Holds the number of exam (ID)
+	 */
 	@FXML
 	private Label ExamID;
 
+	/**
+	 * Holds the description for the exam
+	 */
 	@FXML
 	private Label ExamTitle;
 
+	/**
+	 * Holds the date of submission
+	 */
 	@FXML
 	private Label ExecutionDate;
 
+	/**
+	 * Holds the final grade of exam
+	 */
 	@FXML
 	private Label Grade;
 
+	/**
+	 * @param ActionEvent event
+	 * @throws IOException
+	 * Shows all the exam questions when pressed
+	 */
 	@FXML
 	void btnViewExamPressed(ActionEvent event) throws IOException {
 		GUIControl guiControl = GUIControl.getInstance();
@@ -68,6 +106,11 @@ public class StudentExamTableRowController {
 
 	}
 
+	/**
+	 * @param exam
+	 * @param course
+	 * Sets the exam and its course in order to take details to show.
+	 */
 	public void setExam(SolvedExamToView exam, Course course) {
 		this.exam = exam;
 		this.course = course;
@@ -77,6 +120,10 @@ public class StudentExamTableRowController {
 		ExamTitle.setText(exam.getExamName());
 	}
 
+	/**
+	 * @param exam
+	 * Used to take all questions of certain exam.
+	 */
 	public void setQuestions(SolvedExamToView exam) {
 		ClientMessage m = new ClientMessage(ClientMessageType.GET_QUESTIONS_FOR_SOLVED_EXAM, exam.getSEid());
 		GUIControl guiControl = GUIControl.getInstance();
@@ -89,6 +136,10 @@ public class StudentExamTableRowController {
 
 	}
 
+	/**
+	 * @return questions
+	 * used to return all questions of exam
+	 */
 	public ArrayList<SolvedQuestionToView> getQuestions() {
 		return questions;
 

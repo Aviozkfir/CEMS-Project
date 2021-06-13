@@ -17,31 +17,71 @@ import javafx.scene.text.Text;
 import message.ClientMessage;
 import message.ClientMessageType;
 
+/**
+ * @author Shalom and Omer
+ * @extend StudentMainPageController
+ * Controller for entering ID before starting a computerized exam.
+ *
+ */
 public class StudentComputerizedExamController extends StudentMainPageController implements Initializable {
+	/**
+	 * holds current exam
+	 */
 	public static Exam exam;
+	/**
+	 * holds current exam for student which has relevant parameters
+	 */
 	public static ExamForStudent currentExam;
+	/**
+	 * holds the current student
+	 */
 	public Student student;
 
+	/**
+	 * holds the duration of the exam
+	 */
 	@FXML
 	private Text ExamDuration;
 
+	/**
+	 * holds the name of the exam
+	 */
 	@FXML
 	private Text NameOfExam;
 
+	/**
+	 * Used for entering ID
+	 */
 	@FXML
 	private TextField IdTextField;
 
+	/**
+	 * Used to go to next page.
+	 */
 	@FXML
 	private Button ForwardButton;
 
+	/**
+	 * Used to go to back page
+	 */
 	@FXML
 	private Button BackButton;
 
+	/**
+	 * @param ActionEvent event
+	 * @throws IOException
+	 * Used to go to the previous controller page where exam code is being inserted.
+	 */
 	@FXML
 	void BackButtonPressed(ActionEvent event) throws IOException {
 		guiControl.loadStage(ClientsConstants.Screens.STUDENT_START_EXAM_PAGE.path);
 	}
 
+	/**
+	 * @param ActionEvent event
+	 * @throws IOException
+	 * Used to check whther the ID is true or false, if true goes to computerized exam page execution.
+	 */
 	@FXML
 	void ForwardButtonPressed(ActionEvent event) throws IOException {
 		if (IdTextField.getText().isEmpty()) {
@@ -80,6 +120,9 @@ public class StudentComputerizedExamController extends StudentMainPageController
 
 	}
 
+	/**
+	 *Sets text of duration of exam and name of exam.
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		exam = StudentStartExamController.exam;

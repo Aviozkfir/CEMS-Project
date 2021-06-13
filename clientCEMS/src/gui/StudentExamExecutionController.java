@@ -26,80 +26,178 @@ import entity.SolvedExam;
 import entity.Student;
 import javafx.fxml.Initializable;
 
+/**
+ * @author Shalom and Omer
+ * @extend StudentComputerizedExamController
+ * Used to manage a computerized exam.
+ * 
+ *
+ */
 public class StudentExamExecutionController extends StudentComputerizedExamController implements Initializable {
 
+	/**
+	 * Holds seconds of exam.
+	 */
 	private int seconds;
+	/**
+	 * holds minutes of exam
+	 */
 	private int minutes;
+	/**
+	 * Hold index of current quesion in question ArrayList
+	 */
 	private int currentQuestion = 0;
+	/**
+	 * Holds all the questions of current Exam.
+	 */
 	private ArrayList<QuestionInExam> questions;
+	/**
+	 * Holds the final grade of student at the end of exam.
+	 */
 	private int TotalGrade = 0;
+	/**
+	 * Used to change the current time as the seconds pass.
+	 */
 	private int tickSeconds = 0;
+	/**
+	 * Used to change the current time as the minutes pass.
+	 */
 	private int tickMinutes = 0;
 
+	/**
+	 * Used to combine all the answers options into a toggleGroup
+	 */
 	@FXML
 	private ToggleGroup answersGroup;
 
+	/**
+	 * Used to hold the number of question
+	 */
 	@FXML
 	private Text NumOfQuestionsText;
 
+	/**
+	 * Used to show the time passed since the beggining of exam
+	 */
 	@FXML
 	private Text TimerText;
 
+	/**
+	 * Used to change every time according to time.
+	 */
 	private Timer timer;
 
+	/**
+	 * Used to hold all information of current exam
+	 */
 	private static ExamForStudent exam;
 
+	/**
+	 * Used to hold total time of exam.
+	 */
 	@FXML
 	private Text TimeOfExam;
 
+	/**
+	 * Used to change every time.
+	 */
 	@FXML
 	private Text TimeTick;
 
+	/**
+	 * Used to hold name of exam.
+	 */
 	@FXML
 	private Text NameOfExam2;
 
+	/**
+	 * Used to hold notes for student.
+	 */
 	@FXML
 	private Text NotesToStudent;
 
+	/**
+	 * Used to show number of question.
+	 */
 	@FXML
 	private Text QuestionNumberTitle;
 
+	/**
+	 * Used to show the question.
+	 */
 	@FXML
 	private Text ContentOfQuestion;
 
+	/**
+	 * A choice buttion for option 1
+	 */
 	@FXML
 	private RadioButton OptionA;
 
+	/**
+	 * Used to hold text for option 1
+	 */
 	@FXML
 	private Text OptionAText;
 
+	/**
+	 * A choice buttion for option 2
+	 */
 	@FXML
 	private RadioButton OptionB;
 
+	/**
+	 * Used to hold text for option 2
+	 */
 	@FXML
 	private Text OptionBText;
 
+	/**
+	 * A choice buttion for option 3
+	 */
 	@FXML
 	private RadioButton OptionC;
 
+	/**
+	 * Used to hold text for option 3
+	 */
 	@FXML
 	private Text OptionCText;
 
+	/**
+	 * A choice buttion for option 4
+	 */
 	@FXML
 	private RadioButton OptionD;
 
+	/**
+	 * Used to hold text for option 4
+	 */
 	@FXML
 	private Text OptionDText;
 
+	/**
+	 * Used to go back to previous question
+	 */
 	@FXML
 	private Button PreviousQuestionButton;
 
+	/**
+	 * Used to go to next question
+	 */
 	@FXML
 	private Button NextQuestionButton;
 
+	/**
+	 * Used to submit the exam
+	 */
 	@FXML
 	private Button SubmitButton;
 
+	/**
+	 * @param ActionEvent event
+	 * Used to go to the next question and sets all the next question details.
+	 */
 	@FXML
 	void NextQuestionButtonPressed(ActionEvent event) {
 
@@ -138,6 +236,10 @@ public class StudentExamExecutionController extends StudentComputerizedExamContr
 		}
 	}
 
+	/**
+	 * @param ActionEvent event
+	 * Used to go to previous question and sets all the previous question details
+	 */
 	@FXML
 	void PreviousQuestionButtonPressed(ActionEvent event) {
 
@@ -168,6 +270,11 @@ public class StudentExamExecutionController extends StudentComputerizedExamContr
 
 	}
 
+	/**
+	 * @param ActionEvent event
+	 * @throws IOException
+	 * Used to submit the exam and insert it to database.
+	 */
 	@FXML
 	void SubmitButtonPressed(ActionEvent event) throws IOException {
 		GUIControl.popUpMessageYesNo("System Message", "Are you sure you want to submit your exam?");
@@ -219,6 +326,9 @@ public class StudentExamExecutionController extends StudentComputerizedExamContr
 
 	}
 
+	/**
+	 *Used to set the current exam, sort the questions array, set the timer.
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		OptionA.setToggleGroup(answersGroup);
@@ -310,6 +420,10 @@ public class StudentExamExecutionController extends StudentComputerizedExamContr
 
 	}
 
+	/**
+	 * @param num - number of question
+	 * sets the number of question given the number of question.
+	 */
 	public void setQuestion(int num) {
 
 		QuestionInExam que = questions.get(num);
@@ -322,33 +436,59 @@ public class StudentExamExecutionController extends StudentComputerizedExamContr
 
 	}
 
+	/**
+	 * @param ActionEvent event
+	 * Sets the radio button if option 1 is selected.
+	 */
 	@FXML
 	void Option1IsSelected(ActionEvent event) {
 		questions.get(currentQuestion).setChosenAnswer(1);
 	}
 
+	/**
+	 * @param ActionEvent event
+	 * Sets the radio button if option 2 is selected.
+	 */
 	@FXML
 	void Option2IsSelected(ActionEvent event) {
 		questions.get(currentQuestion).setChosenAnswer(2);
 	}
 
+	/**
+	 * @param ActionEvent event
+	 * Sets the radio button if option 3 is selected.
+	 */
 	@FXML
 	void Option3IsSelected(ActionEvent event) {
 		questions.get(currentQuestion).setChosenAnswer(3);
 
 	}
 
+	/**
+	 * @param ActionEvent event
+	 * Sets the radio button if option 4 is selected.
+	 */
 	@FXML
 	void Option4IsSelected(ActionEvent event) {
 		questions.get(currentQuestion).setChosenAnswer(4);
 
 	}
+	
 
+	/**
+	 * @param minutes
+	 * @param seconds
+	 * Used to save the time passed since the beggining of the exam
+	 */
 	public void updateTime(int minutes, int seconds) {
 		this.tickMinutes = minutes;
 		this.tickSeconds = seconds;
 	}
 	
+	/**
+	 * @throws IOException
+	 * Used to stop the exam if the teacher locked it
+	 */
 	public void stopExam() throws IOException {
 		GUIControl.popUpMessageYesNo("System Message", "Exam has been locked by Teacher");
 			for (int i = 0; i < questions.size(); i++) {

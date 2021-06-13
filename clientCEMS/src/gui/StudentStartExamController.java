@@ -14,16 +14,37 @@ import message.ClientMessage;
 import message.ClientMessageType;
 import message.ServerMessageTypes;
 
+/**
+ * @author Shalom and Omer
+ * @extend StudentMainPageController
+ * Used as a controller to enter Exam Code.
+ *
+ */
 public class StudentStartExamController extends StudentMainPageController {
+	/**
+	 * used to hold the exam details.
+	 */
 	public static Exam exam;
 	
 
+	/**
+	 * Used to hold the written code.
+	 */
 	@FXML
 	private TextField CodeTextField;
 
+	/**
+	 * Used as a button in order to start the exam
+	 */
 	@FXML
 	private Button SubmitStartExam;
 
+	/**
+	 * @param ActionEvent event
+	 * @throws IOException
+	 * Used as a method to start the exam after code is inserted
+	 * and determine whether the exam is manual or computerized
+	 */
 	@FXML
 	void SubmitStartExamPressed(ActionEvent event) throws IOException {
 		if (CodeTextField.getText().isEmpty()) {

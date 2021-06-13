@@ -10,6 +10,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
+/**
+ * @author Shalom and Omer
+ *
+ */
 public class StudentExamChoiceController extends StudentMainPageController implements Initializable {
 
     @FXML

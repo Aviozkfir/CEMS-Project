@@ -43,41 +43,103 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import message.ClientMessage;
 import message.ClientMessageType;
 
+/**
+ * @author Shalom and Omer
+ * @extend StudentMainPageController
+ * Used to manage manual exam
+ *
+ */
 public class StudentManualExamController extends StudentMainPageController implements Initializable {
+	/**
+	 * Holds the exam details
+	 */
 	public Exam exam;
+	/**
+	 * Holds the timer
+	 */
 	public Timer timer;
+	/**
+	 * Holds minutes of exam
+	 */
 	private int minutes;
+	/**
+	 * Holds seconds of exam
+	 */
 	private int seconds;
+	/**
+	 * Holds the file needed to be uploaded
+	 */
 	private static File fileToUpload;
+	/**
+	 * Used to indicate whether file has been chosen
+	 */
 	boolean fileUploaded = false;
+	
+	/**
+	 * Used to indicate whether time is over
+	 */
 	boolean timeIsOver = false;
 
+	/**
+	 * Used to hold extenions for document
+	 */
 	List<String> lstFile;
 
+	/**
+	 * Used to hold total time of exam
+	 */
 	@FXML
 	private Text TimeOfExam2;
 
+	/**
+	 * Used to change time as the the time passes
+	 */
 	@FXML
 	private Text TimeTick2;
 
+	/**
+	 * Shows time advancment
+	 */
 	@FXML
 	private Text Timer2Text;
 
+	/**
+	 * Used as a button for downloading file
+	 */
 	@FXML
 	private Button DownloadFileButton;
 
+	/**
+	 * Used as a button for uploading file
+	 */
 	@FXML
 	private Button UploadFileButton;
 
+	/**
+	 * Used as a button for submission
+	 */
 	@FXML
 	private Button SubmitButton2;
 
+	/**
+	 * Used to show name of exam
+	 */
 	@FXML
 	private Text NameOfExam3;
 
+	/**
+	 * Used to show the path of the chosen file
+	 */
 	@FXML
 	private Text FilePathText;
 
+	/**
+	 * @param ActionEvent event
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 * @throws SQLException
+	 * Used as a method to download file when download button is pressed.
+	 */
 	@FXML
 	void DownloadFileButtonPressed(ActionEvent event) throws FileNotFoundException, IOException, SQLException {
 		ClientMessage downloadMessage = new ClientMessage(ClientMessageType.DOWNLOAD_MANUAL_EXAM, exam.getEid());
@@ -112,6 +174,11 @@ public class StudentManualExamController extends StudentMainPageController imple
 
 	}
 
+	/**
+	 * @param ActionEvent event
+	 * @throws IOException
+	 * Used as a method to take care of submmision
+	 */
 	@FXML
 	void SubmitButon2Pressed(ActionEvent event) throws IOException {
 		GUIControl.popUpMessageYesNo("System Message", "Are you sure you want to submit your exam?");
@@ -141,6 +208,12 @@ public class StudentManualExamController extends StudentMainPageController imple
 
 	}
 
+	/**
+	 * @param ActionEvent event
+	 * @throws FileNotFoundException
+	 * Used as a button to upload a file
+	 * 
+	 */
 	@FXML
 	void UploadFileButtonPressed(ActionEvent event) throws FileNotFoundException {
 		FileChooser fc = new FileChooser();
@@ -154,6 +227,9 @@ public class StudentManualExamController extends StudentMainPageController imple
 
 	}
 
+	/**
+	 *Sets the timer and file extensions
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		lstFile = new ArrayList<>();

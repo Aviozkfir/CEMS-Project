@@ -14,20 +14,47 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 
+/**
+ * @author Shalom and omer
+ * @extend StudentMainPageController
+ * Sets the courses of student as folders which the student can choose from.
+ *
+ */
 public class StudentCourseController extends StudentMainPageController {
+/**
+ * An array that holds the subjects of student.
+ */
 public static ArrayList<Subject> subjects=new ArrayList<Subject>() ;
 
 
+	/**
+	 * A variable that is used for adding folders to grid.
+	 */
 	int counter = 0;
+	/**
+	 * A text field that shows the name of the subject.
+	 */
 	@FXML
 	private Text subjectName;
 
+	/**
+	 * A grid that holds folders of courses
+	 */
 	@FXML
 	private GridPane grid;
 
+	/**
+	 * A button that is used to go back to previous page.
+	 */
 	@FXML
 	private Button Back;
 
+	/**
+	 * @param ActionEvent event
+	 * @throws IOException
+	 * Used to go back to subject page.
+	 * 
+	 */
 	@FXML
 	void BackPressed(ActionEvent event) throws IOException {
 		StudentMyExamsController a = (StudentMyExamsController) guiControl
@@ -35,6 +62,10 @@ public static ArrayList<Subject> subjects=new ArrayList<Subject>() ;
 		a.setStudentSubject();
 	}
 
+	/**
+	 * @param subject
+	 * Used to set the courses of student as folders.
+	 */
 	public void setStudentCourse(Subject subject) {
 
 		this.subjectName.setText(subject.getName());
