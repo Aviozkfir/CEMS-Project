@@ -513,6 +513,7 @@ public class ServerCEMS extends AbstractServer {
 						if(dce.getTeacher().equals(client)&&dce.getEid().equals(((Exam)clientMsg.getMessage()).getEid())) {
 							it.remove();
 							type=ServerMessageTypes.TEACHER_REFRSH_ONGOING_EXAM_PAGE;
+							
 							for(ConnectionToClient ctc:dce.getConToClientStudent())
 								ctc.sendToClient(new ServerMessage(ServerMessageTypes.STOP_EXAM, clientMsg.getMessage()));
 						}

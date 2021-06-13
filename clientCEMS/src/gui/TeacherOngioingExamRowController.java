@@ -58,14 +58,6 @@ public class TeacherOngioingExamRowController {
     
     	ClientMessage m1 = new ClientMessage(ClientMessageType.TEACHER_LOCK_EXAM,exam);
     	GUIControl.getInstance().sendToServer(m1);
-    	
-  
-			 
-			
-			
-    	TeacherOngoingExamsController a = (TeacherOngoingExamsController) GUIControl.getInstance().loadStage(ClientsConstants.Screens.TEACHER_ONGOING_EXAMS_PAGE.path);
-			
-				a.setOngoingExams();
 				
 			
 		

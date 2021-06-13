@@ -1,7 +1,14 @@
 package application;
 
+import java.io.IOException;
+
 import entity.Principal;
+import entity.Student;
+import entity.Teacher;
+import gui.ClientsConstants;
 import gui.GUIControl;
+import gui.StudentExamExecutionController;
+import gui.TeacherOngoingExamsController;
 
 public class UpdateThread extends Thread {
 	private boolean exit = false;
@@ -34,12 +41,34 @@ public class UpdateThread extends Thread {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-					System.out.println("\n got in \n");
+					System.out.println("--> a command from server:");
 					
 					if(guiControl.getUser() instanceof Principal) {
 					guiControl.CountRequest();
 					}
-					
+					else if(guiControl.getUser() instanceof Student) {
+						if(guiControl.getController() instanceof StudentExamExecutionController)
+							try {
+								((StudentExamExecutionController)guiControl.getController()).stopExam();
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+					}
+					else if(guiControl.getUser() instanceof Teacher) {
+						if(guiControl.getController() instanceof TeacherOngoingExamsController) {
+							
+							
+							try {
+								TeacherOngoingExamsController a = (TeacherOngoingExamsController) GUIControl.getInstance().loadStage(ClientsConstants.Screens.TEACHER_ONGOING_EXAMS_PAGE.path);
+								a.setOngoingExams();
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+						}
+							
+					}
 					
 					check = false;
 				}
