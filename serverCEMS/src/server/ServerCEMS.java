@@ -539,6 +539,16 @@ public class ServerCEMS extends AbstractServer {
 						}
 					}
 					break;
+					
+				case TEACHER_SEND_REQUEST:
+					returnVal = MySQLConnection.sendNewRequest((ArrayList<String>) clientMsg.getMessage());
+					if ((boolean) returnVal) {
+						type = ServerMessageTypes.TEACHER_REQUEST_NOT_RECIVED;
+					}
+					else {
+						type = ServerMessageTypes.TEACHER_REQUEST_RECIVED;
+					}
+					break;
 			
 			
 				}

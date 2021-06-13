@@ -1002,7 +1002,32 @@ public class MySQLConnection {
 
 	}
 	
-
+	
+	
+	public static boolean sendNewRequest(ArrayList<String> newRequest) throws SQLException {
+		int rs ;
+		String Eid = newRequest.get(0);
+		String title = newRequest.get(1);
+		String curDuration = newRequest.get(2);
+		String Tid = newRequest.get(3);
+		String newDuration = newRequest.get(4);
+		PreparedStatement stm;
+		stm = con.prepareStatement(
+					"INSERT INTO `Requests` (`Enum`, `title`, `currentDuration`, `Status`, `Status2`, `Tid`, `newDuration`) VALUES (?,?,?,'StandBy','Waiting',?,?)");
+		stm.setString(1, Eid);
+		stm.setString(2, title);
+		stm.setString(3, curDuration);
+		stm.setString(4, Tid);
+		stm.setString(5, newDuration);
+		try {
+			rs = stm.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 
 	
 }
