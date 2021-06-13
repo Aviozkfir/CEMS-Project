@@ -74,6 +74,11 @@ public class ClientCEMS extends AbstractClient {
 			case STOP_EXAM:
 				guiControl.setServerMsg(serverMsg);
 				guiControl.getUpdateThread().Check();
+			
+				break;
+			case STUDENT_EXTEND_TIME:
+				guiControl.setServerMsg(serverMsg);
+				guiControl.getUpdateThread().Check();
 				break;
 			case TEACHER_REFRSH_ONGOING_EXAM_PAGE:
 				guiControl.setServerMsg(serverMsg);

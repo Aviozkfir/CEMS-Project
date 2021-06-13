@@ -215,11 +215,8 @@ public class ServerCEMS extends AbstractServer {
 							currentExam ce =itce.next();
 							if(((Exam)returnVal).getEid().equals(ce.getEid())) {
 									type = ServerMessageTypes.EXAM_INFORMATION_RECIVED;
-<<<<<<< HEAD
 									ce.getConToClientStudent().add(client);
-=======
-							ce.getConToClientStudent().add(client);
->>>>>>> refs/heads/guyNewBranch
+
 							}
 						}
 						if(type != ServerMessageTypes.EXAM_INFORMATION_RECIVED)
@@ -337,10 +334,13 @@ public class ServerCEMS extends AbstractServer {
 							.updatePrincipalApprovedRequests((ArrayList<String>) clientMsg.getMessage());
 					if (returnVal != null) {
 						type = ServerMessageTypes.PRINCIPAL_APPROVED_REQUESTS_ADDED;
-						for(currentExam tce :currentExams)
-							for(String eid : (ArrayList<String>) clientMsg.getMessage()) {
-								if(tce.getEid().equals(eid)) {
-									tce.getTeacher().sendToClient(clientMsg);
+						for(currentExam ce: currentExams)
+							for(int i=0; i< ((ArrayList<String>) clientMsg.getMessage()).size();i++) {
+								if(ce.getEid().equals(((ArrayList<String>) clientMsg.getMessage()).get(i))) {
+									String newTime = ((ArrayList<String>) returnVal).get(i);
+									for(ConnectionToClient cl : ce.getConToClientStudent())
+										cl.sendToClient(new ServerMessage(ServerMessageTypes.STUDENT_EXTEND_TIME, newTime));
+									ce.getTeacher().sendToClient(new ServerMessage(ServerMessageTypes.TEACHER_REFRSH_ONGOING_EXAM_PAGE, ((ArrayList<String>) clientMsg.getMessage()).get(i)));
 								}
 							}
 					}
@@ -366,6 +366,7 @@ public class ServerCEMS extends AbstractServer {
 							.updatePrincipalRequestStatus((ArrayList<String>) clientMsg.getMessage());
 					if (returnVal != null) {
 						type = ServerMessageTypes.PRINCIPAL_UPDATE_REQUESTS_STATUS_SUCCESS;
+						
 					}
 					break;
 

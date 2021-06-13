@@ -520,10 +520,7 @@ public class MySQLConnection {
 		maxID=getMaxID.executeQuery();
 		String id;
 		maxID.next();
-<<<<<<< HEAD
-=======
-		
->>>>>>> refs/heads/guyNewBranch
+
 		if(maxID.getString(1)!=null) {
 			id=(""+(1+Integer.parseInt(maxID.getNString(1))));
 			if(id.length()==5) {
@@ -601,10 +598,17 @@ public class MySQLConnection {
 			statment.setString(1, request);
 			statment.executeUpdate();
 		}
-		//return an array list of eid
-		//return an array list of new time
+		ArrayList<String> newEid= new ArrayList<String>();
+		for(String request : RequestList) {
+			statment = con
+					.prepareStatement("SELECT newDuration FROM Requests WHERE Enum = ?");
+			statment.setString(1, request);
+			ResultSet rs = statment.executeQuery();
+			rs.next();
+			newEid.add(rs.getString(1));
+		}
 		
-		return "Succeded";
+		return newEid;
 	}
 	
 	public static Object updatePrincipalDeclinedRequests(ArrayList<String> RequestList) throws SQLException {

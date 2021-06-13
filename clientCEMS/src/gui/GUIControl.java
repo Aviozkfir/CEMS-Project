@@ -285,16 +285,28 @@ public class GUIControl {
 				if (getUser() instanceof Principal) {
 					CountRequest();
 				} else if (getUser() instanceof Student) {
+					
 					if (getController() instanceof StudentExamExecutionController)
 						try {
-							((StudentExamExecutionController) getController()).stopExam();
+							if(getServerMsg().getType()==ServerMessageTypes.STUDENT_EXTEND_TIME) {
+								((StudentExamExecutionController) getController()).setAddition(getServerMsg().getMessage());
+
+							}
+							else
+								((StudentExamExecutionController) getController()).stopExam();
+							
 						} catch (IOException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					else if(getController() instanceof StudentManualExamController) {
 						try {
-							((StudentManualExamController) getController()).stopExam();
+							if(getServerMsg().getType()==ServerMessageTypes.STUDENT_EXTEND_TIME) {
+								((StudentExamExecutionController) getController()).setAddition(getServerMsg().getMessage());
+
+							}
+							else
+								((StudentManualExamController) getController()).stopExam();
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();

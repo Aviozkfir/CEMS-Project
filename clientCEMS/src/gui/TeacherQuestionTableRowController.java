@@ -84,7 +84,7 @@ public class TeacherQuestionTableRowController {
 
     @FXML
     void btnViewQuestionPressed(ActionEvent event) {
-
+    	
     }
 
 }
