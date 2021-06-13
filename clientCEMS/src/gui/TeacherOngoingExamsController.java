@@ -17,6 +17,8 @@ import message.ClientMessageType;
 public class TeacherOngoingExamsController extends TeacherMainPageController{
 
 
+	
+
     @FXML
     private VBox vTable;
     
@@ -39,7 +41,10 @@ public class TeacherOngoingExamsController extends TeacherMainPageController{
 			controller.setExam(e);
 			vTable.getChildren().add(root);
 			
+
     	}
+    	
+    	
     	
     }
 

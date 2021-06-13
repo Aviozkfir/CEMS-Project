@@ -519,8 +519,8 @@ public class MySQLConnection {
 		getMaxID.setString(2, e.getCid());
 		maxID=getMaxID.executeQuery();
 		String id;
-		
-		if(maxID.next()) {
+		maxID.next();
+		if(maxID.getString(1)!=null) {
 			id=(""+(1+Integer.parseInt(maxID.getNString(1))));
 			if(id.length()==5) {
 				id="0"+id;
@@ -559,12 +559,12 @@ public class MySQLConnection {
 		
 		
 		
-		File newFile = new File ("C:\\"+e.getName()+"_CemsExam.docx");
+		File newFile = new File ("D:\\"+e.getName()+"_CemsExam.docx");
 					  
 		try (FileOutputStream outputStream = new FileOutputStream(newFile)) {
 		    outputStream.write(ExamFile);
 		}  
-		InputStream inputstream = new FileInputStream("C:\\"+e.getName()+"_CemsExam.docx");
+		InputStream inputstream = new FileInputStream("D:\\"+e.getName()+"_CemsExam.docx");
 
 		addMExam.setBlob(2, inputstream);
 		addMExam.setString(3, e.getID());
