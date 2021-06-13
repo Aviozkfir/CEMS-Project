@@ -2,50 +2,86 @@ package gui;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Map.Entry;
 import java.util.ResourceBundle;
-
 import entity.Principal;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Bounds;
-import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.text.Text;
 import javafx.util.StringConverter;
-
+/**
+ * @author On Avioz,Kfir Avioz.
+ * @extend PrincipalMainPageController
+ * @implements Initializable interface.
+ *  Controller for the principal report that presents
+ *  the report by the options the princial chose.
+ *
+ */
 public class PrincipalFinalReportControl extends PrincipalMainPageController implements Initializable {
+	/**
+	 * text that presents Average.
+	 */
 	@FXML
 	private Text Average;
+	/**
+	 * text that presents Median.
+	 */
 	@FXML
 	private Text Median;
+	/**
+	 * text that presents the number of the students in the report.
+	 */
 	@FXML
 	private Text totalStudentsText;  
+	/**
+	 * text that presents the number of the students that failed in the report.
+	 */
 	@FXML
-	private Text totalFailedText;   //
+	private Text totalFailedText; 
+	/**
+	 * text that presents the year range in the report.
+	 */
 	@FXML
-	private Text yearsText;			//
+	private Text yearsText;	
+	/**
+	 * text that presents the report explanations.
+	 */
 	@FXML
 	private Text PageExplainText;
+	/**
+	 * Histogram barchart.
+	 */
 	@FXML
 	private BarChart<String, Integer> barChart;
+	/**
+	 * Histogram's Y axis.
+	 */
 	@FXML
 	private NumberAxis yAxis;
+	/**
+	 * Histogram's X axis.
+	 */
 	@FXML
 	private CategoryAxis xAxis;
-
+	/**
+	 * array of int that counts instances in each bin.
+	 */
 	int yAxisGroup[] = new int[9];
+	/**
+	 * principal instance.
+	 */
 	Principal principal = (Principal) guiControl.getUser();
-	String failedStudents;
 
+	/**
+	 * @param event
+	 * @throws IOException
+	 * The user can get back to the previous page, by the type of report he chose.
+	 */
 	@FXML
 	void BackPressed(ActionEvent event) throws IOException {
 		if (Istype("Course")) {
@@ -65,6 +101,11 @@ public class PrincipalFinalReportControl extends PrincipalMainPageController imp
 
 	}
 
+	/**
+	 * @param location
+	 * @param resources
+	 * Shows the report details(histogram,average,median,etc..) immidiatly when the user gets into the final report fxml.
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		PageExplainTextset();
@@ -77,6 +118,11 @@ public class PrincipalFinalReportControl extends PrincipalMainPageController imp
 
 	}
 
+	
+	/**
+	 * This method is to set the histogram when x's axis index =10.
+	 * the method counts every instance in each bin and sets the histogram result. 
+	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void SetHistogram() {
 
@@ -103,7 +149,9 @@ public class PrincipalFinalReportControl extends PrincipalMainPageController imp
 		}
 
 	}
-
+	/**
+	 *groupData counts each instance in the histogram's bins.
+	 */
 	private void groupData() {
 
 		for (int i = 0; i < 9; i++) {
@@ -133,31 +181,53 @@ public class PrincipalFinalReportControl extends PrincipalMainPageController imp
 			}
 		}
 	}
-
-	public boolean Istype(String type) { // check report type: teacher,student,course.
+	/**
+	 * @param type
+	 * IsType returns the type of report : course,student,teacher.
+	 */
+	public boolean Istype(String type) { 
 		if (principal.getReportType().equals(type))
 			return true;
 		return false;
 	}
 
-	class IntegerStringConverter extends StringConverter<Number> { // convert yaxis from doubles to integers.
+	/**
+	 * @author On Avioz,Kfir Avioz.
+	 * @extend StringConverter<Number>.
+	 * Class to fix scenebuilder: yaxis shows integers instead of doubls.
+	 *
+	 */
+	class IntegerStringConverter extends StringConverter<Number> { 
+		/**
+		 * IntegerStringConverter empty constructor.
+		 * 
+		 */
 		public IntegerStringConverter() {
 		}
-
+		/**
+		 * @param object
+		 * converts an integer to string
+		 */
 		@Override
 		public String toString(Number object) {
 			if (object.intValue() != object.doubleValue())
 				return "";
 			return "" + (object.intValue());
 		}
-
+		/**
+		 * @param object
+		 * converts a string to integer
+		 */
 		@Override
 		public Number fromString(String string) {
 			Number val = Double.parseDouble(string);
 			return val.intValue();
 		}
 	}
-
+	/**
+	 * PageExplainTextset sets text explanation for gui.
+	 * 
+	 */
 	public void PageExplainTextset() {
 		PageExplainText.setText("Distribution of grades- exams of chosen " + principal.getReportType()+" with id: "+principal.getReport().getSelected());
 

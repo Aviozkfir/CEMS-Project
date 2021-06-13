@@ -15,8 +15,8 @@ import message.ClientMessageType;
 import message.ServerMessageTypes;
 
 /**
- * @author On avioz This class is the Main Controller for principal, all other
- *         controllers extends him.
+ * @author On avioz,Kfir Avioz.
+ * This class is the Main Controller for principal, all other controllers extends him.
  * @extend MainPageController
  */
 public class PrincipalMainPageController extends MainPageController {

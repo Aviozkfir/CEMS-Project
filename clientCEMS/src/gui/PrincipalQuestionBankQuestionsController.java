@@ -2,9 +2,7 @@ package gui;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
 import entity.Course;
-import entity.Exam;
 import entity.Principal;
 import entity.Question;
 import javafx.event.ActionEvent;
@@ -20,9 +18,9 @@ import message.ClientMessageType;
 import message.ServerMessageTypes;
 
 /**
- * @author On Avioz
- * @extend PrincipalMainPageController Controller for each question inside
- *         chosen course inside chosen subject inside question bank screen.
+ * @author On Avioz,Kfir Avioz.
+ * @extend PrincipalMainPageController
+ *  Controller for each question inside chosen course inside chosen subject inside question bank screen.
  *
  */
 public class PrincipalQuestionBankQuestionsController extends PrincipalMainPageController {

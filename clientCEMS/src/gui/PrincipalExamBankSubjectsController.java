@@ -11,7 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 
 /**
- * @author On Avioz
+ * @author On Avioz ,Kfir Avioz
  * Controller of principal "Exam Bank" screen.
  * @extends PrincipalMainPageController.
  */

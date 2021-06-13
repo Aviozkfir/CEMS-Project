@@ -12,7 +12,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 
 /**
- * @author On Avioz
+ * @author On Avioz,Kfir Avioz
  * @extend PrincipalMainPageController
  * Controller for question bank screen.
  *
