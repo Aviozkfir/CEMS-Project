@@ -159,7 +159,7 @@ public class PrincipalFinalReportControl extends PrincipalMainPageController imp
 	}
 
 	public void PageExplainTextset() {
-		PageExplainText.setText("Distribution of grades -  exams from the same chosen " + principal.getReportType());
+		PageExplainText.setText("Distribution of grades- exams of chosen " + principal.getReportType()+" with id: "+principal.getReport().getSelected());
 
 	}
 

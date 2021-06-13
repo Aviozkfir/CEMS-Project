@@ -74,6 +74,7 @@ public class PrincipalReportStudentControl extends PrincipalMainPageController i
 				if (!reportData.isEmpty()) {
 					report = new Report(reportData);
 					principal.setReport(report);
+					principal.getReport().setSelected(IDtext.getText());
 					SetMedianAndAverage();
 					SetYearRange();
 

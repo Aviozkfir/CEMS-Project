@@ -127,7 +127,7 @@
                         <Font size="17.0" />
                      </font>
                   </Text>
-                  <Text fx:id="PageExplainText" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Distribution of grades -  exams from the same chosen   " wrappingWidth="496.23974609375">
+                  <Text fx:id="PageExplainText" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Distribution of grades -  exams from the same chosen   " wrappingWidth="643.23974609375">
                      <font>
                         <Font size="17.0" />
                      </font>
