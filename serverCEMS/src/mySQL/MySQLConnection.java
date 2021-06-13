@@ -1,9 +1,12 @@
 package mySQL;
 
+import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -508,7 +511,7 @@ public class MySQLConnection {
 		return id;
 	}
 	
-	public static String addManualExam(Exam e, byte[] ExamFile) throws SQLException, ParseException, FileNotFoundException {
+	public static String addManualExam(Exam e, byte[] ExamFile) throws SQLException, ParseException, IOException {
 		
 		ResultSet maxID;
 		PreparedStatement getMaxID =con.prepareStatement("SELECT MAX(e.Eid) FROM Exams e where e.Sid=? AND e.Cid=?");
@@ -554,9 +557,16 @@ public class MySQLConnection {
 						+ "VALUES (?, ? ,?)");
 		addMExam.setString(1, e.getEid());
 		
-		InputStream inputstream = new ByteArrayInputStream(ExamFile);
 		
-		addMExam.setBinaryStream(2, inputstream);
+		
+		File newFile = new File ("C:\\"+e.getName()+"_CemsExam.docx");
+					  
+		try (FileOutputStream outputStream = new FileOutputStream(newFile)) {
+		    outputStream.write(ExamFile);
+		}  
+		InputStream inputstream = new FileInputStream("C:\\"+e.getName()+"_CemsExam.docx");
+
+		addMExam.setBlob(2, inputstream);
 		addMExam.setString(3, e.getID());
 		return id;
 	}

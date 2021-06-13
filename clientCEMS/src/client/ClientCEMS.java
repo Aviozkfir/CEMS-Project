@@ -78,7 +78,7 @@ public class ClientCEMS extends AbstractClient {
 			case TEACHER_REFRSH_ONGOING_EXAM_PAGE:
 				guiControl.setServerMsg(serverMsg);
 				guiControl.getUpdateThread().Check();
-				
+			
 				
 				break;
 			default:

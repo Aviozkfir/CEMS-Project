@@ -132,7 +132,7 @@ public class ServerCEMS extends AbstractServer {
 							type = ServerMessageTypes.LOGIN_STUDENT;
 						case "Principal":
 							type = ServerMessageTypes.LOGIN_PRINCIPAL;
-							
+							conToClientMng.add(client);	
 						}
 //						if (userList.contains(returnVal)) // user already logged in
 //							returnVal = "logged in";
