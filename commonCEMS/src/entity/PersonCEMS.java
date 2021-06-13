@@ -1,18 +1,44 @@
 package entity;
 
 import java.io.Serializable;
-/*
- * Person is made for employee and subscriber to extend it
+
+/**
+ * A class that holds information about Person in CEMS System.
+ * @author Shalom and Omer
+ *
  */
 @SuppressWarnings("serial")
 public abstract class PersonCEMS implements Serializable {
+	/**
+	 * Holds the first name of person
+	 */
 	protected String firstName;
+	/**
+	 * Holds the last name of person
+	 */
 	protected String lastName;
+	/**
+	 * Holds the ID of person
+	 */
 	protected String id;
+	/**
+	 * Holds the email of person
+	 */
 	protected String email;
+	/**
+	 * Holds the role of person
+	 */
 	protected String role;
 	
 	
+	/**
+	 * A constructor for PersonCEMS given all the fields.
+	 * @param firstName
+	 * @param lastName
+	 * @param id
+	 * @param email
+	 * @param role
+	 */
 	public PersonCEMS(String firstName, String lastName, String id, String email, String role) {
 		super();
 		this.firstName = firstName;
@@ -22,42 +48,88 @@ public abstract class PersonCEMS implements Serializable {
 		this.role = role;
 	}
 	
+	/**
+	 * returns first name of person
+	 * @return String
+	 */
 	public String getFirstName() {
 		return firstName;
 	}
+	/**
+	 * sets first name of person
+	 * @param String firstName
+	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+	/**
+	 * returns last name of person
+	 * @return String
+	 */
 	public String getLastName() {
 		return lastName;
 	}
+	/**
+	 * sets last name of person
+	 * @param String lastName
+	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+	/**
+	 * returns ID of person
+	 * @return String
+	 */
 	public String getId() {
 		return id;
 	}
+	/**
+	 * sets ID of person
+	 * @param String id
+	 */
 	public void setId(String id) {
 		this.id = id;
 	}
+	/**
+	 * returns email of person
+	 * @return String
+	 */
 	public String getEmail() {
 		return email;
 	}
+	/**
+	 * sets email of person
+	 * @param String email
+	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	/**
+	 * returns role of person
+	 * @return String
+	 */
 	public String getRole() {
 		return role;
 	}
+	/**
+	 * sets role of person
+	 * @param String role
+	 */
 	public void setRole(String role) {
 		this.role = role;
 	}
+	/**
+	 *toString for personCEMS
+	 */
 	@Override
 	public String toString() {
 		return "Person [firstName=" + firstName + ", lastName=" + lastName + ", id=" + id + ", email=" + email
 				+ ", role=" + role + "]";
 	}
 
+	/**
+	 *Generates hash code for person
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -70,6 +142,9 @@ public abstract class PersonCEMS implements Serializable {
 		return result;
 	}
 
+	/**
+	 *Checks if PersonCEMS is equal to another PersonCEMS
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
