@@ -42,6 +42,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import message.ClientMessage;
 import message.ClientMessageType;
+import message.ServerMessageTypes;
 
 /**
  * @author Shalom and Omer
@@ -193,7 +194,7 @@ public class StudentManualExamController extends StudentMainPageController imple
 				Object[] toSend = { exam.getEid(), fileToUpload, ((Student) guiControl.getUser()).getId() };
 				ClientMessage FileMessage = new ClientMessage(ClientMessageType.UPLOAD_MANUAL_EXAM, toSend);
 				guiControl.sendToServer(FileMessage);
-				if ((boolean) guiControl.getServerMsg().getMessage() == true) {
+				if ( guiControl.getServerMsg().getType() == ServerMessageTypes.EXAM_UPLOADED_SUCCECFULLY) {
 					guiControl.popUpMessage("System Message", "Exam has been uploaded");
 					guiControl.loadStage(ClientsConstants.Screens.STUDENT_MAIN_PAGE.path);
 
@@ -302,6 +303,11 @@ public class StudentManualExamController extends StudentMainPageController imple
 
 		timer.start();
 
+	}
+	public void stopExam() {
+		timer.stop();
+		
+		
 	}
 
 }
