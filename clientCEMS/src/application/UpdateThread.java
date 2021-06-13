@@ -43,32 +43,7 @@ public class UpdateThread extends Thread {
 					}
 					System.out.println("--> a command from server:");
 					
-					if(guiControl.getUser() instanceof Principal) {
-					guiControl.CountRequest();
-					}
-					else if(guiControl.getUser() instanceof Student) {
-						if(guiControl.getController() instanceof StudentExamExecutionController)
-							try {
-								((StudentExamExecutionController)guiControl.getController()).stopExam();
-							} catch (IOException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
-					}
-					else if(guiControl.getUser() instanceof Teacher) {
-						if(guiControl.getController() instanceof TeacherOngoingExamsController) {
-							
-							
-							try {
-								TeacherOngoingExamsController a = (TeacherOngoingExamsController) GUIControl.getInstance().loadStage(ClientsConstants.Screens.TEACHER_ONGOING_EXAMS_PAGE.path);
-								a.setOngoingExams();
-							} catch (IOException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
-						}
-							
-					}
+					guiControl.exeThread();
 					
 					check = false;
 				}
