@@ -146,7 +146,7 @@ public class StudentManualExamController extends StudentMainPageController imple
 	 */
 	@FXML
 	void DownloadFileButtonPressed(ActionEvent event) throws FileNotFoundException, IOException, SQLException {
-		Object[] data= {exam.getEid(),exam};
+		Object[] data = { exam.getEid(), exam };
 		ClientMessage downloadMessage = new ClientMessage(ClientMessageType.DOWNLOAD_MANUAL_EXAM, data);
 		guiControl.sendToServer(downloadMessage);
 		if ((ManualExamFile) guiControl.getServerMsg().getMessage() == null) {
@@ -180,9 +180,10 @@ public class StudentManualExamController extends StudentMainPageController imple
 	}
 
 	/**
-	 *Used as a method to take care of submmision
+	 * Used as a method to take care of submmision
+	 * 
 	 * @param ActionEvent event
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	@FXML
 	void SubmitButon2Pressed(ActionEvent event) throws IOException {
@@ -195,7 +196,7 @@ public class StudentManualExamController extends StudentMainPageController imple
 
 			else {
 				timer.stop();
-				Object[] toSend = { exam.getEid(), fileToUpload, ((Student) guiControl.getUser()).getId(),exam };
+				Object[] toSend = { exam.getEid(), fileToUpload, ((Student) guiControl.getUser()).getId(), exam };
 				ClientMessage FileMessage = new ClientMessage(ClientMessageType.UPLOAD_MANUAL_EXAM, toSend);
 				guiControl.sendToServer(FileMessage);
 				if (guiControl.getServerMsg().getType() == ServerMessageTypes.EXAM_UPLOADED_SUCCECFULLY) {
@@ -214,9 +215,10 @@ public class StudentManualExamController extends StudentMainPageController imple
 	}
 
 	/**
-	 *Used as a button to upload a file
+	 * Used as a button to upload a file
+	 * 
 	 * @param ActionEvent event
-	 * @throws FileNotFoundException 
+	 * @throws FileNotFoundException
 	 * 
 	 */
 	@FXML
@@ -237,7 +239,7 @@ public class StudentManualExamController extends StudentMainPageController imple
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-	
+
 		lstFile = new ArrayList<>();
 		lstFile.add("*.doc");
 		lstFile.add("*.docx");
@@ -309,13 +311,22 @@ public class StudentManualExamController extends StudentMainPageController imple
 		timer.start();
 
 	}
-	
 
 	/**
 	 * Stops the exam when a messages is recivied from teacher.
+	 * 
+	 * @throws IOException
 	 */
-	public void stopExam() {
+	public void stopExam() throws IOException {
 		timer.stop();
+		Object[] data = { null, null, null, exam };
+		ClientMessage FileMessage = new ClientMessage(ClientMessageType.UPLOAD_MANUAL_EXAM, data);
+		guiControl.sendToServer(FileMessage);
+		if (guiControl.getServerMsg().getType() == ServerMessageTypes.EXAM_UPLOADING_FAILED) {
+			guiControl.popUpMessage("System Message", "Exam has been locked by Teacher");
+			guiControl.loadStage(ClientsConstants.Screens.STUDENT_MAIN_PAGE.path);
+
+		}
 
 	}
 
