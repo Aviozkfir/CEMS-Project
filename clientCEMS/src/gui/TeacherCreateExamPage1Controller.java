@@ -81,6 +81,7 @@ public class TeacherCreateExamPage1Controller {
     	((TeacherExamBankExamsController)GUIControl.instance.loadStage("/gui/TeacherExamBankExams.fxml")).setTeacherCourse(course);
     }
 
+	
     @FXML
     void btnNextPressed(ActionEvent event) {
     	

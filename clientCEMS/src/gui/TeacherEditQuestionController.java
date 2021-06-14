@@ -20,6 +20,12 @@ import message.ClientMessage;
 import message.ClientMessageType;
 import message.ServerMessageTypes;
 
+/**
+ * TeacherEditQuestionController - controller of the page that handls the edit 
+ * of a question in a relevant question bank
+ * @author Sharo
+ *
+ */
 public class TeacherEditQuestionController extends TeacherMainPageController{
 
 	private ArrayList<Course> list= new ArrayList<Course>();
@@ -75,6 +81,12 @@ public class TeacherEditQuestionController extends TeacherMainPageController{
 
     private Course course;
     
+    /**
+     * setTeacherQuestion
+     * @param question
+     * @param course
+     * @throws IOException
+     */
 	public void setTeacherQuestion(Question question, Course course) throws IOException {
 
 		this.question = question;
