@@ -1,6 +1,8 @@
 package entity;
 
-public class updatedRequestExam {
+import java.io.Serializable;
+
+public class updatedRequestExam implements Serializable{
 
 	private Exam exam;
 	private String status;
