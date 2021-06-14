@@ -16,59 +16,78 @@ import javafx.scene.text.Text;
 import message.ClientMessage;
 import message.ClientMessageType;
 
-public class TeacherExamBankSolvedByStudentExamsController  extends TeacherMainPageController{
+/**
+ * Controller that holds the exam for solved exam.
+ * 
+ * @author oavioz
+ *
+ */
+public class TeacherExamBankSolvedByStudentExamsController extends TeacherMainPageController {
 
-    @FXML
-    private AnchorPane myRoot;
+	@FXML
+	private AnchorPane myRoot;
 
-    @FXML
-    private Text subjectName;
+	@FXML
+	private Text subjectName;
 
-    @FXML
-    private Text courseName;
+	@FXML
+	private Text courseName;
 
-    @FXML
-    private Text numberOfExams;
+	@FXML
+	private Text numberOfExams;
 
-    @FXML
-    private VBox vTable;
+	@FXML
+	private VBox vTable;
 
-    @FXML
-    private Button btnBack;
+	@FXML
+	private Button btnBack;
 
-    private Course course;
+	private Course course;
 
-    @FXML
-    void btnBackPressed(ActionEvent event) throws IOException {
-    	((TeacherExamBankSolvedByStudentCoursesController) GUIControl.instance.loadStage("TeacherExamBankSolvedByStudentCourses.fxml")).setTeacherCourse(course.getSubject());
-    }
+	/**
+	 * This method show the screen of choosing courses for solved exams.
+	 * 
+	 * @param event
+	 * @throws IOException
+	 */
+	@FXML
+	void btnBackPressed(ActionEvent event) throws IOException {
+		((TeacherExamBankSolvedByStudentCoursesController) GUIControl.instance
+				.loadStage("TeacherExamBankSolvedByStudentCourses.fxml")).setTeacherCourse(course.getSubject());
+	}
 
-    
-    public void setTeacherCourse(Course course) throws IOException {
-    	
-    	this.course=course;
-    	
-    	courseName.setText(course.getName());
-    	subjectName.setText(course.getSubject().getName());
-    	
-    	ClientMessage m1 = new ClientMessage(ClientMessageType.TEAHCER_GET_SOLVED_EXAMS_BY_COURSE, course);
-    	guiControl.sendToServer(m1);
-    	
-    	ArrayList<SolvedExamType> exams = (ArrayList<SolvedExamType>) guiControl.getServerMsg().getMessage();
-    	
-    	numberOfExams.setText(""+exams.size());
-    	
-    	for(SolvedExamType se : exams)
-    	{
-    		TeacherExamBankSolvedByStudentExamsRowsController controller;
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/TeacherExamBankSolvedByStudentExamsRow.fxml"));
+	/**
+	 * This method sets the course teacher dynamically after the user chose specific
+	 * subject.
+	 * 
+	 * @param course the course the user chose.
+	 * @throws IOException
+	 */
+	public void setTeacherCourse(Course course) throws IOException {
+
+		this.course = course;
+
+		courseName.setText(course.getName());
+		subjectName.setText(course.getSubject().getName());
+
+		ClientMessage m1 = new ClientMessage(ClientMessageType.TEAHCER_GET_SOLVED_EXAMS_BY_COURSE, course);
+		guiControl.sendToServer(m1);
+
+		ArrayList<SolvedExamType> exams = (ArrayList<SolvedExamType>) guiControl.getServerMsg().getMessage();
+
+		numberOfExams.setText("" + exams.size());
+
+		for (SolvedExamType se : exams) {
+			TeacherExamBankSolvedByStudentExamsRowsController controller;
+			FXMLLoader fxmlLoader = new FXMLLoader(
+					getClass().getResource("/gui/TeacherExamBankSolvedByStudentExamsRow.fxml"));
 			AnchorPane root = fxmlLoader.load();
 			controller = (TeacherExamBankSolvedByStudentExamsRowsController) fxmlLoader.getController();
 			se.setCourse(course);
 			controller.setExam(se);
 			vTable.getChildren().add(root);
-			
-    	}
-    	
-    }
+
+		}
+
+	}
 }

@@ -11,6 +11,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.text.Text;
 
+/**Controller that holds the view of the question the user chose after he chose exam.
+ * @author oavioz
+ *
+ */
 public class TeacherExamBankViewExamViewQuestionController extends TeacherMainPageController {
 	/**
 	 * The question.
