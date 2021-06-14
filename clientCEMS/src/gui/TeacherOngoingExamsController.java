@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import entity.Course;
 import entity.Exam;
+import entity.updatedRequestExam;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -22,16 +23,16 @@ public class TeacherOngoingExamsController extends TeacherMainPageController{
     @FXML
     private VBox vTable;
     
-    private ArrayList<Exam> allExams;
+    private ArrayList<updatedRequestExam> allExams;
 
     public void setOngoingExams() throws IOException {
     	
     	ClientMessage m1 = new ClientMessage(ClientMessageType.TEACHER_GET_CURRENT_EXAM,null);
     	guiControl.sendToServer(m1);
     	
-    	allExams = (ArrayList<Exam>) guiControl.getServerMsg().getMessage();
+    	allExams = (ArrayList<updatedRequestExam>) guiControl.getServerMsg().getMessage();
     	
-    	for(Exam e : allExams)
+    	for(updatedRequestExam e : allExams)
     	{
     		TeacherOngioingExamRowController controller;
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/TeacherOngioingExamRow.fxml"));

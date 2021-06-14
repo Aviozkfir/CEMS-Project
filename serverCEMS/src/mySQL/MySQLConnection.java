@@ -34,6 +34,7 @@ import entity.Student;
 import entity.Subject;
 import entity.Teacher;
 import entity.TeachersExam;
+import entity.updatedRequestExam;
 
 /**
  * class that holds static methods related to database actions such as
@@ -665,6 +666,26 @@ public class MySQLConnection {
 		rs.next();
 			 Counter = rs.getInt(1);
 		return Counter;
+	} 
+	
+	public static updatedRequestExam getUpdateExam(Exam e) throws SQLException {
+		
+		ResultSet rs;
+		String Eid =e.getEid();
+		PreparedStatement statment;
+		statment = con.prepareStatement("SELECT status, newDuration FROM Requests  WHERE Status = 'Approved'  AND enum=?");
+		statment.setString(1, Eid);
+		rs = statment.executeQuery();
+		rs.next();
+		String status = rs.getString(1);
+		String newDuration =rs.getString(2);
+		if(status==null) {
+			return null;
+		}
+		statment = con.prepareStatement("DELETE FROM Requests WHERE enum=?");
+		statment.setString(1, Eid);
+		statment.executeUpdate();
+		return new updatedRequestExam(e, status, newDuration);
 	}
 	
 	public static Object updatePrincipalRequestStatus(ArrayList<String> RequestList) throws SQLException {

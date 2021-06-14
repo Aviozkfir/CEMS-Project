@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import client.ClientCEMS;
 import entity.Exam;
 import entity.Question;
+import entity.updatedRequestExam;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -41,12 +42,12 @@ public class TeacherOngioingExamRowController {
 	@FXML
 	private Button btnLockExam;
 
-	private Exam exam;
+	private updatedRequestExam exam;
 
-	public void setExam(Exam exam) {
+	public void setExam(updatedRequestExam exam) {
 		this.exam = exam;
-		title.setText(exam.getName());
-		currentDuration.setText(exam.getTotalTime());
+		title.setText(exam.getExam().getName());
+		currentDuration.setText(exam.getExam().getTotalTime());
 		examStatus.setText("Not sent yet");
 	}
 
@@ -54,10 +55,10 @@ public class TeacherOngioingExamRowController {
 	void btnChangeTimePressed(ActionEvent event) {
 		ArrayList<String> newRequest = new ArrayList<String>();
 		if (CheckInput()) {
-			newRequest.add(exam.getEid());
-			newRequest.add(exam.getName());
-			newRequest.add(exam.getTotalTime());
-			newRequest.add(exam.getID());
+			newRequest.add(exam.getExam().getEid());
+			newRequest.add(exam.getExam().getName());
+			newRequest.add(exam.getExam().getTotalTime());
+			newRequest.add(exam.getExam().getID());
 			newRequest.add(newDurationText.getText());
 
 			GUIControl guiControl = GUIControl.getInstance();

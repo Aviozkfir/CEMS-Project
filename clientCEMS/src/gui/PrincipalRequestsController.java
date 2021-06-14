@@ -25,6 +25,7 @@ import message.ServerMessageTypes;
 public class PrincipalRequestsController extends PrincipalMainPageController {
 	/**
 	 * The principal instance.
+	 *
 	 */
 	Principal principal = (Principal) guiControl.getUser();
 	/**
@@ -171,14 +172,16 @@ public class PrincipalRequestsController extends PrincipalMainPageController {
 	 * 
 	 * @param ApprovedRequests array list that holds all chose requests that
 	 *                         principal want to approve.
+	 * @throws IOException 
 	 * 
 	 */
-	public void SendAprrovedRequests(ArrayList<String> ApprovedRequests) {
+	public void SendAprrovedRequests(ArrayList<String> ApprovedRequests) throws IOException {
 		ClientMessage msg = new ClientMessage(ClientMessageType.PRINCIPAL_APPROVED_REQUESTS_UPDATE, ApprovedRequests);
 		guiControl.sendToServer(msg);
 
 		if (guiControl.getServerMsg().getType() == ServerMessageTypes.PRINCIPAL_APPROVED_REQUESTS_ADDED) {
 
+			
 		} else {
 
 			GUIControl.popUpError("Error-sending update for requests");
@@ -192,18 +195,21 @@ public class PrincipalRequestsController extends PrincipalMainPageController {
 	 * 
 	 * @param DeclinedRequests array list that holds all chose requests that
 	 *                         principal want to decline.
+	 * @throws IOException 
 	 *
 	 */
-	public void SendDeclinedRequests(ArrayList<String> DeclinedRequests) {
+	public void SendDeclinedRequests(ArrayList<String> DeclinedRequests) throws IOException {
 		ClientMessage msg = new ClientMessage(ClientMessageType.PRINCIPAL_DECLINED_REQUESTS_UPDATE, DeclinedRequests);
 		guiControl.sendToServer(msg);
 
 		if (guiControl.getServerMsg().getType() == ServerMessageTypes.PRINCIPAL_DECLINED_REQUESTS_ADDED) {
+			
 		} else {
 
 			GUIControl.popUpError("Error-sending update for requests");
 
 		}
+		
 	}
 
 	/**

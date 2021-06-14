@@ -284,6 +284,18 @@ public class GUIControl {
 			public void run() {
 				if (getUser() instanceof Principal) {
 					CountRequest();
+					((PrincipalMainPageController)getController()).setRequestCounter();
+					if(getController() instanceof PrincipalRequestsController) {
+						PrincipalRequestsController controller;
+						try {
+							controller = (PrincipalRequestsController) loadStage(ClientsConstants.Screens.PRINCIPAL_REQUESTS_PAGE.path);
+							
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+					}
 				} else if (getUser() instanceof Student) {
 					
 					if (getController() instanceof StudentExamExecutionController)

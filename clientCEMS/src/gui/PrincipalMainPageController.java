@@ -13,6 +13,8 @@ import javafx.scene.text.Text;
  */
 public class PrincipalMainPageController extends MainPageController {
 
+	
+
 	/**
 	 * HomePage button in menu.
 	 */
@@ -77,7 +79,8 @@ public class PrincipalMainPageController extends MainPageController {
 		dashBoardPrincipalControllerHome controller = (dashBoardPrincipalControllerHome) guiControl
 				.loadStage(ClientsConstants.Screens.PRINCIPAL_MAIN_PAGE.path);
 		controller.setRequestCounter();
-
+		
+		
 	}
 
 	/**
@@ -92,6 +95,7 @@ public class PrincipalMainPageController extends MainPageController {
 
 		PrincipalExamBankSubjectsController controller = (PrincipalExamBankSubjectsController) guiControl
 				.loadStage(ClientsConstants.Screens.PRINCIPAL_EXAM_BANK_PAGE.path);
+		
 		controller.setPrincipalSubject();
 		controller.setRequestCounter();
 	}

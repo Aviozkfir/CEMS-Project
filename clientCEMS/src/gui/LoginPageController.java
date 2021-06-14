@@ -171,10 +171,7 @@ public class LoginPageController {
 			controller = (MainPageController) fxmlLoader.getController();
 			guiControl.setController(controller);
 			((MainPageController) controller).setUser((PersonCEMS) guiControl.getUser());
-			if (role.equals("Principal")) {
-				PrincipalMainPageController con = (PrincipalMainPageController) guiControl.getController();
-				con.setRequestCounter();
-			}
+			
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.setOnCloseRequest(e -> {
@@ -183,6 +180,11 @@ public class LoginPageController {
 			primaryStage.show();
 			guiControl.setUpdateThread(requestThread);
 			requestThread.start();
+			if (role.equals("Principal")) {
+				PrincipalMainPageController con = (PrincipalMainPageController) guiControl.getController();
+				guiControl.CountRequest();
+				con.setRequestCounter();
+			}
 		}
 
 	}

@@ -22,7 +22,8 @@ public class currentExam {
 		this.teacher=teacher;
 	}
 		private ArrayList<ConnectionToClient> conToClientStudent=new ArrayList<>();	
-
+		private ArrayList<ConnectionToClient> nonConToClientStudent=new ArrayList<>();
+		
 		public ArrayList<ConnectionToClient> getConToClientStudent() {
 			return conToClientStudent;
 		}
@@ -60,6 +61,21 @@ public class currentExam {
 			amountOfFinishedStudents++;
 			if(amountOfStudents!=amountOfFinishedStudents)
 				return false;
+			return true;
+		}
+		
+		public void remove(ConnectionToClient student) {
+			nonConToClientStudent.add(student);
+			conToClientStudent.remove(student);
+		}
+		
+		public boolean add(ConnectionToClient student) {
+			for(ConnectionToClient e : nonConToClientStudent)
+				if(e.equals(student))
+					return false;
+					
+			
+			conToClientStudent.add(student);
 			return true;
 		}
 }

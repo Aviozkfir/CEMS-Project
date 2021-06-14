@@ -26,6 +26,7 @@ import entity.Question;
 import entity.QuestionInExam;
 import entity.SolvedExam;
 import entity.Student;
+import entity.updatedRequestExam;
 import message.ClientMessage;
 import message.ServerMessage;
 import message.ServerMessageTypes;
@@ -83,7 +84,7 @@ public class ServerCEMS extends AbstractServer {
 		while(it.hasNext())
 			ce=it.next();
 			if(ce.getEid().equals(exam.getEid())) {
-				ce.getConToClientStudent().remove(client);
+				ce.remove(client);
 				
 				if(ce.allStudentAreFinished()) {
 					currentExams.remove(ce);
@@ -215,8 +216,8 @@ public class ServerCEMS extends AbstractServer {
 							currentExam ce =itce.next();
 							if(((Exam)returnVal).getEid().equals(ce.getEid())) {
 									type = ServerMessageTypes.EXAM_INFORMATION_RECIVED;
-									ce.getConToClientStudent().add(client);
-
+									if(ce.add(client)==false)
+										type = ServerMessageTypes.EXAM_INFORMATION_NOT_RECIVED;
 							}
 						}
 						if(type != ServerMessageTypes.EXAM_INFORMATION_RECIVED)
@@ -350,7 +351,7 @@ public class ServerCEMS extends AbstractServer {
 									String newTime = ((ArrayList<String>) returnVal).get(i);
 									for(ConnectionToClient cl : ce.getConToClientStudent())
 										cl.sendToClient(new ServerMessage(ServerMessageTypes.STUDENT_EXTEND_TIME, newTime));
-									ce.getTeacher().sendToClient(new ServerMessage(ServerMessageTypes.TEACHER_REFRSH_ONGOING_EXAM_PAGE, ((ArrayList<String>) clientMsg.getMessage()).get(i)));
+									ce.getTeacher().sendToClient(new ServerMessage(ServerMessageTypes.TEACHER_REFRSH_ONGOING_EXAM_PAGE, null));
 								}
 							}
 					}
@@ -421,13 +422,24 @@ public class ServerCEMS extends AbstractServer {
 
 					break;
 				case TEACHER_GET_CURRENT_EXAM:
-					ArrayList<Exam> returnValAsList = new ArrayList<Exam>();
-					
+					ArrayList<updatedRequestExam> returnValAsList = new ArrayList<updatedRequestExam>();
+					boolean sendToMng=false;
 					for( currentExam myce : currentExams)
 						if(myce.getTeacher()==client) {
-							returnValAsList.add(myce.getExam());
+							updatedRequestExam ure = MySQLConnection.getUpdateExam(myce.getExam());
+							if(ure!=null) {
+								sendToMng=true;
+								returnValAsList.add(ure);
+							}else {
+								returnValAsList.add(new updatedRequestExam(myce.getExam(), null, null));
+							}
+							
 						}
-					
+					if(sendToMng)
+						for(ConnectionToClient mn : conToClientMng)
+							mn.sendToClient(new ServerMessage(ServerMessageTypes.PRINCIPAL_GOT_NEW_REQUEST, null));
+
+						
 					type = ServerMessageTypes.TEACHER_GET_CURRENT_EXAMS_RECIVED;
 						
 					returnVal=returnValAsList;
@@ -554,6 +566,8 @@ public class ServerCEMS extends AbstractServer {
 						if(dce.getTeacher().equals(client)&&dce.getEid().equals(((Exam)clientMsg.getMessage()).getEid())) {
 							it.remove();
 							type=ServerMessageTypes.TEACHER_REFRSH_ONGOING_EXAM_PAGE;
+							
+							
 							
 							for(ConnectionToClient ctc:dce.getConToClientStudent())
 								ctc.sendToClient(new ServerMessage(ServerMessageTypes.STOP_EXAM, clientMsg.getMessage()));
