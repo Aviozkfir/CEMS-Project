@@ -16,6 +16,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 
+/**
+ * Takes care of showing the question in certain course.
+ * @author Guy and Sharon
+ *
+ */
 public class TeacherQuestionBankCoursesController extends TeacherMainPageController  {
 
 	@FXML
@@ -27,6 +32,11 @@ public class TeacherQuestionBankCoursesController extends TeacherMainPageControl
     @FXML
     private GridPane grid;
 
+    /**
+     * loads previous window
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void BackPressed(ActionEvent event) throws IOException {
     	TeacherMainQuestionController a = (TeacherMainQuestionController) guiControl.loadStage(ClientsConstants.Screens.TEACHER_MAIN_QUESTION_PAGE.path);
@@ -39,6 +49,10 @@ public class TeacherQuestionBankCoursesController extends TeacherMainPageControl
 
 
 
+	/**
+	 * sets the teacher courses as folders
+	 * @param sub
+	 */
 	public void setTeacherCourse(Subject sub) {
 		
 		this.subjectName.setText(sub.getName());

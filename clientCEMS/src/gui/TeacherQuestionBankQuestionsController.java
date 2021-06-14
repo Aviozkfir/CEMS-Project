@@ -19,6 +19,11 @@ import javafx.scene.text.Text;
 import message.ClientMessage;
 import message.ClientMessageType;
 
+/**
+ * Sets the question in question bank
+ * @author Guy and Sharon
+ *
+ */
 public class TeacherQuestionBankQuestionsController extends TeacherMainPageController {
 
     private ArrayList<Question> allQuestions;
@@ -53,12 +58,22 @@ public class TeacherQuestionBankQuestionsController extends TeacherMainPageContr
     
     private Course course;
 
+    /**
+     * loads previous page
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void btnBackPressed(ActionEvent event) throws IOException {
     	TeacherQuestionBankCoursesController contr =(TeacherQuestionBankCoursesController) GUIControl.instance.loadStage("TeacherQuestionBankCourses.fxml");
 		contr.setTeacherCourse(course.getSubject());
     }
 
+    /**
+     * Takes care of creating new question
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void btnCreateQuestionPressed(ActionEvent event) throws IOException {
     	((TeacherCreateQuestionController)GUIControl.instance.loadStage("/gui/TeacherCreateQuestion.fxml")).setPage(course);
@@ -69,6 +84,11 @@ public class TeacherQuestionBankQuestionsController extends TeacherMainPageContr
 
     }
     
+    /**
+     * Sets teacher courses as folders
+     * @param course
+     * @throws IOException
+     */
     public void setTeacherCourse(Course course) throws IOException {
     	
     	this.course=course;

@@ -14,6 +14,11 @@ import message.ClientMessage;
 import message.ClientMessageType;
 import message.ServerMessageTypes;
 
+/**
+ * Takes care of a single row in question bank table
+ * @author Guy and Sharon
+ *
+ */
 public class TeacherQuestionTableRowController {
 	
 	
@@ -39,6 +44,10 @@ public class TeacherQuestionTableRowController {
     @FXML
     private Button btnDelete;
     
+    /**
+     * sets a single question as a row in table
+     * @param q
+     */
     public void setQuestion(Question q) {
     	this.q=q;
     	questionText.setText(q.getText());
@@ -53,10 +62,19 @@ public class TeacherQuestionTableRowController {
   
     }
     
+    /**
+     * sets the course of that question
+     * @param c
+     */
     public void setCourse(Course c) {
     	this.c=c;
     }
 
+    /**
+     * Delets the questio from table
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void btnDeletePressed(ActionEvent event) throws IOException {
     	
@@ -77,6 +95,11 @@ public class TeacherQuestionTableRowController {
     	
     }
 
+    /**
+     * Edits question from table
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void btnEditPressed(ActionEvent event) throws IOException {
     	GUIControl guiControl = GUIControl.getInstance();
@@ -85,6 +108,11 @@ public class TeacherQuestionTableRowController {
 		a.setTeacherQuestion(q, c);
     }
 
+    /**
+     * Views question when pressed
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void btnViewQuestionPressed(ActionEvent event) throws IOException {
     	GUIControl guiControl = GUIControl.getInstance();

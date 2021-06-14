@@ -12,6 +12,11 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.text.Text;
 
+/**
+ * Takes care of viewing quesition
+ * @author Sharon and Guy
+ *
+ */
 public class TeacherViewQuestionController extends TeacherCreateExamController{
 
     @FXML
@@ -59,6 +64,12 @@ public class TeacherViewQuestionController extends TeacherCreateExamController{
     private Question question;
     private Course course;
     
+	/**
+	 * sets a question in table
+	 * @param question
+	 * @param course
+	 * @throws IOException
+	 */
 	public void setTeacherQuestion(Question question, Course course) throws IOException {
 
 		this.question = question;
@@ -97,6 +108,11 @@ public class TeacherViewQuestionController extends TeacherCreateExamController{
 			break;
 		}
 	}
+    /**
+     * loads previous page when pressed
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void BackPressed(ActionEvent event) throws IOException {
     	((TeacherQuestionBankQuestionsController)GUIControl.instance.loadStage("/gui/TeacherQuestionBankQuestions.fxml")).setTeacherCourse(course);

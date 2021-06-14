@@ -28,6 +28,12 @@ import message.ClientMessage;
 import message.ClientMessageType;
 import message.ServerMessageTypes;
 
+/**
+ * A class that takes care of reports for teacher
+ * @author Guy and Sharon
+ * 
+ *
+ */
 public class TeacherMainReportController extends TeacherMainPageController implements Initializable {
 	@FXML
 	private Button Back;
@@ -55,6 +61,11 @@ public class TeacherMainReportController extends TeacherMainPageController imple
 
 
 
+	/**
+	 * A method that gets data about reports and adds it to window
+	 * @param ActionEvent event
+	 * @throws IOException
+	 */
 	@FXML
 	void GetButtonPressed(ActionEvent event) throws IOException {
 
@@ -86,6 +97,9 @@ public class TeacherMainReportController extends TeacherMainPageController imple
 
 	}
 
+	/**
+	 *Sets exams list on table
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		ObsExamList.addAll(teacher.getExamList());
@@ -96,6 +110,10 @@ public class TeacherMainReportController extends TeacherMainPageController imple
 	}
 	
 
+	/**
+	 * Validates the ID of teacher
+	 * @return boolean
+	 */
 	public boolean validateInput() {
 		String[] date = new String[3];
 
@@ -130,6 +148,9 @@ public class TeacherMainReportController extends TeacherMainPageController imple
 	}
 	
 
+	/**
+	 * Sets report of median and average
+	 */
 	public void SetMedianAndAverage() {
 		ArrayList<String> gradesString = new ArrayList<String>(teacher.getReport().getReportData()); // set
 
@@ -142,6 +163,11 @@ public class TeacherMainReportController extends TeacherMainPageController imple
 		teacher.getReport().setAverage(Average(grades));
 	}
 
+	/**
+	 * returns data about median.
+	 * @param values
+	 * @return String 
+	 */
 	public static String Median(ArrayList<Integer> values) {
 		String convertStr = null;
 		Collections.sort(values);
@@ -151,6 +177,11 @@ public class TeacherMainReportController extends TeacherMainPageController imple
 		return convertStr.valueOf((int) ((lower + upper) / 2.0));
 	}
 
+	/**
+	 * Calculates report about average
+	 * @param values
+	 * @return String
+	 */
 	public static String Average(ArrayList<Integer> values) {
 		String convertStr = null;
 		int sum = 0;
@@ -159,6 +190,9 @@ public class TeacherMainReportController extends TeacherMainPageController imple
 		return convertStr.valueOf(sum / values.size());
 	}
 
+	/**
+	 * Sets the ranges of years we want reports of.
+	 */
 	public void SetYearRange() {
 		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
 		int pickedYear = datePicker.getValue().getYear();
