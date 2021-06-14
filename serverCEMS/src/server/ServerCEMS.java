@@ -129,11 +129,14 @@ public class ServerCEMS extends AbstractServer {
 						switch (returnPerson.getRole()) {
 						case "Teacher":
 							type = ServerMessageTypes.LOGIN_TEACHER;
+							break;
 						case "Student":
 							type = ServerMessageTypes.LOGIN_STUDENT;
+							break;
 						case "Principal":
 							type = ServerMessageTypes.LOGIN_PRINCIPAL;
 							conToClientMng.add(client);	
+							break;
 						}
 //						if (userList.contains(returnVal)) // user already logged in
 //							returnVal = "logged in";

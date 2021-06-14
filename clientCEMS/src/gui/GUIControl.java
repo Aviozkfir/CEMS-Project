@@ -310,10 +310,14 @@ public class GUIControl {
 							
 
 							}
-							else {
+							else if(getServerMsg().getType()==ServerMessageTypes.STOP_EXAM) {
 								System.out.println("stop exam computerized");
 								((StudentExamExecutionController) getController()).stopExam();
 							}
+							else {
+								System.out.println(getServerMsg().getType().toString());
+							}
+							
 							
 						} catch (IOException e1) {
 							// TODO Auto-generated catch block
