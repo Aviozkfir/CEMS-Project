@@ -25,6 +25,12 @@ import message.ClientMessage;
 import message.ClientMessageType;
 import message.ServerMessageTypes;
 
+/**
+ * Controller for log in
+ * 
+ * @author Shalom,Omer
+ * 
+ */
 public class LoginPageController {
 	GUIControl guiControl = GUIControl.getInstance();
 	@FXML
@@ -36,6 +42,14 @@ public class LoginPageController {
 	@FXML
 	private TextField UserIDTextField;
 
+	/**
+	 * This method gets the user to the right Homepage screen by its type
+	 * :principal,teacher,student and get the data needed for each type.moreover,
+	 * validates that the log in information is right.
+	 * 
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	void LoginButtonPressed(ActionEvent event) throws IOException {
 
@@ -171,7 +185,7 @@ public class LoginPageController {
 			controller = (MainPageController) fxmlLoader.getController();
 			guiControl.setController(controller);
 			((MainPageController) controller).setUser((PersonCEMS) guiControl.getUser());
-			
+
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.setOnCloseRequest(e -> {
@@ -189,6 +203,11 @@ public class LoginPageController {
 
 	}
 
+	/**
+	 * Method that validates that the log in information is correct, valid and exist
+	 * in db
+	 *
+	 */
 	private boolean validateLogin() {
 		ClientMessage msg = null;
 		if (UserIDTextField.getText().isEmpty()) {

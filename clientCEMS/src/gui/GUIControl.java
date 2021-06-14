@@ -30,6 +30,8 @@ import message.ServerMessageTypes;
  * service class for the client with various service methods this class is
  * implemented as a singleton so that every instance of it holds the same
  * values.
+ * 
+ * @author Shalom,Omer
  */
 public class GUIControl {
 	public static GUIControl instance = new GUIControl();

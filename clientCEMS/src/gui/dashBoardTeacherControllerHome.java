@@ -11,13 +11,18 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * This class is the dashbordHomepage of
+ * 
+ * @author Sharon,guy.
+ * @extend TeacherMainPageController
+ */
 public class dashBoardTeacherControllerHome extends TeacherMainPageController {
-	
+
+	/**
+	 * Hello message with name text
+	 */
 	@FXML
 	private Text HelloNameMessage;
-	
-	public void setName() {
-		
-	}
 
 }

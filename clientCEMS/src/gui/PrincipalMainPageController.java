@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
-/*
+/**
  * This class is the Main Controller for principal, all other controllers extends him.
  * @author On avioz,Kfir Avioz.
  * @extend MainPageController

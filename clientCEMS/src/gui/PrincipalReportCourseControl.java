@@ -5,15 +5,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import entity.Course;
-import entity.CourseReport;
 import entity.Principal;
 import entity.Report;
-import entity.Student;
-import entity.Subject;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

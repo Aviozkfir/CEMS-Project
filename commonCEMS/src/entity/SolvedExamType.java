@@ -4,7 +4,11 @@ import java.io.Serializable;
 
 public class SolvedExamType implements Serializable {
 
-
+	/**
+	 * Entity of solve exams type
+	 * @author guy,Sharon
+	 * @implement Serializable
+	 */
 	private String Eid;
 	
 	private Course course;
