@@ -426,23 +426,17 @@ public class ServerCEMS extends AbstractServer {
 					break;
 				case TEACHER_GET_CURRENT_EXAM:
 					ArrayList<updatedRequestExam> returnValAsList = new ArrayList<updatedRequestExam>();
-					boolean sendToMng=false;
+					
 					for( currentExam myce : currentExams)
 						if(myce.getTeacher()==client) {
 							updatedRequestExam ure = MySQLConnection.getUpdateExam(myce.getExam());
 							if(ure!=null) {
-								sendToMng=true;
+								
 								returnValAsList.add(ure);
-							}else {
-								returnValAsList.add(new updatedRequestExam(myce.getExam(), null, null));
 							}
 							
 						}
-					if(sendToMng)
-						for(ConnectionToClient mn : conToClientMng)
-							mn.sendToClient(new ServerMessage(ServerMessageTypes.PRINCIPAL_GOT_NEW_REQUEST, null));
-
-						
+					
 					type = ServerMessageTypes.TEACHER_GET_CURRENT_EXAMS_RECIVED;
 						
 					returnVal=returnValAsList;

@@ -181,7 +181,11 @@ public class PrincipalRequestsController extends PrincipalMainPageController {
 
 		if (guiControl.getServerMsg().getType() == ServerMessageTypes.PRINCIPAL_APPROVED_REQUESTS_ADDED) {
 
-			
+			PrincipalRequestsController controller = (PrincipalRequestsController) guiControl
+					.loadStage(ClientsConstants.Screens.PRINCIPAL_REQUESTS_PAGE.path);
+			guiControl.getRequestCount();
+			controller.GetRequestListFromDB();
+			controller.setPrincipalRequests();
 		} else {
 
 			GUIControl.popUpError("Error-sending update for requests");
@@ -203,7 +207,11 @@ public class PrincipalRequestsController extends PrincipalMainPageController {
 		guiControl.sendToServer(msg);
 
 		if (guiControl.getServerMsg().getType() == ServerMessageTypes.PRINCIPAL_DECLINED_REQUESTS_ADDED) {
-			
+			PrincipalRequestsController controller = (PrincipalRequestsController) guiControl
+					.loadStage(ClientsConstants.Screens.PRINCIPAL_REQUESTS_PAGE.path);
+			guiControl.getRequestCount();
+			controller.GetRequestListFromDB();
+			controller.setPrincipalRequests();
 		} else {
 
 			GUIControl.popUpError("Error-sending update for requests");
