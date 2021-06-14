@@ -57,6 +57,7 @@ public class ServerCEMS extends AbstractServer {
 
 	private ArrayList<ConnectionToClient> conToClientMng;
 	private ArrayList<currentExam> currentExams;
+	private ArrayList<Object> userList;
 	// Constructors ******************
 
 	/**
@@ -67,7 +68,7 @@ public class ServerCEMS extends AbstractServer {
 	 */
 	public ServerCEMS(int port) {
 		super(port);
-
+		userList=new ArrayList<>();
 		conToClientMng=new ArrayList<>();
 		currentExams = new ArrayList<>();
 	}
@@ -113,12 +114,12 @@ public class ServerCEMS extends AbstractServer {
 				switch (clientMsg.getType()) {
 				case DISCONNECTED:
 					if (clientMsg.getMessage() != null)
-//						userList.remove(clientMsg.getMessage());
+					userList.remove(clientMsg.getMessage());
 					ServerMain.guiController.disconnectClient(client);
 					break;
 				case LOGOUT:
 					if (clientMsg.getMessage() != null)
-//						userList.remove(clientMsg.getMessage());
+						userList.remove(clientMsg.getMessage());
 					returnVal = null;
 					type = ServerMessageTypes.LOGOUT_SUCCESS;
 					break;
@@ -138,10 +139,10 @@ public class ServerCEMS extends AbstractServer {
 							conToClientMng.add(client);	
 							break;
 						}
-//						if (userList.contains(returnVal)) // user already logged in
-//							returnVal = "logged in";
-//						else if (returnVal != null) // user isn't already logged in and was found in the database
-//							userList.add(returnVal);
+					if (userList.contains(returnVal)) // user already logged in
+							returnVal = "logged in";
+						else if (returnVal != null) // user isn't already logged in and was found in the database
+							userList.add(returnVal);
 						break;
 
 					} else {

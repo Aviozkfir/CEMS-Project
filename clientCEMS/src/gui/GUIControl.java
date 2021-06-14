@@ -235,14 +235,18 @@ public class GUIControl {
 		primaryStage.show();
 	}
 
-	/**getter for requests count.
+	/**
+	 * getter for requests count.
+	 * 
 	 * @return return the counter of new requests.
 	 */
 	public int getRequestCount() {
 		return requestCounter;
 	}
 
-	/**setter for requests count.
+	/**
+	 * setter for requests count.
+	 * 
 	 * @param requestCounter The counter of the new requests.
 	 */
 	public void SetRequestCount(int requestCounter) {
@@ -250,7 +254,8 @@ public class GUIControl {
 	}
 
 	/**
-	 * This method counting the new requests from the DB for the principal and return the counting number.
+	 * This method counting the new requests from the DB for the principal and
+	 * return the counting number.
 	 */
 	public void CountRequest() {
 
@@ -262,14 +267,18 @@ public class GUIControl {
 		}
 	}
 
-	/**getter for update thread.
+	/**
+	 * getter for update thread.
+	 * 
 	 * @return UpdateThread Thread that check some scenarios.
 	 */
 	public UpdateThread getUpdateThread() {
 		return updateThread;
 	}
 
-	/****getter for update thread.
+	/****
+	 * getter for update thread.
+	 * 
 	 * @param requestThread Thread that check some scenarios.
 	 */
 	public void setUpdateThread(UpdateThread requestThread) {
@@ -284,65 +293,65 @@ public class GUIControl {
 			public void run() {
 				if (getUser() instanceof Principal) {
 					CountRequest();
-					((PrincipalMainPageController)getController()).setRequestCounter();
-					if(getController() instanceof PrincipalRequestsController) {
+					((PrincipalMainPageController) getController()).setRequestCounter();
+					if (getController() instanceof PrincipalRequestsController) {
 						PrincipalRequestsController controller;
 						try {
-							controller = (PrincipalRequestsController) loadStage(ClientsConstants.Screens.PRINCIPAL_REQUESTS_PAGE.path);
+							controller = (PrincipalRequestsController) loadStage(
+									ClientsConstants.Screens.PRINCIPAL_REQUESTS_PAGE.path);
 							controller.GetRequestListFromDB();
 							controller.setPrincipalRequests();
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-						
+
 					}
 				} else if (getUser() instanceof Student) {
 					System.out.println("IS IN STUDENT ");
-					
-					if (getController() instanceof StudentExamExecutionController)
-						System.out.println("IS IN COMPUTERIZED EXAM CONTROLLER");
-						try {
-				
-							if(getServerMsg().getType()==ServerMessageTypes.STUDENT_EXTEND_TIME) {
-								System.out.println("STUDENT EXTEND TIME");
-								((StudentExamExecutionController) getController()).setAddition(getServerMsg().getMessage());
-							
 
-							}
-							else if(getServerMsg().getType()==ServerMessageTypes.STOP_EXAM) {
+					if (getController() instanceof StudentExamExecutionController) {
+						try {
+
+							if (getServerMsg().getType() == ServerMessageTypes.STUDENT_EXTEND_TIME) {
+								System.out.println("STUDENT EXTEND TIME");
+								((StudentExamExecutionController) getController())
+										.setAddition(getServerMsg().getMessage());
+
+							} else if (getServerMsg().getType() == ServerMessageTypes.STOP_EXAM) {
 								System.out.println("stop exam computerized");
 								((StudentExamExecutionController) getController()).stopExam();
-							}
-							else {
+							} else {
 								System.out.println(getServerMsg().getType().toString());
 							}
-							
-							
+
 						} catch (IOException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
-				}
-					else if(getController() instanceof StudentManualExamController) {
+					} else if (getController() instanceof StudentManualExamController) {
 						try {
-							System.out.println("IS IN STUDENT");
-							if(getServerMsg().getType()==ServerMessageTypes.STUDENT_EXTEND_TIME) {
+							System.out.println("IS IN STUDENT 1");
+							if (getServerMsg().getType() == ServerMessageTypes.STUDENT_EXTEND_TIME) {
 								System.out.println("STUENT EXTEND TIME MANUAL");
-								((StudentManualExamController) getController()).setAddition(getServerMsg().getMessage());
+								((StudentManualExamController) getController())
+										.setAddition(getServerMsg().getMessage());
 
-							}
-							else {
+							} else if (getServerMsg().getType() == ServerMessageTypes.STOP_EXAM) {
 								System.out.println("STOP EXAM MANUAL");
 								((StudentManualExamController) getController()).stopExam();
-								
+
+							} else {
+								System.out.println(getServerMsg().getType().toString());
+
 							}
+
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					}
-				 else if (getUser() instanceof Teacher) {
+				} else if (getUser() instanceof Teacher) {
 					if (getController() instanceof TeacherOngoingExamsController) {
 
 						try {
