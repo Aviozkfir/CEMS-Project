@@ -676,7 +676,7 @@ public class MySQLConnection {
 		statment = con.prepareStatement("SELECT status, newDuration FROM Requests  WHERE Status = 'Approved'  AND enum=?");
 		statment.setString(1, Eid);
 		rs = statment.executeQuery();
-		if(rs.next())
+		if(!rs.next())
 			return null;
 		String status = rs.getString(1);
 		String newDuration =rs.getString(2);
