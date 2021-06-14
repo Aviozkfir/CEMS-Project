@@ -11,6 +11,11 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+/**
+ * handels with edit exam component
+ * @author Sharo
+ *
+ */
 public class TeacherEditExamController extends TeacherMainPageController{
 
 	private Course course;

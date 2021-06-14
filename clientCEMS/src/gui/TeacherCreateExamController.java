@@ -50,6 +50,9 @@ public class TeacherCreateExamController extends TeacherMainPageController{
     private TeacherCreateExamPage3Controller page3Control;
     private TeacherCreateExamPage4Controller page4Control;
     
+    /**
+     *setTeacherCreateExam- setting all the relevant info for the current page
+     **/
     public void setTeacherCreateExam(Course course) throws IOException {
     	this.course=course;
     	subjectName.setText(course.getSubject().getName());
@@ -101,6 +104,9 @@ public class TeacherCreateExamController extends TeacherMainPageController{
 		
     }
     
+    /**
+     *set3Page- setting all of the relevant info for the 3 page in the process of creating exam
+     **/
     /**
      * @throws IOException
      */

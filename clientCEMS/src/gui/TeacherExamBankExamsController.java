@@ -18,6 +18,11 @@ import javafx.scene.text.Text;
 import message.ClientMessage;
 import message.ClientMessageType;
 
+/**
+ *  TeacherExamBankExamsController - controller that handels the exam 
+ * @author Sharo
+ *
+ */
 public class TeacherExamBankExamsController extends TeacherMainPageController {
 
 	

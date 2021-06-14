@@ -21,7 +21,8 @@ import javafx.scene.layout.AnchorPane;
 
 /**
  * @author Guy and Sharon
- * TeacherCreateQuestionController-
+ * TeacherCreateQuestionController- controller of the page that wiil deal with
+ * adding new question to question bank.
  */
 public class TeacherCreateQuestionController extends TeacherMainPageController {
 
