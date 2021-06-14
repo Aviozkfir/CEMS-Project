@@ -6,10 +6,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.text.Text;
 
 public class TeacherExamBankSolvedByStudentApproveRowController {
 
-    @FXML
+	@FXML
     private Label studentID;
 
     @FXML
@@ -22,16 +24,15 @@ public class TeacherExamBankSolvedByStudentApproveRowController {
     private Button btnApproveAutomatic;
 
     @FXML
-    private Button btnCheckExam;
-
-    @FXML
-    private Label finalGrade;
+    private TextArea changeGradeExplain;
 
     @FXML
     private Button btnPublishSingle;
 
     @FXML
     private Label publishStatus;
+    @FXML
+    private Text finalGrade;
     
     private SolvedExam solvedExam;/////
     
