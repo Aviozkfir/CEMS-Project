@@ -22,7 +22,7 @@ public class TeacherExamBankExamsController extends TeacherMainPageController {
 
 	
 	private ArrayList<Exam> allQuestions;
-	
+	private ArrayList<TeacherExamBankRowController> examControllerList = new ArrayList<TeacherExamBankRowController>(); 
 	
 	
     @FXML
@@ -91,9 +91,9 @@ public class TeacherExamBankExamsController extends TeacherMainPageController {
 			AnchorPane root = fxmlLoader.load();
 			controller = (TeacherExamBankRowController) fxmlLoader.getController();
 			
-			controller.setExam(e);
+			controller.setExam(e,course);
 			vTable.getChildren().add(root);
-			
+			examControllerList.add(controller);
     	}
     	
     }

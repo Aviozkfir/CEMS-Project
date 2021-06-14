@@ -20,9 +20,11 @@ public class ClientsConstants {
 		TEACHER_FINAL_REPORT("/gui/teacherFinalReport.fxml"),
 		TEACHER_EDIT_QUESTION("/gui/TeacherEditQuestion.fxml"),
 		TEACHER_VIEW_QUESTION("/gui/TeacherViewQuestion.fxml"),
-		
+		TEACHER_EXAM_VIEW("/gui/TeacherExamBankViewExam.fxml"),
+		TEACHER_EXAM_BANK_EXAMS("/gui/TeacherExamBankExams.fxml"),
 		QUESTION_BANK_COURSES("/gui/questionBankCourses.fxml"),
-
+		TEACHER_EXAM_QUESTION_TABLE_ROW("/gui/TeacherExamQuestionTableRow.fxml"),
+		TEACHER_EXAM_VIEW_QUESTION_VIEW("/gui/TeacherExamBankViewQuestion.fxml"),
 		STUDENT_MAIN_PAGE("/gui/dashBoardStudentView.fxml"), PRINCIPAL_MAIN_PAGE("/gui/dashBoardPrincipalView.fxml"),
 
 		EXAM_BANK_MAIN_PAGE("/gui/examBankMain.fxml"), REPORT_MAIN_PAGE("/gui/getReportMain.fxml"),

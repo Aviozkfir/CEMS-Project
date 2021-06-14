@@ -1,5 +1,8 @@
 package gui;
 
+import java.io.IOException;
+
+import entity.Course;
 import entity.Exam;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,7 +12,7 @@ import javafx.scene.image.ImageView;
 import message.ClientMessage;
 import message.ClientMessageType;
 
-public class TeacherExamBankRowController {
+public class TeacherExamBankRowController{
 
     @FXML
     private Button btnView;
@@ -36,9 +39,10 @@ public class TeacherExamBankRowController {
     private Button btnDelete;
 
     private Exam exam;
-    
-    public void setExam(Exam exam) {
+    private Course course;
+    public void setExam(Exam exam,Course course) {
 		this.exam = exam;
+		this.course= course;
 		author.setText(exam.getID());
 		date.setText(exam.getDate());
 		examTitle.setText(exam.getName());
@@ -52,7 +56,7 @@ public class TeacherExamBankRowController {
 
     @FXML
     void btnEditPressed(ActionEvent event) {
-
+    	//((TeacherEditExamController) GUIControl.instance.loadStage("TeacherEditExam.fxml")).setTeacherEditExam(course);
     }
 
     @FXML
@@ -62,8 +66,11 @@ public class TeacherExamBankRowController {
     }
 
     @FXML
-    void btnViewQuestionPressed(ActionEvent event) {
-    	
+    void btnViewQuestionPressed(ActionEvent event) throws IOException {
+    	GUIControl guiControl = GUIControl.getInstance();
+		TeacherExamBankViewExamController a = (TeacherExamBankViewExamController) guiControl
+				.loadStage(gui.ClientsConstants.Screens.TEACHER_EXAM_VIEW.path);
+		a.setTeacherExam(exam, course);
     }
 
 }
