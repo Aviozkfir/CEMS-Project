@@ -13,6 +13,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+
+/**
+ * @author Sharon and Guy
+ *TeacherCreateExamController- controller of the page in which the creation of
+ *the exam begins.
+ */
 public class TeacherCreateExamController extends TeacherMainPageController{
 
 	private Course course;
@@ -95,7 +101,9 @@ public class TeacherCreateExamController extends TeacherMainPageController{
 		
     }
     
-    //the page with the preview
+    /**
+     * @throws IOException
+     */
     public void set3Page() throws IOException {
     	FXMLLoader fxmlLoader3 = new FXMLLoader(getClass().getResource("/gui/TeacherCreateExam3.fxml"));
 		page3 = fxmlLoader3.load();

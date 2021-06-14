@@ -441,7 +441,6 @@ public class MySQLConnection {
 		addQuestion.setDate(9, dateInputData);
 		addQuestion.setString(10, q.getSubject());
 		addQuestion.executeUpdate();
-		System.out.print("slnfa;lsj;gnalj");
 		for(Course c : course) {
 			PreparedStatement addToCourse =con
 					.prepareStatement("INSERT INTO Question_In_Course (Qid,Cid) "
@@ -452,6 +451,41 @@ public class MySQLConnection {
 			addToCourse.executeUpdate();
 		}
 	}
+	
+	public static void TeacherEditQuestion(Question q, ArrayList<Course> course) throws SQLException, ParseException {
+			
+			PreparedStatement editQuestion;
+			editQuestion = con
+					.prepareStatement("UPDATE Questions SET Text = ?, Ans1 = ?, Ans2 = ?, Ans3 = ?, Ans4 = ?, CorrectAns = ?,DATE=? WHERE Qid = ?");
+			editQuestion.setString(1, q.getText());
+			editQuestion.setString(2, q.getAnsA());
+			editQuestion.setString(3, q.getAnsB());
+			editQuestion.setString(4, q.getAnsC());
+			editQuestion.setString(5, q.getAnsD());
+			editQuestion.setInt(6, q.getCorrectAnswer());
+			Date dateInput = new SimpleDateFormat("yyyy-MM-dd").parse(q.getModified());
+			java.sql.Date dateInputData = new java.sql.Date(dateInput.getTime());
+			editQuestion.setDate(7, dateInputData);
+			editQuestion.setString(8, q.getId());
+			
+			editQuestion.executeUpdate();
+			//-----------//
+			PreparedStatement deleteCourse;
+			deleteCourse = con
+					.prepareStatement("DELETE FROM Question_In_Course WHERE Qid=?");
+			deleteCourse.setString(1, q.getId());
+			deleteCourse.executeUpdate();
+			//-----------//
+			for(Course c : course) {
+				PreparedStatement addToCourse =con
+						.prepareStatement("INSERT INTO Question_In_Course (Qid,Cid) "
+								+ "VALUES (?, ?)");
+				
+				addToCourse.setString(1, q.getId());
+				addToCourse.setString(2, c.getId());
+				addToCourse.executeUpdate();
+			}
+		}
 	
 	public static String addExam(Exam e, ArrayList<QuestionInExam> list) throws SQLException, ParseException {
 		

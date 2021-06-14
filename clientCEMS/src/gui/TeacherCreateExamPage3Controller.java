@@ -19,6 +19,11 @@ import message.ClientMessage;
 import message.ClientMessageType;
 import message.ServerMessageTypes;
 
+/**
+ * @author Guy and Sharon
+ *TeacherCreateExamPage3Controller-controller of the third page of creating exam(review
+ *details and setting points to each question).
+ */
 public class TeacherCreateExamPage3Controller {
 
 	private Course course;

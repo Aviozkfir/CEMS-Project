@@ -243,6 +243,16 @@ public class ServerCEMS extends AbstractServer {
 						e1.printStackTrace();
 					}
 					break;
+				case TEACHER_EDIT_QUESTION:
+					type = ServerMessageTypes.TEACHER_EDIT_QUESTION_ADDED;
+					Object[] arr1 = (Object[]) clientMsg.getMessage();
+					try {
+						MySQLConnection.TeacherEditQuestion((Question) arr1[0], (ArrayList<Course>) arr1[1]);
+					} catch (Exception e1) {
+						type = ServerMessageTypes.TEACHER_EDIT_QUESTION_NOT_ADDED;
+						e1.printStackTrace();
+					}
+					break;
 				case TEACHER_DELETE_QUESTION:
 					type = ServerMessageTypes.QUESTION_DELETED;
 					Question q = (Question) clientMsg.getMessage();

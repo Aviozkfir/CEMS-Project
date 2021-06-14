@@ -45,7 +45,7 @@ public class TeacherExamBankSolvedByStudentExamsRowsController {
 
     public void setExam(SolvedExamType exam) {
 		this.exam = exam;
-		//coverting fate from yyyy-mm-dd to dd-mm-yyyy
+		//coverting date from yyyy-mm-dd to dd-mm-yyyy
     	String startDateString = exam.getDate().toString();
         DateTimeFormatter oldFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter newFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");

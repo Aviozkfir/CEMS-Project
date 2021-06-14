@@ -28,6 +28,12 @@ import message.ClientMessage;
 import message.ClientMessageType;
 import message.ServerMessageTypes;
 
+/**
+ * @author Guy and Sharon
+ *TeacherCreateManualExamController- the controller of the page in which the teacher can
+ *create manual exam: insertion of general details, optional information,upload of 
+ *.word exam file and publish to relevant exam bank.
+ */
 public class TeacherCreateManualExamController extends TeacherMainPageController implements Initializable{
 
 	

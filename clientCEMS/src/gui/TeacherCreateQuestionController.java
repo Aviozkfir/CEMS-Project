@@ -19,6 +19,10 @@ import message.ServerMessageTypes;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 
+/**
+ * @author Guy and Sharon
+ * TeacherCreateQuestionController-
+ */
 public class TeacherCreateQuestionController extends TeacherMainPageController {
 
 	 	private Course course;
@@ -131,7 +135,7 @@ public class TeacherCreateQuestionController extends TeacherMainPageController {
 	    		return; 
 	    	}
 	    	else if(guiControl.getServerMsg().getType()==ServerMessageTypes.QUESTION_ADDED) {
-	    		GUIControl.popUpMessage("Success", "The question was Created.");
+	    		GUIControl.popUpMessage("Success", "The question was created.");
 	    		((TeacherCreateQuestionController)GUIControl.instance.loadStage("/gui/TeacherCreateQuestion.fxml")).setPage(course);
 	    	}if(guiControl.getServerMsg().getType()==ServerMessageTypes.QUESTION_NOT_ADDED) {
 	    		GUIControl.popUpMessage("Error", "Could not create question.");

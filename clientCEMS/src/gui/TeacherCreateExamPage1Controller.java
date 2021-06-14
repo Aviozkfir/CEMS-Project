@@ -18,6 +18,11 @@ import message.ClientMessage;
 import message.ClientMessageType;
 import message.ServerMessageTypes;
 
+/**
+ * @author Guy and Sharon
+ *TeacherCreateExamPage1Controller- controller of the first page of creating exam(General
+ *details insertion).
+ */
 public class TeacherCreateExamPage1Controller {
 
     @FXML
