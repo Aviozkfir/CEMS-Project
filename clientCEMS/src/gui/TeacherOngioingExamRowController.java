@@ -17,6 +17,11 @@ import message.ClientMessage;
 import message.ClientMessageType;
 import message.ServerMessageTypes;
 
+/**
+ * A class that takes care of rows in table of on going exams.
+ * @author Guy and sharon
+ *
+ */
 public class TeacherOngioingExamRowController {
 	@FXML
 	private Label num;
@@ -44,6 +49,9 @@ public class TeacherOngioingExamRowController {
 
 	private updatedRequestExam exam;
 
+	/**Sets the relevant exam to row table.
+	 * @param updatedRequestExam exam
+	 */
 	public void setExam(updatedRequestExam exam) {
 		this.exam = exam;
 		title.setText(exam.getExam().getName());
@@ -51,6 +59,10 @@ public class TeacherOngioingExamRowController {
 		examStatus.setText("Not sent yet");
 	}
 
+	/**
+	 * Sending request of teacher for a new time request.
+	 * @param ActionEvent event
+	 */
 	@FXML
 	void btnChangeTimePressed(ActionEvent event) {
 		ArrayList<String> newRequest = new ArrayList<String>();
@@ -70,6 +82,11 @@ public class TeacherOngioingExamRowController {
 		}
 	}
 
+	/**
+	 * Takes care of locking the exam
+	 * @param ActionEvent event
+	 * @throws IOException
+	 */
 	@FXML
 	void btnLockExamPressed(ActionEvent event) throws IOException {
 
@@ -78,6 +95,10 @@ public class TeacherOngioingExamRowController {
 
 	}
 
+	/**
+	 * checks the input of new duration
+	 * @return boolean
+	 */
 	private boolean CheckInput() {
 		String input = newDurationText.getText();
 
