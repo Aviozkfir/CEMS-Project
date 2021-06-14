@@ -289,7 +289,8 @@ public class GUIControl {
 						PrincipalRequestsController controller;
 						try {
 							controller = (PrincipalRequestsController) loadStage(ClientsConstants.Screens.PRINCIPAL_REQUESTS_PAGE.path);
-							
+							controller.GetRequestListFromDB();
+							controller.setPrincipalRequests();
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
