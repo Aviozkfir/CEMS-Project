@@ -433,6 +433,8 @@ public class ServerCEMS extends AbstractServer {
 							if(ure!=null) {
 								
 								returnValAsList.add(ure);
+							}else {
+								returnValAsList.add(new updatedRequestExam(myce.getExam(), null, null));
 							}
 							
 						}
