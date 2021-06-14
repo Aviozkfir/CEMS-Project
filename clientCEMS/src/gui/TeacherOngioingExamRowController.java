@@ -73,7 +73,7 @@ public class TeacherOngioingExamRowController {
 	@FXML
 	void btnLockExamPressed(ActionEvent event) throws IOException {
 
-		ClientMessage m1 = new ClientMessage(ClientMessageType.TEACHER_LOCK_EXAM, exam);
+		ClientMessage m1 = new ClientMessage(ClientMessageType.TEACHER_LOCK_EXAM, exam.getExam());
 		GUIControl.getInstance().sendToServer(m1);
 
 	}
