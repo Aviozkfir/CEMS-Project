@@ -183,7 +183,7 @@ public class PrincipalRequestsController extends PrincipalMainPageController {
 
 			PrincipalRequestsController controller = (PrincipalRequestsController) guiControl
 					.loadStage(ClientsConstants.Screens.PRINCIPAL_REQUESTS_PAGE.path);
-			guiControl.getRequestCount();
+			guiControl.CountRequest();
 			controller.GetRequestListFromDB();
 			controller.setPrincipalRequests();
 		} else {
@@ -209,7 +209,8 @@ public class PrincipalRequestsController extends PrincipalMainPageController {
 		if (guiControl.getServerMsg().getType() == ServerMessageTypes.PRINCIPAL_DECLINED_REQUESTS_ADDED) {
 			PrincipalRequestsController controller = (PrincipalRequestsController) guiControl
 					.loadStage(ClientsConstants.Screens.PRINCIPAL_REQUESTS_PAGE.path);
-			guiControl.getRequestCount();
+			
+			guiControl.CountRequest();
 			controller.GetRequestListFromDB();
 			controller.setPrincipalRequests();
 		} else {
@@ -250,7 +251,7 @@ public class PrincipalRequestsController extends PrincipalMainPageController {
 		if (CheckedRequests.isEmpty()) {
 			GUIControl.popUpError("Error - No requests has been chosed");
 		} else {
-			GUIControl.popUpError("Requests has sent successfully");
+			GUIControl.popUpMessage("Requests has sent successfully");
 		}
 	}
 }
