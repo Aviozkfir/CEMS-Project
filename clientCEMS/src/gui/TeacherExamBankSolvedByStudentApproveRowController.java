@@ -1,17 +1,15 @@
 package gui;
 
-import entity.Question;
-import entity.SolvedExam;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.text.Text;
+
 
 public class TeacherExamBankSolvedByStudentApproveRowController {
 
-	@FXML
+    @FXML
     private Label studentID;
 
     @FXML
@@ -21,7 +19,7 @@ public class TeacherExamBankSolvedByStudentApproveRowController {
     private Label automaticGrade;
 
     @FXML
-    private Button btnApproveAutomatic;
+    private TextArea changeGradeExplain1;
 
     @FXML
     private TextArea changeGradeExplain;
@@ -31,31 +29,19 @@ public class TeacherExamBankSolvedByStudentApproveRowController {
 
     @FXML
     private Label publishStatus;
-    @FXML
-    private Text finalGrade;
+
+    private String SEid;
     
-    private SolvedExam solvedExam;/////
-    
-    public void setSolvedExam(SolvedExam solvedE) {
-    	solvedExam=solvedE;
-    	studentID.setText(solvedE.getID());
-    	automaticGrade.setText(solvedE.getFinalGrade());
-    	
-    }
-
-    @FXML
-    void approveAutomaticButtonPressed(ActionEvent event) {
-    	finalGrade.setText(automaticGrade.getText());
-    }
-
-    @FXML
-    void btnCheckExamPressed(ActionEvent event) {
-
-    }
-
     @FXML
     void btnPublishSinglePressed(ActionEvent event) {
-    	publishStatus.setText("Published!");
+    	
     }
-
+    
+    public void setRow(String[] a, String SEid) {
+    	this.SEid=SEid;
+    	studentID.setText(a[0]);
+    	suspiciousRes.setText(a[1]);
+    	automaticGrade.setText(a[2]);
+    	
+    }
 }

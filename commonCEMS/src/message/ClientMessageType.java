@@ -55,6 +55,8 @@ public enum ClientMessageType {
 	
 	TEACHER_PUBLISH_EXAM,
 	TEACHER_LOCK_EXAM,
+	TEACHER_GET_EXAMS,
+	TEACHER_ADD_GRADE,
 
 
 

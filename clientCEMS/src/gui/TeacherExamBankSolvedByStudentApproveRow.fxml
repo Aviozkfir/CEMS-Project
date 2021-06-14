@@ -12,9 +12,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="53.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherExamBankSolvedByStudentApproveRowController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="53.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherExamBankSolvedByStudentApproveRowController">
    <children>
-      <HBox prefHeight="53.0" prefWidth="816.0" style="-fx-background-color: white;">
+      <HBox layoutX="2.0" prefHeight="53.0" prefWidth="816.0" style="-fx-background-color: white;">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
@@ -56,24 +56,6 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button fx:id="btnApproveAutomatic" mnemonicParsing="false" onAction="#approveAutomaticButtonPressed" prefHeight="34.0" prefWidth="54.0" style="-fx-background-color: #60E761; -fx-background-radius: 100;">
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <graphic>
-                  <ImageView fitHeight="16.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/checkMark.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <HBox.margin>
-                  <Insets right="5.0" top="5.0" />
-               </HBox.margin>
-            </Button>
             <Label alignment="CENTER" prefHeight="42.0" prefWidth="47.0" text="or">
                <opaqueInsets>
                   <Insets top="5.0" />
@@ -90,19 +72,24 @@
                   <Font size="14.0" />
                </font>
             </Text>
+            <TextArea fx:id="changeGradeExplain1" prefHeight="43.0" prefWidth="42.0">
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
+            </TextArea>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="comment">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="5.0" top="15.0" />
+               </HBox.margin>
+            </Text>
             <TextArea fx:id="changeGradeExplain" prefHeight="43.0" prefWidth="114.0">
                <HBox.margin>
                   <Insets bottom="5.0" right="5.0" top="5.0" />
                </HBox.margin>
             </TextArea>
-            <Text fx:id="finalGrade" strokeType="OUTSIDE" strokeWidth="0.0" text="Final grade">
-               <HBox.margin>
-                  <Insets right="5.0" top="15.0" />
-               </HBox.margin>
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Text>
             <Button fx:id="btnPublishSingle" mnemonicParsing="false" onAction="#btnPublishSinglePressed" prefHeight="37.0" prefWidth="129.0" style="-fx-background-color: #3161C2; -fx-background-radius: 100;" text="Publish" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="16.0" />

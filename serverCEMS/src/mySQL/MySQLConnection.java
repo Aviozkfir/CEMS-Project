@@ -383,7 +383,18 @@ public class MySQLConnection {
 		return questionList;
 	}
 	
-	
+	public static void addCheckedExam(ArrayList<Object> ar) throws SQLException {
+		
+		PreparedStatement delQ =con.prepareStatement("UPDATE SolvedExams\n"
+				+ "SET Grade = ?, Checked =Yes, NotesForStudent=? \n"
+				+ "WHERE SEid=?;");
+		delQ.setInt(1, Integer.parseInt((String)ar.get(0)));
+		delQ.setString(2, (String)ar.get(2));
+		delQ.setString(2, (String)ar.get(3));
+		delQ.executeUpdate();
+		
+		
+	}
 	public static void deletedQuestion(Question q) throws SQLException {
 		
 		
