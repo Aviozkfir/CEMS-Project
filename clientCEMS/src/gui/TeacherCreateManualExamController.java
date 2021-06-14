@@ -113,13 +113,12 @@ public class TeacherCreateManualExamController extends TeacherMainPageController
     		GUIControl.popUpMessage("Error", "Exam is too long");
     		return;
     	}
-    	String h = (Integer.parseInt(examDuration.getText())/60)+"";
-    	String min = (Integer.parseInt(examDuration.getText())%60)+"";
-    	if(h.length()==1)
-    		h="0"+h;
+    	String min = (Integer.parseInt(examDuration.getText()))+"";
+        
     	if(min.length()==1)
     		min="0"+min;
-    	exam.setTotalTime(h+":"+min);
+    	
+    	exam.setTotalTime(min+":00");
     	
     	
     	
