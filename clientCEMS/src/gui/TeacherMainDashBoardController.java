@@ -15,11 +15,19 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * Main Controller for teacher.
+ * @author oavioz
+ *
+ */
 public class TeacherMainDashBoardController extends TeacherMainPageController implements Initializable{
 	
 	@FXML
 	private Text HelloNameMessage;
 	
+	/**
+	 * set the name of the teacher in the dash board (hompage).
+	 */
 	public void setName() {
 		
 		Teacher a= (Teacher)guiControl.getUser();

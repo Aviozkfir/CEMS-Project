@@ -15,6 +15,11 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.text.Text;
 import javafx.util.StringConverter;
 
+/**
+ * controller that holds the final report.
+ * @author oavioz
+ *
+ */
 public class TeacherFinalReportControll extends TeacherMainPageController implements Initializable {
 	@FXML
 	private Text Average;
@@ -39,6 +44,11 @@ public class TeacherFinalReportControll extends TeacherMainPageController implem
 	Teacher teacher = (Teacher) guiControl.getUser();
 	String failedStudents;
 
+	/**
+	 * This method sending us into the previous screen.
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	void BackPressed(ActionEvent event) throws IOException {
 		TeacherMainReportController controller = (TeacherMainReportController) guiControl
@@ -46,6 +56,9 @@ public class TeacherFinalReportControll extends TeacherMainPageController implem
 
 	}
 
+	/**
+	 *initializing this screen, setting Averge, media, total student counting, years.
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		PageExplainTextset();
@@ -58,6 +71,9 @@ public class TeacherFinalReportControll extends TeacherMainPageController implem
 
 	}
 
+	/**
+	 * This method setting the histogram.
+	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void SetHistogram() {
 
@@ -85,6 +101,9 @@ public class TeacherFinalReportControll extends TeacherMainPageController implem
 
 	}
 
+	/**
+	 * This method setting the data of the histogram.
+	 */
 	private void groupData() {
 
 		for (int i = 0; i < 9; i++) {

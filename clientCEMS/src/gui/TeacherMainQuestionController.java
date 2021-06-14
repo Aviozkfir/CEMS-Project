@@ -20,12 +20,20 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+/**
+ * Controller for the question bank screen.
+ * @author oavioz
+ *
+ */
 public class TeacherMainQuestionController extends TeacherMainPageController {
 
     @FXML
     private GridPane grid;
 
     
+    /**
+     * This method setting the subjects in the question bank controller.
+     */
     public void setTeacherSubject() {
     	int i;
 		Teacher teacher = (Teacher) guiControl.getUser();
