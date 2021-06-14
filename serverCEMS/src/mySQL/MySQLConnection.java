@@ -965,13 +965,9 @@ public class MySQLConnection {
 		ArrayList<String[]> list = new ArrayList<>();
 		ResultSet rs;
 		PreparedStatement logInPreparedStatement;
-		logInPreparedStatement = con.prepareStatement(
-				"(SELECT s.ID, SUM(case when q.CorrectAns=aqe.Ans then 1 else 0 end) as grade, 'yes' FROM SolvedExams s, AnsweredQuestionsForExams aqe, Questions q\n"
-				+ "WHERE s.Eid=? AND s.DATE=? AND s.SEid=aqe.SEid AND q.Qid=aqe.Qid GROUP BY s.ID HAVING s.ID IN (SELECT s1.ID FROM SolvedExams s1, SolvedExams s2, AnsweredQuestionsForExams aqe1, AnsweredQuestionsForExams aqe2 WHERE s1.Eid=s2.Eid AND s1.DATE=s2.DATE AND s1.Eid=? AND s1.DATE=? AND aqe1.SEid=s1.SEid AND aqe2.SEid=s2.SEid AND aqe2.Qid=aqe1.Qid AND s1.ID!=s2.ID GROUP BY s1.ID, s2.ID HAVING SUM(case when aqe2.Ans!=aqe1.Ans OR aqe2.Ans=-1 then 1 else 0 end)=0))\n"
-				+ "UNION\n"
-				+ "(SELECT s.ID, SUM(case when q.CorrectAns=aqe.Ans then 1 else 0 end) as grade, 'NO' FROM SolvedExams s, AnsweredQuestionsForExams aqe, Questions q\n"
-				+ "WHERE s.Eid=? AND s.DATE=? AND s.SEid=aqe.SEid AND q.Qid=aqe.Qid GROUP BY s.ID HAVING s.ID NOT IN (SELECT s1.ID FROM SolvedExams s1, SolvedExams s2, AnsweredQuestionsForExams aqe1, AnsweredQuestionsForExams aqe2 WHERE s1.Eid=s2.Eid AND s1.DATE=s2.DATE AND s1.Eid=? AND s1.DATE=? AND aqe1.SEid=s1.SEid AND aqe2.SEid=s2.SEid AND aqe2.Qid=aqe1.Qid AND s1.ID!=s2.ID GROUP BY s1.ID, s2.ID HAVING SUM(case when aqe2.Ans!=aqe1.Ans OR aqe2.Ans=-1 then 1 else 0 end)=0))\n"
-				+ "");
+		logInPreparedStatement = con.prepareStatement("(SELECT s.ID, 'yes', s.Grade, s.Checked FROM SolvedExams s WHERE s.Eid=? AND s.DATE=? AND s.ID IN (SELECT s1.ID FROM SolvedExams s1, SolvedExams s2, AnsweredQuestionsForExams aqe1, AnsweredQuestionsForExams aqe2 WHERE s1.Eid=s2.Eid AND s1.DATE=s2.DATE AND s1.Eid=? AND s1.DATE=? AND aqe1.SEid=s1.SEid AND aqe2.SEid=s2.SEid AND aqe2.Qid=aqe1.Qid AND s1.ID!=s2.ID GROUP BY s1.ID, s2.ID HAVING SUM(case when aqe2.Ans!=aqe1.Ans OR aqe2.Ans=-1 then 1 else 0 end)=0))\n"
+				+ "UNION \n"
+				+ "(SELECT s.ID, 'no', s.Grade, s.Checked FROM SolvedExams s WHERE s.Eid=? AND s.DATE=? AND  s.ID NOT IN (SELECT s1.ID FROM SolvedExams s1, SolvedExams s2, AnsweredQuestionsForExams aqe1, AnsweredQuestionsForExams aqe2 WHERE s1.Eid=s2.Eid AND s1.DATE=s2.DATE AND s1.Eid=? AND s1.DATE=? AND aqe1.SEid=s1.SEid AND aqe2.SEid=s2.SEid AND aqe2.Qid=aqe1.Qid AND s1.ID!=s2.ID GROUP BY s1.ID, s2.ID HAVING SUM(case when aqe2.Ans!=aqe1.Ans OR aqe2.Ans=-1 then 1 else 0 end)=0))");
 		
 		logInPreparedStatement.setString(1, Eid);
 		Date dateInput = new SimpleDateFormat("yyyy-MM-dd").parse(sdate);
@@ -988,7 +984,7 @@ public class MySQLConnection {
 		
 		rs = logInPreparedStatement.executeQuery();
 		while (rs.next()) {
-			String[] a = {rs.getString(1),rs.getInt(2)+"",rs.getString(3)};
+			String[] a = {rs.getString(1),rs.getString(2),rs.getInt(3)+"",rs.getString(4)};
 			list.add(a);
 		}
 		rs.close();
