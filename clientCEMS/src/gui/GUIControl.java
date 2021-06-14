@@ -298,34 +298,47 @@ public class GUIControl {
 						
 					}
 				} else if (getUser() instanceof Student) {
+					System.out.println("IS IN STUDENT ");
 					
 					if (getController() instanceof StudentExamExecutionController)
+						System.out.println("IS IN COMPUTERIZED EXAM CONTROLLER");
 						try {
+				
 							if(getServerMsg().getType()==ServerMessageTypes.STUDENT_EXTEND_TIME) {
-								//((StudentExamExecutionController) getController()).setAddition(getServerMsg().getMessage());
+								System.out.println("STUDENT EXTEND TIME");
+								((StudentExamExecutionController) getController()).setAddition(getServerMsg().getMessage());
+							
 
 							}
-							else
+							else {
+								System.out.println("stop exam computerized");
 								((StudentExamExecutionController) getController()).stopExam();
+							}
 							
 						} catch (IOException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
+				}
 					else if(getController() instanceof StudentManualExamController) {
 						try {
+							System.out.println("IS IN STUDENT");
 							if(getServerMsg().getType()==ServerMessageTypes.STUDENT_EXTEND_TIME) {
+								System.out.println("STUENT EXTEND TIME MANUAL");
 								((StudentManualExamController) getController()).setAddition(getServerMsg().getMessage());
 
 							}
-							else
+							else {
+								System.out.println("STOP EXAM MANUAL");
 								((StudentManualExamController) getController()).stopExam();
+								
+							}
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					}
-				} else if (getUser() instanceof Teacher) {
+				 else if (getUser() instanceof Teacher) {
 					if (getController() instanceof TeacherOngoingExamsController) {
 
 						try {
