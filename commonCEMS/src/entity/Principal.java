@@ -10,6 +10,13 @@ import java.io.Serializable;
 
 import java.util.ArrayList;
 
+/**
+ * An entity of principal.
+ * 
+ * @author Kfir Avioz,On Avioz.
+ * @implement Serializable.
+ *
+ */
 @SuppressWarnings("serial")
 public class Principal extends PersonCEMS implements Serializable {
 
