@@ -343,6 +343,10 @@ public class StudentManualExamController extends StudentMainPageController imple
 		guiControl.loadStage(ClientsConstants.Screens.STUDENT_MAIN_PAGE.path);
 
 	}
+	/**
+	 * Sets additional time
+	 * @param Object additionTime
+	 */
 	public void setAddition(Object additionTime) {
 		String time=(String)additionTime;
 		addition=Integer.parseInt(time);

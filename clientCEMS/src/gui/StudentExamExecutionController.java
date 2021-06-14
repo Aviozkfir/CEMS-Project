@@ -193,6 +193,8 @@ public class StudentExamExecutionController extends StudentComputerizedExamContr
 	 */
 	@FXML
 	private Button SubmitButton;
+	
+	int addition=0;
 
 	/**
 	 * Used to go to the next question and sets all the next question details.
@@ -367,6 +369,19 @@ public class StudentExamExecutionController extends StudentComputerizedExamContr
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				String toPrintEveryTime = null;
+				String toPrint=null;
+				if (addition != 0) {
+					guiControl.popUpMessage("System Message", addition + " Minutes have been added!");
+					minutes += addition;
+					if (minutes >= 100) {
+						 toPrint = String.format("Total Time is:\n %03d:%02d%n", minutes, seconds);
+					} else {
+						 toPrint = String.format("Total Time is:\n %02d:%02d%n", minutes, seconds);
+						
+					}
+					TimeOfExam.setText(toPrint);
+					addition = 0;
+				}
 				if (minutes >= 100) {
 					toPrintEveryTime = String.format("%03d:%02d%n", Minutes, Seconds);
 				} else {
@@ -528,6 +543,15 @@ public class StudentExamExecutionController extends StudentComputerizedExamContr
 
 		}
 
+	}
+	
+	/**
+	 * Sets additional time
+	 * @param Object additionTime
+	 */
+	public void setAddition(Object additionTime) {
+		String time=(String)additionTime;
+		addition=Integer.parseInt(time);
 	}
 
 }
