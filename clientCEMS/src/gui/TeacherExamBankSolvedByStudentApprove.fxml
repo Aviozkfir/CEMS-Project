@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="myRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherExamBankSolvedByStudentApproveController">
+<AnchorPane fx:id="myRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherExamBankSolvedByStudentApproveController">
    <children>
       <VBox prefHeight="600.0" prefWidth="206.0" style="-fx-background-color: #F7F7F7;">
          <children>
@@ -201,33 +201,8 @@
                         <Insets left="11.0" />
                      </HBox.margin>
                   </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" />
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Text fx:id="numOfGraded" fill="#26bfbc" strokeType="OUTSIDE" strokeWidth="0.0" text="2000" textAlignment="CENTER" wrappingWidth="94.95509719848633">
-                           <font>
-                              <Font name="System Bold" size="26.0" />
-                           </font>
-                        </Text>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Graded&#10;" textAlignment="CENTER">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Text fx:id="numOfNotGraded" fill="#de0000" strokeType="OUTSIDE" strokeWidth="0.0" text="2000" textAlignment="CENTER" wrappingWidth="94.95509719848633">
-                           <font>
-                              <Font name="System Bold" size="26.0" />
-                           </font>
-                        </Text>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Not Graded&#10;" textAlignment="CENTER">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Text>
-                     </children>
                      <HBox.margin>
                         <Insets right="330.0" />
                      </HBox.margin>

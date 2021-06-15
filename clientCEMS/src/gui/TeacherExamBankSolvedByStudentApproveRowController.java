@@ -18,9 +18,7 @@ import message.ClientMessageType;
 
 public class TeacherExamBankSolvedByStudentApproveRowController {
 
-    public void setSetAmounts(Supplier<Integer> setAmounts) {
-		this.setAmounts = setAmounts;
-	}
+ 
 
 	@FXML
     private Label studentID;
@@ -46,7 +44,6 @@ public class TeacherExamBankSolvedByStudentApproveRowController {
     String[] a;
     SolvedExamType exam;
 
-    private Supplier<Integer> setAmounts;
     
     @FXML
     void btnCheckExamPressed(ActionEvent event) throws IOException {
@@ -65,7 +62,7 @@ public class TeacherExamBankSolvedByStudentApproveRowController {
     	GUIControl.instance.sendToServer(new ClientMessage( ClientMessageType.TEACHER_ADD_GRADE, ar));
     	finalGrade.setText(a[3]);
     	publishStatus.setText("Checked");
-    	setAmounts.get();
+    	
     	
     }
     
