@@ -1167,14 +1167,14 @@ public class MySQLConnection {
 		ResultSet rs;
 		PreparedStatement logInPreparedStatement;
 		logInPreparedStatement = con.prepareStatement(
-				"SELECT s.SEid,s.Eid,s.DATE,e.Name,s.Grade FROM SolvedExams s,Exams e WHERE s.Eid=e.Eid AND s.ID=? AND s.Checked=?");
+				"SELECT s.SEid,s.Eid,s.DATE,e.Name,s.Grade,s.NotesForStudent FROM SolvedExams s,Exams e WHERE s.Eid=e.Eid AND s.ID=? AND s.Checked=?");
 		logInPreparedStatement.setString(1, student.getId());
 		logInPreparedStatement.setString(2, "Yes");
 
 		rs = logInPreparedStatement.executeQuery();
 		while (rs.next()) {
 			solvedExamsList.add(new SolvedExamToView(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
-					rs.getString(5)));
+					rs.getString(5),rs.getString(6)));
 		}
 		rs.close();
 		return solvedExamsList;

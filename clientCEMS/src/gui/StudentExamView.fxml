@@ -236,7 +236,7 @@
                                           <VBox prefHeight="32.0" prefWidth="609.0" />
                                        </children>
                                     </VBox>
-                                    <Text fx:id="NotesForStudent" strokeType="OUTSIDE" strokeWidth="0.0" text="Notes For Student" wrappingWidth="189.509765625">
+                                    <Text fx:id="NotesForStudent" strokeType="OUTSIDE" strokeWidth="0.0" text="Notes For Student" wrappingWidth="598.509765625">
                                        <font>
                                           <Font size="20.0" />
                                        </font>
@@ -298,6 +298,14 @@
                               <Insets right="11.0" />
                            </HBox.margin>
                         </Button>
+                        <Text fx:id="NotesForExam" strokeType="OUTSIDE" strokeWidth="0.0" text="text" wrappingWidth="469.8076171875">
+                           <HBox.margin>
+                              <Insets left="100.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
                      </children>
                      <opaqueInsets>
                         <Insets />

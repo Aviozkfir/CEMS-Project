@@ -14,13 +14,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherExamBankExamsSubjectController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherExamBankExamsSubjectController">
    <children>
       <VBox prefHeight="600.0" prefWidth="175.0" style="-fx-background-color: #F7F7F7;">
          <children>
             <ImageView fitHeight="92.0" fitWidth="156.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../eclipse-workspace/Client/photos/CEMSlogo.png" />
+                  <Image url="@../resources/CEMSlogo.png" />
                </image>
                <VBox.margin>
                   <Insets bottom="10.0" />
@@ -33,7 +33,7 @@
                <graphic>
                   <ImageView fitHeight="27.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../eclipse-workspace/Client/photos/btnHomepage.png" />
+                        <Image url="@../resources/btnHomepage.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -69,7 +69,7 @@
                <graphic>
                   <ImageView fitHeight="27.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../eclipse-workspace/Client/photos/btnStatistics.png" />
+                        <Image url="@../resources/btnStatistics.png" />
                      </image>
                   </ImageView>
                </graphic>

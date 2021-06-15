@@ -4,10 +4,12 @@ import java.io.Serializable;
 
 /**
  * A class that holds relevant information to present to student.
+ * 
  * @author Shalom and Omer
  *
  */
 public class SolvedExamToView implements Serializable {
+	String notesForExam;
 	/**
 	 * Holds the Submission exam ID
 	 */
@@ -31,23 +33,27 @@ public class SolvedExamToView implements Serializable {
 
 	/**
 	 * constructor given all the fields
+	 * 
 	 * @param SEid
 	 * @param eid
 	 * @param finishDate
 	 * @param examName
 	 * @param grade
 	 */
-	public SolvedExamToView(String SEid, String eid, String finishDate, String examName, String grade) {
+	public SolvedExamToView(String SEid, String eid, String finishDate, String examName, String grade,
+			String notesForExam) {
 		super();
 		this.eid = eid;
 		this.finishDate = finishDate;
 		this.examName = examName;
 		this.grade = grade;
 		this.SEid = SEid;
+		this.notesForExam = notesForExam;
 	}
 
 	/**
 	 * returns Exam ID
+	 * 
 	 * @return String
 	 */
 	public String getEid() {
@@ -56,6 +62,7 @@ public class SolvedExamToView implements Serializable {
 
 	/**
 	 * returns finish date
+	 * 
 	 * @return String
 	 */
 	public String getFinishDate() {
@@ -64,6 +71,7 @@ public class SolvedExamToView implements Serializable {
 
 	/**
 	 * returns exam name
+	 * 
 	 * @return String
 	 */
 	public String getExamName() {
@@ -72,6 +80,7 @@ public class SolvedExamToView implements Serializable {
 
 	/**
 	 * sets grade for that exam
+	 * 
 	 * @return String
 	 */
 	public String getGrade() {
@@ -79,7 +88,7 @@ public class SolvedExamToView implements Serializable {
 	}
 
 	/**
-	 *toString for SolvedExam
+	 * toString for SolvedExam
 	 */
 	@Override
 	public String toString() {
@@ -89,10 +98,15 @@ public class SolvedExamToView implements Serializable {
 
 	/**
 	 * returns submission exam ID
+	 * 
 	 * @return String
 	 */
 	public String getSEid() {
 		return SEid;
+	}
+
+	public String getNotesForExam() {
+		return notesForExam;
 	}
 
 }

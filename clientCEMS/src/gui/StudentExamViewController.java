@@ -25,6 +25,8 @@ import javafx.scene.text.Text;
  *
  */
 public class StudentExamViewController extends StudentMainPageController {
+    @FXML
+    private Text NotesForExam;
 	/**
 	 * Holds the index of the current question
 	 */
@@ -215,14 +217,14 @@ public class StudentExamViewController extends StudentMainPageController {
 	 * @param int num
 	 */
 	public void setQuestion(int num) {
-
+		NotesForExam.setText("Exam notes: "+exam.getNotesForExam());
 		SolvedQuestionToView que = questions.get(num);
 		ContentOfQuestion.setText(que.getQuestionText());
 		OptionAText.setText(que.getAnsA());
 		OptionBText.setText(que.getAnsB());
 		OptionCText.setText(que.getAnsC());
 		OptionDText.setText(que.getAnsD());
-		NotesForStudent.setText(que.getNotesForStudent());
+		NotesForStudent.setText("Notes for Student: "+que.getNotesForStudent());
 		QuestionNumberTitle.setText("Question: " + que.getQuestionNum());
 		NameOfExam2.setText(exam.getExamName());
 		CorrectAnswerText.setText("Correct Answer is: " + que.getCorrectAns());
