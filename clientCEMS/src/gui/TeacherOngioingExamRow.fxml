@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="97.0" prefWidth="841.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherOngioingExamRowController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="97.0" prefWidth="841.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherOngioingExamRowController">
    <children>
       <HBox prefHeight="94.0" prefWidth="841.0" style="-fx-background-color: white;">
          <opaqueInsets>
@@ -37,14 +37,6 @@
                   <Font size="13.0" />
                </font>
             </Label>
-            <Label fx:id="currentDuration" alignment="CENTER" prefHeight="42.0" prefWidth="91.0" text="1:30:00">
-               <opaqueInsets>
-                  <Insets top="5.0" />
-               </opaqueInsets>
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </Label>
             <TextField fx:id="newDurationText" prefHeight="25.0" prefWidth="80.0">
                <HBox.margin>
                   <Insets right="10.0" top="10.0" />
@@ -55,14 +47,6 @@
                   <Insets bottom="5.0" top="10.0" />
                </HBox.margin>
             </TextArea>
-            <Label fx:id="examStatus" alignment="CENTER" prefHeight="42.0" prefWidth="100.0" text="Status here">
-               <opaqueInsets>
-                  <Insets top="5.0" />
-               </opaqueInsets>
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Label>
             <Button fx:id="btnChangeTime" mnemonicParsing="false" onAction="#btnChangeTimePressed" prefHeight="69.0" prefWidth="75.0" style="-fx-background-color: white;">
                <graphic>
                   <ImageView fitHeight="74.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">

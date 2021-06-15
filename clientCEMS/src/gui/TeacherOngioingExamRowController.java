@@ -29,8 +29,7 @@ public class TeacherOngioingExamRowController {
 	@FXML
 	private Label title;
 
-	@FXML
-	private Label currentDuration;
+	
 
 	@FXML
 	private TextField newDurationText;
@@ -38,8 +37,7 @@ public class TeacherOngioingExamRowController {
 	@FXML
 	private TextArea reasonText;
 
-	@FXML
-	private Label examStatus;
+	
 
 	@FXML
 	private Button btnChangeTime;
@@ -55,8 +53,7 @@ public class TeacherOngioingExamRowController {
 	public void setExam(updatedRequestExam exam) {
 		this.exam = exam;
 		title.setText(exam.getExam().getName());
-		currentDuration.setText(exam.getExam().getTotalTime());
-		examStatus.setText("Not sent yet");
+	
 	}
 
 	/**
