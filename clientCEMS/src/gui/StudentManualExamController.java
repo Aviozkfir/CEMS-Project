@@ -280,6 +280,7 @@ public class StudentManualExamController extends StudentMainPageController imple
 				if (addition != 0) {
 					guiControl.popUpMessage("System Message", addition + " Minutes have been added!");
 					minutes += addition;
+					TotalMinutes+=addition;
 					if (minutes >= 100) {
 						 toPrint = String.format("Total Time is:\n %03d:%02d%n", minutes, seconds);
 					} else {
