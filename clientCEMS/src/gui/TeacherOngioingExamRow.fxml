@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="97.0" prefWidth="841.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherOngioingExamRowController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="97.0" prefWidth="706.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherOngioingExamRowController">
    <children>
-      <HBox prefHeight="94.0" prefWidth="841.0" style="-fx-background-color: white;">
+      <HBox prefHeight="94.0" prefWidth="706.0" style="-fx-background-color: white;">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>

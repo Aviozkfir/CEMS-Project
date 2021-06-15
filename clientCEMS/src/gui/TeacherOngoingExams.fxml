@@ -140,14 +140,6 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="42.0" prefWidth="91.0" text="Current Duration" textAlignment="CENTER" wrapText="true">
-                     <opaqueInsets>
-                        <Insets top="5.0" />
-                     </opaqueInsets>
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
                   <Label alignment="CENTER" prefHeight="42.0" prefWidth="80.0" text="New Duration" textAlignment="CENTER" wrapText="true">
                      <opaqueInsets>
                         <Insets top="5.0" />
@@ -157,14 +149,6 @@
                      </font>
                   </Label>
                   <Label alignment="CENTER" prefHeight="42.0" prefWidth="176.0" text="New Duration Reason" textAlignment="CENTER" wrapText="true">
-                     <opaqueInsets>
-                        <Insets top="5.0" />
-                     </opaqueInsets>
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label alignment="CENTER" prefHeight="42.0" prefWidth="113.0" text="Request&#10;Status" textAlignment="CENTER" wrapText="true">
                      <opaqueInsets>
                         <Insets top="5.0" />
                      </opaqueInsets>
