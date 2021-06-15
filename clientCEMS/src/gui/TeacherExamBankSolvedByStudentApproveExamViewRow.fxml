@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="369.0" prefWidth="844.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherExamBankSolvedByStudentApproveExamViewRowController">
+   <children>
+      <VBox prefHeight="369.0" prefWidth="844.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox prefHeight="0.0" prefWidth="829.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <children>
+                  <Line endX="770.0" startX="-12.0" stroke="#e8ebef" strokeWidth="2.0">
+                     <HBox.margin>
+                        <Insets bottom="7.0" left="21.0" />
+                     </HBox.margin>
+                  </Line>
+               </children>
+            </HBox>
+            <HBox prefHeight="24.0" prefWidth="844.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Question ">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="qNum" strokeType="OUTSIDE" strokeWidth="0.0" text="#num">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </Text>
+               </children>
+               <VBox.margin>
+                  <Insets left="21.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="38.0" prefWidth="844.0">
+               <children>
+                  <Text fx:id="textQuestion" strokeType="OUTSIDE" strokeWidth="0.0" text="question text here" wrappingWidth="787.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="21.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox prefHeight="38.0" prefWidth="844.0">
+               <children>
+                  <Text fx:id="textQuestion1" strokeType="OUTSIDE" strokeWidth="0.0" text="Correct Answer Is:" wrappingWidth="148.0">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="21.0" />
+                     </HBox.margin>
+                  </Text>
+                  <Text fx:id="correctAns" strokeType="OUTSIDE" strokeWidth="0.0" text="Correct">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets top="2.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox prefHeight="40.0" prefWidth="808.0">
+               <children>
+                  <Pane prefHeight="39.0" prefWidth="50.0" style="-fx-border-color: #4CB5F5;">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets left="1.0" right="14.0" />
+                     </HBox.margin>
+                     <children>
+                        <Label alignment="CENTER" layoutY="-1.0" prefHeight="21.0" prefWidth="50.0" style="-fx-background-color: #4CB5F5; -fx-font-weight: bold;" text="A" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <RadioButton fx:id="rbA" disable="true" layoutX="16.0" layoutY="20.0" mnemonicParsing="false">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="rbGroup" />
+                           </toggleGroup>
+                        </RadioButton>
+                     </children>
+                  </Pane>
+                  <Text fx:id="ans1" strokeType="OUTSIDE" strokeWidth="0.0" text="Ans1">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Text>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="11.0" left="21.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="40.0" prefWidth="808.0">
+               <children>
+                  <Pane prefHeight="39.0" prefWidth="50.0" style="-fx-border-color: #4CB5F5;">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets left="1.0" right="14.0" />
+                     </HBox.margin>
+                     <children>
+                        <Label alignment="CENTER" layoutY="-1.0" prefHeight="21.0" prefWidth="50.0" style="-fx-background-color: #4CB5F5; -fx-font-weight: bold;" text="B" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <RadioButton fx:id="rbB" disable="true" layoutX="16.0" layoutY="20.0" mnemonicParsing="false">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="rbGroup" />
+                           </toggleGroup>
+                        </RadioButton>
+                     </children>
+                  </Pane>
+                  <Text fx:id="ans2" strokeType="OUTSIDE" strokeWidth="0.0" text="Ans2">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Text>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="11.0" left="21.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="40.0" prefWidth="808.0">
+               <children>
+                  <Pane prefHeight="39.0" prefWidth="50.0" style="-fx-border-color: #4CB5F5;">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets left="1.0" right="14.0" />
+                     </HBox.margin>
+                     <children>
+                        <Label alignment="CENTER" layoutY="-1.0" prefHeight="21.0" prefWidth="50.0" style="-fx-background-color: #4CB5F5; -fx-font-weight: bold;" text="C" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <RadioButton fx:id="rbC" disable="true" layoutX="16.0" layoutY="20.0" mnemonicParsing="false">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="rbGroup" />
+                           </toggleGroup>
+                        </RadioButton>
+                     </children>
+                  </Pane>
+                  <Text fx:id="ans3" strokeType="OUTSIDE" strokeWidth="0.0" text="Ans3">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Text>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="11.0" left="21.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="40.0" prefWidth="808.0">
+               <children>
+                  <Pane prefHeight="39.0" prefWidth="50.0" style="-fx-border-color: #4CB5F5;">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets left="1.0" right="14.0" />
+                     </HBox.margin>
+                     <children>
+                        <Label alignment="CENTER" layoutY="-1.0" prefHeight="21.0" prefWidth="50.0" style="-fx-background-color: #4CB5F5; -fx-font-weight: bold;" text="D" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <RadioButton fx:id="rbD" disable="true" layoutX="16.0" layoutY="20.0" mnemonicParsing="false">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="rbGroup" />
+                           </toggleGroup>
+                        </RadioButton>
+                     </children>
+                  </Pane>
+                  <Text fx:id="ans4" strokeType="OUTSIDE" strokeWidth="0.0" text="Ans4">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Text>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="11.0" left="21.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="38.0" prefWidth="829.0">
+               <children>
+                  <Text fill="#1dff00" strokeType="OUTSIDE" strokeWidth="0.0" text="*">
+                     <HBox.margin>
+                        <Insets left="19.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Comments:" wrappingWidth="79.6171875">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="3.0" />
+                     </HBox.margin>
+                  </Text>
+                  <TextArea fx:id="studentNotesText" prefHeight="38.0" prefWidth="577.0" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </HBox>
+            <Line endX="770.0" startX="-12.0" stroke="#e8ebef" strokeWidth="2.0">
+               <VBox.margin>
+                  <Insets left="21.0" top="7.0" />
+               </VBox.margin>
+            </Line>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+   </children>
+</AnchorPane>

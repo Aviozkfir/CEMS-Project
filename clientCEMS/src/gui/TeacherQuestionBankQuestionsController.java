@@ -37,11 +37,6 @@ public class TeacherQuestionBankQuestionsController extends TeacherMainPageContr
     @FXML
     private Text courseName;
 
-    @FXML
-    private TextField searchBar;
-
-    @FXML
-    private Button btnSearch;
 
     @FXML
     private Text numberOfQuestions;
@@ -79,10 +74,7 @@ public class TeacherQuestionBankQuestionsController extends TeacherMainPageContr
     	((TeacherCreateQuestionController)GUIControl.instance.loadStage("/gui/TeacherCreateQuestion.fxml")).setPage(course);
     }
 
-    @FXML
-    void btnSearchPressed(ActionEvent event) {
-
-    }
+ 
     
     /**
      * Sets teacher courses as folders

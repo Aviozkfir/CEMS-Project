@@ -48,11 +48,11 @@ public class TeacherCreateManualExamController extends TeacherMainPageController
     @FXML
     private TextArea teacherNotesText;
 
- //   @FXML
- //   private Text subjectName;
+    @FXML
+    private Text subjectName;
 
-  //  @FXML
-  //  private Text courseName;
+    @FXML
+    private Text courseName;
     private Exam exam = new Exam();
 
     @FXML
@@ -182,6 +182,8 @@ public class TeacherCreateManualExamController extends TeacherMainPageController
     	exam.setSid(course.getSubject().getId());
     	exam.setID(((Teacher)guiControl.getUser()).getId());
     	exam.setMode("Manual");
+    	subjectName.setText(course.getSubject().getName());
+    	courseName.setText(course.getName());
 		
 	}
 	

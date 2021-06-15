@@ -17,11 +17,6 @@ import message.ClientMessage;
 import message.ClientMessageType;
 import message.ServerMessageTypes;
 
-/**
- * Controller that holds the view of the desired exam.
- * @author oavioz
- *
- */
 public class TeacherExamBankViewExamController extends TeacherMainPageController{
 	
 	/**
@@ -73,11 +68,6 @@ public class TeacherExamBankViewExamController extends TeacherMainPageController
     @FXML
     private Button Back;
 
-    /**
-     * This method gets us into the previous screen , the exams list.
-     * @param event
-     * @throws IOException
-     */
     @FXML
 	void BackPressed(ActionEvent event) throws IOException {
 		TeacherExamBankExamsController contr = (TeacherExamBankExamsController) GUIControl.instance

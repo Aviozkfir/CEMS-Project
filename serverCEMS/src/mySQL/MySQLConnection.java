@@ -16,10 +16,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 import entity.Course;
 import entity.Exam;
@@ -221,6 +221,17 @@ public class MySQLConnection {
 		}
 		return studentList;
 	}
+	
+	public static String incDay(String dt) throws ParseException {
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar c = Calendar.getInstance();
+		c.setTime(sdf.parse(dt));
+		c.add(Calendar.DATE, 1);  // number of days to add
+		dt = sdf.format(c.getTime());  // dt is now the new date
+		
+		return dt;
+	}
 
 	/**
 	 * returns all grades according to the report
@@ -346,7 +357,7 @@ public class MySQLConnection {
 		return exam;
 	}
 	
-	public static ArrayList<SolvedExamType> getTeacherSolvedExamByCourse(Course course) throws SQLException {
+	public static ArrayList<SolvedExamType> getTeacherSolvedExamByCourse(Course course) throws SQLException, ParseException {
 		ArrayList<SolvedExamType> exams = new ArrayList<SolvedExamType>();
 		
 		ResultSet rs1;
@@ -358,7 +369,7 @@ public class MySQLConnection {
 		logInPreparedStatement1.setString(1, course.getId());
 		rs1 = logInPreparedStatement1.executeQuery();
 		while (rs1.next()) {
-			exams.add( new SolvedExamType(rs1.getString(1) ,rs1.getDate(2).toString(), rs1.getString(3), rs1.getInt(4),rs1.getInt(5)) );
+			exams.add( new SolvedExamType(rs1.getString(1) ,incDay(rs1.getDate(2).toString()), rs1.getString(3), rs1.getInt(4),rs1.getInt(5)) );
 		}
 		
 		
@@ -443,13 +454,17 @@ public class MySQLConnection {
 //		return questionList;
 //	}
 	
-	/**
-	 * returns all questions given the course
-	 * @param course
-	 * @return
-	 * @throws SQLException
-	 */
-	public static Object getQuestionByCourse(Course course) throws SQLException {
+			
+	public static Object getQuestionByCourse(Course course) throws SQLException, ParseException {
+	   
+	
+										  
+				 
+		   
+						
+	
+																			  
+							
 		ArrayList<Question> questionList = new ArrayList<Question>();
 		ResultSet rs;
 		PreparedStatement logInPreparedStatement;
@@ -459,25 +474,33 @@ public class MySQLConnection {
 		logInPreparedStatement.setString(1, course.getId());
 		rs = logInPreparedStatement.executeQuery();
 		while (rs.next()) {
+			
 			questionList.add(new Question(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
-					rs.getString(5), rs.getString(6), rs.getString(7), rs.getDate(8).toString(), rs.getInt(9)));
+					rs.getString(5), rs.getString(6), rs.getString(7), incDay(rs.getDate(8).toString()), rs.getInt(9)));
 		}
 		return questionList;
 	}
 	
-	/**
-	 * updates the data base when exam is checked
-	 * @param ar
-	 * @throws SQLException
-	 */
-	public static void addCheckedExam(ArrayList<Object> ar) throws SQLException {
+			
+	public static void addCheckedExam(Object[] ar) throws SQLException {
+	   
+	
+											  
+			 
+						
+	
+																			  
+							
 		
 		PreparedStatement delQ =con.prepareStatement("UPDATE SolvedExams\n"
-				+ "SET Grade = ?, Checked =Yes, NotesForStudent=? \n"
+				+ "SET Grade = ?, Checked ='Yes', NotesForStudent=? \n"
 				+ "WHERE SEid=?;");
-		delQ.setInt(1, Integer.parseInt((String)ar.get(0)));
-		delQ.setString(2, (String)ar.get(2));
-		delQ.setString(2, (String)ar.get(3));
+		delQ.setInt(1, Integer.parseInt((String)ar[0]));
+		if(ar[1]==null)
+			delQ.setString(2, "");
+		else
+			delQ.setString(2, (String)ar[1]);
+		delQ.setString(3,(String) ar[2]);
 		delQ.executeUpdate();
 		
 		
@@ -548,6 +571,7 @@ public class MySQLConnection {
 		addQuestion.setString(8, q.getAuthor());
 		
 		Date dateInput = new SimpleDateFormat("yyyy-MM-dd").parse(q.getModified());
+	
 		java.sql.Date dateInputData = new java.sql.Date(dateInput.getTime());
 		addQuestion.setDate(9, dateInputData);
 		addQuestion.setString(10, q.getSubject());
@@ -1129,33 +1153,61 @@ public class MySQLConnection {
 		rs.close();
 		return questions;
 	}
+	public static void addCheckedExamComments(Object[] ar) throws SQLException {
+		
+		ArrayList<SolvedQuestionToView> list = (ArrayList<SolvedQuestionToView>) ar[3];
+		String s = (String) ar[2];
+		
+		for(SolvedQuestionToView q : list) {
+		ResultSet rs;
+		PreparedStatement logInPreparedStatement;
+		logInPreparedStatement = con.prepareStatement("UPDATE AnsweredQuestionsForExams "
+				+ "   SET NotesForStudent = ? "
+				+ "	WHERE SEid=? AND Qid=?");
+		if(q.getNotesForStudent()==null)
+			logInPreparedStatement.setString(1,"");
+		else
+			logInPreparedStatement.setString(1,q.getNotesForStudent());
+		logInPreparedStatement.setString(2,s);
+		logInPreparedStatement.setString(3,q.getQid());
+		logInPreparedStatement.executeUpdate();
+		}
+				
+	}
 	public static Object teacherGetExamsResults(String Eid, String sdate) throws SQLException, ParseException {
+		
+		System.out.print(Eid+" "+sdate);
 		ArrayList<String[]> list = new ArrayList<>();
 		ResultSet rs;
 		PreparedStatement logInPreparedStatement;
-		logInPreparedStatement = con.prepareStatement("(SELECT s.ID, 'yes', s.Grade, s.Checked FROM SolvedExams s WHERE s.Eid=? AND s.DATE=? AND s.ID IN (SELECT s1.ID FROM SolvedExams s1, SolvedExams s2, AnsweredQuestionsForExams aqe1, AnsweredQuestionsForExams aqe2 WHERE s1.Eid=s2.Eid AND s1.DATE=s2.DATE AND s1.Eid=? AND s1.DATE=? AND aqe1.SEid=s1.SEid AND aqe2.SEid=s2.SEid AND aqe2.Qid=aqe1.Qid AND s1.ID!=s2.ID GROUP BY s1.ID, s2.ID HAVING SUM(case when aqe2.Ans!=aqe1.Ans OR aqe2.Ans=-1 then 1 else 0 end)=0))\n"
-				+ "UNION \n"
-				+ "(SELECT s.ID, 'no', s.Grade, s.Checked FROM SolvedExams s WHERE s.Eid=? AND s.DATE=? AND  s.ID NOT IN (SELECT s1.ID FROM SolvedExams s1, SolvedExams s2, AnsweredQuestionsForExams aqe1, AnsweredQuestionsForExams aqe2 WHERE s1.Eid=s2.Eid AND s1.DATE=s2.DATE AND s1.Eid=? AND s1.DATE=? AND aqe1.SEid=s1.SEid AND aqe2.SEid=s2.SEid AND aqe2.Qid=aqe1.Qid AND s1.ID!=s2.ID GROUP BY s1.ID, s2.ID HAVING SUM(case when aqe2.Ans!=aqe1.Ans OR aqe2.Ans=-1 then 1 else 0 end)=0))");
-		
-		logInPreparedStatement.setString(1, Eid);
+		logInPreparedStatement = con.prepareStatement("(SELECT s.SEid, s.ID, 'No' ,SUM(case when q.CorrectAns=aqe.Ans then aqe.Qpoints else 0 end), s.Checked, s.Submitted, s.TimeOfExe, s.Grade FROM SolvedExams s, AnsweredQuestionsForExams aqe, Questions q WHERE s.Eid=? AND s.DATE=? AND q.Qid=aqe.Qid AND aqe.SEid=s.SEid GROUP BY s.SEid HAVING s.ID NOT IN (SELECT s1.ID FROM SolvedExams s1, SolvedExams s2, AnsweredQuestionsForExams aqe1, AnsweredQuestionsForExams aqe2 WHERE s1.Eid=s2.Eid AND s1.DATE=s2.DATE AND s1.Eid=? AND s1.DATE=? AND aqe1.SEid=s1.SEid AND aqe2.SEid=s2.SEid AND aqe2.Qid=aqe1.Qid AND s1.ID!=s2.ID GROUP BY s1.ID, s2.ID HAVING SUM(case when aqe2.Ans!=aqe1.Ans OR aqe2.Ans=-1 then 1 else 0 end)=0))\n"
+				+ "UNION\n"
+				+ "(SELECT s.SEid, s.ID, 'Yes', SUM(case when q.CorrectAns=aqe.Ans then aqe.Qpoints else 0 end), s.Checked, s.Submitted, s.TimeOfExe, s.Grade FROM SolvedExams s, AnsweredQuestionsForExams aqe, Questions q WHERE s.Eid=? AND s.DATE=? AND q.Qid=aqe.Qid AND aqe.SEid=s.SEid GROUP BY s.SEid HAVING s.ID IN (SELECT s1.ID FROM SolvedExams s1, SolvedExams s2, AnsweredQuestionsForExams aqe1, AnsweredQuestionsForExams aqe2 WHERE s1.Eid=s2.Eid AND s1.DATE=s2.DATE AND s1.Eid=? AND s1.DATE=? AND aqe1.SEid=s1.SEid AND aqe2.SEid=s2.SEid AND aqe2.Qid=aqe1.Qid AND s1.ID!=s2.ID GROUP BY s1.ID, s2.ID HAVING SUM(case when aqe2.Ans!=aqe1.Ans OR aqe2.Ans=-1 then 1 else 0 end)=0))");
+				
+				
+				
+				logInPreparedStatement.setString(1, Eid);
 		Date dateInput = new SimpleDateFormat("yyyy-MM-dd").parse(sdate);
 		java.sql.Date dateInputData = new java.sql.Date(dateInput.getTime());
-		logInPreparedStatement.setDate(2, dateInputData);
+		logInPreparedStatement.setString(2, sdate);
 		
 		
 		logInPreparedStatement.setString(3, Eid);
-		logInPreparedStatement.setDate(4, dateInputData);
+		logInPreparedStatement.setString(4, sdate);
 		logInPreparedStatement.setString(5, Eid);
-		logInPreparedStatement.setDate(6, dateInputData);
+		logInPreparedStatement.setString(6, sdate);
 		logInPreparedStatement.setString(7, Eid);
-		logInPreparedStatement.setDate(8, dateInputData);
+		logInPreparedStatement.setString(8, sdate);
 		
 		rs = logInPreparedStatement.executeQuery();
+	
 		while (rs.next()) {
-			String[] a = {rs.getString(1),rs.getString(2),rs.getInt(3)+"",rs.getString(4)};
+			String[] a = {rs.getString(1),rs.getString(2),rs.getString(3),rs.getInt(4)+"",rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8)+""};
 			list.add(a);
+		
 		}
 		rs.close();
+		
 		return list;
 	}
 	/**

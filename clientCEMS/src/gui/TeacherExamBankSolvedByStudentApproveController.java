@@ -15,79 +15,89 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import message.ClientMessage;
+import message.ClientMessageType;
 
-/**
- * Controller that holds the exam that solved by student.
- * 
- * @author oavioz
- *
- */
 public class TeacherExamBankSolvedByStudentApproveController extends TeacherMainPageController {
 
-	@FXML
-	private AnchorPane myRoot;
+    @FXML
+    private AnchorPane myRoot;
 
-	@FXML
-	private Text subjectName;
+    @FXML
+    private Text subjectName;
 
-	@FXML
-	private Text courseName;
+    @FXML
+    private Text courseName;
 
-	@FXML
-	private Text examName;
+    @FXML
+    private Text examName;
 
-	@FXML
-	private Text numOfExams;
+    @FXML
+    private Text numOfExams;
 
-	@FXML
-	private Text numOfGraded;
+    @FXML
+    private Text numOfGraded;
 
-	@FXML
-	private Text numOfNotGraded;
+    @FXML
+    private Text numOfNotGraded;
 
-	@FXML
-	private Button btnPublishAll;
+    @FXML
+    private Button btnPublishAll;
 
-	@FXML
-	private VBox vTable;
+    @FXML
+    private VBox vTable;
 
-	@FXML
-	private Button btnBack;
+    @FXML
+    private Button btnBack;
 
-	private SolvedExamType exam;
+    
+    private SolvedExamType exam;
+    
+    @FXML
+    void btnBackPressed(ActionEvent event) throws IOException {
+    	TeacherExamBankSolvedByStudentExamsController a = ((TeacherExamBankSolvedByStudentExamsController) guiControl.loadStage("/gui/TeacherExamBankSolvedByStudentExams.fxml"));
+    	a.setTeacherCourse(exam.getCourse());
+    	
+    }
 
-	/**
-	 * This method getting back to the screen Solved exams.
-	 * 
-	 * @param event
-	 * @throws IOException
-	 */
-	@FXML
-	void btnBackPressed(ActionEvent event) throws IOException {
-		TeacherExamBankSolvedByStudentExamsController a = ((TeacherExamBankSolvedByStudentExamsController) guiControl
-				.loadStage("/gui/TeacherExamBankSolvedByStudentExams.fxml"));
-		a.setTeacherCourse(exam.getCourse());
-
-	}
-
-	@FXML
-	void btnPublishAllPressed(ActionEvent event) {
-
-	}
-
-	/**
-	 * This method setting the solved exam.
-	 * 
-	 * @param exam The exam.
-	 */
-	public void setExamType(SolvedExamType exam) {
-		this.exam = exam;
-		this.numOfExams.setText(exam.getTotal() + "");
-		this.numOfGraded.setText(exam.getChecked() + "");
-		this.numOfNotGraded.setText((exam.getTotal() - exam.getChecked()) + "");
-		this.subjectName.setText(exam.getCourse().getSubject().getName());
-		this.courseName.setText(exam.getCourse().getName());
-		this.examName.setText(exam.getName());
-	}
+    
+   
+    public void setExamType(SolvedExamType exam) throws IOException {
+    	this.exam=exam;	
+    	this.numOfExams.setText(exam.getTotal()+"");
+    	this.numOfGraded.setText(exam.getChecked()+"");
+    	this.numOfNotGraded.setText((exam.getTotal()-exam.getChecked())+"");
+    	this.subjectName.setText(exam.getCourse().getSubject().getName());
+    	this.courseName.setText(exam.getCourse().getName());
+    	this.examName.setText(exam.getName());
+    	
+    	String[] a = {exam.getEid(),exam.getDate()};
+    	guiControl.sendToServer(new ClientMessage(ClientMessageType.TEACHER_GET_EXAMS,a));
+    	ArrayList<String[]> list = (ArrayList<String[]>) guiControl.getServerMsg().getMessage();
+    	
+    	for(String[] e : list) {
+    		TeacherExamBankSolvedByStudentApproveRowController controller;
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/TeacherExamBankSolvedByStudentApproveRow.fxml"));
+			AnchorPane root = fxmlLoader.load();
+			controller = (TeacherExamBankSolvedByStudentApproveRowController) fxmlLoader.getController();
+			controller.setRow(e, exam);
+			controller.setSetAmounts(()->{
+				
+				
+				exam.setChecked(exam.getChecked()+1);
+				this.numOfGraded.setText(exam.getChecked()+"");
+		    	this.numOfNotGraded.setText((exam.getTotal()-exam.getChecked())+"");
+		    	return 1;
+			});
+			{
+				
+				
+				exam.setChecked(exam.getChecked()+1);
+				this.numOfGraded.setText(exam.getChecked()+"");
+		    	this.numOfNotGraded.setText((exam.getTotal()-exam.getChecked())+"");
+			}
+			vTable.getChildren().add(root);
+    	}
+    }
 
 }

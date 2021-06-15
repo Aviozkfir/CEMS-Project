@@ -81,6 +81,30 @@
                   <Insets left="43.0" right="10.0" />
                </HBox.margin>
             </Button>
+            <Button fx:id="btnEdit" mnemonicParsing="false" onAction="#btnEditPressed" prefHeight="38.0" prefWidth="48.0" style="-fx-background-color: white;">
+               <graphic>
+                  <ImageView fitHeight="45.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/btnEdit.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Button>
+            <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#btnDeletePressed" prefHeight="42.0" prefWidth="39.0" style="-fx-background-color: white;">
+               <graphic>
+                  <ImageView fitHeight="45.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/btnDelete.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Button>
          </children>
          <opaqueInsets>
             <Insets />

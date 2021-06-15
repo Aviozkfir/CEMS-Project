@@ -159,6 +159,9 @@ public class SolvedQuestionToView implements Serializable {
 	public int getQuestionNum() {
 		return questionNum;
 	}
+	public void setNotesForStudent(String notesForStudent) {
+		this.notesForStudent = notesForStudent;
+	}
 
 	/**
 	 *toString for SolvedQuestuonToView

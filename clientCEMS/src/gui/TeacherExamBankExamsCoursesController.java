@@ -14,10 +14,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 
-/**
- * @author Sharon and Guy
- *TeacherExamBankExamsCoursesController- shows all of the exams in the current course
- */
 public class TeacherExamBankExamsCoursesController extends TeacherMainPageController  {
 
 	@FXML
@@ -36,10 +32,11 @@ public class TeacherExamBankExamsCoursesController extends TeacherMainPageContro
     }
 
     
-    /**
-     * setTeacherCourse - sets all of the relevant courses of to the current logged teacher
-     * @param sub
-     */
+	
+    
+
+
+
 	public void setTeacherCourse(Subject sub) {
 		
 		this.subjectName.setText(sub.getName());
