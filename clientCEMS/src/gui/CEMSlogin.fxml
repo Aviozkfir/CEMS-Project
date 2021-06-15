@@ -8,11 +8,27 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="388.0" prefWidth="673.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LoginPageController">
+<AnchorPane prefHeight="388.0" prefWidth="673.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LoginPageController">
    <children>
-      <ImageView fitHeight="388.0" fitWidth="680.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="388.0" fitWidth="680.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../resources/loginBg.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="90.0" fitWidth="184.0" layoutX="430.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/loginIcon2.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="168.0" fitWidth="127.0" layoutX="243.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/loginPage3.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="UserIDTextField" layoutX="42.0" layoutY="108.0" promptText="UserID" />
+      <ImageView fitHeight="223.0" fitWidth="291.0" layoutX="394.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/loginPage.png" />
          </image>
       </ImageView>
       <Button fx:id="LoginButton" layoutX="42.0" layoutY="212.0" mnemonicParsing="false" onAction="#LoginButtonPressed" prefHeight="34.0" prefWidth="135.0" style="-fx-background-radius: 30 30 30 30;" text="Login">
@@ -20,26 +36,10 @@
             <Font size="15.0" />
          </font>
       </Button>
-      <TextField fx:id="UserIDTextField" layoutX="42.0" layoutY="108.0" promptText="UserID" />
       <PasswordField fx:id="PasswordFieldText" layoutX="42.0" layoutY="159.0" promptText="Password" />
-      <ImageView fitHeight="104.0" fitWidth="243.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="90.0" fitWidth="177.0" layoutX="28.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../resources/CEMSlogo.PNG" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="223.0" fitWidth="291.0" layoutX="394.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../resources/loginPage.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="168.0" fitWidth="127.0" layoutX="159.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../resources/loginPage3.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="90.0" fitWidth="184.0" layoutX="430.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../resources/loginIcon2.png" />
+            <Image url="@../resources/CEMSlogo.png" />
          </image>
       </ImageView>
    </children>

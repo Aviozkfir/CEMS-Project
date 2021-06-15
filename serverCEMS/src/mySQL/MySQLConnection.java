@@ -89,6 +89,12 @@ public class MySQLConnection {
 	}
 
 
+	/**
+	 * Returns num of students in course
+	 * @param Cid
+	 * @return
+	 * @throws SQLException
+	 */
 	public static int numOfStudentsInCourse(String Cid) throws SQLException {
 		PreparedStatement exams = con.prepareStatement(
 				"SELECT COUNT(pec.ID) FROM Person_Enrolled_Course pec, Person p WHERE pec.Cid=? AND pec.ID=p.ID AND p.Role=\"Student\"");
@@ -100,6 +106,12 @@ public class MySQLConnection {
 	}
 	
 
+	/**
+	 * retruns subjects of teacher given his ID
+	 * @param teacherID
+	 * @return
+	 * @throws SQLException
+	 */
 	public static Object getTeacherSubjects(String teacherID) throws SQLException {
 		ArrayList<Subject> subjectList = new ArrayList<Subject>();
 		ResultSet rs;
@@ -114,6 +126,12 @@ public class MySQLConnection {
 		return subjectList;
 	}
 
+	/**
+	 * returns all teacher courses
+	 * @param teacherID
+	 * @return
+	 * @throws SQLException
+	 */
 	public static Object getTeacherCourses(String teacherID) throws SQLException {
 		ArrayList<Course> courseList = new ArrayList<Course>();
 		ResultSet rs;
@@ -128,6 +146,12 @@ public class MySQLConnection {
 		return courseList;
 	}
 
+	/**
+	 * returns all subjects of principal given hid ID
+	 * @param principalID
+	 * @return
+	 * @throws SQLException
+	 */
 	public static Object getPrincipalSubjects(String principalID) throws SQLException {
 		ArrayList<Subject> subjectList = new ArrayList<Subject>();
 		ResultSet rs;
@@ -140,6 +164,13 @@ public class MySQLConnection {
 		return subjectList;
 	}
 
+	/**
+	 * returns all courses of principal given his ID
+	 * @param principalID
+	 *
+	 * @return
+	 * @throws SQLException
+	 */
 	public static Object getPrincipalCourses(String principalID) throws SQLException {
 		ArrayList<Course> courseList = new ArrayList<Course>();
 		ResultSet rs;
@@ -153,6 +184,11 @@ public class MySQLConnection {
 		return courseList;
 	}
 
+	/**
+	 * returns all students in data base
+	 * @return
+	 * @throws SQLException
+	 */
 	public static Object getPrincipalStudentList() throws SQLException {
 		ArrayList<Student> studentList = new ArrayList<Student>();
 		ResultSet rs;
@@ -166,6 +202,11 @@ public class MySQLConnection {
 		return studentList;
 	}
 
+	/**
+	 * returns all teachers in data base
+	 * @return
+	 * @throws SQLException
+	 */
 	public static Object getPrincipalTeacherList() throws SQLException {
 		ArrayList<Teacher> studentList = new ArrayList<Teacher>();
 		ResultSet rs;
@@ -179,6 +220,13 @@ public class MySQLConnection {
 		return studentList;
 	}
 
+	/**
+	 * returns all grades according to the report
+	 * @param data
+	 * @return
+	 * @throws SQLException
+	 * @throws ParseException
+	 */
 	public static Object getPrincipalReportCourses(String[] data) throws SQLException, ParseException {
 		ArrayList<String> report=new ArrayList<String>();
 		ResultSet rs;
@@ -199,6 +247,13 @@ public class MySQLConnection {
 
 	}
 
+	/**
+	 * returns all grades according to the report
+	 * @param data
+	 * @return
+	 * @throws SQLException
+	 * @throws ParseException
+	 */
 	public static Object getPrincipalReportStudents(String[] data) throws SQLException, ParseException {
 		ArrayList<String> report=new ArrayList<String>();
 		ResultSet rs;
@@ -220,6 +275,13 @@ public class MySQLConnection {
 
 	}
 
+	/**
+	 * returns all grades according to the report
+	 * @param data
+	 * @return
+	 * @throws SQLException
+	 * @throws ParseException
+	 */
 	public static Object getPrincipalReportTeachers(String[] data) throws SQLException, ParseException {
 		ArrayList<String> report=new ArrayList<String>();
 		ResultSet rs;
@@ -302,6 +364,12 @@ public class MySQLConnection {
 		return exams;
 	}
 	
+	/**
+	 * returns all exams given course ID
+	 * @param course
+	 * @return
+	 * @throws SQLException
+	 */
 	public static ArrayList<Exam> getTeacherExamByCourse(Course course) throws SQLException {
 		ArrayList<Exam> exams = new ArrayList<Exam>();
 		ResultSet rs;
@@ -317,6 +385,12 @@ public class MySQLConnection {
 		return exams;
 	}
 	
+	/**
+	 * returns all questions of exam
+	 * @param exam
+	 * @return
+	 * @throws SQLException
+	 */
 	public static ArrayList<Question> setTeacherExamQuesstions(Exam exam) throws SQLException {
 		
 		ArrayList<Question> questionList = new ArrayList<Question>();
@@ -367,6 +441,12 @@ public class MySQLConnection {
 //		return questionList;
 //	}
 	
+	/**
+	 * returns all questions given the course
+	 * @param course
+	 * @return
+	 * @throws SQLException
+	 */
 	public static Object getQuestionByCourse(Course course) throws SQLException {
 		ArrayList<Question> questionList = new ArrayList<Question>();
 		ResultSet rs;
@@ -383,6 +463,11 @@ public class MySQLConnection {
 		return questionList;
 	}
 	
+	/**
+	 * updates the data base when exam is checked
+	 * @param ar
+	 * @throws SQLException
+	 */
 	public static void addCheckedExam(ArrayList<Object> ar) throws SQLException {
 		
 		PreparedStatement delQ =con.prepareStatement("UPDATE SolvedExams\n"
@@ -395,6 +480,11 @@ public class MySQLConnection {
 		
 		
 	}
+	/**
+	 * delets question given the object.
+	 * @param q
+	 * @throws SQLException
+	 */
 	public static void deletedQuestion(Question q) throws SQLException {
 		
 		
@@ -411,6 +501,13 @@ public class MySQLConnection {
 		
 	}
 	
+	/**
+	 * adds question given the course
+	 * @param q
+	 * @param course
+	 * @throws SQLException
+	 * @throws ParseException
+	 */
 	public static void addQuestionByCourses(Question q, ArrayList<Course> course) throws SQLException, ParseException {
 		
 		ResultSet maxID;
@@ -464,6 +561,13 @@ public class MySQLConnection {
 		}
 	}
 	
+	/**
+	 * Edits the question given the question and array of questions
+	 * @param q
+	 * @param course
+	 * @throws SQLException
+	 * @throws ParseException
+	 */
 	public static void TeacherEditQuestion(Question q, ArrayList<Course> course) throws SQLException, ParseException {
 			
 			PreparedStatement editQuestion;
@@ -499,6 +603,14 @@ public class MySQLConnection {
 			}
 		}
 	
+	/**
+	 * adds exam to database given exam
+	 * @param e
+	 * @param list
+	 * @return
+	 * @throws SQLException
+	 * @throws ParseException
+	 */
 	public static String addExam(Exam e, ArrayList<QuestionInExam> list) throws SQLException, ParseException {
 		
 		ResultSet maxID;
@@ -557,6 +669,15 @@ public class MySQLConnection {
 		return id;
 	}
 	
+	/**
+	 * adds manual exam given the exam.
+	 * @param e
+	 * @param ExamFile
+	 * @return
+	 * @throws SQLException
+	 * @throws ParseException
+	 * @throws IOException
+	 */
 	public static String addManualExam(Exam e, byte[] ExamFile) throws SQLException, ParseException, IOException {
 		
 		ResultSet maxID;
@@ -621,6 +742,11 @@ public class MySQLConnection {
 		return id;
 	}
 
+	/**
+	 * returns principal requests from db 
+	 * @return
+	 * @throws SQLException
+	 */
 	public static Object getPrincipalRequests() throws SQLException {
 		ArrayList<Request> requestList = new ArrayList<Request>();
 		ResultSet rs;
@@ -636,6 +762,12 @@ public class MySQLConnection {
 		return requestList;
 	}
 
+	/**
+	 * updates principal approved requests given the array
+	 * @param RequestList
+	 * @return
+	 * @throws SQLException
+	 */
 	public static Object updatePrincipalApprovedRequests(ArrayList<String> RequestList) throws SQLException {
 		PreparedStatement statment;
 		for (String request : RequestList) {
@@ -657,6 +789,12 @@ public class MySQLConnection {
 		return newEid;
 	}
 	
+	/**
+	 * 
+	 * @param RequestList
+	 * @return
+	 * @throws SQLException
+	 */
 	public static Object updatePrincipalDeclinedRequests(ArrayList<String> RequestList) throws SQLException {
 		PreparedStatement statment;
 		for (String request : RequestList) {
@@ -668,6 +806,11 @@ public class MySQLConnection {
 		return "Succeded";
 	}
 	
+	/**
+	 * returns number of requests
+	 * @return
+	 * @throws SQLException
+	 */
 	public static Object getRequestCount() throws SQLException {
 		int Counter = 0;
 		ResultSet rs;
@@ -679,6 +822,12 @@ public class MySQLConnection {
 		return Counter;
 	} 
 	
+	/**
+	 * returns request exam object given the exam
+	 * @param e
+	 * @return
+	 * @throws SQLException
+	 */
 	public static updatedRequestExam getUpdateExam(Exam e) throws SQLException {
 		
 		ResultSet rs;
@@ -698,6 +847,12 @@ public class MySQLConnection {
 		return new updatedRequestExam(e, status, newDuration);
 	}
 	
+	/**
+	 * 
+	 * @param RequestList
+	 * @return
+	 * @throws SQLException
+	 */
 	public static Object updatePrincipalRequestStatus(ArrayList<String> RequestList) throws SQLException {
 		PreparedStatement statment;
 		for (String request : RequestList) {
