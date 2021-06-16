@@ -72,7 +72,15 @@ public class TeacherMainReportController extends TeacherMainPageController imple
 		public ServerMessage getServerMsg() {
 			return guiControl.getServerMsg();
 		}
-
+		
+		@Override 
+		public void popUpError(String msg) {
+		     guiControl.popUpError(msg);
+		}
+		@Override 
+		public  void popUpMessage(String msg) {
+		     guiControl.popUpError(msg);
+		}
 	}
 
 	/**

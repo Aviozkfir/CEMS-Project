@@ -29,6 +29,18 @@ public class TeacherMainReportControllerTest {
 			return new ServerMessage(null, returnVal);
 		}
 
+		@Override
+		public void popUpError(String msg) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void popUpMessage(String msg) {
+			// TODO Auto-generated method stub
+			
+		}
+
 	}
 
 	public Object returnVal;
