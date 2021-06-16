@@ -74,7 +74,7 @@ public class TeacherMainReportControllerTest {
 	}
 
 	public Object returnVal;
-	public ArrayList<String> gradesList = new ArrayList<String>();
+	public ArrayList<String> gradesList;
 	ServerMessageTypes type;
 	String popUpmsg;
 	String popUpError;
@@ -83,11 +83,10 @@ public class TeacherMainReportControllerTest {
 	TeacherMainReportController teacherMainReportController;
 	IServerClientCommunication serverClientCommunicationStub;
 	IFxmlManager fxmlManagerStub;
-	String[] inputData = new String[2];
+	String[] inputData;
 	Teacher teacher;
 	int PickedYear;
-	
-	
+
 	@SuppressWarnings("static-access")
 	@Before
 	public void setUp() throws Exception {
@@ -96,10 +95,9 @@ public class TeacherMainReportControllerTest {
 		fxmlManagerStub = new FxmlManagerStub();
 		teacherMainReportController.setServerClientCommunication(serverClientCommunicationStub);
 		teacherMainReportController.setFxmlManager(fxmlManagerStub);
-		gradesList.add("0");
-		gradesList.add("50");
-		gradesList.add("100");
 		exam = new TeachersExam("123456", "exam", "2000-05-03");
+		inputData = new String[2];
+		gradesList = new ArrayList<String>();
 		examList = new ArrayList<TeachersExam>();
 		examList.add(exam);
 		teacher = new Teacher("Shula", "Bula", "12345678", "Sh@gmail.com", "Teacher");
@@ -210,6 +208,9 @@ public class TeacherMainReportControllerTest {
 	public void teacherReportDataAdded() {
 		inputData[0] = "010101";
 		inputData[1] = "2000-05-04";
+		gradesList.add("0");
+		gradesList.add("50");
+		gradesList.add("100");
 		PickedYear = 2000;
 		type = ServerMessageTypes.TEACHER_REPORT_DATA_ADDED;
 		returnVal = gradesList;
@@ -219,6 +220,51 @@ public class TeacherMainReportControllerTest {
 		} catch (IOException e) {
 			fail();
 		}
-
 	}
+
+	@Test
+	public void teacherReportDataNotAdded() {
+		inputData[0] = "010101";
+		inputData[1] = "2000-05-04";
+		gradesList.add("0");
+		gradesList.add("50");
+		gradesList.add("100");
+		PickedYear = 2000;
+		type = ServerMessageTypes.TEACHER_REPORT_DATA_NOT_ADDED;
+		returnVal = gradesList;
+		try {
+			teacherMainReportController.produceReport(inputData, teacher);
+			assertEquals("Error in loading the report data", popUpError);
+		} catch (IOException e) {
+			fail();
+		}
+	}
+
+	@Test
+	public void teacherReportDataIsEmpty() {
+		inputData[0] = "010101";
+		inputData[1] = "2000-05-04";
+		PickedYear = 2000;
+		type = ServerMessageTypes.TEACHER_REPORT_DATA_ADDED;
+		returnVal = gradesList;
+		try {
+			teacherMainReportController.produceReport(inputData, teacher);
+			assertEquals("The chosen Id and Date range for the report contains 0 solved exams.", popUpmsg);
+		} catch (IOException e) {
+			fail();
+		}
+	}
+
+	@Test
+	public void teacherReportDataIsNull() {
+		type = ServerMessageTypes.TEACHER_REPORT_DATA_ADDED;
+		gradesList.add("0");
+		try {
+			teacherMainReportController.produceReport(null, null);
+			fail();
+		} catch (Exception e) {
+			assertEquals(e.getMessage(), null);
+		}
+	}
+
 }
