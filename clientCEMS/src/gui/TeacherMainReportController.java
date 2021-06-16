@@ -93,9 +93,8 @@ public class TeacherMainReportController extends TeacherMainPageController imple
 	void GetButtonPressed(ActionEvent event) throws IOException {
 		inputData[0] = IDtext.getText();
 		inputData[1] = datePicker.getValue().toString();
-		if (validateInput(inputData)) {
-			sendUserInuputToserver(inputData);
-			produceReport(serverClientCommunication.getServerMsg().getType());
+		if (validateInput(inputData,idInlist)) {
+			produceReport(inputData);
 		}
 	}
 
@@ -116,20 +115,20 @@ public class TeacherMainReportController extends TeacherMainPageController imple
 	 * 
 	 * @return boolean
 	 */
-	public boolean validateInput(String[] inputData) {
+	public boolean validateInput(String[] inputData,boolean idInlist) {
 		String[] date = new String[3];
-
+		
 		try {
 			date = inputData[1].split("-"); // spliting the not manualy input date into yyyy,MM,dd.
 			if (inputData[0].isEmpty() || inputData[1].isEmpty()) {
-				guiControl.popUpError("Please fill all the required fields.");
+				serverClientCommunication.popUpError("Please fill all the required fields.");
 				return false;
 			} else if (inputData[0].length() != 6 || !inputData[0].matches("[0-9]+")) {
-				guiControl.popUpError("Invalid ID input.\nPlease insert only 6 digits");
+				serverClientCommunication.popUpError("Invalid ID input.\nPlease insert only 6 digits");
 				return false;
-			} else if (date[0].length() != 4 || date[1].length() != 2 || date[2].length() != 2 || date.length != 3
+			} else if (date[0].length() != 4 || date[1].length() != 2 || date[2].length() != 2 
 					|| !inputData[1].matches("[0-9\\-/]+")) {
-				guiControl.popUpError("Invalid Date input.\nPlease insert legal date");
+				serverClientCommunication.popUpError("Invalid Date input.\nPlease insert legal date");
 				return false;
 			} else {
 				for (TeachersExam exam : teacher.getExamList()) {
@@ -137,14 +136,14 @@ public class TeacherMainReportController extends TeacherMainPageController imple
 						idInlist = true;
 				}
 				if (!idInlist) {
-					guiControl.popUpError("Id is not in the list.\n Please insert id from the list.");
+					serverClientCommunication.popUpError("Id is not in the list.\n Please insert id from the list.");
 					return false;
 				}
 				idInlist = false;
 			}
 			return true;
 		} catch (Exception e) {
-			guiControl.popUpError("Invalid Date input manualy.\nPlease insert legal date or use the button");
+			serverClientCommunication.popUpError("Invalid Date input manualy.\nPlease insert legal date or use the button");
 			return false;
 		}
 	}
@@ -202,16 +201,13 @@ public class TeacherMainReportController extends TeacherMainPageController imple
 		teacher.getReport().setYearRange(pickedYear + "-" + currentYear);
 	}
 
-	public static void setServerClientCommunication(IServerClientCommunication serverClientCommunication) {
-		TeacherMainReportController.serverClientCommunication = serverClientCommunication;
-	}
 
-	public void sendUserInuputToserver(String[] inputData) {
-		serverClientCommunication.sendToServer(new ClientMessage(ClientMessageType.TEACHER_REPORT_DATA, inputData));
-	}
 
-	public void produceReport(ServerMessageTypes msg) throws IOException {
-		if (msg == ServerMessageTypes.TEACHER_REPORT_DATA_ADDED) {
+
+	public void produceReport(String[] inputData) throws IOException {
+		ClientMessage msg= new ClientMessage(ClientMessageType.TEACHER_REPORT_DATA, inputData);
+		serverClientCommunication.sendToServer(msg);
+		if (serverClientCommunication.getServerMsg().getType()== ServerMessageTypes.TEACHER_REPORT_DATA_ADDED) {
 			ArrayList<String> reportData = (ArrayList<String>) serverClientCommunication.getServerMsg().getMessage();
 			if (!reportData.isEmpty()) {
 				report = new Report(reportData);
@@ -223,11 +219,14 @@ public class TeacherMainReportController extends TeacherMainPageController imple
 				TeacherFinalReportControll controller = (TeacherFinalReportControll) guiControl
 						.loadStage(ClientsConstants.Screens.TEACHER_FINAL_REPORT.path);
 			} else {
-				guiControl.popUpMessage("The chosen Id and Date range for the report contains 0 solved exams.");
+				serverClientCommunication.popUpMessage("The chosen Id and Date range for the report contains 0 solved exams.");
 			}
 		}
-		if (msg == ServerMessageTypes.TEACHER_REPORT_DATA_NOT_ADDED)
-			guiControl.popUpError("Error in loading the report data");
+		if (serverClientCommunication.getServerMsg().getType() == ServerMessageTypes.TEACHER_REPORT_DATA_NOT_ADDED)
+			serverClientCommunication.popUpError("Error in loading the report data");
 	}
-
+	
+	public static void setServerClientCommunication(IServerClientCommunication serverClientCommunication) {
+		TeacherMainReportController.serverClientCommunication = serverClientCommunication;
+	}
 }
