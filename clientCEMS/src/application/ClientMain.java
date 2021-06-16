@@ -17,7 +17,8 @@ public class ClientMain extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			client=new ClientCEMS("79.176.2.111",DEFAULT_PORT);
+			//79.176.2.111
+			client=new ClientCEMS("localhost",DEFAULT_PORT);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
