@@ -13,4 +13,6 @@ public interface IServerClientCommunication {
 	public void popUpError(String msg);
 
 	public void popUpMessage(String msg);
+	
+	public Object getUser();
 }

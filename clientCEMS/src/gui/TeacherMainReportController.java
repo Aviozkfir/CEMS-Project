@@ -57,7 +57,7 @@ public class TeacherMainReportController extends TeacherMainPageController imple
 	private ObservableList<TeachersExam> ObsExamList = FXCollections.observableArrayList();
 	static GUIControl guiControl = GUIControl.getInstance();
 	static IServerClientCommunication serverClientCommunication = new ServerClientCommunication();
-	private Teacher teacher = (Teacher) guiControl.getUser();
+	private Teacher teacher = (Teacher) serverClientCommunication.getUser();
 	private String[] inputData = new String[2];
 
 	static class ServerClientCommunication implements IServerClientCommunication {
@@ -75,11 +75,17 @@ public class TeacherMainReportController extends TeacherMainPageController imple
 		
 		@Override 
 		public void popUpError(String msg) {
-		     guiControl.popUpError(msg);
+			GUIControl.popUpError(msg);
 		}
 		@Override 
 		public  void popUpMessage(String msg) {
-		     guiControl.popUpError(msg);
+			GUIControl.popUpError(msg);
+		     
+		}
+		@Override 
+		public Object getUser() {
+			return guiControl.getUser();
+		     
 		}
 	}
 
@@ -93,7 +99,7 @@ public class TeacherMainReportController extends TeacherMainPageController imple
 	void GetButtonPressed(ActionEvent event) throws IOException {
 		inputData[0] = IDtext.getText();
 		inputData[1] = datePicker.getValue().toString();
-		if (validateInput(inputData,idInlist)) {
+		if (validateInput(inputData,teacher.getExamList())) {
 			produceReport(inputData);
 		}
 	}
@@ -115,7 +121,7 @@ public class TeacherMainReportController extends TeacherMainPageController imple
 	 * 
 	 * @return boolean
 	 */
-	public boolean validateInput(String[] inputData,boolean idInlist) {
+	public boolean validateInput(String[] inputData, ArrayList<TeachersExam> examList) {
 		String[] date = new String[3];
 		
 		try {
@@ -131,7 +137,7 @@ public class TeacherMainReportController extends TeacherMainPageController imple
 				serverClientCommunication.popUpError("Invalid Date input.\nPlease insert legal date");
 				return false;
 			} else {
-				for (TeachersExam exam : teacher.getExamList()) {
+				for (TeachersExam exam : examList) {
 					if (inputData[0].equals(exam.getEid()))
 						idInlist = true;
 				}
