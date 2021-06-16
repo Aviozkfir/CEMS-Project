@@ -7,10 +7,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.ResourceBundle;
 
-import entity.Exam;
-import entity.Principal;
 import entity.Report;
-import entity.Student;
 import entity.Teacher;
 import entity.TeachersExam;
 import javafx.collections.FXCollections;
@@ -26,10 +23,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import message.ClientMessage;
 import message.ClientMessageType;
+import message.ServerMessage;
 import message.ServerMessageTypes;
 
 /**
  * A class that takes care of reports for teacher
+ * 
  * @author Guy and Sharon
  * 
  *
@@ -51,54 +50,49 @@ public class TeacherMainReportController extends TeacherMainPageController imple
 	private DatePicker datePicker;
 	@FXML
 	private Button GetButton;
+
 	private Report report;
 
 	private boolean idInlist = false;
 	private ObservableList<TeachersExam> ObsExamList = FXCollections.observableArrayList();
+	static GUIControl guiControl = GUIControl.getInstance();
+	static IServerClientCommunication serverClientCommunication = new ServerClientCommunication();
 	private Teacher teacher = (Teacher) guiControl.getUser();
 	private String[] inputData = new String[2];
 
+	static class ServerClientCommunication implements IServerClientCommunication {
 
-
-
-	/**
-	 * A method that gets data about reports and adds it to window
-	 * @param ActionEvent event
-	 * @throws IOException
-	 */
-	@FXML
-	void GetButtonPressed(ActionEvent event) throws IOException {
-
-		if (validateInput()) {
-
-			inputData[0] = IDtext.getText();
-			inputData[1] = datePicker.getValue().toString();
-			ClientMessage msg = new ClientMessage(ClientMessageType.TEACHER_REPORT_DATA, inputData);
+		@Override
+		public void sendToServer(Object msg) {
 			guiControl.sendToServer(msg);
 
-			if (guiControl.getServerMsg().getType() == ServerMessageTypes.TEACHER_REPORT_DATA_ADDED) {
-				ArrayList<String> reportData= (ArrayList<String>) guiControl.getServerMsg().getMessage();
-				if (!reportData.isEmpty()) {
-					report = new Report(reportData);
-					teacher.setReport(report);
-					teacher.getReport().setSelected(IDtext.getText());
-					SetMedianAndAverage();
-					SetYearRange();
+		}
 
-					TeacherFinalReportControll controller = (TeacherFinalReportControll) guiControl
-							.loadStage(ClientsConstants.Screens.TEACHER_FINAL_REPORT.path);
-				} else {
-					GUIControl.popUpMessage("The chosen Id and Date range for the report contains 0 solved exams.");
-				}
-			}
-			if (guiControl.getServerMsg().getType() == ServerMessageTypes.TEACHER_REPORT_DATA_NOT_ADDED)
-				GUIControl.popUpError("Error in loading the report data");
+		@Override
+		public ServerMessage getServerMsg() {
+			return guiControl.getServerMsg();
 		}
 
 	}
 
 	/**
-	 *Sets exams list on table
+	 * A method that gets data about reports and adds it to window
+	 * 
+	 * @param ActionEvent event
+	 * @throws IOException
+	 */
+	@FXML
+	void GetButtonPressed(ActionEvent event) throws IOException {
+		inputData[0] = IDtext.getText();
+		inputData[1] = datePicker.getValue().toString();
+		if (validateInput(inputData)) {
+			sendUserInuputToserver(inputData);
+			produceReport(serverClientCommunication.getServerMsg().getType());
+		}
+	}
+
+	/**
+	 * Sets exams list on table
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -108,45 +102,44 @@ public class TeacherMainReportController extends TeacherMainPageController imple
 		dateColumn.setCellValueFactory(new PropertyValueFactory<TeachersExam, String>("date"));
 		TableView.getItems().setAll(ObsExamList);
 	}
-	
 
 	/**
 	 * Validates the ID of teacher
+	 * 
 	 * @return boolean
 	 */
-	public boolean validateInput() {
+	public boolean validateInput(String[] inputData) {
 		String[] date = new String[3];
 
 		try {
-			date = datePicker.getValue().toString().split("-"); // spliting the not manualy input date into yyyy,MM,dd.
-			if (IDtext.getText().isEmpty() || datePicker.getValue().toString().isEmpty()) {
-				GUIControl.popUpError("Please fill all the required fields.");
+			date = inputData[1].split("-"); // spliting the not manualy input date into yyyy,MM,dd.
+			if (inputData[0].isEmpty() || inputData[1].isEmpty()) {
+				guiControl.popUpError("Please fill all the required fields.");
 				return false;
-			} else if (IDtext.getText().length() != 6 || !IDtext.getText().matches("[0-9]+")) {
-				GUIControl.popUpError("Invalid ID input.\nPlease insert only 6 digits");
+			} else if (inputData[0].length() != 6 || !inputData[0].matches("[0-9]+")) {
+				guiControl.popUpError("Invalid ID input.\nPlease insert only 6 digits");
 				return false;
 			} else if (date[0].length() != 4 || date[1].length() != 2 || date[2].length() != 2 || date.length != 3
-					|| !datePicker.getValue().toString().matches("[0-9\\-/]+")) {
-				GUIControl.popUpError("Invalid Date input.\nPlease insert legal date");
+					|| !inputData[1].matches("[0-9\\-/]+")) {
+				guiControl.popUpError("Invalid Date input.\nPlease insert legal date");
 				return false;
 			} else {
 				for (TeachersExam exam : teacher.getExamList()) {
-					if (IDtext.getText().equals(exam.getEid()))
+					if (inputData[0].equals(exam.getEid()))
 						idInlist = true;
 				}
 				if (!idInlist) {
-					GUIControl.popUpError("Id is not in the list.\n Please insert id from the list.");
+					guiControl.popUpError("Id is not in the list.\n Please insert id from the list.");
 					return false;
 				}
 				idInlist = false;
 			}
 			return true;
 		} catch (Exception e) {
-			GUIControl.popUpError("Invalid Date input manualy.\nPlease insert legal date or use the button");
+			guiControl.popUpError("Invalid Date input manualy.\nPlease insert legal date or use the button");
 			return false;
 		}
 	}
-	
 
 	/**
 	 * Sets report of median and average
@@ -165,8 +158,9 @@ public class TeacherMainReportController extends TeacherMainPageController imple
 
 	/**
 	 * returns data about median.
+	 * 
 	 * @param values
-	 * @return String 
+	 * @return String
 	 */
 	public static String Median(ArrayList<Integer> values) {
 		String convertStr = null;
@@ -179,6 +173,7 @@ public class TeacherMainReportController extends TeacherMainPageController imple
 
 	/**
 	 * Calculates report about average
+	 * 
 	 * @param values
 	 * @return String
 	 */
@@ -198,5 +193,33 @@ public class TeacherMainReportController extends TeacherMainPageController imple
 		int pickedYear = datePicker.getValue().getYear();
 		teacher.getReport().setYearRange(pickedYear + "-" + currentYear);
 	}
-	
+
+	public static void setServerClientCommunication(IServerClientCommunication serverClientCommunication) {
+		TeacherMainReportController.serverClientCommunication = serverClientCommunication;
+	}
+
+	public void sendUserInuputToserver(String[] inputData) {
+		serverClientCommunication.sendToServer(new ClientMessage(ClientMessageType.TEACHER_REPORT_DATA, inputData));
+	}
+
+	public void produceReport(ServerMessageTypes msg) throws IOException {
+		if (msg == ServerMessageTypes.TEACHER_REPORT_DATA_ADDED) {
+			ArrayList<String> reportData = (ArrayList<String>) serverClientCommunication.getServerMsg().getMessage();
+			if (!reportData.isEmpty()) {
+				report = new Report(reportData);
+				teacher.setReport(report);
+				teacher.getReport().setSelected(IDtext.getText());
+				SetMedianAndAverage();
+				SetYearRange();
+
+				TeacherFinalReportControll controller = (TeacherFinalReportControll) guiControl
+						.loadStage(ClientsConstants.Screens.TEACHER_FINAL_REPORT.path);
+			} else {
+				guiControl.popUpMessage("The chosen Id and Date range for the report contains 0 solved exams.");
+			}
+		}
+		if (msg == ServerMessageTypes.TEACHER_REPORT_DATA_NOT_ADDED)
+			guiControl.popUpError("Error in loading the report data");
+	}
+
 }
