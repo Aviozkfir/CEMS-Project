@@ -15,4 +15,5 @@ public interface IServerClientCommunication {
 	public void popUpMessage(String msg);
 	
 	public Object getUser();
+	
 }

@@ -11,7 +11,10 @@ import org.junit.Test;
 
 import entity.Teacher;
 import entity.TeachersExam;
+import gui.IFxmlManager;
 import gui.IServerClientCommunication;
+import gui.MainPageController;
+import gui.TeacherFinalReportControll;
 import gui.TeacherMainReportController;
 import message.ClientMessage;
 import message.ServerMessage;
@@ -55,6 +58,21 @@ public class TeacherMainReportControllerTest {
 
 	}
 
+	class FxmlManagerStub implements IFxmlManager {
+
+		@Override
+		public int setPickedYear() {
+			return PickedYear;
+		}
+
+		@Override
+		public TeacherFinalReportControll loadStage(String path) throws IOException {
+			TeacherFinalReportControll difController = new TeacherFinalReportControll();
+			return difController;
+		}
+
+	}
+
 	public Object returnVal;
 	public ArrayList<String> gradesList = new ArrayList<String>();
 	ServerMessageTypes type;
@@ -64,21 +82,27 @@ public class TeacherMainReportControllerTest {
 	TeachersExam exam;
 	TeacherMainReportController teacherMainReportController;
 	IServerClientCommunication serverClientCommunicationStub;
+	IFxmlManager fxmlManagerStub;
 	String[] inputData = new String[2];
-	Teacher teacher = new Teacher("Shula", "Bula", "12345678", "Sh@gmail.com", "Teacher");
-
+	Teacher teacher;
+	int PickedYear;
+	
+	
 	@SuppressWarnings("static-access")
 	@Before
 	public void setUp() throws Exception {
 		teacherMainReportController = new TeacherMainReportController();
 		serverClientCommunicationStub = new ServerClientCommunicationStub();
+		fxmlManagerStub = new FxmlManagerStub();
 		teacherMainReportController.setServerClientCommunication(serverClientCommunicationStub);
+		teacherMainReportController.setFxmlManager(fxmlManagerStub);
 		gradesList.add("0");
 		gradesList.add("50");
 		gradesList.add("100");
 		exam = new TeachersExam("123456", "exam", "2000-05-03");
+		examList = new ArrayList<TeachersExam>();
 		examList.add(exam);
-
+		teacher = new Teacher("Shula", "Bula", "12345678", "Sh@gmail.com", "Teacher");
 	}
 
 	@Test
@@ -144,21 +168,57 @@ public class TeacherMainReportControllerTest {
 		inputData[1] = "2000-05-c4";
 		assertFalse(teacherMainReportController.validateInput(inputData, examList));
 		assertEquals("Invalid Date input.\nPlease insert legal date", popUpError);
+		inputData[0] = "123456";
+		inputData[1] = "2000-05-04-03";
+		assertFalse(teacherMainReportController.validateInput(inputData, examList));
+		assertEquals("Invalid Date input.\nPlease insert legal date", popUpError);
+		inputData[0] = "123456";
+		inputData[1] = "2000/05/04";
+		assertFalse(teacherMainReportController.validateInput(inputData, examList));
+		assertEquals("Invalid Date input.\nPlease insert legal date", popUpError);
 
+	}
+
+	@Test
+	public void validateInputIdInList() {
+		inputData[0] = "123456";
+		inputData[1] = "2000-05-04";
+		assertTrue(teacherMainReportController.validateInput(inputData, examList));
+	}
+
+	@Test
+	public void validateInputIdNotInList() {
+		inputData[0] = "123457";
+		inputData[1] = "2000-05-04";
+		assertFalse(teacherMainReportController.validateInput(inputData, examList));
+		assertEquals("Id is not in the list.\n Please insert id from the list.", popUpError);
+	}
+
+	@Test
+	public void validateInputCatchException() {
+		inputData[0] = "123456";
+		inputData[1] = "2000-05";
+		assertFalse(teacherMainReportController.validateInput(inputData, examList));
+		assertEquals("Invalid Date input manualy.\nPlease insert legal date or use the button", popUpError);
+		assertFalse(teacherMainReportController.validateInput(null, examList));
+		assertEquals("Invalid Date input manualy.\nPlease insert legal date or use the button", popUpError);
+		assertFalse(teacherMainReportController.validateInput(inputData, null));
+		assertEquals("Invalid Date input manualy.\nPlease insert legal date or use the button", popUpError);
 	}
 
 	@Test
 	public void teacherReportDataAdded() {
 		inputData[0] = "010101";
 		inputData[1] = "2000-05-04";
+		PickedYear = 2000;
 		type = ServerMessageTypes.TEACHER_REPORT_DATA_ADDED;
 		returnVal = gradesList;
 		try {
-			teacherMainReportController.produceReport(inputData);
+			teacherMainReportController.produceReport(inputData, teacher);
 			assertTrue(true);
 		} catch (IOException e) {
 			fail();
 		}
-		
+
 	}
 }

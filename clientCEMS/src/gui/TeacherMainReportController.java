@@ -57,6 +57,7 @@ public class TeacherMainReportController extends TeacherMainPageController imple
 	private ObservableList<TeachersExam> ObsExamList = FXCollections.observableArrayList();
 	static GUIControl guiControl = GUIControl.getInstance();
 	static IServerClientCommunication serverClientCommunication = new ServerClientCommunication();
+	public IFxmlManager fxmlManager = new FxmlManager();
 	private Teacher teacher = (Teacher) serverClientCommunication.getUser();
 	private String[] inputData = new String[2];
 
@@ -72,20 +73,36 @@ public class TeacherMainReportController extends TeacherMainPageController imple
 		public ServerMessage getServerMsg() {
 			return guiControl.getServerMsg();
 		}
-		
-		@Override 
+
+		@Override
 		public void popUpError(String msg) {
 			GUIControl.popUpError(msg);
 		}
-		@Override 
-		public  void popUpMessage(String msg) {
+
+		@Override
+		public void popUpMessage(String msg) {
 			GUIControl.popUpError(msg);
-		     
+
 		}
-		@Override 
+
+		@Override
 		public Object getUser() {
 			return guiControl.getUser();
-		     
+
+		}
+
+	}
+
+	public class FxmlManager implements IFxmlManager {
+
+		@Override
+		public int setPickedYear() {
+			return datePicker.getValue().getYear();
+		}
+
+		@Override
+		public TeacherFinalReportControll loadStage(String path) throws IOException {
+			return (TeacherFinalReportControll) guiControl.loadStage(path);
 		}
 	}
 
@@ -99,8 +116,8 @@ public class TeacherMainReportController extends TeacherMainPageController imple
 	void GetButtonPressed(ActionEvent event) throws IOException {
 		inputData[0] = IDtext.getText();
 		inputData[1] = datePicker.getValue().toString();
-		if (validateInput(inputData,teacher.getExamList())) {
-			produceReport(inputData);
+		if (validateInput(inputData, teacher.getExamList())) {
+			produceReport(inputData, teacher);
 		}
 	}
 
@@ -123,7 +140,7 @@ public class TeacherMainReportController extends TeacherMainPageController imple
 	 */
 	public boolean validateInput(String[] inputData, ArrayList<TeachersExam> examList) {
 		String[] date = new String[3];
-		
+
 		try {
 			date = inputData[1].split("-"); // spliting the not manualy input date into yyyy,MM,dd.
 			if (inputData[0].isEmpty() || inputData[1].isEmpty()) {
@@ -132,7 +149,7 @@ public class TeacherMainReportController extends TeacherMainPageController imple
 			} else if (inputData[0].length() != 6 || !inputData[0].matches("[0-9]+")) {
 				serverClientCommunication.popUpError("Invalid ID input.\nPlease insert only 6 digits");
 				return false;
-			} else if (date[0].length() != 4 || date[1].length() != 2 || date[2].length() != 2 
+			} else if (date[0].length() != 4 || date[1].length() != 2 || date[2].length() != 2 || date.length != 3
 					|| !inputData[1].matches("[0-9\\-/]+")) {
 				serverClientCommunication.popUpError("Invalid Date input.\nPlease insert legal date");
 				return false;
@@ -149,7 +166,8 @@ public class TeacherMainReportController extends TeacherMainPageController imple
 			}
 			return true;
 		} catch (Exception e) {
-			serverClientCommunication.popUpError("Invalid Date input manualy.\nPlease insert legal date or use the button");
+			serverClientCommunication
+					.popUpError("Invalid Date input manualy.\nPlease insert legal date or use the button");
 			return false;
 		}
 	}
@@ -157,7 +175,7 @@ public class TeacherMainReportController extends TeacherMainPageController imple
 	/**
 	 * Sets report of median and average
 	 */
-	public void SetMedianAndAverage() {
+	public void SetMedianAndAverage(Teacher teacher) {
 		ArrayList<String> gradesString = new ArrayList<String>(teacher.getReport().getReportData()); // set
 
 		ArrayList<Integer> grades = new ArrayList<Integer>();
@@ -201,38 +219,39 @@ public class TeacherMainReportController extends TeacherMainPageController imple
 	/**
 	 * Sets the ranges of years we want reports of.
 	 */
-	public void SetYearRange() {
+	public void SetYearRange(Teacher teacher) {
 		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-		int pickedYear = datePicker.getValue().getYear();
+		int pickedYear = fxmlManager.setPickedYear();
 		teacher.getReport().setYearRange(pickedYear + "-" + currentYear);
 	}
 
-
-
-
-	public void produceReport(String[] inputData) throws IOException {
-		ClientMessage msg= new ClientMessage(ClientMessageType.TEACHER_REPORT_DATA, inputData);
+	public void produceReport(String[] inputData, Teacher teacher) throws IOException {
+		ClientMessage msg = new ClientMessage(ClientMessageType.TEACHER_REPORT_DATA, inputData);
 		serverClientCommunication.sendToServer(msg);
-		if (serverClientCommunication.getServerMsg().getType()== ServerMessageTypes.TEACHER_REPORT_DATA_ADDED) {
+		if (serverClientCommunication.getServerMsg().getType() == ServerMessageTypes.TEACHER_REPORT_DATA_ADDED) {
 			ArrayList<String> reportData = (ArrayList<String>) serverClientCommunication.getServerMsg().getMessage();
 			if (!reportData.isEmpty()) {
 				report = new Report(reportData);
 				teacher.setReport(report);
-				teacher.getReport().setSelected(IDtext.getText());
-				SetMedianAndAverage();
-				SetYearRange();
+				teacher.getReport().setSelected(inputData[0]);
+				SetMedianAndAverage(teacher);
+				SetYearRange(teacher);
 
-				TeacherFinalReportControll controller = (TeacherFinalReportControll) guiControl
-						.loadStage(ClientsConstants.Screens.TEACHER_FINAL_REPORT.path);
+				TeacherFinalReportControll controller = fxmlManager.loadStage(ClientsConstants.Screens.TEACHER_FINAL_REPORT.path);
 			} else {
-				serverClientCommunication.popUpMessage("The chosen Id and Date range for the report contains 0 solved exams.");
+				serverClientCommunication
+						.popUpMessage("The chosen Id and Date range for the report contains 0 solved exams.");
 			}
 		}
 		if (serverClientCommunication.getServerMsg().getType() == ServerMessageTypes.TEACHER_REPORT_DATA_NOT_ADDED)
 			serverClientCommunication.popUpError("Error in loading the report data");
 	}
-	
+
 	public static void setServerClientCommunication(IServerClientCommunication serverClientCommunication) {
 		TeacherMainReportController.serverClientCommunication = serverClientCommunication;
+	}
+
+	public void setFxmlManager(IFxmlManager fxmlManager) {
+		this.fxmlManager = fxmlManager;
 	}
 }
