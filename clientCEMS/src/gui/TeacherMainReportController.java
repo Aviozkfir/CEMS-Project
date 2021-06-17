@@ -176,7 +176,7 @@ public class TeacherMainReportController extends TeacherMainPageController imple
 	 * Sets report of median and average
 	 */
 	public void SetMedianAndAverage(Teacher teacher) {
-		ArrayList<String> gradesString = new ArrayList<String>(teacher.getReport().getReportData()); // set
+		ArrayList<String> gradesString = new ArrayList<String>(teacher.getReport().getReportData()); 
 
 		ArrayList<Integer> grades = new ArrayList<Integer>();
 		for (String i : gradesString) {
