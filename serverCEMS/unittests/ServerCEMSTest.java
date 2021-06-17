@@ -10,9 +10,16 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import entity.PersonCEMS;
+import entity.Principal;
+import entity.Student;
+import entity.Teacher;
 import mySQL.MySQLConnection;
 import server.ServerCEMS;
 
+/**
+ * @author guy, sharon
+ * test the sql queries and output of server
+ */
 public class ServerCEMSTest {
 	//Creating veriables.
 	private String username;
@@ -42,20 +49,123 @@ public class ServerCEMSTest {
 		server.close();
 	}
 
+	
+	
+	
+	/**
+	 * check a valid login of Principal
+	 * output: Principal object
+	 */
 	@Test
-	public void logInSubvalidInput() {
+	public void logInPrincipal() {
 		IdAndPass[0] = "312231222";
 		IdAndPass[1] = "123";
 		Object result;
 		try {
 			result = server.validatePerson(IdAndPass);
 			assertTrue(server.userList.contains(result));
+			assertTrue(result instanceof Principal);
+			Principal teacher = (Principal) result;
+			assertEquals(teacher.getFirstName(),"Moti");
+			assertEquals(teacher.getLastName(),"Hanuka");
+			assertEquals(teacher.getEmail(),"Moti.Hanuka@gmail.com");
+			
 		} catch (SQLException e) {
 			assertTrue(false);
 		}
 	}
 	
 	
+	
+	/**
+	 * check a valid login of Teacher
+	 * output: Teacher object
+	 */
+	@Test
+	public void logInTeacher() {
+		IdAndPass[0] = "311285648";
+		IdAndPass[1] = "123";
+		Object result;
+		try {
+			result = server.validatePerson(IdAndPass);
+			assertTrue(server.userList.contains(result));
+			assertTrue(result instanceof Teacher);
+			Teacher teacher = (Teacher) result;
+			assertEquals(teacher.getFirstName(),"Kfir");
+			assertEquals(teacher.getLastName(),"Abuhashmil");
+			assertEquals(teacher.getEmail(),"Kfir.Abuhashmil@gmail.com");
+			
+		} catch (SQLException e) {
+			assertTrue(false);
+		}
+	}
+	
+	
+	/**
+	 * check a valid login of Student
+	 * output: Student object
+	 */
+	@Test
+	public void logInStudent() {
+		IdAndPass[0] = "207417395";
+		IdAndPass[1] = "GuyArbel123";
+		Object result;
+		try {
+			result = server.validatePerson(IdAndPass);
+			assertTrue(server.userList.contains(result));
+			assertTrue(result instanceof Student);
+			Student teacher = (Student) result;
+			assertEquals(teacher.getFirstName(),"Guy");
+			assertEquals(teacher.getLastName(),"Arbel");
+			assertEquals(teacher.getEmail(),"Guyarb6@gmail.com");
+			
+		} catch (SQLException e) {
+			assertTrue(false);
+		}
+	}
+	
+	
+	/**
+	 * check a double logg in of same user.
+	 * output: 'logged in' String
+	 */
+	@Test
+	public void alreadyloggedIn() {
+		IdAndPass[0] = "207417395";
+		IdAndPass[1] = "GuyArbel123";
+		Object result;
+		try {
+			server.validatePerson(IdAndPass);
+			result = server.validatePerson(IdAndPass);
+			assertEquals(result,"logged in");
+			
+		} catch (SQLException e) {
+			assertTrue(false);
+		}
+		
+		
+	}
+	
+	/**
+	 * check check invalid log in
+	 * output: null
+	 */
+	@Test
+	public void invalidUserlogIn() {
+		IdAndPass[0] = "lordVoldemord";
+		IdAndPass[1] = "123";
+		Object result;
+		try {
+			
+			result = server.validatePerson(IdAndPass);
+			assertEquals(result,null);
+			
+		} catch (SQLException e) {
+			assertTrue(false);
+		}
+		
+		
+	}
 	
 
 	

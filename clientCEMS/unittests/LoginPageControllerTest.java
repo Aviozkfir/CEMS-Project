@@ -14,8 +14,18 @@ import message.ClientMessageType;
 import message.ServerMessage;
 import message.ServerMessageTypes;
 
+/**
+ * @author guy, sharon
+ * test the functionality of login controller page.
+ */
 public class LoginPageControllerTest {
 
+	 
+	/**
+	 * @author guy, sharon
+	 * stub of IServerClientCommunication
+	 * meant to be functionality of server and pop up messages.
+	 */
 	private class stubServerClientCommunication implements IServerClientCommunication{
 
 		private Object toServerMsg;
@@ -84,6 +94,12 @@ public class LoginPageControllerTest {
 		
 	}
 		
+	
+	/**
+	 * @author guy, sharon
+	 * stub of ILoginGetUserInput
+	 * meant to set the input pressed by user.
+	 */
 	private class stubILoginGetUserInput implements ILoginGetUserInput{
 
 		private String ID;
@@ -108,6 +124,14 @@ public class LoginPageControllerTest {
 		
 	}
 
+	/**
+	 * @author guy, sharon
+	 * test for successful login of student
+	 * input: name and password
+	 * server output: server message with type: student login and object: student
+	 * output: true
+	 * error popUp: none.
+	 */
 	@Test
 	public void studentSuccessfulLogin() {
 		LoginPageController myCon = new LoginPageController();
@@ -134,6 +158,15 @@ public class LoginPageControllerTest {
 		
 	}
 	
+	
+	/**
+	 * @author guy, sharon
+	 * test for successful login of teacher
+	 * input: name and password
+	 * server output: server message with type: teacher login and object: teacher
+	 * output: true
+	 * error popUp: none.
+	 */
 	@Test
 	public void teacherSuccessfulLogin() {
 		LoginPageController myCon = new LoginPageController();
@@ -159,7 +192,14 @@ public class LoginPageControllerTest {
 	}
 	
 	
-	
+	/**
+	 * @author guy, sharon
+	 * test for successful login of principal
+	 * input: name and password
+	 * server output: server message with type: principal login and object: principal
+	 * output: true
+	 * error popUp: none.
+	 */
 	@Test
 	public void principalSuccessfulLogin() {
 		LoginPageController myCon = new LoginPageController();
@@ -184,7 +224,14 @@ public class LoginPageControllerTest {
 		assertEquals(iServerClientCommunication.errorMsg,null);
 	}
 	
-	
+	/**
+	 * @author guy, sharon
+	 * test for successful login of student
+	 * input: name and password
+	 * server output: server message with type: student login and object: string : 'logged in'
+	 * output: false
+	 * error popUp: This user is already logged in
+	 */
 	@Test
 	public void StudentAlreadyLoggedIn() {
 		LoginPageController myCon = new LoginPageController();
@@ -209,6 +256,18 @@ public class LoginPageControllerTest {
 		assertEquals(iServerClientCommunication.errorMsg,"This user is already logged in");
 	}
 	
+	
+	
+	
+	
+	/**
+	 * @author guy, sharon
+	 * test for successful login of student
+	 * input: name and password
+	 * server output: server message with type: login person not found and object: null
+	 * output: false
+	 * error popUp: Login information doesn't exist\n Please try again
+	 */
 	@Test
 	public void invalidInput() {
 		LoginPageController myCon = new LoginPageController();
