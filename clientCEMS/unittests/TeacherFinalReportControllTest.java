@@ -14,7 +14,7 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 
 public class TeacherFinalReportControllTest {
-
+	//Creating veriables.
 	Teacher teacher;
 	ArrayList<String> gradeslist;
 	BarChart<String, Number> barChart;
@@ -36,9 +36,11 @@ public class TeacherFinalReportControllTest {
 		xAxis = new CategoryAxis();
 		barChart = new BarChart<String, Number>(xAxis, yAxis);
 	}
-
+	// Checking that GroupData sets the bin group incidence right by the gradelist of the report. (yAxisGroupExpected {1,1,1,1,1,1,1,1,1})
+	// Input: yAxisGroupActual,gradeslist.
+	// Result: True
 	@Test
-	public void TestGroupDataSetsRightGroups() {
+	public void TestGroupDataSetsValidGroups() {
 		gradeslist.add("54");
 		gradeslist.add("60");
 		gradeslist.add("66");
@@ -59,7 +61,9 @@ public class TeacherFinalReportControllTest {
 		}
 
 	}
-
+	// Checking case when a grade is higher than 100 and it wont affect the group of bins.(yAxisGroupExpected{0,0,0,0,0,0,0,0,0}) 
+	// Input: yAxisGroupActual,gradeslist.
+	// Result: True
 	@Test
 	public void TestGroupDataSetsGradeHigherthan100() {
 		gradeslist.add("150");
@@ -75,11 +79,14 @@ public class TeacherFinalReportControllTest {
 		}
 	}
 
+	// Checking that groupdata throws null when args are null.
+	// Input:null,null.
+	// Result: True(Exception-null.) 
 	@Test
-	public void TestGroupDataYaxisArgNull() {
+	public void TestGroupDataArgsNull() {
 
 		try {
-			teacherFinalReportControll.groupData(null, gradeslist);
+			teacherFinalReportControll.groupData(null, null);
 			fail();
 		} catch (Exception e) {
 			assertEquals(e.getMessage(), null);
@@ -87,17 +94,9 @@ public class TeacherFinalReportControllTest {
 
 	}
 
-	@Test
-	public void TestGroupDataGradesListArgNull() {
-
-		try {
-			teacherFinalReportControll.groupData(yAxisGroupActual, null);
-			fail();
-		} catch (Exception e) {
-			assertEquals(e.getMessage(), null);
-		}
-
-	}
+	// Checking that the Xchart for histogram has setted successfully.(checking each index)
+	// Input:yAxisGroupActual, gradeslist, barChart, yAxis, xAxis
+	// Result: True
 
 	@Test
 	public void SetHistorgramXchartSuccessfull() {
@@ -127,7 +126,9 @@ public class TeacherFinalReportControllTest {
 		assertEquals(barChart.getData().get(0).getData().get(8).getXValue(), "95-100");
 
 	}
-
+	// Checking that the Ychart for histogram has setted successfully.(checking each index)
+	// Input:yAxisGroupActual, gradeslist, barChart, yAxis, xAxis
+	// Result: True
 	@Test
 	public void SetHistorgramYchartSuccessfull() {
 		gradeslist.add("54");
@@ -149,6 +150,9 @@ public class TeacherFinalReportControllTest {
 		}
 
 	}
+	// Checking that GetHistogram throws null excpetion when args are null.
+	// null, null, null, null, null
+	// Result: True(Exception-null.) 
 	@Test
 	public void TestHistogramArgNull() {
 
