@@ -91,6 +91,11 @@ public class TeacherMainReportController extends TeacherMainPageController imple
 
 		}
 
+		@Override
+		public void setUser(Object user) {
+			guiControl.setUser(user);
+		}
+
 	}
 
 	public class FxmlManager implements IFxmlManager {

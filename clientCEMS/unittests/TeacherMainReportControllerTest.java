@@ -55,6 +55,10 @@ public class TeacherMainReportControllerTest {
 			return (Teacher) teacher;
 		}
 
+		@Override
+		public void setUser(Object user) {
+		}
+
 	}
 	//Stub class for some of fxml buttons in TeacherMainReportController.
 	class FxmlManagerStub implements IFxmlManager {
