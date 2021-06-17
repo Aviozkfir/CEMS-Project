@@ -23,6 +23,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import message.ClientMessage;
 import message.ClientMessageType;
+import message.ServerMessage;
 import message.ServerMessageTypes;
 
 /**
@@ -41,7 +42,74 @@ public class LoginPageController {
 
 	@FXML
 	private TextField UserIDTextField;
+	
+	
+	private IServerClientCommunication iServerClientCommunication = new LoginServerClientCommunication();
+	
+	public void setiServerClientCommunication(IServerClientCommunication iServerClientCommunication) {
+		this.iServerClientCommunication = iServerClientCommunication;
+	}
+	
+	private ILoginGetUserInput iLoginGetUserInput = new LoginILoginGetUserInput();
 
+	public void setiLoginGetUserInput(ILoginGetUserInput iLoginGetUserInput) {
+		this.iLoginGetUserInput = iLoginGetUserInput;
+	}
+
+	private class LoginServerClientCommunication implements IServerClientCommunication{
+
+	@Override
+	public void sendToServer(Object msg) {
+		guiControl.sendToServer(msg);
+		
+	}
+
+	@Override
+	public ServerMessage getServerMsg() {
+		
+		return guiControl.getServerMsg();
+	}
+
+	@Override
+	public void popUpError(String msg) {
+		guiControl.popUpError(msg);
+		
+	}
+
+	@Override
+	public void popUpMessage(String msg) {
+		guiControl.popUpMessage(msg);
+		
+	}
+
+	@Override
+	public Object getUser() {
+		return guiControl.getUser();
+	}
+	
+	@Override
+	public void setUser(Object user) {
+		guiControl.setUser(user);
+	}
+		
+	}
+
+	
+	private class LoginILoginGetUserInput implements ILoginGetUserInput{
+
+		@Override
+		public String getUserID() {
+			
+			return UserIDTextField.getText();
+		}
+
+		@Override
+		public String getUserPassword() {
+			
+			return PasswordFieldText.getText();
+		}
+		
+	}
 	/**
 	 * This method gets the user to the right Homepage screen by its type
 	 * :principal,teacher,student and get the data needed for each type.moreover,
@@ -208,28 +276,28 @@ public class LoginPageController {
 	 * in db
 	 *
 	 */
-	private boolean validateLogin() {
+	public boolean validateLogin() {
 		ClientMessage msg = null;
-		if (UserIDTextField.getText().isEmpty()) {
-			GUIControl.popUpError("No UserID was inserted\n Please enter UserID");
+		if (iLoginGetUserInput.getUserID().isEmpty()) {
+			iServerClientCommunication.popUpError("No UserID was inserted\n Please enter UserID");
 			return false;
 		}
-		if (PasswordFieldText.getText().isEmpty()) {
-			GUIControl.popUpError("No Password was inserted\n Please enter Password");
+		if (iLoginGetUserInput.getUserPassword().isEmpty()) {
+			iServerClientCommunication.popUpError("No Password was inserted\n Please enter Password");
 			return false;
 		}
-		String[] IdAndPassword = { UserIDTextField.getText(), PasswordFieldText.getText() };
+		String[] IdAndPassword = { iLoginGetUserInput.getUserID(), iLoginGetUserInput.getUserPassword() };
 		msg = new ClientMessage(ClientMessageType.LOGIN_PERSON, IdAndPassword);
-		guiControl.sendToServer(msg);
+		iServerClientCommunication.sendToServer(msg);
 
-		if (guiControl.getServerMsg().getMessage() == null) {
-			GUIControl.popUpError("Login information doesn't exist\n Please try again");
+		if (iServerClientCommunication.getServerMsg().getMessage() == null) {
+			iServerClientCommunication.popUpError("Login information doesn't exist\n Please try again");
 			return false;
-		} else if (guiControl.getServerMsg().getMessage().equals("logged in")) {
-			GUIControl.popUpError("This user is already logged in");
+		} else if (iServerClientCommunication.getServerMsg().getMessage().equals("logged in")) {
+			iServerClientCommunication.popUpError("This user is already logged in");
 			return false;
 		}
-		guiControl.setUser(guiControl.getServerMsg().getMessage());
+		iServerClientCommunication.setUser(iServerClientCommunication.getServerMsg().getMessage());
 		return true;
 	}
 

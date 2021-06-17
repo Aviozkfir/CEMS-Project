@@ -16,4 +16,6 @@ public interface IServerClientCommunication {
 	
 	public Object getUser();
 	
+	public void setUser(Object user);
+	
 }
