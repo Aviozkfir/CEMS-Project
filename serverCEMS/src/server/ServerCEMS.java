@@ -55,7 +55,7 @@ public class ServerCEMS extends AbstractServer {
 
 	private ArrayList<ConnectionToClient> conToClientMng;
 	private ArrayList<currentExam> currentExams;
-	private ArrayList<Object> userList;
+	public ArrayList<Object> userList;
 	// Constructors ******************
 
 	/**
@@ -637,6 +637,28 @@ public class ServerCEMS extends AbstractServer {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * @param inputData Data that contains Exam id and Date.
+	 * @return Report for the exam.
+	 * @throws SQLException
+	 * @throws ParseException
+	 */
+	public Object getTeacherSolvedExamReport(String[] inputData) throws SQLException, ParseException {
+		Object returnVal;
+		returnVal = MySQLConnection.getTeacherSolvedExamReport(inputData);
+		return returnVal;
+	}
+	
+	public Object validatePerson(String[] IdAndPw) throws SQLException {
+		Object returnVal;
+		returnVal = MySQLConnection.validatePerson(IdAndPw);
+		if (userList.contains(returnVal))
+			returnVal = "logged in";
+		else if (returnVal != null)
+			userList.add(returnVal);
+		return returnVal;
 	}
 
 	/**
