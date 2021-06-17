@@ -2,6 +2,7 @@ package gui;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import entity.Teacher;
 import javafx.event.ActionEvent;
@@ -17,7 +18,7 @@ import javafx.util.StringConverter;
 
 /**
  * controller that holds the final report.
- * @author oavioz
+ * @author onavioz,kfiravioz
  *
  */
 public class TeacherFinalReportControll extends TeacherMainPageController implements Initializable {
@@ -34,11 +35,11 @@ public class TeacherFinalReportControll extends TeacherMainPageController implem
 	@FXML
 	private Text PageExplainText;
 	@FXML
-	private BarChart<String, Integer> barChart;
+	public BarChart<String, Number> barChart;
 	@FXML
-	private NumberAxis yAxis;
+	public NumberAxis yAxis;
 	@FXML
-	private CategoryAxis xAxis;
+	public CategoryAxis xAxis;
 
 	int yAxisGroup[] = new int[9];
 	Teacher teacher = (Teacher) guiControl.getUser();
@@ -64,7 +65,7 @@ public class TeacherFinalReportControll extends TeacherMainPageController implem
 		PageExplainTextset();
 		Average.setText(teacher.getReport().getAverage());
 		Median.setText(teacher.getReport().getMedian());
-		SetHistogram();
+		SetHistogram(yAxisGroup,teacher.getReport().getReportData(),barChart,yAxis,xAxis);
 		totalStudentsText.setText(String.valueOf(teacher.getReport().getReportData().size()));
 		totalFailedText.setText(String.valueOf(yAxisGroup[0]));
 		yearsText.setText(teacher.getReport().getYearRange());
@@ -75,13 +76,13 @@ public class TeacherFinalReportControll extends TeacherMainPageController implem
 	 * This method setting the histogram.
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void SetHistogram() {
+	public void SetHistogram(int[] yAxisGroup,ArrayList<String> reportData,BarChart<String, Number> barChart, NumberAxis yAxis,CategoryAxis xAxis) {
 
 		barChart.setCategoryGap(0);
 		barChart.setBarGap(2);
 		xAxis.setLabel("Grades");
 		yAxis.setLabel("incidence");
-		groupData();
+		groupData(yAxisGroup,reportData);
 		XYChart.Series series = new XYChart.Series<>();
 		series.getData().add(new XYChart.Data("0-55", yAxisGroup[0]));
 		series.getData().add(new XYChart.Data("55-65", yAxisGroup[1]));
@@ -104,13 +105,13 @@ public class TeacherFinalReportControll extends TeacherMainPageController implem
 	/**
 	 * This method setting the data of the histogram.
 	 */
-	private void groupData() {
+	public void groupData(int yAxisGroup[],ArrayList<String> reportData) {
 
 		for (int i = 0; i < 9; i++) {
 			yAxisGroup[i] = 0;
 		}
 		// Map.Entry<String, Object> entry : map.entrySet()
-		for (String currentgrade : teacher.getReport().getReportData()) {
+		for (String currentgrade : reportData) {
 			int grade = Integer.parseInt(currentgrade);
 			if (grade <= 55) {
 				yAxisGroup[0]++;
@@ -136,7 +137,7 @@ public class TeacherFinalReportControll extends TeacherMainPageController implem
 
 
 
-	class IntegerStringConverter extends StringConverter<Number> { // convert yaxis from doubles to integers.
+	 class IntegerStringConverter extends StringConverter<Number> { // convert yaxis from doubles to integers.
 		public IntegerStringConverter() {
 		}
 
